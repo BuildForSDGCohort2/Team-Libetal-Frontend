@@ -1,4 +1,5 @@
-import {amber, cyan, green, orange, red} from "@material-ui/core/colors";
+import {amber, cyan, green, red} from "@material-ui/core/colors";
+import Colors from "../Colors";
 
 
 export default class Settings {
@@ -9,9 +10,9 @@ export default class Settings {
 
     static black = "#000000";
 
-    static orange = orange[900];
+    static orange = Colors.deep_orange;
 
-    static orangeLight = orange[700];
+    static orangeLight = Colors.orange;
 
     static get isLight() {
         return this.style === "light";
@@ -30,7 +31,7 @@ export default class Settings {
     }
 
     static get colorPrimary() {
-        return this.style === "light" ? this.white : this.black;
+        return this.style === "light" ? Colors.white : Colors.black;
     }
 
     static get colorPrimaryLight() {

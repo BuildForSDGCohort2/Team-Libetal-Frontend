@@ -100,7 +100,7 @@ export default class Register extends Component {
         return this.state.skills.map(skill => (
             <MenuItem
                 onClick={this.updateSelectedSkills.bind(this, skill.id)}
-                value={skill.id}>{skill.name}</MenuItem>
+                key={skill.id} value={skill.id}>{skill.name}</MenuItem>
         ));
     }
 
@@ -271,7 +271,6 @@ export default class Register extends Component {
     }
 
     get nameInputs() {
-        let profileNameLabel = "Profile Name";
         let firstNameLabel = "First Name";
         let lastNameLabel = "Last Name";
 

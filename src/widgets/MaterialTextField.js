@@ -6,10 +6,10 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 export default class MaterialTextField extends Component {
 
 
-    constructor(props) {
+    constructor({startIcon, ...props}) {
         super(props);
-        this.onChange = props.onChange;
 
+        this.onChange = props.onChange;
         this.performOnChange = this.performOnChange.bind(this);
     }
 
@@ -82,7 +82,6 @@ export default class MaterialTextField extends Component {
 
         return (
             <TextField
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}
@@ -128,7 +127,6 @@ export default class MaterialTextField extends Component {
             <TextField
                 ref={this.ref}
                 onChange={this.performOnChange}
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}
@@ -172,7 +170,6 @@ export default class MaterialTextField extends Component {
         return (
             <TextField
                 onChange={this.performOnChange}
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}

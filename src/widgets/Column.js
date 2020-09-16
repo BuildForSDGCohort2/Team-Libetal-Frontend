@@ -1,13 +1,15 @@
 import React, {Component} from "react";
-import MaterialGrid from "./MaterialGrid";
+import Grid from "@material-ui/core/Grid";
 
 export default class Column extends Component {
 
-
     render() {
+        let {direction, reverse = false, ...props} = this.props;
+
+        direction = reverse ? "column-reverse" : "column";
 
         return (
-            <MaterialGrid direction={"column"} {...this.props}/>
+            <Grid item  {...props}/>
         );
     }
 }

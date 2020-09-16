@@ -12,6 +12,7 @@ export default class MaterialBtn extends React.Component {
         }
     };
 
+
     render() {
 
         let {
@@ -36,7 +37,8 @@ export default class MaterialBtn extends React.Component {
                 className={className}
                 variant={variant}
                 color={color}
-                {...props}>
+                {...props}
+            >
                 {content}
                 {children}
             </Button>

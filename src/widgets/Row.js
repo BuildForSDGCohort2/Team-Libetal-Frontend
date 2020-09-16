@@ -1,13 +1,22 @@
 import React, {Component} from "react";
-import MaterialGrid from "./MaterialGrid";
+import Grid from "@material-ui/core/Grid";
 
+
+/**
+ * Displays Items in a row
+ * */
 export default class Row extends Component {
 
+    props = {
+        justify: "center"
+    };
 
     render() {
 
+        let {direction, container, ...props} = this.props;
+
         return (
-            <MaterialGrid direction={"row"} {...this.props}/>
+            <Grid container direction={"row"} {...props}/>
         );
     }
 }

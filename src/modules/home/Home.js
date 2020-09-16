@@ -307,7 +307,6 @@ export default class Home extends View {
                 </Typography>
                 <List>
                     <ListItem>
-
                         <IconButton><AccountTreeIcon/></IconButton> Projects Sharing
                     </ListItem>
                     <ListItem>
