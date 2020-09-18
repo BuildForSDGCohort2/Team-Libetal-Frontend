@@ -8,11 +8,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MaterialBtn from "../../../widgets/MaterialBtn";
-import {Redirect} from "react-router";
-import Button from "@material-ui/core/Button";
 import App from "../../../App";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 
 export default class RepoAppBar extends View {
 
@@ -23,7 +19,7 @@ export default class RepoAppBar extends View {
             <AppBar
                 position="fixed"
                 className={clsx(appTheme.appBar, classes.appBar, {
-                    [classes.appBarShift]: open,
+                    [classes.appBarShift]: open
                 })}>
                 <Toolbar style={{display: "flex", flexDirection: "row !important", alignItems: "right"}}>
                     <IconButton
@@ -32,7 +28,7 @@ export default class RepoAppBar extends View {
                         onClick={handleOpen}
                         edge="start"
                         className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
+                            [classes.hide]: open
                         })}
                     >
                         <MenuIcon/>

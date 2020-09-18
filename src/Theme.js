@@ -4,7 +4,6 @@ import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";
 import Settings from "./utils/Settings";
 import {orange} from "@material-ui/core/colors";
-import red from "@material-ui/core/colors/red";
 
 
 const drawerWidth = 240;
@@ -19,7 +18,7 @@ const lTheme = createMuiTheme({
             main: Settings.colorPrimary,
             dark: Settings.colorPrimaryDark,
             contrastText: Settings.textPrimary,
-            light:Settings.colorPrimaryLight
+            light: Settings.colorPrimaryLight
         },
         secondary: {
             main: Settings.colorSecondary,
@@ -28,6 +27,10 @@ const lTheme = createMuiTheme({
              light: "#FFFFFF",
              dark: "#FFFFFF",*/
             contrastText: Settings.textSecondary
+        },
+        background: {
+            default: Settings.colorPrimary,
+            paper: Settings.colorPrimary
         }
     }
 });
@@ -116,7 +119,9 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(2)
+        paddingTop: 12,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     "@global": {
         ul: {

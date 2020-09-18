@@ -8,8 +8,8 @@ export default class MaterialTextField extends Component {
 
     constructor(props) {
         super(props);
-        this.onChange = props.onChange;
 
+        this.onChange = props.onChange;
         this.performOnChange = this.performOnChange.bind(this);
     }
 
@@ -82,7 +82,6 @@ export default class MaterialTextField extends Component {
 
         return (
             <TextField
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}
@@ -128,7 +127,6 @@ export default class MaterialTextField extends Component {
             <TextField
                 ref={this.ref}
                 onChange={this.performOnChange}
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}
@@ -172,7 +170,6 @@ export default class MaterialTextField extends Component {
         return (
             <TextField
                 onChange={this.performOnChange}
-                labelText={labelText}
                 color={color}
                 variant={variant}
                 onClick={onClick}
@@ -180,7 +177,7 @@ export default class MaterialTextField extends Component {
                 placeholder={placeholder}
                 fullWidth={fullWidth}
                 style={style}
-                startIcon={startIcon}
+                //startIcon={startIcon}
                 children={children}
                 value={value}
                 {...props}
@@ -208,7 +205,7 @@ export default class MaterialTextField extends Component {
             label,
             placeholder,
             fullWidth,
-            style = {},
+            style,
             onChange,
             startIcon,
             children,

@@ -1,17 +1,29 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 export default class MaterialImage extends Component {
 
-    props = {
+    static defaultProps = {
         src: "",
         alt: "MaterialImage",
         size: undefined
+    };
+
+    static propTypes = {
+        src: PropTypes.string.isRequired,
+        alt: PropTypes.string
     };
 
     static IMAGE_SMALL = 24;
     static ICON_SIZE = 24;
     static ICON_SIZE_SMALL = 16;
     static ICON_SIZE_LARGE = 42;
+
+    constructor(props) {
+        super(props);
+
+        this.imgRef = React.createRef();
+    }
 
     render() {
 
@@ -23,6 +35,7 @@ export default class MaterialImage extends Component {
         }
 
         if (height !== undefined && width === undefined) {
+            // noinspection JSSuspiciousNameCombination
             width = height;
         }
 
@@ -34,8 +47,6 @@ export default class MaterialImage extends Component {
         }
 
 
-        return (
-            <img src={src} alt={alt} height={height} width={width}/>
-        );
+        return <img ref={this.imgRef} src={src} alt={alt} height={height} width={width}/>;
     }
 }

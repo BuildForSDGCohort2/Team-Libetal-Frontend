@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {createMuiTheme} from "@material-ui/core/styles";
-import {ThemeProvider} from "@material-ui/styles";
+import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import {Toolbar} from "@material-ui/core";
 import MaterialImage from "../../widgets/MaterialImage";
@@ -18,15 +17,16 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import Settings from "../../utils/Settings";
+import Divider from "@material-ui/core/Divider";
+import MaterialTextField from "../../widgets/MaterialTextField";
+import MaterialDivider from "../../widgets/MaterialDivider";
 import Paper from "@material-ui/core/Paper";
 import MaterialSelect from "../../widgets/MaterialSelect";
 import MenuItem from "@material-ui/core/MenuItem";
-import Divider from "@material-ui/core/Divider";
-import MaterialTextField from "../../widgets/MaterialTextField";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import withStyles from "@material-ui/core/styles/withStyles";
-import MaterialDivider from "../../widgets/MaterialDivider";
+import Accounts from "../accounts/Accounts";
+import StyledTabs from "../../widgets/StyledTabs";
+import StyledTab from "../../widgets/StyledTab";
+import PropTypes from "prop-types";
 
 
 const btnSuccess = createMuiTheme({
@@ -65,48 +65,15 @@ const dashBoardTheme = createMuiTheme({
     }
 });
 
-const StyledTabs = withStyles({
-    indicator: {
-        display: "flex",
-        justifyContent: "center",
-        backgroundColor: "transparent",
-        "& > span": {
-            width: "100%",
-            backgroundColor: Settings.colorSecondary
-        },
-        "& > a": {
-            display: "none"
-        }
-    }
-})((props) => <Tabs {...props} TabIndicatorProps={{children: <span/>}}/>);
-
-
-const StyledTab = withStyles((theme) => ({
-    root: {
-        textTransform: "none",
-        padding: 2,
-        margin: 4,
-        minWidth: 0
-    },
-    wrapper: {
-        fontWeight: "normal",
-        letterSpacing: 0.5
-    }
-}))((props) => <Tab  {...props} />);
 
 export default class Dashboard extends Component {
-
-    /*context is required*/
-    props = {
-        context: {}
-    };
 
     state = {
         userDetails: {
             name: "Breimer",
             email: "brymher@gmail.com"
         },
-        currentTab: 0,
+        currentTab: 6,
         dashBoardSearchKey: 0,
         dashBoardSearchValues: [
             {
@@ -125,19 +92,35 @@ export default class Dashboard extends Component {
                 id: 4,
                 name: "Tools"
             }, {
-                id: 4,
+                id: 5,
                 name: "Reviews"
             }, {
-                id: 4,
-                name: "Account"
+                id: 6,
+                name: "Accounts"
             }
         ]
     };
 
+    static defaultProps = {
+        classes: {}
+    };
+
+    static propTypes = {
+        classes: PropTypes.object.isRequired
+    };
+
     constructor(props) {
         super(props);
+
+        this.ref = React.createRef();
+        this.bindEvents();
+    }
+
+
+    bindEvents() {
         this.handleDashboardSearchChange = this.handleDashboardSearchChange.bind(this);
     }
+
 
     handleDashboardSearchChange(e) {
         let value = e.target.value;
@@ -156,7 +139,7 @@ export default class Dashboard extends Component {
 
     get navigation() {
         return (
-            <AppBar>
+            <AppBar className={this.props.classes.appBar}>
                 <Toolbar>
                     <MaterialImage
                         src={"/images/logo.png"}
@@ -165,12 +148,15 @@ export default class Dashboard extends Component {
                     />
                     <Separator/>
                     <nav>
-                        <StyledTabs value={this.state.currentTab} fullwidth={false}>
+                        <StyledTabs
+                            value={this.state.currentTab}
+                            fullwidth={"true"}
+                            onChange={(e, i) => {
+                                this.setState(prevState => ({currentTab: i}));
+                            }}>
                             {
                                 this.state.dashBoardSearchValues.map(({id, name}, i) => (
-                                        <StyledTab
-                                            href={`/dashboard/${name.toLowerCase()}`}
-                                            label={name}/>
+                                        <StyledTab key={i} label={name}/>
                                     )
                                 )
                             }
@@ -188,7 +174,7 @@ export default class Dashboard extends Component {
                                 renderValue={selected => (this.dashBoardSearchValue)}
                                 children={
                                     this.state.dashBoardSearchValues.map(({id, name}, i) => (
-                                        <MenuItem value={i}>{name}</MenuItem>
+                                        <MenuItem value={i} key={i}>{name}</MenuItem>
                                     ))}
                             />
 
@@ -269,6 +255,11 @@ export default class Dashboard extends Component {
 
     }
 
+    get accounts() {
+
+        return (<Accounts classes={this.props.classes} context={this}/>);
+    }
+
     get projects() {
         let {classes} = this.props;
         return (
@@ -282,7 +273,7 @@ export default class Dashboard extends Component {
 
                         <ThemeProvider
                             theme={btnSuccess}
-                            children={<MaterialBtn  variant={"contained"} content={"CREATE PROJECT"}/>}/>
+                            children={<MaterialBtn variant={"contained"} content={"CREATE PROJECT"}/>}/>
                     </Grid>
 
 
@@ -290,6 +281,11 @@ export default class Dashboard extends Component {
 
             </Grid>
         );
+    }
+
+    /**TODO resolve url to use this currentBody*/
+    resolveLocation() {
+
     }
 
     get currentBody() {
@@ -302,11 +298,15 @@ export default class Dashboard extends Component {
                 return this.issues;
             case  2:
                 return this.teams;
+
+            case 6:
+                return this.accounts;
             default:
                 return this.projects;
         }
 
     }
+
 
     render() {
 
@@ -314,7 +314,7 @@ export default class Dashboard extends Component {
 
         return (
             <ThemeProvider theme={dashBoardTheme}>
-                <div className={classes.root}>
+                <div ref={this.ref} className={classes.root}>
                     {this.navigation}
 
                     <main className={classes.content} style={{background: Settings.colorPrimary}}>

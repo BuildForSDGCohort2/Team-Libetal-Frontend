@@ -3,14 +3,20 @@ import Button from "@material-ui/core/Button";
 
 export default class MaterialBtn extends React.Component {
 
-    props = {
+    static defaultProps = {
         content: "MaterialButton",
         variant: "contained",
         color: "secondary",
         onClick: () => {
-            console.log("Unhandled Click");
+            console.log(`Unhandled Click`);
         }
     };
+
+
+    constructor(props) {
+        super(props);
+        this.ref = React.createRef();
+    }
 
     render() {
 
@@ -29,6 +35,7 @@ export default class MaterialBtn extends React.Component {
 
         return (
             <Button
+                ref={this.ref}
                 startIcon={startIcon}
                 endIcon={endIcon}
                 onClick={onClick}
@@ -36,7 +43,8 @@ export default class MaterialBtn extends React.Component {
                 className={className}
                 variant={variant}
                 color={color}
-                {...props}>
+                {...props}
+            >
                 {content}
                 {children}
             </Button>

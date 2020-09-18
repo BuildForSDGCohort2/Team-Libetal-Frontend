@@ -16,9 +16,6 @@ class AppComponent extends Component {
         throw new Error("Navigate not implemented");
     };
 
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -56,7 +53,7 @@ class AppComponent extends Component {
                                         />
 
                                         <Route path="/register"
-                                               component={()=>(
+                                               component={() => (
                                                    <Register
                                                        navigator={navigator}
                                                        classes={classes}
@@ -66,12 +63,14 @@ class AppComponent extends Component {
                                                )}
                                         />
                                         <Route path="/(d|D)ashboard"
-                                               component={() => (
-                                                   <Dashboard
-                                                       context={this}
-                                                       classes={classes}
-                                                   />
-                                               )}/>
+                                               component={location => {
+                                                   return (
+                                                       <Dashboard
+                                                           location={location}
+                                                           classes={classes}
+                                                       />
+                                                   );
+                                               }}/>
 
                                         {/*TODO CREATE DASHBOARD*/}
                                         {/*TODO CREATE FINANCIAL ACCOUNT MANAGER*/}
