@@ -14,13 +14,8 @@ export default class Accounts extends React.Component {
     };
 
     static propTypes = {
-        context: PropTypes.instanceOf("Dashboard").isRequired
+        context:PropTypes.object
     };
-
-    props = {
-        context: {}
-    };
-
 
     constructor(props) {
         super(props);

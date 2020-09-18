@@ -11,16 +11,12 @@ import clsx from "clsx";
 
 export default class AccountsDrawer extends React.Component {
 
-    props = {
+    static defaultProps = {
         drawerState: true,
         classes: {},
         toggleDrawer: () => {
             console.log("Should pass drawer toggleTo AccountsDrawer");
         }
-    };
-
-    static defaultProps = {
-        drawerState: true
     };
 
     render() {

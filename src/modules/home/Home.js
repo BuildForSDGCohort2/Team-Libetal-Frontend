@@ -24,6 +24,7 @@ import Tab from "@material-ui/core/Tab";
 import {createMuiTheme} from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
+import Row from "../../widgets/Row";
 
 const theme = createMuiTheme({
     palette: {
@@ -118,7 +119,7 @@ export default class Home extends View {
         this.updateTabView(21);
     }
 
-    getLayout({userDetails, appTheme, classes}) {
+     getLayout({userDetails, appTheme, classes}) {
 
 
         let flex = {
@@ -130,7 +131,7 @@ export default class Home extends View {
         };
 
         return (
-            <>
+            <Row ref={this.ref}>
                 <CssBaseline/>
                 <AppBar position="static" color="default" elevation={0} className={appTheme.homeAppBar}>
                     <Grid container className={appTheme.homeHeader}>
@@ -175,15 +176,14 @@ export default class Home extends View {
                             value={this.state.currentTab}
                             onChange={this.handleChange}
                         >
-                            <Tab theme={theme} icon={<PaletteIcon/>} label="Features" textColorSecondary="#FFF000"
-                                 textColorPrimary="#000FFF"/>
+                            <Tab theme={theme} icon={<PaletteIcon/>} label="Features"/>
                             <Tab theme={theme} icon={<BuildIcon className="iconAccent"/>} label="Issues"/>
                             <Tab theme={theme} icon={<BugReportIcon className="txtPrimary"/>} label="Bugs"/>
                         </Tabs>
                         {this.state.currentTabView}
                     </Grid>
                 </Grid>
-            </>
+            </Row>
         );
     }
 
@@ -254,7 +254,6 @@ export default class Home extends View {
                 <div className={classes.grow}/>
                 <nav className={appTheme.alignChildRight}>
                     <MaterialBtn
-                        variant={""}
                         onClick={() => this.accessAccount()}
                         startIcon={<AccountCircleIcon/>}
                         content={"Login/Register"}
@@ -265,7 +264,6 @@ export default class Home extends View {
                         content={"Dashboard"}/>
                     <MaterialBtn
                         onClick={this.openAppStore}
-                        className={[appTheme.btn]}
                         startIcon={<AppsIcon/>}
                         content={"App Store"}
                     />
@@ -329,8 +327,7 @@ export default class Home extends View {
     }
 }
 
-Home.create = (userDetails = null, classes, appTheme, theme) =>
-    (<Home classes={classes} appTheme={appTheme} theme={theme} userDetails={userDetails}/>);
+
 
 
 

@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Settings from "../utils/Settings";
 import Tabs from "@material-ui/core/Tabs";
-import Colors from "../Colors";
 import MaterialTab from "./MaterialTab";
+import PropTypes from "prop-types";
 
 
 const component = (
@@ -36,21 +36,30 @@ export default class TabsLayout extends Component {
         defaultTabIndex: 0
     };
 
-    props = {
-        tabStyle: {},
-        tabs: TabsLayout.defaultTabStyle.tabs,
-        defaultTabIndex: TabsLayout.defaultTabStyle.defaultTabIndex,
-        orientation: TabsLayout.defaultTabStyle.orientation,
-        onChange: undefined,
-        tabTopPadding: 2,
-        tabBottomPadding: 2,
-        minTabHeight: 24,
-        minTabWidth: 24,
-        value: 0,
-        variant: ""
+    static ORIENTATION = {
+        VERTICAL: "vertical",
+        HORIZONTAL: "horizontal"
+    };
+
+    static VARIANT = {
+        SCROLLABLE: "scrollable"
+    };
+
+    static propTypes = {
+        tabStyle: PropTypes.object,
+        tabs: PropTypes.array,
+        defaultTabIndex: PropTypes.number,
+        orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+        tabTopPadding: PropTypes.number,
+        tabBottomPadding: PropTypes.number,
+        minTabHeight: PropTypes.number,
+        minTabWidth: PropTypes.number,
+        value: PropTypes.number,
+        variant: PropTypes.string
     };
 
     static defaultProps = {
+        tabStyle: {},
         value: 0,
         onChange(e, newTab) {
             console.log(`Unhandled tab change newTab=${newTab}`);
@@ -71,6 +80,10 @@ export default class TabsLayout extends Component {
     };
     static defaultTabStyle = {};
 
+
+    constructor(props) {
+        super(props);
+    }
 
     get tabs() {
         let {
@@ -118,16 +131,28 @@ export default class TabsLayout extends Component {
 
     render() {
 
-        let {orientation, onChange, minTabHeight, classes, showIndicator, ...props} = this.props;
+        let {
+            tabs,
+            tabStyle,
+            defaultTabIndex,
+            minTabWidth,
+            tabTopPadding,
+            tabBottomPadding,
+            orientation,
+            onChange,
+            minTabHeight,
+            classes,
+            showIndicator,
+            ...props
+        } = this.props;
 
 
         if (showIndicator === false) {
             return (
                 <HiddenIndicator
-
                     value={this.state.defaultTabIndex}
                     orientation={orientation}
-                    indicatorColor={Colors.black}
+                    indicatorColor={"secondary"}
                     onChange={onChange}
                     {...props}
                     style={{minHeight: minTabHeight}}
@@ -142,7 +167,7 @@ export default class TabsLayout extends Component {
 
                 value={this.state.defaultTabIndex}
                 orientation={orientation}
-                indicatorColor={Colors.black}
+                indicatorColor={"secondary"}
                 onChange={onChange}
                 {...props}
                 style={{minHeight: minTabHeight}}

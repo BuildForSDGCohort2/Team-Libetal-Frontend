@@ -8,25 +8,28 @@ import MenuItem from "@material-ui/core/MenuItem";
 export default class MaterialSelect extends Component {
 
 
-    props = {
+    static defaultProps = {
         style: {},
         selectionItems: [],
-        selectionHeader: {},
-        selectionFooter: {}
+        selectionHeader: undefined,
+        selectionFooter: undefined,
+        labelId: "",
+        id: "",
+        value: "",
+        onChange: "",
+        renderValue: undefined
     };
-
 
     get selectionItems() {
         let {selectionItems, children} = this.props;
 
-        if (this.selectionItemsField === undefined) {
-            this.selectionItemsField = selectionItems === undefined ? children : selectionItems.map(({key, value}) => {
+        this.selectionItemsField = selectionItems === undefined ? children : selectionItems.map(({key, value}) => {
 
-                return (
-                    <MenuItem key={key} value={key}>{value}</MenuItem>
-                );
-            });
-        }
+            return (
+                <MenuItem key={key} value={key}>{value}</MenuItem>
+            );
+        });
+
 
         return this.selectionItemsField;
     }
@@ -54,12 +57,14 @@ export default class MaterialSelect extends Component {
         );
     }
 
+
     get input() {
         return this.props.labelId === undefined ? this.basicInput : this.withLabel;
     }
 
     get withLabel() {
         let {
+            selectionItems,
             labelId,
             labelText,
             label,
@@ -92,7 +97,7 @@ export default class MaterialSelect extends Component {
             materialLabel,
             menuTitleText,
             labelId,
-            style = {},
+            style,
             children,
             selectionHeader,
             selectionFooter,

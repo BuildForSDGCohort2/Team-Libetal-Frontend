@@ -2,17 +2,21 @@ import React from "react";
 import {IconButton} from "@material-ui/core";
 import {withProps} from "recompose";
 import * as Icons from "@material-ui/icons";
+import PropTypes from "prop-types"
 
 export default class MaterialIconBtn extends React.Component {
 
-    props = {
-        icon: "Apps",
+    static defaultProps = {
         iconSize: 24,
-        iconName: "Apps",
-        iconPadding: 4,
-        color: "primary",
+        iconPadding: 2,
+        color: "secondary",
         style: {}
     };
+
+    static propTypes ={
+        icon: PropTypes.string,
+        iconName:PropTypes.string
+    }
 
     render() {
         let {

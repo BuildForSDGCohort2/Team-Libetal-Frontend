@@ -1,5 +1,7 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
+import Row from "../../widgets/Row";
+import Column from "../../widgets/Column";
+import Paper from "@material-ui/core/Paper";
 
 /**TODO
  * needs access to userDetails
@@ -17,14 +19,15 @@ export default class AccountProductivity extends React.Component {
      * */
     render() {
         return (
-            <Grid container>
-                <Grid item xs={12}>
-
-                </Grid>
-                <Grid item xs={12}>
-
-                </Grid>
-            </Grid>
+            <>
+                <Paper style={{padding: 2}}>
+                    <Row>
+                        <Column xs={1}>
+                            AccountProductivity
+                        </Column>
+                    </Row>
+                </Paper>
+            </>
         );
     }
 }

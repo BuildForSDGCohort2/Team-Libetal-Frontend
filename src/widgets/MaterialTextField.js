@@ -6,7 +6,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 export default class MaterialTextField extends Component {
 
 
-    constructor({startIcon, ...props}) {
+    constructor(props) {
         super(props);
 
         this.onChange = props.onChange;
@@ -177,7 +177,7 @@ export default class MaterialTextField extends Component {
                 placeholder={placeholder}
                 fullWidth={fullWidth}
                 style={style}
-                startIcon={startIcon}
+                //startIcon={startIcon}
                 children={children}
                 value={value}
                 {...props}
@@ -205,7 +205,7 @@ export default class MaterialTextField extends Component {
             label,
             placeholder,
             fullWidth,
-            style = {},
+            style,
             onChange,
             startIcon,
             children,

@@ -26,6 +26,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Accounts from "../accounts/Accounts";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
+import PropTypes from "prop-types";
 
 
 const btnSuccess = createMuiTheme({
@@ -67,11 +68,6 @@ const dashBoardTheme = createMuiTheme({
 
 export default class Dashboard extends Component {
 
-    /*context is required*/
-    props = {
-        context: {}
-    };
-
     state = {
         userDetails: {
             name: "Breimer",
@@ -105,11 +101,26 @@ export default class Dashboard extends Component {
         ]
     };
 
+    static defaultProps = {
+        classes: {}
+    };
+
+    static propTypes = {
+        classes: PropTypes.object.isRequired
+    };
+
     constructor(props) {
         super(props);
 
+        this.ref = React.createRef();
+        this.bindEvents();
+    }
+
+
+    bindEvents() {
         this.handleDashboardSearchChange = this.handleDashboardSearchChange.bind(this);
     }
+
 
     handleDashboardSearchChange(e) {
         let value = e.target.value;
@@ -139,7 +150,7 @@ export default class Dashboard extends Component {
                     <nav>
                         <StyledTabs
                             value={this.state.currentTab}
-                            fullwidth
+                            fullwidth={"true"}
                             onChange={(e, i) => {
                                 this.setState(prevState => ({currentTab: i}));
                             }}>
@@ -246,7 +257,7 @@ export default class Dashboard extends Component {
 
     get accounts() {
 
-        return (<Accounts classes={this.props.classes}/>);
+        return (<Accounts classes={this.props.classes} context={this}/>);
     }
 
     get projects() {
@@ -303,7 +314,7 @@ export default class Dashboard extends Component {
 
         return (
             <ThemeProvider theme={dashBoardTheme}>
-                <div className={classes.root}>
+                <div ref={this.ref} className={classes.root}>
                     {this.navigation}
 
                     <main className={classes.content} style={{background: Settings.colorPrimary}}>

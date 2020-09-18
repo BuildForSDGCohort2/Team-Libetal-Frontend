@@ -37,13 +37,12 @@ export default class MaterialTab extends Component {
 
     constructor(props) {
         super(props);
-        this.ref = React.createRef();
     }
 
     render() {
 
         return (
-            <MTab ref={this.ref} {...this.props}/>
+            <MTab {...this.props}/>
         );
     }
 }

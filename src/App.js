@@ -67,7 +67,6 @@ class AppComponent extends Component {
                                                    return (
                                                        <Dashboard
                                                            location={location}
-                                                           context={this}
                                                            classes={classes}
                                                        />
                                                    );

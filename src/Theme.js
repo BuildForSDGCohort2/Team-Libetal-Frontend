@@ -119,7 +119,9 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(2)
+        paddingTop: 12,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     "@global": {
         ul: {

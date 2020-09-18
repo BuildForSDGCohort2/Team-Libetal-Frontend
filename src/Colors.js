@@ -1,3 +1,8 @@
+import ChartJs from "chart.js";
+
+let colorHelper = ChartJs.helpers.color;
+
+
 const colors = {
     material_red: {
         "base": "#e51c23",
@@ -314,6 +319,15 @@ const colors = {
 
 const Colors = new Proxy(colors, {
     get(target, key, value) {
+
+
+        if (key === "alpha") {
+            return function (colorName, alpha) {
+
+                return colorHelper(Colors[colorName]).alpha(alpha).rgbString();
+            };
+        }
+
         let flags = key.split("_");
 
 
@@ -325,7 +339,7 @@ const Colors = new Proxy(colors, {
 
         switch (length) {
             case 3:
-                color=  target[key][`${flags[1]}-${flags[2]}`];
+                color = target[key][`${flags[1]}-${flags[2]}`];
                 break;
             case 4:
                 key = key + `_${flags[1]}`;
@@ -333,7 +347,7 @@ const Colors = new Proxy(colors, {
                 break;
             default:
                 if (length > 1) key = key + `_${flags[1]}`;
-                color =  target[key].base;
+                color = target[key].base;
         }
 
 

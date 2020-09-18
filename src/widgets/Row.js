@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
 
 
 /**
@@ -7,16 +8,34 @@ import Grid from "@material-ui/core/Grid";
  * */
 export default class Row extends Component {
 
-    props = {
-        justify: "center"
+    static propTypes = {
+        justify: PropTypes.string
     };
+
+    static END = "flex-end";
+    static START = "flex-start";
+
+    static JUSTIFY = {
+        SPACE_AROUND: "space-around",
+        SPACE_BETWEEN: "space-between",
+        SPACE_EVENLY: "space-evenly",
+        START: "flex-start",
+        END: "flex-end",
+        CENTER: "center"
+    };
+
+
+    constructor(props) {
+        super(props);
+
+    }
 
     render() {
 
-        let {direction, container, ...props} = this.props;
+        let {direction = "row", container, ...props} = this.props;
 
         return (
-            <Grid container direction={"row"} {...props}/>
+            <Grid  container direction={"row"} {...props}/>
         );
     }
 }

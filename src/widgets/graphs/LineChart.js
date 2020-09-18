@@ -1,5 +1,5 @@
 import React from "react";
-import Chart from "./graphs/Chart";
+import Chart from "./Chart";
 
 
 export default class LineChart extends Chart {

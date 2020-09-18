@@ -4,17 +4,18 @@ import * as Icons from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
 
 
-
 export default class MaterialIcon extends React.Component {
 
-    props = {
-        icon: "Apps",
+    static defaultProps = {
         iconSize: 24,
-        iconName: "Apps",
-        iconPadding: 4,
-        color: "primary",
+        color: "secondary",
         style: {}
     };
+
+    constructor(props) {
+        super(props);
+    }
+
 
     render() {
         let {
@@ -37,6 +38,7 @@ export default class MaterialIcon extends React.Component {
             ...props
         })(Icons[iconName]);
 
+
         return (
             <Icon
                 style={{
@@ -44,6 +46,7 @@ export default class MaterialIcon extends React.Component {
                     height: iconSize,
                     width: iconSize
                 }}
+                color={color}
             />
         );
     }
