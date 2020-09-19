@@ -1,4 +1,4 @@
-# Accounts 
+# Insights 
 These are user accounts to handle transactions made from application sales. 
 
 ## Requirements
@@ -62,7 +62,7 @@ cost for implementation is aggregated to the project contributions of others.
         > This might require a validation,  
           Or the platform could provide competence tests i.e [freelancer.com](https://www.freelancer.com/exam/exams)
         - Previous projects if any part of CV
-    - User Accounts Details, required on financial period end (onRegister/onUpdate).
+    - User Insights Details, required on financial period end (onRegister/onUpdate).
     - Skill set i.e Developer/Designer/FullStack with sub sections 
         i.e Developer/Kotlin or Developer/Android
     - Payment stipulations. 
@@ -75,7 +75,7 @@ cost for implementation is aggregated to the project contributions of others.
     - Number of projects participated in.
     - Commit and commit price evaluation.
     
-3. Accounts
+3. Insights
     - Total Cost of development per project, (Aggregated from added features and bug fixes).
     - % share per project.
     - Transaction details 

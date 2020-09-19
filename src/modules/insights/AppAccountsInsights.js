@@ -4,9 +4,9 @@ export default class AppAccountsInsights extends React.Component {
 
 
     /**TODO
-     * split Accounts Component
+     * split Insights Component
      * */
     render() {
-
+        return (<></>);
     }
 }

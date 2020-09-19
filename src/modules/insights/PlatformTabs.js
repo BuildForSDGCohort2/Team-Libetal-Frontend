@@ -20,7 +20,7 @@ export default class PlatformTabs extends React.Component {
         platforms: PropTypes.array.isRequired
     };
 
-    get tabs() {
+    render() {
         return (
             <TabsLayout
                 defaultTabIndex={this.props.defaultTabIndex}
@@ -35,9 +35,5 @@ export default class PlatformTabs extends React.Component {
                 )}
             />
         );
-    }
-
-    render() {
-        return this.tabs;
     }
 }

@@ -12,10 +12,6 @@ export default class MaterialIcon extends React.Component {
         style: {}
     };
 
-    constructor(props) {
-        super(props);
-    }
-
 
     render() {
         let {
@@ -31,6 +27,11 @@ export default class MaterialIcon extends React.Component {
             } = {},
             ...props
         } = this.props;
+
+        if (!(color === "secondary" || color === "primary" || color === "action" || color === "inherit" || color === "disabled")) {
+            style.color = color
+            color = undefined;
+        }
 
         iconName = iconName || icon;
 

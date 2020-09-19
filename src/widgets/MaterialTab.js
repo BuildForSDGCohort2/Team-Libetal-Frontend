@@ -35,9 +35,6 @@ const MTab = withStyles((theme) => ({
 
 export default class MaterialTab extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 

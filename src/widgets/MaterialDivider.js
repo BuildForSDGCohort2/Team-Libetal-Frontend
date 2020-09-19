@@ -1,17 +1,22 @@
 import React from "react";
 import Divider from "@material-ui/core/Divider";
 import Settings from "../utils/Settings";
+import PropTypes from "prop-types";
 
 export default class MaterialDivider extends React.Component {
-
 
 
     static HORIZONTAL = "horizontal";
     static VERTICAL = "vertical";
 
-    constructor(props) {
-        super(props);
-    }
+
+    static propTypes = {
+        orientation: PropTypes.string,
+        height: PropTypes.number,
+        spacing: PropTypes.number,
+        style: PropTypes.object,
+        color:PropTypes.string
+    };
 
 
     render() {

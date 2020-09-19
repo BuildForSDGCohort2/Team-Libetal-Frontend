@@ -23,7 +23,7 @@ import MaterialDivider from "../../widgets/MaterialDivider";
 import Paper from "@material-ui/core/Paper";
 import MaterialSelect from "../../widgets/MaterialSelect";
 import MenuItem from "@material-ui/core/MenuItem";
-import Accounts from "../accounts/Accounts";
+import Insights from "../insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
 import PropTypes from "prop-types";
@@ -96,7 +96,7 @@ export default class Dashboard extends Component {
                 name: "Reviews"
             }, {
                 id: 6,
-                name: "Accounts"
+                name: "Insights"
             }
         ]
     };
@@ -139,7 +139,7 @@ export default class Dashboard extends Component {
 
     get navigation() {
         return (
-            <AppBar className={this.props.classes.appBar}>
+            <AppBar className={this.props.classes.clippingDrawerAppBar}>
                 <Toolbar>
                     <MaterialImage
                         src={"/images/logo.png"}
@@ -255,17 +255,13 @@ export default class Dashboard extends Component {
 
     }
 
-    get accounts() {
-
-        return (<Accounts classes={this.props.classes} context={this}/>);
-    }
 
     get projects() {
         let {classes} = this.props;
         return (
             <Grid container className={classes.root}>
                 <Grid item lg={8}>
-                    This is Long tex tfor start filed
+                    This is Long text for start filed
                     <MaterialDivider orientation={"horizontal"}/>
                 </Grid>
                 <Grid item lg={4}>
@@ -275,7 +271,6 @@ export default class Dashboard extends Component {
                             theme={btnSuccess}
                             children={<MaterialBtn variant={"contained"} content={"CREATE PROJECT"}/>}/>
                     </Grid>
-
 
                 </Grid>
 
@@ -293,14 +288,13 @@ export default class Dashboard extends Component {
         switch (this.state.currentTab) {
             case 0:
                 return this.projects;
-
             case 1:
                 return this.issues;
             case  2:
                 return this.teams;
 
             case 6:
-                return this.accounts;
+                return <Insights classes={this.props.classes}/>;
             default:
                 return this.projects;
         }
@@ -316,7 +310,6 @@ export default class Dashboard extends Component {
             <ThemeProvider theme={dashBoardTheme}>
                 <div ref={this.ref} className={classes.root}>
                     {this.navigation}
-
                     <main className={classes.content} style={{background: Settings.colorPrimary}}>
                         <div className={classes.toolbar}/>
                         {this.currentBody}

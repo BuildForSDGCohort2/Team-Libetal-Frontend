@@ -33,7 +33,7 @@ const Layout = withStyles({
 export default class TabsLayout extends Component {
 
     state = {
-        defaultTabIndex: 0
+        currentTab: 0
     };
 
     static ORIENTATION = {
@@ -47,7 +47,15 @@ export default class TabsLayout extends Component {
 
     static propTypes = {
         tabStyle: PropTypes.object,
-        tabs: PropTypes.array,
+        tabs: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.string),
+            PropTypes.arrayOf(
+                PropTypes.shape({
+                    key: PropTypes.number,
+                    label: PropTypes.any
+                })
+            )
+        ]),
         defaultTabIndex: PropTypes.number,
         orientation: PropTypes.oneOf(["horizontal", "vertical"]),
         tabTopPadding: PropTypes.number,
@@ -76,14 +84,11 @@ export default class TabsLayout extends Component {
         minTabWidth: 32,
         tabTopPadding: 2,
         tabBottomPadding: 2,
-        showIndicator: true
+        showIndicator: true,
+        onTabChangeRequest: () => true,
+        onTabChangeRejected: (tabId) => console.log(`Unhandled tab change rejections ${tabId}`)
     };
     static defaultTabStyle = {};
-
-
-    constructor(props) {
-        super(props);
-    }
 
     get tabs() {
         let {
@@ -111,7 +116,32 @@ export default class TabsLayout extends Component {
 
         switch (typeof tabs) {
             case "object":
-                tabs = propTabs.map(({key, label}) => this.getTab(key, label, tabStyle));
+                tabs = propTabs.map((tab, i) => {
+                    let key = i;
+                    let label;
+
+                    switch (typeof tab) {
+                        case "string":
+                            key = i;
+                            label = tab;
+                            break;
+                        case "object":
+                            // Unify syntax design if you find rem to implement in Unify lang gitHub
+                            // {key,label} = tab
+                            if(tab.label === undefined){
+                                key = i
+                                label = tab
+                            }else {
+                                key = tab.key;
+                                label = tab.label;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return this.getTab(key, label, tabStyle);
+                });
                 break;
             default:
                 tabs = tabs.map((label, i) => this.getTab(i, label, tabStyle));
@@ -126,8 +156,20 @@ export default class TabsLayout extends Component {
     }
 
     componentDidMount() {
-
+        this.setState({currentTab: this.props.defaultTabIndex});
     }
+
+    set currentTab(value) {
+        this.setState({
+            currentTab: (value || this.props.defaultTabIndex)
+        });
+    }
+
+
+    get currentTab() {
+        return this.state.currentTab;
+    }
+
 
     render() {
 
@@ -142,18 +184,29 @@ export default class TabsLayout extends Component {
             onChange,
             minTabHeight,
             classes,
+            value,
+            onTabChangeRequest,
+            onTabChangeRejected,
             showIndicator,
             ...props
         } = this.props;
 
 
+        let tabChange = (e, tabId) => {
+            if (onTabChangeRequest(tabId)) {
+                this.currentTab = tabId;
+                onChange(this, tabId);
+            } else onTabChangeRejected(tabId);
+        };
+
+
         if (showIndicator === false) {
             return (
                 <HiddenIndicator
-                    value={this.state.defaultTabIndex}
+                    value={this.currentTab}
                     orientation={orientation}
                     indicatorColor={"secondary"}
-                    onChange={onChange}
+                    onChange={tabChange}
                     {...props}
                     style={{minHeight: minTabHeight}}
                 >
@@ -164,16 +217,14 @@ export default class TabsLayout extends Component {
 
         return (
             <Layout
-
-                value={this.state.defaultTabIndex}
+                value={this.currentTab}
                 orientation={orientation}
                 indicatorColor={"secondary"}
-                onChange={onChange}
+                onChange={tabChange}
                 {...props}
                 style={{minHeight: minTabHeight}}
-            >
-                {this.tabs}
-            </Layout>
+                children={this.tabs}
+            />
         );
     }
 

@@ -68,7 +68,9 @@ export default class Chart extends React.Component {
 
     static defaultProps = ChartProps;
 
-    static propTypes = ChartPropTypes;
+    static propTypes = {
+        ...ChartPropTypes
+    };
 
     get element() {
         return this.elementField === undefined ? (this.elementField = React.createRef()) : this.elementField;
@@ -152,7 +154,8 @@ export default class Chart extends React.Component {
             borderColor,
             pointRadius,
             borderWidth,
-            hidden
+            hidden,
+            type = undefined
         } = child.props;
 
         return {
@@ -163,7 +166,8 @@ export default class Chart extends React.Component {
             backgroundColor: backgroundColor,
             borderColor: borderColor,
             borderWidth: borderWidth,
-            hidden: hidden
+            hidden: hidden,
+            type :type
         };
     }
 

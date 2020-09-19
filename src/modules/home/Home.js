@@ -254,15 +254,21 @@ export default class Home extends View {
                 <div className={classes.grow}/>
                 <nav className={appTheme.alignChildRight}>
                     <MaterialBtn
+                        variant={"default"}
                         onClick={() => this.accessAccount()}
                         startIcon={<AccountCircleIcon/>}
                         content={"Login/Register"}
                     />
-                    <MaterialBtn content={"About Us"}/>
                     <MaterialBtn
+                        variant={"default"}
+                        content={"About Us"}
+                    />
+                    <MaterialBtn
+                        variant={"default"}
                         onClick={this.openDashboard}
                         content={"Dashboard"}/>
                     <MaterialBtn
+                        variant={"default"}
                         onClick={this.openAppStore}
                         startIcon={<AppsIcon/>}
                         content={"App Store"}

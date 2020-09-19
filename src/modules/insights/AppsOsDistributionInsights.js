@@ -23,6 +23,7 @@ export default class AppsOsDistributionInsights extends React.Component {
 
 
     state = {
+        currentInsight: 0,
         currentInsightTab: 0,
         currentInsightIndex: 0,
         insightSizeValues: [
@@ -298,10 +299,10 @@ export default class AppsOsDistributionInsights extends React.Component {
                 values,
                 labels
             },
-            currentInsightTab
+            currentInsight
         } = this.state;
 
-        let os = keys[currentInsightTab];
+        let os = keys[currentInsight];
 
         let {downloads, purchases, users} = values[os];
 
@@ -358,19 +359,22 @@ export default class AppsOsDistributionInsights extends React.Component {
         );
     }
 
+
+    set currentInsight(value) {
+        this.setState({currentInsight: value});
+    }
+
     get insightTabs() {
         return (
             <TabsLayout
-                value={this.state.currentInsightTab}
-                tabs={this.state.deviceTypes.map(({id, name: type}, i) => ({
-                    key: i,
-                    label: type
-                }))}
-                onChange={(e, currentInsightTab) => {
-                    this.setState({currentInsightTab});
-
-                }}
-
+                defaultTabIndex={0}
+                tabs={
+                    this.state.deviceTypes.map(({id, name: type}, i) => ({
+                        key: i,
+                        label: type
+                    }))
+                }
+                onChange={(e, tabId) => (this.currentInsight = tabId)}
             />
         );
     }
@@ -390,7 +394,7 @@ export default class AppsOsDistributionInsights extends React.Component {
                 </Column>
                 <Column xs={4}>
                     <Row justify={Row.END}>
-                        <MaterialIcon icon={"Sort"} iconSize={24} />
+                        <MaterialIcon icon={"Sort"} iconSize={24}/>
                         <MaterialIcon icon={"Settings"} iconSize={24}/>
                     </Row>
                 </Column>

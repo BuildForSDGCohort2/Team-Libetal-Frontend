@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default class DataSet extends React.Component {
 
@@ -11,6 +12,10 @@ export default class DataSet extends React.Component {
         fillArea: false,
         pointRadius: 0,
         hidden: false
+    };
+
+    static propTypes = {
+        type: PropTypes.oneOf(["bar","line"])
     };
 
     static defaultProps = {

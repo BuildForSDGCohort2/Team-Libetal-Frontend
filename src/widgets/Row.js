@@ -35,7 +35,7 @@ export default class Row extends Component {
         let {direction = "row", container, ...props} = this.props;
 
         return (
-            <Grid  container direction={"row"} {...props}/>
+            <Grid container direction={"row"} {...props}/>
         );
     }
 }

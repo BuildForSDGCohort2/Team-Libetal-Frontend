@@ -15,8 +15,10 @@ import MaterialIconBtn from "../../widgets/MaterialIconBtn";
 import Calendar from "../../utils/Calendar";
 import Column from "../../widgets/Column";
 import Flex from "../../widgets/Flex";
+import Settings from "../../utils/Settings";
 
-export default class AppsInsights extends React.Component {
+export default class AppsSalesInsights extends React.Component {
+
 
 
     static defaultProps = {
@@ -24,6 +26,9 @@ export default class AppsInsights extends React.Component {
     };
 
     state = {
+        downloadsChangePercent: 10,
+        totalDownloads: 10000,
+        grossSales: 1000,
         currentYearIndex: 0,
         currentApp: 0,
         currentMonth: 0,
@@ -118,18 +123,18 @@ export default class AppsInsights extends React.Component {
 
     selectionStates = [
         {
-            key: AppsInsights.INSIGHTS_DAYS,
+            key: AppsSalesInsights.INSIGHTS_DAYS,
             value: "Days"
         }, {
-            key: AppsInsights.INSIGHTS_WEEKS,
+            key: AppsSalesInsights.INSIGHTS_WEEKS,
             value: "Weeks"
         },
         {
-            key: AppsInsights.INSIGHTS_MONTHS,
+            key: AppsSalesInsights.INSIGHTS_MONTHS,
             value: "Months"
         },
         {
-            key: AppsInsights.INSIGHTS_YEARS,
+            key: AppsSalesInsights.INSIGHTS_YEARS,
             value: "Years"
         }
     ];
@@ -422,7 +427,7 @@ export default class AppsInsights extends React.Component {
         let tabs = [
             {
                 key: 0,
-                label: <MaterialIcon icon={"Apps"} iconSize={24}/>
+                label: <Row><MaterialTextView text={"All"} fontSize={12}/></Row>
             },
             ...this.state.projects[this.currentProjectsType].list.map(({id, name}, i) => (
                 {
@@ -481,10 +486,10 @@ export default class AppsInsights extends React.Component {
                     </Row>
                     {this.chart}
                 </Grid>
-                <Column  item xs={1} style={{
+                <Column item xs={1} style={{
                     display: "flex",
                     height: 44 * 6
-                }} >
+                }}>
                     {this.appInsightsAppsTabs}
                 </Column>
             </Grid>
@@ -579,15 +584,15 @@ export default class AppsInsights extends React.Component {
         let view;
 
         switch (appsInsightsDays) {
-            case AppsInsights.INSIGHTS_WEEKS:
+            case AppsSalesInsights.INSIGHTS_WEEKS:
                 view = (
                     this.insightsWeeksGrouping
                 );
                 break;
-            case AppsInsights.INSIGHTS_MONTHS:
+            case AppsSalesInsights.INSIGHTS_MONTHS:
                 view = this.insightsMonthSelect;
                 break;
-            case AppsInsights.INSIGHTS_YEARS:
+            case AppsSalesInsights.INSIGHTS_YEARS:
                 view = (
                     <>
                         {insightGroupingStart}-{insightGroupingSpacing}
@@ -699,7 +704,7 @@ export default class AppsInsights extends React.Component {
                         this.updateAppsInsights();
                     });
                 }}
-                defaultValue={AppsInsights.INSIGHTS_DAYS}
+                defaultValue={AppsSalesInsights.INSIGHTS_DAYS}
                 selectionItems={this.selectionStates}/>
         );
     }
@@ -744,7 +749,7 @@ export default class AppsInsights extends React.Component {
     get appInsightsTabs() {
         return (
             <TabsLayout
-                value={this.state.currentProjectsTypeField}
+                defaultTabIndex={0}
                 tabs={this.projectTypes.map((type, i) => ({
                     key: i,
                     label: type
@@ -758,6 +763,22 @@ export default class AppsInsights extends React.Component {
     }
 
 
+    get totalDownloads() {
+        return this.state.totalDownloads;
+    }
+
+    get grossSales() {
+        return this.state.grossSales;
+    }
+
+    set grossSales(value) {
+        this.setState({grossSales: value});
+    }
+
+    get downloadsChangePercent() {
+        return this.state.downloadsChangePercent;
+    }
+
     render() {
         return (
             <>
@@ -768,13 +789,16 @@ export default class AppsInsights extends React.Component {
                     {this.appInsightsBody}
                     <MaterialDivider spacing={2} orientation={"horizontal"}/>
                     <MaterialTextView text={"Software Insights"}/>
-                    <Row>
+                    <Row alignItems={Flex.END}>
                         <MaterialTextView text={"Total Sales:"} variant={"body2"}/>
-                        <MaterialTextView text={"1000"} variant={"body2"}/>
+                        <MaterialTextView text={`$${this.grossSales}`} variant={"body2"}/>
                     </Row>
-                    <Grid>
-                        <MaterialTextView text={"Downloads Sales: $50"} variant={"body2"}/>
-                    </Grid>
+                    <Row alignItems={Flex.END}>
+                        <MaterialTextView text={"Downloads Sales:"} variant={"body2"}/>
+                        <MaterialTextView text={`${this.totalDownloads}`}/>
+                        <MaterialIcon icon={"ExpandLess"} color={Settings.colorSuccess}/>
+                        <MaterialTextView text={`${this.downloadsChangePercent}%`}/>
+                    </Row>
                 </Paper>
             </>
         );

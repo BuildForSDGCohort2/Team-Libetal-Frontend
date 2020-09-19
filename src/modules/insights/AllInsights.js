@@ -1,8 +1,7 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
 import Row from "../../widgets/Row";
 import AppsOsDistributionInsights from "./AppsOsDistributionInsights";
-import AppsInsights from "./AppsInsights";
+import AppsSalesInsights from "./AppsSalesInsights";
 import AppsIssuesInsights from "./AppsIssuesInsights";
 import Column from "../../widgets/Column";
 import MaterialTextView from "../../widgets/MaterialTextView";
@@ -10,16 +9,12 @@ import CommitsInsights from "./CommitsInsights";
 import TransactionsInsights from "./TransactionsInsights";
 
 
-export default class AccountInsights extends React.Component {
+export default class AllInsights extends React.Component {
 
 
     state = {
         platforms: []
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     async fetchPlatforms() {
         // Returns data relating to the current developer
@@ -110,7 +105,7 @@ export default class AccountInsights extends React.Component {
     }
 
     get issuesInsights() {
-        return (<AppsIssuesInsights platforms={this.state.platforms}/>);
+        return (<AppsIssuesInsights platforms={this.state.platforms} apps={this.state.apps}/>);
     }
 
     /**TODO
@@ -135,26 +130,30 @@ export default class AccountInsights extends React.Component {
      *      Canceled Issues (Issues closed without fixes)
      * */
     render() {
+        let {
+            pinState
+        } = this.props;
+
         let xs = 11;
 
-        let {
-            platforms
-        } = this.state;
-
-
         return (
-            <Row  style={{paddingRight: 0, paddingLeft: 58}}>
+            <>
                 <Row>
-                    <MaterialTextView text={"Accounts Insights"}/>
+                    TODO: Display trending items and their why they are trending. In terms of issues, issue solving
+                    speed,
+                    People contributing to, People financing etc
+                </Row>
+                <Row>
+                    <MaterialTextView text={"Accounts"} variant={"h5"}/>
                 </Row>
                 <Row justify={Row.JUSTIFY.START} spacing={1} style={{marginBottom: 10}}>
-                    <Grid item xs={xs} lg={5}>
-                        <AppsInsights/>
-                    </Grid>
-                    <Grid item xs={xs} lg={4}>
+                    <Column xs={xs} lg={pinState ? 6 : 5}>
+                        <AppsSalesInsights/>
+                    </Column>
+                    <Column xs={xs} lg={pinState ? 6 : 4}>
                         <AppsOsDistributionInsights/>
-                    </Grid>
-                    <Column lg={3}>
+                    </Column>
+                    <Column lg={pinState ? 12 : 3}>
                         {this.transactionsInsights}
                     </Column>
                 </Row>
@@ -162,15 +161,11 @@ export default class AccountInsights extends React.Component {
                     <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
                 </Row>
                 <Row>
-                    <Column lg={6}>
-                        <Row>
-                            <MaterialTextView text={"Development"} variant={"h6"}/>
-                        </Row>
-                        <Row>
-                            {this.commitsInsights}
-                        </Row>
+                    <Column xs={12} xm={6} lg={6}>
+                        <MaterialTextView text={"Commits"} variant={"h6"}/>
+                        {this.commitsInsights}
                     </Column>
-                    <Column lg={5}>
+                    <Column xs={12} xm={6} lg={6}>
                         <Row>
                             <MaterialTextView text={"Issues"} variant={"h6"}/>
                         </Row>
@@ -179,9 +174,8 @@ export default class AccountInsights extends React.Component {
                         </Row>
                     </Column>
                 </Row>
-            </Row>
+            </>
         );
     }
-
 
 }
