@@ -8,11 +8,11 @@ import TabsLayout from "../../widgets/TabsLayout";
 import MaterialIcon from "../../widgets/MaterialIcon";
 import Flex from "../../widgets/Flex";
 import LineChart from "../../widgets/graphs/LineChart";
-import DataSet from "../../widgets/DataSet";
 import Colors from "../../Colors";
 import MaterialDivider from "../../widgets/MaterialDivider";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import CheckBox from "@material-ui/core/Checkbox";
+import DataSet from "../../widgets/DataSet";
 
 
 let consolidatePlatformInsights = function (insightName, platform, insights) {
@@ -59,11 +59,12 @@ export default class AppsIssuesInsights extends React.Component {
     };
 
     state = {
-        currentApp: 1,
+        currentApp: 0,
         showAssignedIssues: true,
         showOpenIssues: true,
         showClosedIssues: false,
-        currentPlatform: 0,
+        currentPlatformId: 0,
+        currentPlatform: "all",
         allInsights: [],
         appNames: [],
         appNamesPerPlatform: {
@@ -327,21 +328,6 @@ export default class AppsIssuesInsights extends React.Component {
                 });
 
 
-                let appKeys = Object.keys(apps);
-
-
-                appKeys.forEach(
-                    (k, i) => {
-                        if (i !== 0) {
-                            apps[k].forEach(
-                                app => {
-                                    insights.all.push(app);
-                                }
-                            );
-                        }
-                    }
-                );
-
                 resolve({
                     appNames: appNames,
                     dates: dates,
@@ -361,7 +347,7 @@ export default class AppsIssuesInsights extends React.Component {
     }
 
     onPlatformTabsChange(event, newTab) {
-        this.currentPlatform = newTab;
+        this.currentPlatformId = newTab;
     }
 
     onAppsTabsChange(event, newTab) {
@@ -370,16 +356,36 @@ export default class AppsIssuesInsights extends React.Component {
 
     toolTipsTitleCallback(toolTips, data) {
 
+        switch (this.currentPlatform.toLowerCase()) {
+            case "all":
+                return this.currentPlatformNames[this.currentApp] + " Projects";
+                break;
+        }
+
         return toolTips.map(
-            (tooltip, i) => this.currentApps[this.currentApp].name
+            toolTip => {
+                let label = data.datasets[toolTip.datasetIndex].label
+
+                return label.appName
+            }
         );
     }
 
     toolTipsLabelCallback(toolTip, data) {
 
-        let l = data.datasets[toolTip.datasetIndex].label;
         let k = toolTip.value;
-        return `${l} ${k}`;
+
+        if(this.currentPlatformKey === "all"){
+
+            let l = data.datasets[toolTip.datasetIndex].label;
+
+            return `${k} ${l}`;
+        }
+
+        let label =  data.datasets[toolTip.datasetIndex].label;
+
+
+        return `${k} ${label.issue}`
     }
 
     componentDidMount() {
@@ -395,12 +401,16 @@ export default class AppsIssuesInsights extends React.Component {
         this.setState({currentApp: value});
     }
 
-    set currentPlatform(value) {
-        this.setState({currentPlatform: value, currentApp: 0});
+    set currentPlatformId(value) {
+
+
+        this.setState({currentPlatformId: value, currentApp: 0}, (state) => {
+
+        });
     }
 
-    get currentPlatform() {
-        return this.state.currentPlatform;
+    get currentPlatformId() {
+        return this.state.currentPlatformId;
     }
 
     get currentApps() {
@@ -412,36 +422,141 @@ export default class AppsIssuesInsights extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let {
-            currentPlatform,
-            apps
-        } = this.state;
 
-        let appKeys = Object.keys(apps);
 
-        let platform = appKeys[currentPlatform];
-
-        if (platform === "all") {
-
-        } else {
-            this.currentApps = apps[platform];
-        }
     }
 
-    render() {
+    get currentPlatformKey() {
+        return this.currentPlatform.toLowerCase();
+    }
+
+
+    get allAppsDataset() {
+        return this.extractDatasets(this.currentApps.all);
+    }
+
+    extractDatasets(apps = {}) {
+        let appKeys = Object.keys(apps);
+
+
+        let keys = {
+            openIssues: "Open",
+            closedIssues: "Closed",
+            assignedIssues: "Assigned"
+        };
+
+        return appKeys.map(
+            (key, i) => {
+
+
+                let issueKey = keys[key];
+                let issueTitle = `${issueKey} Issues`;
+                let issueName = `${issueKey.toLowerCase()}Issues`;
+
+                let dSet = apps[issueName];
+
+                let colorName = AppsIssuesInsights.colors[i];
+
+                return (
+                    <DataSet
+                        label={issueTitle}
+                        pointRadius={2}
+                        backgroundColor={Colors.alpha(colorName, .4)}
+                        borderColor={colorName}
+                        fillArea={true}
+                        borderWidth={2}
+                        data={dSet}
+                        type={key === "assignedIssues" ? "bar" : "line"}
+                        hidden={!this.state[`show${issueKey}Issues`]}
+                    />
+                );
+            }
+        );
+    }
+
+    get allCollapsedDatasets() {
         let {
-            platforms
-        } = this.props;
+            currentApp,
+            currentApps
+        } = this;
+        return this.extractDatasets(currentApps[Object.keys(currentApps)[currentApp]]);
+    }
+
+    get datasets() {
+
+        switch (this.currentPlatform.toLowerCase()) {
+            case "all":
+                if (this.currentApp === 0) {
+                    return this.allAppsDataset;
+                }
+
+                return this.allCollapsedDatasets;
+
+            default:
+
+        }
+
+        let dataset = [];
+
+        this.currentApps.forEach(
+            (app, i) => {
+
+                let hideCurrent = this.currentApp !== i;
+
+                let colorName = AppsIssuesInsights.colors[i];
+
+                let color = Colors[colorName];
+
+                dataset.push(
+                    <DataSet
+                        borderWidth={2}
+                        borderColor={color}
+                        backgroundColor={Colors.alpha(colorName,.8)}
+                        pointRadius={2}
+                        label={{appName:app.name,issue:"Assigned Issues"}}
+                        data={app.assignedIssues}
+                        type={"bar"}
+                        hidden={!this.state.showAssignedIssues || hideCurrent}
+                    />
+                );
+
+                colorName = AppsIssuesInsights.colors[i + 1];
+                color = Colors[colorName];
+
+                dataset.push(
+                    <DataSet
+                        borderWidth={2}
+                        borderColor={color}
+                        pointRadius={2}
+                        label={{appName:app.name,issue:"Closed Issues"}}
+                        data={app.closedIssues}
+                        hidden={!this.state.showClosedIssues || hideCurrent}
+                    />
+                );
+
+                colorName = AppsIssuesInsights.colors[i + 1];
+                color = Colors[colorName];
+
+                dataset.push(
+                    <DataSet
+                        borderWidth={2}
+                        borderColor={color}
+                        pointRadius={2}
+                        label={{appName:app.name,issue:"Open Issues"}}
+                        data={app.openIssues}
+                        hidden={!this.state.showOpenIssues || hideCurrent}
+                    />
+                );
+            }
+        );
+
+        return dataset;
+    }
+
+    get stepSize() {
 
         let {
-            combined,
-            currentApp,
-            currentPlatform,
-            apps = [],
-            dates,
-            showAssignedIssues,
-            showOpenIssues,
-            showClosedIssues
+            combined
         } = this.state;
 
         let max = 10;
@@ -459,101 +574,111 @@ export default class AppsIssuesInsights extends React.Component {
             }
         );
 
-        let stepSize = max / yAxisRows;
+        return max / yAxisRows;
+    }
 
 
-        let appKeys = Object.keys(apps);
+    get chart() {
+
+        let {
+            dates
+        } = this.state;
+
+
+        return (
+            <LineChart
+                showLegends={false}
+                showXAxisLabel={false}
+                tooltipLabelCallBack={this.toolTipsLabelCallback}
+                yAxisStepSize={100}
+                tooltipTitleCallBack={this.toolTipsTitleCallback}
+                xAxisLabelFormatter={(date) => {
+                    return `${date.getDate()}/${date.getMonth()}`;
+                }}
+
+                labels={dates.slice(0, 7)}
+                children={this.datasets}
+            />
+        );
+    }
+
+    get currentAppsTabs() {
+
+        let tabs;
+
+        if (this.currentPlatform.toLowerCase() === "all") {
+            tabs = this.currentPlatformNames.map(
+                name => {
+                    return (
+                        <Row alignItems={Flex.CENTER}>
+                            <MaterialIcon icon={"Apps"} iconSize={16}/>
+                            {name}
+                        </Row>
+                    );
+                }
+            );
+        } else {
+            tabs = this.currentApps.map(app => {
+                let name = app.name;
+
+                if (name.length > 7) {
+                    let ns = name.split(" ");
+                    if (ns.length > 1) {
+                        name = ns.map(v => (v[0] || "").toUpperCase()).join(".");
+                    }
+                }
+
+                return (
+                    <Row alignItems={Flex.CENTER}>
+                        <MaterialIcon icon={"Apps"} iconSize={16}/>
+                        {name}
+                    </Row>
+                );
+            });
+        }
+
+
+        return tabs;
+    }
+
+    get currentPlatformNames() {
+        return Object.keys(this.state.apps).map(plat => `${plat[0].toUpperCase()}${plat.slice(1, plat.length)}`);
+    }
+
+    get currentPlatform() {
+        return this.currentPlatformNames[this.state.currentPlatformId];
+    }
+
+    get currentAppsTabsLayout() {
+
+        return (
+            <TabsLayout
+                defaultTabIndex={0}
+                minTabHeight={24}
+                variant={TabsLayout.VARIANT.SCROLLABLE}
+                orientation={TabsLayout.ORIENTATION.VERTICAL}
+                onChange={(e, v) => this.currentApp = v}
+                tabs={this.currentAppsTabs}
+            />
+        );
+    }
+
+    render() {
+        let {
+            platforms
+        } = this.props;
+
+        this.currentApps = this.state.apps[this.currentPlatform.toLowerCase()];
 
         platforms = [{id: 0, name: "All"}, ...platforms];
-
-        let platform = appKeys[currentPlatform];
-
-        let currentApps = apps[platform];
-
-        let tabs = [{name: "All"}, ...currentApps].map(app => {
-            let name = app.name;
-
-            if (name.length > 7) {
-                let ns = name.split(" ");
-                if (ns.length > 1) {
-                    name = ns.map(v => (v[0] || "").toUpperCase()).join(".");
-                }
-            }
-
-            return (
-                <Row alignItems={Flex.CENTER}>
-                    <MaterialIcon icon={"Apps"} iconSize={16}/>
-                    {name}
-                </Row>
-            );
-        });
-
-
-        let dS = [];
-
-        currentApps = this.currentApps;
-
-        currentApps.forEach(
-            (app, i) => {
-
-                let hide = false;
-
-                if (currentApp !== 0) {
-                    hide = currentApp !== i;
-                }
-
-                let colorName = AppsIssuesInsights.colors[i] || "black";
-                let color = Colors[colorName];
-
-                dS.push(
-                    <DataSet
-                        label={"Assigned Issues"}
-                        borderColor={color}
-                        backgroundColor={color}
-                        borderWidth={4}
-                        pointRadius={1}
-                        data={app.assignedIssues}
-                        fillArea={true}
-                        type={"bar"}
-                        hidden={(!showAssignedIssues) || hide}
-                    />
-                );
-
-                dS.push(
-                    <DataSet
-                        label={"Open Issues"}
-                        borderColor={color}
-                        backgroundColor={color}
-                        borderWidth={4}
-                        pointRadius={1}
-                        data={app.openIssues}
-                        fillArea={false}
-                        hidden={!showOpenIssues || hide}
-                    />
-                );
-
-                dS.push(
-                    <DataSet
-                        label={"Closed Issues"}
-                        borderColor={color}
-                        backgroundColor={color}
-                        borderWidth={4}
-                        pointRadius={1}
-                        data={app.closedIssues}
-                        fillArea={false}
-                        hidden={!showClosedIssues || hide}
-                    />
-                );
-            }
-        );
-
 
         let insightsOptions = ["Open", "Closed", "Assigned"];
 
         return (
             <>
                 <Row>
-                    <PlatformTabs platforms={platforms} onChange={this.onPlatformTabsChange}/>
+                    <PlatformTabs platforms={platforms}
+                                  onChange={(e, platformId) => this.currentPlatformId = platformId}/>
                 </Row>
                 <Paper style={{flexGrow: 1, display: "flex", flexDirection: "column", padding: 4}}>
                     <Row justify={Flex.CENTER} alignItems={Flex.CENTER}>
@@ -577,56 +702,38 @@ export default class AppsIssuesInsights extends React.Component {
                     </Row>
                     <Row>
                         <Column lg={2} style={{height: 286, display: "flex"}}>
-                            <TabsLayout
-                                defaultTabIndex={0}
-                                minTabHeight={24}
-                                variant={TabsLayout.VARIANT.SCROLLABLE}
-                                orientation={TabsLayout.ORIENTATION.VERTICAL}
-                                onChange={(e, v) => this.currentApp = v}
-                                tabs={tabs}
-                            />
+                            {this.currentAppsTabsLayout}
                         </Column>
                         <Column lg={10}>
-                            <LineChart
-                                showLegends={false}
-                                showXAxisLabel={false}
-                                tooltipLabelCallBack={this.toolTipsLabelCallback}
-
-                                yAxisStepSize={stepSize}
-                                tooltipTitleCallBack={this.toolTipsTitleCallback}
-                                xAxisLabelFormatter={(date) => {
-                                    return `${date.getDate()}/${date.getMonth()}`;
-                                }}
-
-                                labels={dates.slice(0, 7)}
-                                children={dS}
-                            />
-
+                            {this.chart}
                         </Column>
                     </Row>
                     <Column xs={12}>
                         <MaterialDivider spacing={1}/>
                         <Row justify={Flex.SPACE_AROUND}>
-                            <Column xs={6} xm={4} lg={4}>
+                            <Column xs={6} xm={4} lg={3}>
                                 <Row>
                                     <MaterialIcon icon={"ExpandLess"} color={Colors.green}/>
-
                                     <MaterialTextView text={"10% Closed Issues"}/>
                                 </Row>
                             </Column>
-                            <Column xs={6} xm={4} lg={4}>
+                            <Column xs={6} xm={4} lg={3}>
                                 <Row>
                                     <MaterialIcon icon={"ExpandMore"} color={Colors.red}/>
 
                                     <MaterialTextView text={"12% Open Issues"}/>
                                 </Row>
                             </Column>
-
-                            <Column xs={6} xm={4} lg={4}>
+                            <Column xs={6} xm={4} lg={3}>
                                 <Row>
-                                    <MaterialIcon icon={"ExpandMore"} color={Colors.green}/>
-
+                                    <MaterialIcon icon={"ExpandLess"} color={Colors.green}/>
                                     <MaterialTextView text={"10% Assigned Issues"}/>
+                                </Row>
+                            </Column>
+                            <Column xs={6} xm={4} lg={3}>
+                                <Row>
+                                    <MaterialIcon icon={"ExpandLess"} color={Colors.green}/>
+                                    <MaterialTextView text={"10% New Issues"}/>
                                 </Row>
                             </Column>
                         </Row>

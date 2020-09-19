@@ -148,7 +148,7 @@ export default class AllInsights extends React.Component {
                 </Row>
                 <Row justify={Row.JUSTIFY.START} spacing={1} style={{marginBottom: 10}}>
                     <Column xs={xs} lg={pinState ? 6 : 5}>
-                        <AppsSalesInsights/>
+                        <AppsSalesInsights apps={this.state.apps}/>
                     </Column>
                     <Column xs={xs} lg={pinState ? 6 : 4}>
                         <AppsOsDistributionInsights/>
