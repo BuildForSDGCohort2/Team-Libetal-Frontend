@@ -313,7 +313,8 @@ const colors = {
     },
     white: {
         base: "#ffffff"
-    }
+    },
+
 };
 
 

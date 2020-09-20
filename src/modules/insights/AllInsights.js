@@ -7,6 +7,13 @@ import Column from "../../widgets/Column";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import CommitsInsights from "./CommitsInsights";
 import TransactionsInsights from "./TransactionsInsights";
+import Paper from "@material-ui/core/Paper";
+import Colors from "../../Colors";
+import Flex from "../../widgets/Flex";
+import MaterialDivider from "../../widgets/MaterialDivider";
+import MaterialIcon from "../../widgets/MaterialIcon";
+import Grid from "@material-ui/core/Grid";
+import UserInvestmentInsights from "./UserInvestmentInsights";
 
 
 export default class AllInsights extends React.Component {
@@ -100,12 +107,93 @@ export default class AllInsights extends React.Component {
         return (<CommitsInsights/>);
     }
 
-    get transactionsInsights() {
-        return (<TransactionsInsights platforms={this.state.platforms}/>);
+    get usersEarningsInsights() {
+        return (<UserInvestmentInsights />);
     }
 
     get issuesInsights() {
         return (<AppsIssuesInsights platforms={this.state.platforms} apps={this.state.apps}/>);
+    }
+
+
+    sampleTrendingFooterTextView(text){
+        return (
+            <MaterialTextView text={text} fontSize={12} textColor={Colors.white}/>
+        )
+    }
+    sampleTrendingItem(name ="Libetal",activeUsers = "10000+",color){
+
+        let textColor = Colors.white;
+
+        return (
+            <Column xs={5} lg={3}>
+                <Paper  elevation={6} style={{
+                    flexDirection: "column",
+                    display: "flex",
+                    flexGrow: 1,
+                    padding:4,
+                    backgroundColor: color,
+                }}>
+                    <Row justify={Flex.CENTER} style={{flexGrow: 2}}>
+                        <Grid container direction={"column"} alignItems={Flex.CENTER}>
+                            <div style={{display: "flex", flexGrow: 1}}/>
+                            <MaterialTextView
+                                text={name}
+                                variant={"h5"}
+                                textColor={textColor}
+                            />
+                            <div style={{display: "flex", flexGrow: 1}}/>
+                            <MaterialTextView
+                                text={activeUsers}
+                                textColor={textColor}
+                                variant={"h4"}
+                            />
+                            <MaterialTextView
+                                text={"active"}
+                                textColor={textColor}
+                                fontSize={10}
+                            />
+                            <div style={{display: "flex", flexGrow: 1}}/>
+                            <Row justify={Flex.CENTER} alignItems={Flex.CENTER}>
+                                <MaterialTextView
+                                    text={"15%"}
+                                    textColor={textColor}
+                                    ffontSize={12}
+                                />
+                                <MaterialIcon icon={"ExpandLess"}
+                                              color={textColor}
+                                              iconSize={18}
+                                />
+                                <MaterialTextView
+                                    text={"Users"}
+                                    textColor={textColor}
+                                    fontSize={12}
+                                />
+                            </Row>
+                        </Grid>
+                    </Row>
+                    <MaterialDivider color={textColor}/>
+                    <Row style={{background: Colors.alpha("black", .1)}}>
+                        <Column xs={6}>
+                            <MaterialTextView
+                                text={"Commits: 100+"}
+                                textColor={Colors.white}
+                            />
+                            {this.sampleTrendingFooterTextView("100 new")}
+                            {this.sampleTrendingFooterTextView("10 merged")}
+                        </Column>
+                        <Column xs={6}>
+                            <MaterialTextView
+                                text={"Issues"}
+                                textColor={Colors.white}
+                            />
+                            {this.sampleTrendingFooterTextView("10 New")}
+                            {this.sampleTrendingFooterTextView("10 Closed")}
+                        </Column>
+                    </Row>
+                </Paper>
+            </Column>
+        );
     }
 
     /**TODO
@@ -138,10 +226,11 @@ export default class AllInsights extends React.Component {
 
         return (
             <>
-                <Row>
-                    TODO: Display trending items and their why they are trending. In terms of issues, issue solving
-                    speed,
-                    People contributing to, People financing etc
+                <Row spacing={1}>
+                    {this.sampleTrendingItem("Libetal","800k+",Colors.orange)}
+                    {this.sampleTrendingItem("Dukto","200k+",Colors.red)}
+                    {this.sampleTrendingItem("Luro","12+",Colors.pink)}
+                    {this.sampleTrendingItem("FlexTron","40k+",Colors.blue)}
                 </Row>
                 <Row>
                     <MaterialTextView text={"Accounts"} variant={"h5"}/>
@@ -154,7 +243,7 @@ export default class AllInsights extends React.Component {
                         <AppsOsDistributionInsights/>
                     </Column>
                     <Column lg={pinState ? 12 : 3}>
-                        {this.transactionsInsights}
+                        {this.usersEarningsInsights}
                     </Column>
                 </Row>
                 <Row>

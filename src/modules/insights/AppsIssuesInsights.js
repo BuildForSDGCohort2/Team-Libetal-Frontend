@@ -48,6 +48,37 @@ function getTotals(arr, key) {
 }
 
 
+const colors = [
+    "material_red",
+    "pink",
+    "yellow",
+    "amber",
+    "red",
+    "orange",
+    "lime",
+    "brown",
+    "blue_grey",
+    "grey",
+    "cyan",
+    "purple",
+    "black",
+    "white",
+    "deepPurple",
+    "indigo",
+    "blue",
+    "light_blue",
+    "deep_orange",
+    "teal",
+    "green",
+    "light_green",
+    "grey",
+    "black",
+    "white"
+].sort(() => Math.random() - 0.5)
+
+
+
+
 export default class AppsIssuesInsights extends React.Component {
 
     static defaultProps = {
@@ -79,30 +110,7 @@ export default class AppsIssuesInsights extends React.Component {
         combined: {}
     };
 
-    static colors = [
-        "material_red",
-        "red",
-        "pink",
-        "purple",
-        "deepPurple",
-        "indigo",
-        "blue",
-        "light_blue",
-        "cyan",
-        "teal",
-        "green",
-        "light_green",
-        "lime",
-        "yellow",
-        "amber",
-        "orange",
-        "deep_orange",
-        "brown",
-        "blue_grey",
-        "grey",
-        "black",
-        "white"
-    ];
+    static colors = colors;
 
     constructor(props) {
         super(props);

@@ -7,11 +7,9 @@ export default class LineChart extends Chart {
 
     kind = "line";
 
-    static propTypes ={
+    static propTypes = {
         datasets: PropTypes.arrayOf(
-            PropTypes.shape({
-
-            })
+            PropTypes.shape({})
         ),
         labels: PropTypes.array,
         yAxisStepSize: PropTypes.number,
@@ -35,6 +33,10 @@ export default class LineChart extends Chart {
         size: PropTypes.number,
         major: PropTypes.object,
         xAxisLabelFormatter: PropTypes.func,
-        yAxisLabelFormatter: PropTypes.func
-    }
+        yAxisLabelFormatter: PropTypes.func,
+        yAxisTextColor: PropTypes.string,
+        xAxisTextColor: PropTypes.string,
+        yAxisGridLineColor:PropTypes.string,
+        xAxisGridLineColor:PropTypes.string
+    };
 }

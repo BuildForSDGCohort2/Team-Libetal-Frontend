@@ -2,7 +2,7 @@ import React from "react";
 import {withProps} from "recompose";
 import * as Icons from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
-
+import PropTypes from "prop-types";
 
 export default class MaterialIcon extends React.Component {
 
@@ -12,6 +12,12 @@ export default class MaterialIcon extends React.Component {
         style: {}
     };
 
+
+    static propTypes = {
+        icon: PropTypes.string.isRequired,
+        color:PropTypes.string,
+        iconSize:PropTypes.oneOf([PropTypes.number,PropTypes.string])
+    };
 
     render() {
         let {
@@ -29,7 +35,7 @@ export default class MaterialIcon extends React.Component {
         } = this.props;
 
         if (!(color === "secondary" || color === "primary" || color === "action" || color === "inherit" || color === "disabled")) {
-            style.color = color
+            style.color = color;
             color = undefined;
         }
 

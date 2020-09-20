@@ -16,9 +16,9 @@ import Calendar from "../../utils/Calendar";
 import Column from "../../widgets/Column";
 import Flex from "../../widgets/Flex";
 import Settings from "../../utils/Settings";
+import AllAppsSettings from "./context_menues/AllAppsSettings";
 
 export default class AppsSalesInsights extends React.Component {
-
 
 
     static defaultProps = {
@@ -259,7 +259,8 @@ export default class AppsSalesInsights extends React.Component {
     get appInsightsMenu() {
         return (
             <>
-                <MaterialIconBtn icon={"Settings"} iconPadding={6} iconSize={18}/>
+                <AllAppsSettings/>
+                {/*<MaterialIconBtn icon={"Settings"} iconPadding={6} iconSize={18}/>*/}
             </>
         );
     }
@@ -563,10 +564,11 @@ export default class AppsSalesInsights extends React.Component {
 
         let monthsPassed = date.getMonth();
 
+        //TODO
         return (
             <>
                 <MaterialSelect
-
+                    style={{marginTop:0}}
                 />
                 {this.insightsMonthSelect}
             </>
@@ -664,7 +666,7 @@ export default class AppsSalesInsights extends React.Component {
 
                     });
                 }}
-
+                style={{marginTop:0}}
                 selectionItems={this.state.insightYears.map((year, i) => ({
                     key: i,
                     value: year
@@ -688,6 +690,7 @@ export default class AppsSalesInsights extends React.Component {
                         this.updateAppsInsights();
                     });
                 }}
+                style={{marginTop:0}}
                 defaultValue={0}
                 selectionItems={this.insightsMonthSelectItems}/>
         );
@@ -704,6 +707,7 @@ export default class AppsSalesInsights extends React.Component {
                         this.updateAppsInsights();
                     });
                 }}
+                style={{marginTop:0}}
                 defaultValue={AppsSalesInsights.INSIGHTS_DAYS}
                 selectionItems={this.selectionStates}/>
         );
@@ -724,8 +728,8 @@ export default class AppsSalesInsights extends React.Component {
                         <MaterialTextView text={this.currentApp.name}/>
                     </Row>
                 </Column>
-                <Column xs={6} lg={7} container>
-                    <Row justify={Flex.END} {...headerCommonProps}>
+                <Column xs={6} lg={7} justify={Flex.CENTER}>
+                    <Row justify={Flex.END} alignContent={Flex.CENTER} {...headerCommonProps}>
                         {this.insightGrouping}
                         {this.insightGroupBy}
                         {this.insightsYearsSelect}
@@ -734,7 +738,7 @@ export default class AppsSalesInsights extends React.Component {
                 <Column xs={12} lg={2}>
                     <Row justify={Flex.END} {...headerCommonProps}>
                         {this.appInsightsSort}
-                        {this.appInsightsMenu}
+                        <AllAppsSettings/>
                     </Row>
                 </Column>
             </Row>

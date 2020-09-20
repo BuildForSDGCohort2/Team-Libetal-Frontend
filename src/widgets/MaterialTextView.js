@@ -6,14 +6,13 @@ import PropTypes from "prop-types";
 export default class MaterialTextView extends React.Component {
 
 
-
-
-
     static propTypes = {
+        textColor:PropTypes.string,
         text: PropTypes.string.isRequired,
         variant: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6", "small", "body", "body1", "body2"]),
         fontSize:PropTypes.oneOfType([PropTypes.string,PropTypes.number])
     };
+
     static  defaultProps = {
         style: {}
     };
@@ -27,6 +26,7 @@ export default class MaterialTextView extends React.Component {
     render() {
 
         let {
+            textColor,
             text,
             variant,
             fontSize,
@@ -41,7 +41,8 @@ export default class MaterialTextView extends React.Component {
 
                 {...props}
                 style={{
-                    ...style
+                    ...style,
+                    color:textColor
                 }}
                 variant={variant}>
                 {text}
