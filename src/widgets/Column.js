@@ -4,12 +4,17 @@ import Grid from "@material-ui/core/Grid";
 export default class Column extends Component {
 
     render() {
-        let {direction, reverse = false, ...props} = this.props;
+        let {direction, reverse = false, justify,alignItems,...props} = this.props;
 
         direction = reverse ? "column-reverse" : "column";
 
-        return (
-            <Grid item  {...props}/>
-        );
+
+        let view ;
+
+        if(justify === undefined){
+            view = <Grid item  {...props}/>
+        }else view= <Grid container justify={justify} item  {...props}/>
+
+        return view;
     }
 }

@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 export default class MaterialImage extends Component {
 
     static defaultProps = {
-        src: "",
         alt: "MaterialImage",
         size: undefined
     };
 
     static propTypes = {
         src: PropTypes.string.isRequired,
-        alt: PropTypes.string
+        alt: PropTypes.string,
+        size:PropTypes.number,
+        height:PropTypes.number,
+        width:PropTypes.number
     };
 
     static IMAGE_SMALL = 24;

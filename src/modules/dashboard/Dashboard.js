@@ -27,17 +27,13 @@ import Insights from "../insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
 import PropTypes from "prop-types";
+import Projects from "./Projects";
+import InputBase from "@material-ui/core/InputBase";
+import Row from "../../widgets/Row";
+import Flex from "../../widgets/Flex";
+import MaterialIcon from "../../widgets/MaterialIcon";
 
 
-const btnSuccess = createMuiTheme({
-    palette: {
-        secondary: {
-            main: Settings.colorSuccess,
-            dark: Settings.colorSuccessDark,
-            contrastText: Settings.textSuccess
-        }
-    }
-});
 const dashBoardTheme = createMuiTheme({
     palette: {
         primary: {
@@ -73,7 +69,7 @@ export default class Dashboard extends Component {
             name: "Breimer",
             email: "brymher@gmail.com"
         },
-        currentTab: 6,
+        currentTab: 0,
         dashBoardSearchKey: 0,
         dashBoardSearchValues: [
             {
@@ -98,7 +94,7 @@ export default class Dashboard extends Component {
                 id: 6,
                 name: "Insights"
             }
-        ]
+        ],
     };
 
     static defaultProps = {
@@ -164,7 +160,7 @@ export default class Dashboard extends Component {
                     </nav>
                     <Separator/>
                     <Paper>
-                        <Grid container>
+                        <Row alignItems={Flex.CENTER}>
                             <MaterialSelect
                                 style={{position: "relative", marginTop: 6, marginLeft: 6}}
                                 labelId="demo-simple-select-label"
@@ -172,21 +168,23 @@ export default class Dashboard extends Component {
                                 value={this.state.dashBoardSearchKey}
                                 onChange={this.handleDashboardSearchChange}
                                 renderValue={selected => (this.dashBoardSearchValue)}
-                                children={
+                                selectionItems={
                                     this.state.dashBoardSearchValues.map(({id, name}, i) => (
-                                        <MenuItem value={i} key={i}>{name}</MenuItem>
+                                        {
+                                            key:id,
+                                            value:name
+                                        }
                                     ))}
                             />
-
-                            <Divider style={{height: 36, width: 1, margin: 4}} orientation="vertical"/>
-                            <MaterialTextField
+                            <MaterialDivider orientation={"vertical"} height={24} spacing={4}/>
+                            <InputBase
                                 style={{marginTop: 6}}
                                 placeholder={"Search"}
                             />
                             <IconButton type="submit" aria-label="search">
                                 <SearchIcon/>
                             </IconButton>
-                        </Grid>
+                        </Row>
                     </Paper>
                     <IconButton color="secondary" aria-label="upload picture" component="span">
                         <AppsIcon/>
@@ -197,7 +195,6 @@ export default class Dashboard extends Component {
                     <IconButton color="secondary" aria-label="upload picture" component="span">
                         <NotificationsIcon/>
                     </IconButton>
-
                     <MaterialBtn
                         color={"primary"}
                         variant={"contained"}
@@ -257,25 +254,7 @@ export default class Dashboard extends Component {
 
 
     get projects() {
-        let {classes} = this.props;
-        return (
-            <Grid container className={classes.root}>
-                <Grid item lg={8}>
-                    This is Long text for start filed
-                    <MaterialDivider orientation={"horizontal"}/>
-                </Grid>
-                <Grid item lg={4}>
-                    <Grid container alignItems={"flex-end"} justify={"flex-end"}>
-
-                        <ThemeProvider
-                            theme={btnSuccess}
-                            children={<MaterialBtn variant={"contained"} content={"CREATE PROJECT"}/>}/>
-                    </Grid>
-
-                </Grid>
-
-            </Grid>
-        );
+        return <Projects classes={this.props.classes}/>;
     }
 
     /**TODO resolve url to use this currentBody*/

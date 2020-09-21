@@ -242,15 +242,13 @@ export default class AllInsights extends React.Component {
                     <Column xs={xs} lg={pinState ? 6 : 4}>
                         <AppsOsDistributionInsights/>
                     </Column>
-                    <Column lg={pinState ? 12 : 3}>
+                    <Column lg={pinState ? 6 : 3}>
                         {this.usersEarningsInsights}
                     </Column>
-                </Row>
-                <Row>
-                    <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
-                </Row>
-                <Row>
                     <Column xs={12} xm={6} lg={6}>
+                        <Row>
+                            <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
+                        </Row>
                         <MaterialTextView text={"Commits"} variant={"h6"}/>
                         {this.commitsInsights}
                     </Column>
@@ -263,6 +261,7 @@ export default class AllInsights extends React.Component {
                         </Row>
                     </Column>
                 </Row>
+
             </>
         );
     }

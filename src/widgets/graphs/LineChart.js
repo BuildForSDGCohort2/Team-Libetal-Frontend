@@ -37,6 +37,7 @@ export default class LineChart extends Chart {
         yAxisTextColor: PropTypes.string,
         xAxisTextColor: PropTypes.string,
         yAxisGridLineColor:PropTypes.string,
-        xAxisGridLineColor:PropTypes.string
+        xAxisGridLineColor:PropTypes.string,
+        showGridLines:PropTypes.bool
     };
 }

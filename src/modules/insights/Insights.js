@@ -6,6 +6,7 @@ import AccountsInsights from "./AccountsInsights";
 import ProjectsInsights from "./ProjectsInsights";
 import Row from "../../widgets/Row";
 import ProductivityInsights from "./ProductivityInsights";
+import Footer from "../Footer";
 
 
 /**Todo
@@ -91,6 +92,11 @@ export default class Insights extends React.Component {
                         paddingLeft: pinState ? 242 : 58
                     }}
                     children={this.currentTab}
+                />
+                <Footer
+                    style={{
+                        paddingLeft: pinState ? 242 : 58
+                    }}
                 />
             </>
         );

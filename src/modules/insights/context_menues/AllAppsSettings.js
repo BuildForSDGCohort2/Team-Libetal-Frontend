@@ -40,6 +40,7 @@ export default class AllAppsSettings extends Component {
 
         return (
             <>
+
                 <IconButton
                     aria-controls="simple-menu"
                     aria-haspopup="true"

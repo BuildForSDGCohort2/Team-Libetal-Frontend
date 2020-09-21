@@ -4,6 +4,7 @@ import {FormControl} from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import PropTypes from "prop-types";
 
 export default class MaterialSelect extends Component {
 
@@ -18,6 +19,20 @@ export default class MaterialSelect extends Component {
         value: "",
         onChange: "",
         renderValue: undefined
+    };
+
+    static propTypes = {
+        selectionItems: PropTypes.arrayOf(PropTypes.shape({
+            key:PropTypes.number,
+            value:PropTypes.any,
+        })),
+        selectionHeader:PropTypes.any,
+        selectionFooter:PropTypes.any,
+        labelId:PropTypes.string,
+        id:PropTypes.string,
+        value:PropTypes.any,
+        onChange:PropTypes.func,
+        renderValue:PropTypes.any
     };
 
     get selectionItems() {
@@ -47,7 +62,6 @@ export default class MaterialSelect extends Component {
             ...props
         } = this.props;
 
-
         return (
             <Select {...props}>
                 {selectionHeader}
@@ -71,7 +85,6 @@ export default class MaterialSelect extends Component {
             children,
             selectionHeader,
             selectionFooter,
-
             ...props
         } = this.props;
 

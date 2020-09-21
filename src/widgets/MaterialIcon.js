@@ -16,7 +16,7 @@ export default class MaterialIcon extends React.Component {
     static propTypes = {
         icon: PropTypes.string.isRequired,
         color:PropTypes.string,
-        iconSize:PropTypes.oneOf([PropTypes.number,PropTypes.string])
+        iconSize:PropTypes.number
     };
 
     render() {
