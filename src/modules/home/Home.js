@@ -5,26 +5,29 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AppsIcon from "@material-ui/icons/Apps";
-import BuildIcon from "@material-ui/icons/Build";
-import PaletteIcon from "@material-ui/icons/Palette";
 // import TimeLineIcon from "@material-ui/icons/TimeLine";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import IconButton from "@material-ui/core/IconButton";
-import BugReportIcon from "@material-ui/icons/BugReport";
 import List from "@material-ui/core/List";
 import Link from "@material-ui/core/Link";
 import Toolbar from "@material-ui/core/Toolbar";
 import ListItem from "@material-ui/core/ListItem";
 import MaterialBtn from "../../widgets/MaterialBtn";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import {createMuiTheme} from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
 import Row from "../../widgets/Row";
+import Column from "../../widgets/Column";
+import MaterialTextView from "../../widgets/MaterialTextView";
+import Flex from "../../widgets/Flex";
+import MaterialIcon from "../../widgets/MaterialIcon";
+import Colors from "../../Colors";
+import Footer from "../Footer";
+import Paper from "@material-ui/core/Paper";
+import MaterialDivider from "../../widgets/MaterialDivider";
 
 const theme = createMuiTheme({
     palette: {
@@ -45,6 +48,7 @@ export default class Home extends View {
             console.log(`Requesting for page ${link}`);
         }
     };
+
     state = {
         currentTab: 0,
         currentTabView: (<Typography>Not A Valid Tab</Typography>),
@@ -116,10 +120,166 @@ export default class Home extends View {
     }
 
     componentDidMount() {
-        this.updateTabView(21);
+        this.updateTabView(1);
     }
 
-     getLayout({userDetails, appTheme, classes}) {
+
+    get body() {
+
+        let titleVariant = "h4";
+
+        let textStyle = {
+            textAlign: "center",
+            justify: "center",
+            lineHeight:2
+        };
+
+        let paperStyle = {
+            padding:18
+        }
+
+        return (
+            <>
+                <Row style={{marginTop: 56}} className={this.props.appTheme.body} justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                    <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
+                       <Paper style={paperStyle}>
+                           <Column alignItems={Flex.CENTER}>
+                               <MaterialTextView
+                                   text={"Contributions"}
+                                   variant={titleVariant}
+                                   textColor={Colors.red}
+                               />
+
+                               <MaterialDivider width={"50%"}/>
+
+                               <MaterialTextView
+                                   text={"Code, Design, Funding.\n All contributions are evaluated and agreed upon the contributor and the project creator or manager if any exists, and are later evaluated upon project returns."}
+                                   style={textStyle}
+                               />
+                           </Column>
+                       </Paper>
+                    </Column>
+                    <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
+                        <Paper style={paperStyle}>
+                            <Column alignItems={Flex.CENTER}>
+                                <MaterialTextView
+                                    text={"Returns Evaluation"}
+                                    variant={titleVariant}
+                                />
+                                <MaterialDivider width={"50%"}/>
+
+                                <MaterialTextView
+                                    text={"Returns are to be evaluated based on contributors total input on any given product,\n" +
+                                    "be it in terms of code or financial input or design.\n" +
+                                    "All input that was used during the product inception to completion is to be evaluated and quantified."}
+                                    style={textStyle}
+                                />
+                            </Column>
+                        </Paper>
+
+                    </Column>
+                    <Column xs={12} lg={3} alignItems={Flex.CENTER}>
+
+                        <Paper style={paperStyle}>
+                            <Column alignItems={Flex.CENTER}>
+
+                                <MaterialTextView
+                                    text={"Pricing"}
+                                    variant={titleVariant}
+                                />
+                                <MaterialDivider width={"50%"}/>
+
+                                <MaterialTextView
+                                    text={"Feature pricing and evaluation is done by project contributors, that you hand pick as you see fit depending on your project"}
+                                    style={textStyle}
+                                />
+
+                            </Column>
+                        </Paper>
+
+                    </Column>
+                </Row>
+                {this.projectEstimationAndEvaluation}
+                {this.projectManagement}
+                {<Footer/>}
+            </>
+        );
+    }
+
+    get projectEstimationAndEvaluation() {
+        return (
+            <Row style={{marginTop: 24}} justify={Flex.SPACE_AROUND}>
+                <Column xs={12} lg={6}>
+                    <img src={"/images/project_estimation.png"}/>
+                </Column>
+                <Column xs={12} lg={4} justify={Flex.CENTER}>
+                    <MaterialTextView
+                        text={"Pricing, Estimation and \n Evaluation."}
+                        variant={"h5"}
+                    />
+                    <Row>
+                        <Column alignItems={Flex.CENTER}>
+                           <Row justify={Flex.END}>
+                               <MaterialTextView
+                                   text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
+                                   fontSize={14}
+                                   style={{
+                                       textAlign: "right"
+                                   }}
+                               />
+
+                           </Row>
+                            <MaterialBtn
+                                content={"Learn More"}
+                                endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
+                                color={Colors.white}
+                            />
+                        </Column>
+                    </Row>
+
+                </Column>
+            </Row>
+        );
+    }
+
+    get projectManagement() {
+
+        return (
+            <Row stye={{marginTop: 12}} justify={Flex.SPACE_BETWEEN}>
+                <Column xs={12} lg={3} alignItems={Flex.END} justify={Flex.CENTER}>
+                    <MaterialTextView
+                        text={"Project Management"}
+                        variant={"h4"}
+                        style={{
+                            textAlign: "right"
+                        }}
+                    />
+                    <Row justify={Flex.CENTER}>
+                        <MaterialTextView
+                            text={"Manage project issues, tasks, contributions with ease,\n" +
+                            "Get direct access to the product users insights.\n" +
+                            "Product users can create new issues and even make feature requests for the product. "}
+                            style={{
+                                textAlign: "left"
+                            }}
+                        />
+
+                        <MaterialBtn
+                            variant={"contained"}
+                            content={<MaterialTextView text={"Learn more"} variant={"h5"}/>}
+                            color={Colors.orange}
+                            textColor={Colors.white}
+                        />
+                    </Row>
+                </Column>
+                <Column xs={12} lg={7}>
+                    <img src="/images/project.management.issues.png" alt="Project Management" width={"100%"}/>
+                </Column>
+            </Row>
+        );
+    }
+
+    getLayout({userDetails, appTheme, classes}) {
 
 
         let flex = {
@@ -133,7 +293,7 @@ export default class Home extends View {
         return (
             <Row ref={this.ref}>
                 <CssBaseline/>
-                <AppBar position="static" color="default" elevation={0} className={appTheme.homeAppBar}>
+                <AppBar position="static" elevation={4} className={appTheme.homeAppBar}>
                     <Grid container className={appTheme.homeHeader}>
                         <Grid container>
                             <Grid item xs={3} style={flex}>
@@ -167,21 +327,7 @@ export default class Home extends View {
                 </AppBar>
                 {/* Hero unit */}
                 <Grid container>
-                    <Grid item xs={7}>
-
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Tabs
-                            theme={theme}
-                            value={this.state.currentTab}
-                            onChange={this.handleChange}
-                        >
-                            <Tab theme={theme} icon={<PaletteIcon/>} label="Features"/>
-                            <Tab theme={theme} icon={<BuildIcon className="iconAccent"/>} label="Issues"/>
-                            <Tab theme={theme} icon={<BugReportIcon className="txtPrimary"/>} label="Bugs"/>
-                        </Tabs>
-                        {this.state.currentTabView}
-                    </Grid>
+                    {this.body}
                 </Grid>
             </Row>
         );
@@ -329,7 +475,8 @@ export default class Home extends View {
                         </IconButton> Skill Investment
                     </ListItem>
                 </List>
-            </Grid>);
+            </Grid>
+        );
     }
 }
 

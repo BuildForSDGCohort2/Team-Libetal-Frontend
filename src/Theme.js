@@ -184,7 +184,8 @@ export default function Theme({props, children}) {
     let styles = Settings.style === "dark" ? darkTheme : lightTheme;
 
     return (
-        <ThemeProvider theme={lTheme}>
+        <ThemeProvider
+            theme={lTheme}>
             {children({
                 classes,
                 /**@Depricated*/
