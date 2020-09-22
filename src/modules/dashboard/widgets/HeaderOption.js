@@ -10,7 +10,7 @@ export default class HeaderOption extends OptionsMenu {
 
     static propTypes = {
         ...OptionsMenuPropsTypes,
-        title: PropTypes.string,
+        title: PropTypes.any,
         textColor:PropTypes.string,
         btnColor:PropTypes.string
     };
@@ -38,7 +38,7 @@ export default class HeaderOption extends OptionsMenu {
                     minHeight:2
                 }}
                 onClick={
-                    this.openMenu
+                    this.open
                 }
                 endIcon={
                     <MaterialIcon

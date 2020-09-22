@@ -5,6 +5,7 @@ import {Toolbar} from "@material-ui/core";
 import MaterialImage from "../../widgets/MaterialImage";
 import Separator from "../../widgets/separator";
 import MaterialBtn from "../../widgets/MaterialBtn";
+
 import {
     AccountCircle as AccountCircleIcon,
     Apps as AppsIcon,
@@ -23,7 +24,7 @@ import MaterialDivider from "../../widgets/MaterialDivider";
 import Paper from "@material-ui/core/Paper";
 import MaterialSelect from "../../widgets/MaterialSelect";
 import MenuItem from "@material-ui/core/MenuItem";
-import Insights from "../insights/Insights";
+import Insights from "./insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
 import PropTypes from "prop-types";
@@ -32,6 +33,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Row from "../../widgets/Row";
 import Flex from "../../widgets/Flex";
 import MaterialIcon from "../../widgets/MaterialIcon";
+import Issues from "./issues/Issues";
 
 
 const dashBoardTheme = createMuiTheme({
@@ -64,12 +66,19 @@ const dashBoardTheme = createMuiTheme({
 
 export default class Dashboard extends Component {
 
+    static PROJECTS = 0
+    static ISSUES =  1
+    static TEAMS =  2
+    static TASKS =  3
+    static REVIEWS =  4
+    static INSIGHTS =  5
+
     state = {
         userDetails: {
             name: "Breimer",
             email: "brymher@gmail.com"
         },
-        currentTab: 0,
+        currentTab: Dashboard.ISSUES,
         dashBoardSearchKey: 0,
         dashBoardSearchValues: [
             {
@@ -268,7 +277,7 @@ export default class Dashboard extends Component {
             case 0:
                 return this.projects;
             case 1:
-                return this.issues;
+                return <Issues />;
             case  2:
                 return this.teams;
 

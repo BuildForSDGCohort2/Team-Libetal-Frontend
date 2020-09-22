@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 import Paper from "@material-ui/core/Paper";
-import Colors from "../../Colors";
-import Row from "../../widgets/Row";
-import Flex from "../../widgets/Flex";
-import Column from "../../widgets/Column";
-import MaterialTextView from "../../widgets/MaterialTextView";
+import Colors from "../../../Colors";
+import Row from "../../../widgets/Row";
+import Flex from "../../../widgets/Flex";
+import Column from "../../../widgets/Column";
+import MaterialTextView from "../../../widgets/MaterialTextView";
 import EarningsMenu from "./context_menues/EarningsMenu";
-import MaterialIcon from "../../widgets/MaterialIcon";
-import LineChart from "../../widgets/graphs/LineChart";
-import DataSet from "../../widgets/DataSet";
-import MaterialBtn from "../../widgets/MaterialBtn";
+import MaterialIcon from "../../../widgets/MaterialIcon";
+import LineChart from "../../../widgets/graphs/LineChart";
+import DataSet from "../../../widgets/DataSet";
+import MaterialBtn from "../../../widgets/MaterialBtn";
 
 /**TODO
  * Need to present the

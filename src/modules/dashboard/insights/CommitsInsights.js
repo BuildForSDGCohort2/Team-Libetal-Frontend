@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import Paper from "@material-ui/core/Paper";
-import Row from "../../widgets/Row";
-import LineChart from "../../widgets/graphs/LineChart";
-import Column from "../../widgets/Column";
-import TabsLayout from "../../widgets/TabsLayout";
-import MaterialDivider from "../../widgets/MaterialDivider";
-import Colors from "../../Colors";
-import MaterialTextView from "../../widgets/MaterialTextView";
+import Row from "../../../widgets/Row";
+import LineChart from "../../../widgets/graphs/LineChart";
+import Column from "../../../widgets/Column";
+import TabsLayout from "../../../widgets/TabsLayout";
+import MaterialDivider from "../../../widgets/MaterialDivider";
+import Colors from "../../../Colors";
+import MaterialTextView from "../../../widgets/MaterialTextView";
 
 
 export default class CommitsInsights extends Component {

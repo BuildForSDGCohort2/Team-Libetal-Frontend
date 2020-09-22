@@ -22,7 +22,7 @@ export default class PriorityOptionsMenu extends OptionsMenu {
                     background: "none"
                 }}
                 onClick={
-                    this.openMenu
+                    this.open
                 }
                 endIcon={
                     <MaterialIcon

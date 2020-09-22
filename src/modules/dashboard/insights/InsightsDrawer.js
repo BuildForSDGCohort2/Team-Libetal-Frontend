@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Radio from "@material-ui/core/Radio";
-import MaterialDrawer from "../../widgets/navigation/MaterialDrawer";
-import Colors from "../../Colors";
+import MaterialDrawer from "../../../widgets/navigation/MaterialDrawer";
+import Colors from "../../../Colors";
 import Divider from "@material-ui/core/Divider";
-import MaterialDrawerListItem from "../../widgets/navigation/MaterialDrawerListItem";
+import MaterialDrawerListItem from "../../../widgets/navigation/MaterialDrawerListItem";
 
 export default class InsightsDrawer extends React.Component {
 

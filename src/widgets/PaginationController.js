@@ -170,7 +170,7 @@ export default class PaginationController extends Component {
             pagesControllers.push(
                 <MaterialBtn
                     content={i}
-                    textColor={isCurrentPage ? Colors.white : undefined}
+                    textColor={isCurrentPage ? Colors.white : Colors.grey}
                     color={isCurrentPage ? Colors.green : undefined}
                     variant={isCurrentPage ? "contained" : "text"}
                     style={{height: 24, padding: 2, minWidth: 24}}
@@ -188,11 +188,11 @@ export default class PaginationController extends Component {
 
         if (i < totalSteps) {
             pagesControllers.push(
-              this.moreControl(
-                  event => {
-                      this.currentPage += visiblePageIndexControls;
-                  }
-              )
+                this.moreControl(
+                    event => {
+                        this.currentPage += visiblePageIndexControls;
+                    }
+                )
             );
         }
 
@@ -205,16 +205,25 @@ export default class PaginationController extends Component {
             classes
         } = this.props;
 
+        let style = {padding:0,paddingLeft:0,paddingRight:0,minWidth:0}
         return (
-            <Row alignItems={Flex.CENTER} children={[
-                <IconButton onClick={() => this.currentPage -= 1}>
-                    <MaterialIcon icon={"ChevronLeft"}/>
-                </IconButton>,
-                ...this.paginationIndexes,
-                <IconButton onClick={() => this.currentPage += 1}>
-                    <MaterialIcon icon={"ChevronRight"}/>
-                </IconButton>
-            ]}/>
+            <Row alignItems={Flex.CENTER} children={
+                [
+                    <MaterialBtn
+                        content={<MaterialIcon icon={"ChevronLeft"}/>}
+                        variant={"text"}
+                        style={style}
+                        onClick={() => this.currentPage -= 1}
+                    />,
+                    ...this.paginationIndexes,
+                    <MaterialBtn
+                        content={<MaterialIcon icon={"ChevronRight"}/>}
+                        variant={"text"}
+                        style={style}
+                        onClick={() => this.currentPage += 1}
+                    />
+                ]
+            }/>
         );
     }
 }

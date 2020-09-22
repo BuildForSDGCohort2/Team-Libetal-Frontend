@@ -55,7 +55,7 @@ export default class TabsLayout extends Component {
                     label: PropTypes.any
                 })
             )
-        ]),
+        ]).isRequired,
         defaultTabIndex: PropTypes.number,
         orientation: PropTypes.oneOf(["horizontal", "vertical"]),
         tabTopPadding: PropTypes.number,
@@ -63,7 +63,8 @@ export default class TabsLayout extends Component {
         minTabHeight: PropTypes.number,
         minTabWidth: PropTypes.number,
         value: PropTypes.number,
-        variant: PropTypes.string
+        variant: PropTypes.oneOf(["standard","scrollable","fullWidth"]),
+        showIndicator:PropTypes.bool
     };
 
     static defaultProps = {

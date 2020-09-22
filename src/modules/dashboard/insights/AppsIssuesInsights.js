@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Row from "../../widgets/Row";
+import Row from "../../../widgets/Row";
 import PlatformTabs from "./PlatformTabs";
-import Column from "../../widgets/Column";
+import Column from "../../../widgets/Column";
 import Paper from "@material-ui/core/Paper";
-import TabsLayout from "../../widgets/TabsLayout";
-import MaterialIcon from "../../widgets/MaterialIcon";
-import Flex from "../../widgets/Flex";
-import LineChart from "../../widgets/graphs/LineChart";
-import Colors from "../../Colors";
-import MaterialDivider from "../../widgets/MaterialDivider";
-import MaterialTextView from "../../widgets/MaterialTextView";
+import TabsLayout from "../../../widgets/TabsLayout";
+import MaterialIcon from "../../../widgets/MaterialIcon";
+import Flex from "../../../widgets/Flex";
+import LineChart from "../../../widgets/graphs/LineChart";
+import Colors from "../../../Colors";
+import MaterialDivider from "../../../widgets/MaterialDivider";
+import MaterialTextView from "../../../widgets/MaterialTextView";
 import CheckBox from "@material-ui/core/Checkbox";
-import DataSet from "../../widgets/DataSet";
+import DataSet from "../../../widgets/DataSet";
 
 
 let consolidatePlatformInsights = function (insightName, platform, insights) {

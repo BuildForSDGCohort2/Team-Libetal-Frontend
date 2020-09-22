@@ -1,5 +1,5 @@
 import React from "react";
-import TabsLayout from "../../widgets/TabsLayout";
+import TabsLayout from "../../../widgets/TabsLayout";
 import PropTypes from "prop-types";
 
 export default class PlatformTabs extends React.Component {

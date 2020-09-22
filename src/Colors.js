@@ -314,6 +314,9 @@ const colors = {
     white: {
         base: "#ffffff"
     },
+    transparent:{
+        base:"rgba(0,0,0,0)"
+    }
 
 };
 

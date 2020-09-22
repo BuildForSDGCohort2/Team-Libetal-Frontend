@@ -4,6 +4,30 @@ import * as Icons from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
 import PropTypes from "prop-types";
 
+export const MaterialIconProps = {
+    icon: PropTypes.oneOf([
+        "Settings",
+        "Home",
+        "Notifications",
+        "Apps",
+        "Sort",
+        "Search",
+        "Copyright",
+        "Save",
+        "FilterList",
+        "AttachFile",
+        "StarBorder",
+        "FavoriteBorder",
+        "MoreVert",
+        "ExpandMore",
+        "ExpandLess",
+        "ChevronLeft",
+        "ChevronRight"
+    ]).isRequired,
+    color: PropTypes.string,
+    iconSize: PropTypes.number
+};
+
 export default class MaterialIcon extends React.Component {
 
     static defaultProps = {
@@ -14,9 +38,31 @@ export default class MaterialIcon extends React.Component {
 
 
     static propTypes = {
-        icon: PropTypes.string.isRequired,
-        color:PropTypes.string,
-        iconSize:PropTypes.number
+        icon: PropTypes.oneOf([
+            "Settings",
+            "Home",
+            "Notifications",
+            "Apps",
+            "Sort",
+            "Search",
+            "Copyright",
+            "Save",
+            "FilterList",
+            "AttachFile",
+            "StarBorder",
+            "FavoriteBorder",
+            "MoreVert",
+            "ExpandMore",
+            "ExpandLess",
+            "ChevronLeft",
+            "ChevronRight",
+            "MoreHoriz",
+            "AccountTree",
+            "RssFeed",
+            "Favorite"
+        ]).isRequired,
+        color: PropTypes.string,
+        iconSize: PropTypes.number
     };
 
     render() {

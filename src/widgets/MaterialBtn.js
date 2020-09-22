@@ -10,7 +10,9 @@ export default class MaterialBtn extends React.Component {
         variant: "contained",
         color: "secondary",
         textTransform: "capitalize",
-        onClick: PropTypes.func
+        onClick: ()=>{
+            console.log(`Unhandled button click`)
+        }
     };
 
     static propTypes = {
@@ -19,7 +21,9 @@ export default class MaterialBtn extends React.Component {
         content: PropTypes.any,
         textTransform: PropTypes.oneOf(["none", "uppercase", "lowercase", "capitalize"]),
         onClick: PropTypes.func,
-        color: PropTypes.string
+        color: PropTypes.string,
+        startIcon:PropTypes.any,
+        endIcon:PropTypes.any
     };
 
 

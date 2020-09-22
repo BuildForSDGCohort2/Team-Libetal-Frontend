@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import TabsLayout from "../../widgets/TabsLayout";
+import TabsLayout from "../../../widgets/TabsLayout";
 
 export default class AppsTabs extends Component {
 

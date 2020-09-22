@@ -9,7 +9,9 @@ import PropTypes from "prop-types";
 export default class Row extends Component {
 
     static propTypes = {
-        justify: PropTypes.string
+        justify: PropTypes.string,
+        alignItems:PropTypes.string,
+        alignContent:PropTypes.string
     };
 
     static END = "flex-end";

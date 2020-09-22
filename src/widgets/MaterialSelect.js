@@ -117,6 +117,7 @@ export default class MaterialSelect extends Component {
             ...props
         } = this.props;
 
+        // variant={"outlined"}  not logical too big a button that isn't stylable from here
         return (
             <FormControl {...props} >
                 {this.input}

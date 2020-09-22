@@ -1,6 +1,6 @@
 import React from "react";
-import Row from "../../widgets/Row";
-import Column from "../../widgets/Column";
+import Row from "../../../widgets/Row";
+import Column from "../../../widgets/Column";
 import Paper from "@material-ui/core/Paper";
 
 /**TODO

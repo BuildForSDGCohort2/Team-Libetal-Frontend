@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import InsightsDrawer from "./InsightsDrawer";
 import AccountsInsights from "./AccountsInsights";
 import ProjectsInsights from "./ProjectsInsights";
-import Row from "../../widgets/Row";
+import Row from "../../../widgets/Row";
 import ProductivityInsights from "./ProductivityInsights";
-import Footer from "../Footer";
+import Footer from "../../Footer";
 
 
 /**Todo

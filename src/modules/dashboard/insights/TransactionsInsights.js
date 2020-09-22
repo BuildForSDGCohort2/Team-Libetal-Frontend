@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Row from "../../widgets/Row";
+import Row from "../../../widgets/Row";
 import PlatformTabs from "./PlatformTabs";
 import Paper from "@material-ui/core/Paper";
 

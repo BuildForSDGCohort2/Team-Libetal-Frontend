@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
-import MaterialIcon from "../../../widgets/MaterialIcon";
+import MaterialIcon from "../../../../widgets/MaterialIcon";
 import MenuItem from "@material-ui/core/MenuItem";
-import Colors from "../../../Colors";
+import Colors from "../../../../Colors";
 
 export default class EarningsMenu extends Component {
 

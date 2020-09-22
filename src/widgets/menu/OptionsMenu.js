@@ -9,10 +9,14 @@ export const OptionsMenuPropsTypes = {
     onMenuOpen: PropTypes.func,
     onMenuClose: PropTypes.func,
     onMenuItemClick: PropTypes.func,
-    menuItems:PropTypes.arrayOf(PropTypes.shape({
-        key:PropTypes.number,
-        title:PropTypes.string
-    })).isRequired
+    menuItems: PropTypes.arrayOf(
+        PropTypes.shape(
+            {
+                itemId: PropTypes.number,
+                title: PropTypes.any
+            }
+        )
+    ).isRequired
 
 };
 export default class OptionsMenu extends Component {
@@ -25,7 +29,8 @@ export default class OptionsMenu extends Component {
     static defaultProps = {
         onMenuItemClick(itemId, e) {
             console.log(`Unhandled menu item click ${itemId}`);
-        }
+        },
+        menuItems:[]
     };
 
     static propTypes = OptionsMenuPropsTypes;
@@ -40,11 +45,11 @@ export default class OptionsMenu extends Component {
     }
 
     bindEvents() {
-        this.closeMenu = this.closeMenu.bind(this);
-        this.openMenu = this.openMenu.bind(this);
+        this.close = this.close.bind(this);
+        this.open = this.open.bind(this);
     }
 
-    openMenu(e) {
+    open(e) {
         this.setState({anchorEl: e.currentTarget}, () => {
             let {
                 onMenuOpen
@@ -56,7 +61,7 @@ export default class OptionsMenu extends Component {
 
     }
 
-    closeMenu() {
+    close() {
         this.setState({anchorEl: undefined}, () => {
             let {
                 onMenuClose
@@ -71,17 +76,25 @@ export default class OptionsMenu extends Component {
      * <MenuItem onClick={this.onMenuClose}>Item 2</MenuItem>
      * */
     get menuItems() {
-        return this.props.menuItems.map(({id, title}) => {
+        return this.props.menuItems.map(({itemId, title, key, id}) => {
+
+            let menuItemId;
+
+            // Secure id assignment
+            if (menuItemId === undefined && key !== undefined) menuItemId = key;
+            if (menuItemId === undefined && itemId !== undefined) menuItemId = itemId;
+            if (menuItemId === undefined && id !== undefined) menuItemId = id;
 
             return (
                 <MenuItem
                     onClick={
                         (e) => {
-                            this.props.onMenuItemClick(id, e);
+                            this.props.onMenuItemClick(menuItemId, this, e);
                         }
-                    }>
-                    {title}
-                </MenuItem>
+                    }
+
+                    children={title}
+                />
             );
         });
     }
@@ -103,10 +116,10 @@ export default class OptionsMenu extends Component {
                     id={id}
                     anchorEl={anchorEl}
                     keepMounted
-                    style={{marginTop:40}}
+                    style={{marginTop: 40}}
                     // when an anchor element exists show the menu
                     open={Boolean(anchorEl)}
-                    onClose={this.closeMenu}
+                    onClose={this.close}
                     children={this.menuItems}
                 />
             </>
