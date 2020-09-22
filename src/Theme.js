@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
-        // zIndex: theme.zIndex.drawer + 1,
+        zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
@@ -127,9 +127,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        paddingTop: 12,
-        paddingLeft: 8,
-        paddingRight: 8
+        paddingTop: 12
     },
     "@global": {
         ul: {

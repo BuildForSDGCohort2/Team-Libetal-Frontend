@@ -6,6 +6,7 @@ import Theme from "./Theme";
 import HoCs from "./Hocs";
 import Register from "./modules/users/registration/Register";
 import Dashboard from "./modules/dashboard/Dashboard";
+import About from "./modules/about/About";
 
 
 class AppComponent extends Component {
@@ -30,6 +31,16 @@ class AppComponent extends Component {
 
                                 return (
                                     <Switch>
+
+                                        <Route
+                                            path={"/(a|A)bout"}
+                                            component={()=>{
+                                                return <About
+                                                    navigator={navigateTo}
+
+                                                />
+                                            }}
+                                        />
 
                                         <Route exact path="(/|/home)"
                                                component={() => (

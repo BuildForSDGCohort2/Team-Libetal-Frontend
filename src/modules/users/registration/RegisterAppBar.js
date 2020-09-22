@@ -21,7 +21,6 @@ export default class RegisterAppBar extends View {
 
     getLayout({classes, styles, theme, handleOpen, open}) {
 
-
         return (
             <AppBar
                 position="static"

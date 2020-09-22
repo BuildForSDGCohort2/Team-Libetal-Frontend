@@ -131,42 +131,61 @@ export default class Home extends View {
         let textStyle = {
             textAlign: "center",
             justify: "center",
-            lineHeight:2
+            lineHeight: 1.5,
+            marginTop: 4,
+            fontSize: 18
         };
 
         let paperStyle = {
-            padding:18
-        }
+            padding: 18
+        };
 
+        let textColor = Colors.white;
         return (
             <>
-                <Row style={{marginTop: 56}} className={this.props.appTheme.body} justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                <Row style={{marginTop: 56}} className={this.props.appTheme.body} justify={Flex.SPACE_AROUND}
+                     alignItems={Flex.CENTER}>
                     <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
-                       <Paper style={paperStyle}>
-                           <Column alignItems={Flex.CENTER}>
-                               <MaterialTextView
-                                   text={"Contributions"}
-                                   variant={titleVariant}
-                                   textColor={Colors.red}
-                               />
+                        <Paper style={{
+                            ...paperStyle,
+                            backgroundColor: Colors.red,
+                            color: textColor
+                        }}>
+                            <Column alignItems={Flex.CENTER} justify={Flex.SPACE_AROUND}>
+                                <MaterialTextView
+                                    text={"Contributions"}
+                                    variant={titleVariant}
+                                />
+                                <MaterialDivider width={"50%"} color={textColor}/>
 
-                               <MaterialDivider width={"50%"}/>
+                                <MaterialTextView
+                                    text={"Code, Design, Funding.\n All contributions are evaluated and agreed upon the contributor and the project creator or manager if any exists, and are later evaluated upon project returns."}
+                                    style={textStyle}
+                                />
+                            </Column>
+                        </Paper>
 
-                               <MaterialTextView
-                                   text={"Code, Design, Funding.\n All contributions are evaluated and agreed upon the contributor and the project creator or manager if any exists, and are later evaluated upon project returns."}
-                                   style={textStyle}
-                               />
-                           </Column>
-                       </Paper>
+                        <MaterialBtn
+                            content={"Learn More >"}
+                            style={{
+                                marginTop: 12
+                            }}
+                            color={Colors.red}
+                            textColor={Colors.white}
+                        />
                     </Column>
                     <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
-                        <Paper style={paperStyle}>
+                        <Paper style={{
+                            ...paperStyle,
+                            backgroundColor: Colors.purple,
+                            color: Colors.white
+                        }}>
                             <Column alignItems={Flex.CENTER}>
                                 <MaterialTextView
                                     text={"Returns Evaluation"}
                                     variant={titleVariant}
                                 />
-                                <MaterialDivider width={"50%"}/>
+                                <MaterialDivider width={"50%"} color={textColor}/>
 
                                 <MaterialTextView
                                     text={"Returns are to be evaluated based on contributors total input on any given product,\n" +
@@ -177,32 +196,103 @@ export default class Home extends View {
                             </Column>
                         </Paper>
 
+                        <MaterialBtn
+                            content={"Learn More >"}
+                            style={{
+                                marginTop: 12
+                            }}
+                            color={Colors.purple}
+                            textColor={Colors.white}
+                        />
+
                     </Column>
                     <Column xs={12} lg={3} alignItems={Flex.CENTER}>
 
-                        <Paper style={paperStyle}>
+                        <Paper style={{
+                            ...paperStyle,
+                            backgroundColor: Colors.pink,
+                            color: textColor
+                        }}>
                             <Column alignItems={Flex.CENTER}>
 
                                 <MaterialTextView
                                     text={"Pricing"}
                                     variant={titleVariant}
                                 />
-                                <MaterialDivider width={"50%"}/>
+                                <MaterialDivider width={"50%"} color={textColor}/>
 
                                 <MaterialTextView
                                     text={"Feature pricing and evaluation is done by project contributors, that you hand pick as you see fit depending on your project"}
                                     style={textStyle}
                                 />
-
                             </Column>
                         </Paper>
 
+                        <MaterialBtn
+                            content={"Learn More >"}
+                            style={{
+                                marginTop: 12
+                            }}
+                            color={Colors.pink}
+                            textColor={textColor}
+                        />
                     </Column>
                 </Row>
                 {this.projectEstimationAndEvaluation}
                 {this.projectManagement}
+                {this.contributeSection}
+                {this.partnership}
                 {<Footer/>}
             </>
+        );
+    }
+
+    get partnership() {
+        return (
+            <Row style={{marginTop:16,marginBottom:16}} justify={Flex.CENTER}>
+                <MaterialTextView
+                    text={"Our Partners"}
+                    variant={"h4"}
+                    textColor={Colors.red}
+                />
+                <Row>
+                    <Column xs={6} lg={2}>
+                        <Paper>
+
+                        </Paper>
+                    </Column>
+                </Row>
+            </Row>
+        )
+    }
+
+    get contributeSection() {
+
+        return (
+            <Row justify={Flex.CENTER} style={{marginTop: 12}}>
+                <Column alignItems={Flex.CENTER}>
+                    <MaterialTextView
+                        text={"Contribute To Libetal"}
+                        variant={"h4"}
+                        textColor={Colors.orange}
+                    />
+                    <MaterialDivider width={"50%"}/>
+
+                    <Row justify={Flex.CENTER}>
+                       <Column xs={12} lg={8}>
+                           <Typography align={"center"}>
+                               Contribute to the
+                               <Link href={"/dashboard"} style={{color:Colors.blue}}> @Libetal </Link>
+                               project, there are a few sections that need contribution, Documentation, Design, Code
+                               security and Licencing design and drafting.<br/>
+                               And so much more. Your contributions are considered an investment and evaluated by the
+                               platform as per the project design.<br/>
+                               Financial contributions are also accepted as per the agreement of the project proposal
+                           </Typography>
+                       </Column>
+                    </Row>
+                </Column>
+            </Row>
         );
     }
 
@@ -213,30 +303,36 @@ export default class Home extends View {
                     <img src={"/images/project_estimation.png"}/>
                 </Column>
                 <Column xs={12} lg={4} justify={Flex.CENTER}>
-                    <MaterialTextView
-                        text={"Pricing, Estimation and \n Evaluation."}
-                        variant={"h5"}
-                    />
-                    <Row>
-                        <Column alignItems={Flex.CENTER}>
-                           <Row justify={Flex.END}>
-                               <MaterialTextView
-                                   text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
-                                   fontSize={14}
-                                   style={{
-                                       textAlign: "right"
-                                   }}
-                               />
-
-                           </Row>
-                            <MaterialBtn
-                                content={"Learn More"}
-                                endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
-                                color={Colors.white}
+                    <Paper style={{paddingLeft: 6, paddingRight: 6, paddingTop: 12, paddingBottom: 12}}>
+                        <Row justify={Flex.CENTER}>
+                            <MaterialTextView
+                                text={"Pricing, Estimation and \n Evaluation."}
+                                variant={"h5"}
+                                textColor={Colors.green}
                             />
-                        </Column>
-                    </Row>
+                        </Row>
+                        <Row>
+                            <Column alignItems={Flex.CENTER}>
+                                <Row justify={Flex.END}>
+                                    <MaterialTextView
+                                        text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
+                                        fontSize={14}
+                                        style={{
+                                            textAlign: "right"
+                                        }}
+                                    />
 
+                                </Row>
+                                <MaterialBtn
+                                    content={"Learn More"}
+                                    endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
+                                    color={Colors.green}
+                                    textColor={Colors.white}
+                                />
+                            </Column>
+                        </Row>
+
+                    </Paper>
                 </Column>
             </Row>
         );
@@ -245,22 +341,24 @@ export default class Home extends View {
     get projectManagement() {
 
         return (
-            <Row stye={{marginTop: 12}} justify={Flex.SPACE_BETWEEN}>
-                <Column xs={12} lg={3} alignItems={Flex.END} justify={Flex.CENTER}>
-                    <MaterialTextView
-                        text={"Project Management"}
-                        variant={"h4"}
-                        style={{
-                            textAlign: "right"
-                        }}
-                    />
+            <Row stye={{marginTop: 12}} justify={Flex.SPACE_AROUND}>
+                <Column xs={12} lg={4} justify={Flex.CENTER}>
+                    <Row>
+                        <MaterialTextView
+                            text={"Project Management"}
+                            variant={"h4"}
+                            style={{
+                                textAlign: "left"
+                            }}
+                        />
+                    </Row>
                     <Row justify={Flex.CENTER}>
                         <MaterialTextView
                             text={"Manage project issues, tasks, contributions with ease,\n" +
                             "Get direct access to the product users insights.\n" +
                             "Product users can create new issues and even make feature requests for the product. "}
                             style={{
-                                textAlign: "left"
+                                textAlign: "right"
                             }}
                         />
 
@@ -408,6 +506,9 @@ export default class Home extends View {
                     <MaterialBtn
                         variant={"default"}
                         content={"About Us"}
+                        onClick={()=>{
+                            this.props.navigator("about")
+                        }}
                     />
                     <MaterialBtn
                         variant={"default"}
