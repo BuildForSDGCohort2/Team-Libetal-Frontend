@@ -30,7 +30,7 @@ const MTab = withStyles((theme) => ({
     }
 }))((
     props
-) => <Tab {...props} />);
+) => <Tab  {...props} />);
 
 
 export default class MaterialTab extends Component {
@@ -38,8 +38,22 @@ export default class MaterialTab extends Component {
 
     render() {
 
+        let {
+            onClick = e => {
+
+            },
+            ...props
+        } = this.props;
         return (
-            <MTab {...this.props}/>
+            <MTab
+                onClick={
+                    e => {
+                        e.stopPropagation();
+                        onClick(e);
+                    }
+                }
+                {...props}
+            />
         );
     }
 }

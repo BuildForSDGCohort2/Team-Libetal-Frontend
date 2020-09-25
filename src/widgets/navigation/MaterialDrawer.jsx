@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import MaterialDrawerList from "./MaterialDrawerList";
 
+
+
+
 export default class MaterialDrawer extends Component {
 
     state = {
@@ -15,17 +18,58 @@ export default class MaterialDrawer extends Component {
         flexShrink: 0,
         whiteSpace: "nowrap"
     };
+    static defaultProps = {
+        variant: "permanent"
+    };
 
     static propTypes = {
-        footer:PropTypes.any,
-        header:PropTypes.any,
-        onItemClick:PropTypes.func,
+        variant: PropTypes.oneOf(["persistent", "permanent", "temporary"]),
+        footer: PropTypes.any,
+        header: PropTypes.any,
+        items:PropTypes.arrayOf(
+            PropTypes.shape({
+                onClick: PropTypes.func,
+                key: PropTypes.number,
+                get body(){
+                    return this
+                },
+                collapseTitle:PropTypes.string,
+                icon: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.shape({
+                        name: PropTypes.string,
+                        color: PropTypes.any
+                    })
+                ]),
+                end: PropTypes.any,
+                onItemClick: PropTypes.func
+            })
+        ),
+        drawerItems:PropTypes.arrayOf(
+            PropTypes.shape({
+                onClick: PropTypes.func,
+                key: PropTypes.number,
+                get body(){
+                    return this
+                },
+                collapseTitle:PropTypes.string,
+                icon: PropTypes.oneOfType([
+                    PropTypes.string,
+                    PropTypes.shape({
+                        name: PropTypes.string,
+                        color: PropTypes.any
+                    })
+                ]),
+                end: PropTypes.any,
+                onItemClick: PropTypes.func
+            })
+        ),
+        onItemClick: PropTypes.func,
         initialIsOpen: PropTypes.bool,
         classes: PropTypes.object.isRequired,
         onMouseEnter: PropTypes.func,
         onMouseLeave: PropTypes.func
     };
-
 
     get isOpen() {
         return this.state.isOpen;
@@ -49,24 +93,26 @@ export default class MaterialDrawer extends Component {
 
     get materialList() {
 
-
         let list;
 
         let {
             items,
+            drawerItems,
             onItemClick
         } = this.props;
+
+        items = items || drawerItems
 
         if (items !== undefined) {
             list = (
                 <MaterialDrawerList
                     items={items}
-                    onItemClick={(e,itemId) => {
+                    onItemClick={(e, itemId) => {
                         (onItemClick || (
                             (drawer, itemId) => {
                                 console.log(`Unhandled click on ${itemId}`);
                             }
-                        ))(this,itemId,e);
+                        ))(this, itemId, e);
                     }}
                 />
             );
@@ -84,7 +130,8 @@ export default class MaterialDrawer extends Component {
         let {
             classes,
             onMouseLeave,
-            onMouseEnter
+            onMouseEnter,
+            variant
         } = this.props;
 
         let {
@@ -93,7 +140,7 @@ export default class MaterialDrawer extends Component {
 
         return (
             <Drawer
-                variant="permanent"
+                variant={variant}
                 style={{
                     width: 1000
                 }}
@@ -120,7 +167,7 @@ export default class MaterialDrawer extends Component {
 
                 {this.props.header}
                 {this.materialList}
-                <div style={{flexGrow:1}}/>
+                <div style={{flexGrow: 1}}/>
                 {this.props.footer}
             </Drawer>
         );

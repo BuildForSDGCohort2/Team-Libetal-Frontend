@@ -7,9 +7,10 @@ export default class MaterialTextView extends React.Component {
 
 
     static propTypes = {
+        textAlign:PropTypes.oneOf(["left","right","center"]),
         textColor:PropTypes.string,
-        text: PropTypes.string.isRequired,
-        variant: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6", "small", "body", "body1", "body2"]),
+        text: PropTypes.string,
+        variant: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6", "small", "body", "body1", "body2","caption"]),
         fontSize:PropTypes.oneOfType([PropTypes.string,PropTypes.number])
     };
 
@@ -30,9 +31,12 @@ export default class MaterialTextView extends React.Component {
             text,
             variant,
             fontSize,
+            textAlign,
             style: {fontSize: cFontSize, ...style},
             ...props
         } = this.props;
+
+        style.textAlign = textAlign || style.textAlign
 
         if (variant === undefined) style.fontSize = fontSize || cFontSize;
 
@@ -46,6 +50,7 @@ export default class MaterialTextView extends React.Component {
                 }}
                 variant={variant}>
                 {text}
+                {this.props.children}
             </Typography>
         );
     }

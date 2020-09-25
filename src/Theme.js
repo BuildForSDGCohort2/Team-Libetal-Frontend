@@ -35,6 +35,36 @@ const lTheme = createMuiTheme({
     }
 });
 
+const dTheme = createMuiTheme({
+    palette: {
+        type: "dark",
+        primary: {
+            main: "#202020",
+            dark: "#101010",
+            contrastText: "#FFFFFF",
+            light: Settings.colorPrimaryLight
+        },
+        secondary: {
+            main: Settings.colorSecondary,
+            dark: Settings.colorSecondaryDark,
+            /**TODO eddit for hover states
+             light: "#FFFFFF",
+             dark: "#FFFFFF",*/
+            contrastText: Settings.textSecondary
+        },
+        background: {
+            default: "#303030",
+            paper: "#303030"
+        },
+        text: {
+            primary: "#FFFFFF",
+            secondary: "rgba(255,255,255,.8)",
+            disabled: "rgba(255,255,255,.5)"
+        }
+    }
+});
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex"
@@ -181,9 +211,11 @@ export default function Theme({props, children}) {
     // THIS SHOULD BE STYLES appStyles
     let styles = Settings.style === "dark" ? darkTheme : lightTheme;
 
+    let t = Settings.palette === "dark" ? dTheme : lTheme;
+
     return (
         <ThemeProvider
-            theme={lTheme}>
+            theme={t}>
             {children({
                 classes,
                 /**@Depricated*/

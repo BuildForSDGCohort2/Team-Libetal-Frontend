@@ -2,9 +2,30 @@ import React, {Component} from "react";
 import FormControl from "@material-ui/core/FormControl";
 import {TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import PropTypes from "prop-types";
 
 export default class MaterialTextField extends Component {
 
+
+    static propTypes = {
+        labelText: PropTypes.string,
+        labelId: PropTypes.string,
+        color: PropTypes.string,
+        variant: PropTypes.string,
+        onClick: PropTypes.func,
+        InputProps: PropTypes.object,
+        label: PropTypes.any,
+        placeholder: PropTypes.string,
+        fullWidth: PropTypes.bool,
+        style: PropTypes.object,
+        startIcon: PropTypes.any,
+        onChange: PropTypes.func,
+        value: PropTypes.any
+    };
+
+    static defaultProps = {
+        color: "secondary"
+    };
 
     constructor(props) {
         super(props);
@@ -134,7 +155,6 @@ export default class MaterialTextField extends Component {
                 placeholder={placeholder}
                 fullWidth={fullWidth}
                 style={style}
-                startIcon={startIcon}
                 children={children}
                 value={value}
                 {...props}
@@ -191,7 +211,6 @@ export default class MaterialTextField extends Component {
 
 
     get input() {
-
         return this.props.select ? this.selectInput : this.textInput;
     }
 

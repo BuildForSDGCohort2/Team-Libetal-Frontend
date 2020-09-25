@@ -314,26 +314,28 @@ const colors = {
     white: {
         base: "#ffffff"
     },
-    transparent:{
-        base:"rgba(0,0,0,0)"
-    }
+    transparent: {
+        base: "rgba(0,0,0,0)"
+    },
 
+    alpha(colorName, alpha) {
+        return colors.helper(Colors[colorName], alpha);
+    },
+    helper(hex, alpha) {
+        return colorHelper(hex).alpha(alpha).rgbString();
+    }
 };
 
 
 const Colors = new Proxy(colors, {
     get(target, key, value) {
 
+        if (key === "alpha") return colors.alpha;
 
-        if (key === "alpha") {
-            return function (colorName, alpha) {
 
-                return colorHelper(Colors[colorName]).alpha(alpha).rgbString();
-            };
-        }
-
+        if (key === "helper") return colors.helper;
+        // (color)_(darken|lighten)_1
         let flags = key.split("_");
-
 
         key = `${flags[0]}`;
 

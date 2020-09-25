@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Row from "../../widgets/Row";
 import Column from "../../widgets/Column";
 import MaterialDivider from "../../widgets/MaterialDivider";
-import MaterialSelect from "../../widgets/MaterialSelect";
+import MaterialSelect from "../../widgets/input/MaterialSelect";
 import Flex from "../../widgets/Flex";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import MaterialBtn from "../../widgets/MaterialBtn";
@@ -712,7 +712,13 @@ export default class Projects extends Component {
                                 children={
                                     <MaterialBtn
                                         variant={"contained"}
-                                        content={"CREATE PROJECT"}/>
+                                        content={"CREATE PROJECT"}
+                                        onClick={
+                                            e => {
+                                                this.props.navigator("dashboard/projects/new")
+                                            }
+                                        }
+                                    />
                                 }
                             />
                         </Grid>

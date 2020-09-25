@@ -28,6 +28,9 @@ import Colors from "../../Colors";
 import Footer from "../Footer";
 import Paper from "@material-ui/core/Paper";
 import MaterialDivider from "../../widgets/MaterialDivider";
+import MaterialCol from "../../widgets/grid/MaterialCol";
+import MaterialRow from "../../widgets/grid/MaterialRow";
+import GridItem from "../../widgets/grid/GridItem";
 
 const theme = createMuiTheme({
     palette: {
@@ -143,113 +146,144 @@ export default class Home extends View {
         let textColor = Colors.white;
         return (
             <>
-                <Row style={{marginTop: 56}} className={this.props.appTheme.body} justify={Flex.SPACE_AROUND}
-                     alignItems={Flex.CENTER}>
-                    <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
-                        <Paper style={{
-                            ...paperStyle,
-                            backgroundColor: Colors.red,
-                            color: textColor
-                        }}>
-                            <Column alignItems={Flex.CENTER} justify={Flex.SPACE_AROUND}>
-                                <MaterialTextView
-                                    text={"Contributions"}
-                                    variant={titleVariant}
-                                />
-                                <MaterialDivider width={"50%"} color={textColor}/>
+                <Row className={this.props.appTheme.body}>
+                    <MaterialRow marginTop={32} justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.red,
+                                color: textColor
+                            }}>
+                                <MaterialCol>
+                                    <MaterialTextView
+                                        text={"Contributions"}
+                                        variant={titleVariant}
+                                    />
+                                    <MaterialDivider width={"50%"} color={textColor}/>
 
-                                <MaterialTextView
-                                    text={"Code, Design, Funding.\n All contributions are evaluated and agreed upon the contributor and the project creator or manager if any exists, and are later evaluated upon project returns."}
-                                    style={textStyle}
-                                />
-                            </Column>
-                        </Paper>
+                                    <MaterialTextView textColor={textColor} textAlign={"center"}>
+                                        Code, Design, Funding.
+                                        All contributions are evaluated and agreed upon the contributor and the project
+                                        creator or manager if any exists, and are later evaluated upon project returns.
+                                    </MaterialTextView>
+                                </MaterialCol>
+                            </Paper>
 
-                        <MaterialBtn
-                            content={"Learn More >"}
-                            style={{
-                                marginTop: 12
-                            }}
-                            color={Colors.red}
-                            textColor={Colors.white}
-                        />
-                    </Column>
-                    <Column xs={12} xm={4} lg={3} alignItems={Flex.CENTER}>
-                        <Paper style={{
-                            ...paperStyle,
-                            backgroundColor: Colors.purple,
-                            color: Colors.white
-                        }}>
-                            <Column alignItems={Flex.CENTER}>
-                                <MaterialTextView
-                                    text={"Returns Evaluation"}
-                                    variant={titleVariant}
-                                />
-                                <MaterialDivider width={"50%"} color={textColor}/>
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.red}
+                                textColor={Colors.white}
+                            />
+                        </MaterialCol>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.purple,
+                                color: Colors.white
+                            }}>
+                                <MaterialCol alignItems={Flex.CENTER}>
+                                    <MaterialTextView
+                                        text={"Returns Evaluation"}
+                                        variant={titleVariant}
+                                    />
+                                    <MaterialDivider width={"50%"} color={textColor}/>
 
-                                <MaterialTextView
-                                    text={"Returns are to be evaluated based on contributors total input on any given product,\n" +
-                                    "be it in terms of code or financial input or design.\n" +
-                                    "All input that was used during the product inception to completion is to be evaluated and quantified."}
-                                    style={textStyle}
-                                />
-                            </Column>
-                        </Paper>
+                                    <MaterialTextView
+                                        text={"Returns are to be evaluated based on contributors total input on any given product,\n" +
+                                        "be it in terms of code or financial input or design.\n" +
+                                        "All input that was used during the product inception to completion is to be evaluated and quantified."}
+                                        style={textStyle}
+                                    />
+                                </MaterialCol>
+                            </Paper>
 
-                        <MaterialBtn
-                            content={"Learn More >"}
-                            style={{
-                                marginTop: 12
-                            }}
-                            color={Colors.purple}
-                            textColor={Colors.white}
-                        />
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.purple}
+                                textColor={Colors.white}
+                            />
 
-                    </Column>
-                    <Column xs={12} lg={3} alignItems={Flex.CENTER}>
+                        </MaterialCol>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
 
-                        <Paper style={{
-                            ...paperStyle,
-                            backgroundColor: Colors.pink,
-                            color: textColor
-                        }}>
-                            <Column alignItems={Flex.CENTER}>
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.pink,
+                                color: textColor
+                            }}>
+                                <MaterialCol alignItems={Flex.END}>
+                                    <MaterialTextView textAlign={"right"} variant={titleVariant}>
+                                        <em>Collaboration</em>
+                                    </MaterialTextView>
+                                    <MaterialDivider width={"50%"} color={textColor}/>
+                                    {/*  <MaterialTextView
+                                        text={"Feature pricing and evaluation is done by project contributors, that you hand pick as you see fit depending on your project"}
+                                        style={textStyle}
+                                    />*/}
+                                    <Typography variant={"h6"} style={{textAlign: "center"}}>
+                                        Get to co-create products that will shape your near feature. From production
+                                        tools,
+                                        to home apps that could be the next big thing. By investing your time wisely.
+                                    </Typography>
+                                </MaterialCol>
+                            </Paper>
 
-                                <MaterialTextView
-                                    text={"Pricing"}
-                                    variant={titleVariant}
-                                />
-                                <MaterialDivider width={"50%"} color={textColor}/>
 
-                                <MaterialTextView
-                                    text={"Feature pricing and evaluation is done by project contributors, that you hand pick as you see fit depending on your project"}
-                                    style={textStyle}
-                                />
-                            </Column>
-                        </Paper>
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.pink}
+                                textColor={textColor}
+                            />
 
-                        <MaterialBtn
-                            content={"Learn More >"}
-                            style={{
-                                marginTop: 12
-                            }}
-                            color={Colors.pink}
-                            textColor={textColor}
-                        />
-                    </Column>
+                        </MaterialCol>
+                    </MaterialRow>
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={12}/>
+                    <MaterialRow justify={Flex.SPACE_EVENLY}>
+                        <MaterialRow justify={Flex.CENTER}>
+                            <MaterialTextView
+                                text={"Libetal!! Built for Creators"}
+                                variant={"h3"}
+                                textColor={Colors.purple}
+                                textAlign={"center"}
+                                style={{
+                                    textShadow: `2px 2px 30px  ${Colors.purple}`
+                                }}
+                            />
+                        </MaterialRow>
+                        <MaterialRow justify={Flex.CENTER}>
+                            <GridItem xs={12} xsm={8} lg={6}>
+                                <MaterialTextView variant={"h5"} textAlign={"center"}>
+                                    Libetal is more that just commits, it's investment. Investing your time and skill on
+                                    something you believe in.
+                                </MaterialTextView>
+                            </GridItem>
+                        </MaterialRow>
+                    </MaterialRow>
+                    {this.projectEstimationAndEvaluation}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.projectManagement}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.contributeSection}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.partnership}
                 </Row>
-                {this.projectEstimationAndEvaluation}
-                {this.projectManagement}
-                {this.contributeSection}
-                {this.partnership}
-                {<Footer/>}
+                <Footer/>
             </>
         );
     }
 
     get partnership() {
         return (
-            <Row style={{marginTop:16,marginBottom:16}} justify={Flex.CENTER}>
+            <Row style={{marginTop: 16, marginBottom: 16}} justify={Flex.CENTER}>
                 <MaterialTextView
                     text={"Our Partners"}
                     variant={"h4"}
@@ -263,122 +297,124 @@ export default class Home extends View {
                     </Column>
                 </Row>
             </Row>
-        )
+        );
     }
 
     get contributeSection() {
 
         return (
-            <Row justify={Flex.CENTER} style={{marginTop: 12}}>
-                <Column alignItems={Flex.CENTER}>
+            <MaterialRow justify={Flex.CENTER} style={{marginTop: 12}}>
+                <MaterialCol alignItems={Flex.CENTER}>
                     <MaterialTextView
                         text={"Contribute To Libetal"}
                         variant={"h4"}
-                        textColor={Colors.orange}
+                        textColor={Colors.red}
                     />
-                    <MaterialDivider width={"50%"}/>
-
+                    <MaterialDivider width={"80%"}/>
                     <Row justify={Flex.CENTER}>
-                       <Column xs={12} lg={8}>
-                           <Typography align={"center"}>
-                               Contribute to the
-                               <Link href={"/dashboard"} style={{color:Colors.blue}}> @Libetal </Link>
-                               project, there are a few sections that need contribution, Documentation, Design, Code
-                               security and Licencing design and drafting.<br/>
-                               And so much more. Your contributions are considered an investment and evaluated by the
-                               platform as per the project design.<br/>
-                               Financial contributions are also accepted as per the agreement of the project proposal
-                           </Typography>
-                       </Column>
+                        <Column xs={12} lg={8}>
+                            <Typography align={"center"}>
+                                Contribute to the
+                                <Link href={"/dashboard"} style={{color: Colors.blue}}> @Libetal </Link>
+                                project, there are a few sections that need contribution, Documentation, Design, Code
+                                security and Licencing design and drafting.<br/>
+                                And so much more. Your contributions are considered an investment and evaluated by the
+                                platform as per the project design.<br/>
+                                Financial contributions are also accepted as per the agreement of the project proposal
+                            </Typography>
+                        </Column>
                     </Row>
-                </Column>
-            </Row>
+                </MaterialCol>
+            </MaterialRow>
         );
     }
 
     get projectEstimationAndEvaluation() {
         return (
-            <Row style={{marginTop: 24}} justify={Flex.SPACE_AROUND}>
-                <Column xs={12} lg={6}>
-                    <img src={"/images/project_estimation.png"}/>
-                </Column>
-                <Column xs={12} lg={4} justify={Flex.CENTER}>
-                    <Paper style={{paddingLeft: 6, paddingRight: 6, paddingTop: 12, paddingBottom: 12}}>
-                        <Row justify={Flex.CENTER}>
-                            <MaterialTextView
-                                text={"Pricing, Estimation and \n Evaluation."}
-                                variant={"h5"}
-                                textColor={Colors.green}
-                            />
-                        </Row>
-                        <Row>
-                            <Column alignItems={Flex.CENTER}>
-                                <Row justify={Flex.END}>
-                                    <MaterialTextView
-                                        text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
-                                        fontSize={14}
-                                        style={{
-                                            textAlign: "right"
-                                        }}
-                                    />
-
-                                </Row>
-                                <MaterialBtn
-                                    content={"Learn More"}
-                                    endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
-                                    color={Colors.green}
-                                    textColor={Colors.white}
-                                />
-                            </Column>
-                        </Row>
-
+            <MaterialRow marginTop={24} justify={Flex.SPACE_EVENLY}>
+                <GridItem xs={12} lg={6}>
+                    <Paper>
+                        <img src={"/images/project_estimation.png"} width={"100%"}/>
                     </Paper>
-                </Column>
-            </Row>
+                </GridItem>
+                <GridItem xs={12} lg={4}>
+                    <MaterialCol alignItems={Flex.SPACE_AROUND}>
+                        <Paper style={{paddingLeft: 6, paddingRight: 6, paddingTop: 12, paddingBottom: 12}}>
+                            <Row justify={Flex.CENTER}>
+                                <MaterialTextView
+                                    variant={"h5"}
+                                    textColor={Colors.green}>
+                                    Pricing, Estimation and
+                                    Evaluation.
+                                </MaterialTextView>
+                            </Row>
+                            <Row>
+                                <Column alignItems={Flex.CENTER}>
+                                    <Row justify={Flex.END}>
+                                        <MaterialTextView
+                                            text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
+                                            fontSize={14}
+                                            style={{
+                                                textAlign: "right"
+                                            }}
+                                        />
+
+                                    </Row>
+                                </Column>
+                            </Row>
+
+                        </Paper>
+                        <MaterialDivider spacing={12} color={Colors.transparent}/>
+                        <GridItem>
+                            <MaterialBtn
+                                content={"Learn More"}
+                                endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
+                                color={Colors.green}
+                                textColor={Colors.white}
+                            />
+                        </GridItem>
+                    </MaterialCol>
+                </GridItem>
+
+            </MaterialRow>
         );
     }
 
     get projectManagement() {
 
         return (
-            <Row stye={{marginTop: 12}} justify={Flex.SPACE_AROUND}>
-                <Column xs={12} lg={4} justify={Flex.CENTER}>
-                    <Row>
-                        <MaterialTextView
-                            text={"Project Management"}
-                            variant={"h4"}
-                            style={{
-                                textAlign: "left"
-                            }}
-                        />
-                    </Row>
-                    <Row justify={Flex.CENTER}>
-                        <MaterialTextView
-                            text={"Manage project issues, tasks, contributions with ease,\n" +
-                            "Get direct access to the product users insights.\n" +
-                            "Product users can create new issues and even make feature requests for the product. "}
-                            style={{
-                                textAlign: "right"
-                            }}
-                        />
-
-                        <MaterialBtn
-                            variant={"contained"}
-                            content={<MaterialTextView text={"Learn more"} variant={"h5"}/>}
-                            color={Colors.orange}
-                            textColor={Colors.white}
-                        />
-                    </Row>
-                </Column>
-                <Column xs={12} lg={7}>
-                    <img src="/images/project.management.issues.png" alt="Project Management" width={"100%"}/>
-                </Column>
-            </Row>
+            <MaterialRow justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                <GridItem xs={12} sm={6} lg={3}>
+                    <MaterialTextView
+                        textAlign={"left"}
+                        text={"Project Management"}
+                        variant={"h4"}
+                    />
+                    <MaterialRow justify={Flex.CENTER}>
+                        <MaterialTextView textAlign={"right"}>
+                            Manage project issues, tasks, contributions with ease
+                            Get direct access to the product users insights.<br/>
+                            Product users can create new issues and even make feature requests for the product.
+                        </MaterialTextView>
+                    </MaterialRow>
+                    <MaterialDivider color={Colors.transparent} spacing={12}/>
+                    <MaterialBtn
+                        variant={"contained"}
+                        content={<MaterialTextView text={"Learn more"} variant={"h5"}/>}
+                        color={Colors.orange}
+                        textColor={Colors.white}
+                    />
+                </GridItem>
+                <GridItem xs={12} lg={7}>
+                    <Paper>
+                        <img src={"/images/project.management.issues.png"} alt={"Project Management"} width={"100%"}/>
+                    </Paper>
+                </GridItem>
+            </MaterialRow>
         );
     }
 
     getLayout({userDetails, appTheme, classes}) {
-
 
         let flex = {
             display: "flex"
@@ -506,8 +542,8 @@ export default class Home extends View {
                     <MaterialBtn
                         variant={"default"}
                         content={"About Us"}
-                        onClick={()=>{
-                            this.props.navigator("about")
+                        onClick={() => {
+                            this.props.navigator("about");
                         }}
                     />
                     <MaterialBtn

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 
 const component = (
-    props => <Tabs  {...props} TabIndicatorProps={{children: <span/>}}/>
+    props => <Tabs {...props} TabIndicatorProps={{children: <span/>}}/>
 );
 const HiddenIndicator = withStyles({
     indicator: {
@@ -29,7 +29,7 @@ const Layout = withStyles({
         }
     }
 })(component);
-
+// TODO onItemClick should return either true or false to control tab change
 export default class TabsLayout extends Component {
 
     state = {
@@ -63,8 +63,10 @@ export default class TabsLayout extends Component {
         minTabHeight: PropTypes.number,
         minTabWidth: PropTypes.number,
         value: PropTypes.number,
-        variant: PropTypes.oneOf(["standard","scrollable","fullWidth"]),
-        showIndicator:PropTypes.bool
+        variant: PropTypes.oneOf(["standard", "scrollable", "fullWidth"]),
+        showIndicator: PropTypes.bool,
+        onItemClick: PropTypes.func,
+        onChange:PropTypes.func
     };
 
     static defaultProps = {
@@ -86,6 +88,9 @@ export default class TabsLayout extends Component {
         tabTopPadding: 2,
         tabBottomPadding: 2,
         showIndicator: true,
+        onItemClick: e => {
+
+        },
         onTabChangeRequest: () => true,
         onTabChangeRejected: (tabId) => console.log(`Unhandled tab change rejections ${tabId}`)
     };
@@ -96,6 +101,7 @@ export default class TabsLayout extends Component {
             tabs: propTabs,
             tabStyle,
             minTabWidth,
+
             minTabHeight,
             tabTopPadding,
             tabBottomPadding
@@ -129,10 +135,10 @@ export default class TabsLayout extends Component {
                         case "object":
                             // Unify syntax design if you find rem to implement in Unify lang gitHub
                             // {key,label} = tab
-                            if(tab.label === undefined){
-                                key = i
-                                label = tab
-                            }else {
+                            if (tab.label === undefined) {
+                                key = i;
+                                label = tab;
+                            } else {
                                 key = tab.key;
                                 label = tab.label;
                             }
@@ -153,7 +159,7 @@ export default class TabsLayout extends Component {
     }
 
     getTab(key, label, tabStyle) {
-        return <MaterialTab key={key} label={label} style={tabStyle}/>;
+        return <MaterialTab key={key} label={label} onClick={this.props.onItemClick} style={tabStyle}/>;
     }
 
     componentDidMount() {
@@ -189,6 +195,7 @@ export default class TabsLayout extends Component {
             onTabChangeRequest,
             onTabChangeRejected,
             showIndicator,
+            onItemClick,
             ...props
         } = this.props;
 
@@ -222,9 +229,9 @@ export default class TabsLayout extends Component {
                 orientation={orientation}
                 indicatorColor={"secondary"}
                 onChange={tabChange}
-                {...props}
                 style={{minHeight: minTabHeight}}
                 children={this.tabs}
+                {...props}
             />
         );
     }

@@ -18,12 +18,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import Settings from "../../utils/Settings";
-import Divider from "@material-ui/core/Divider";
-import MaterialTextField from "../../widgets/MaterialTextField";
 import MaterialDivider from "../../widgets/MaterialDivider";
 import Paper from "@material-ui/core/Paper";
-import MaterialSelect from "../../widgets/MaterialSelect";
-import MenuItem from "@material-ui/core/MenuItem";
+import MaterialSelect from "../../widgets/input/MaterialSelect";
 import Insights from "./insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
@@ -32,8 +29,14 @@ import Projects from "./Projects";
 import InputBase from "@material-ui/core/InputBase";
 import Row from "../../widgets/Row";
 import Flex from "../../widgets/Flex";
-import MaterialIcon from "../../widgets/MaterialIcon";
 import Issues from "./issues/Issues";
+import MaterialOptionsMenu from "../../widgets/menu/MaterialOptionsMenu";
+import MaterialIcon from "../../widgets/MaterialIcon";
+import MaterialIconButton from "../../widgets/button/MaterialIconButton";
+import MaterialCol from "../../widgets/grid/MaterialCol";
+import MaterialRow from "../../widgets/grid/MaterialRow";
+import GridItem from "../../widgets/grid/GridItem";
+import AccessibilityControl from "../../widgets/AccessibilityControl";
 
 
 const dashBoardTheme = createMuiTheme({
@@ -66,12 +69,12 @@ const dashBoardTheme = createMuiTheme({
 
 export default class Dashboard extends Component {
 
-    static PROJECTS = 0
-    static ISSUES =  1
-    static TEAMS =  2
-    static TASKS =  3
-    static REVIEWS =  4
-    static INSIGHTS =  5
+    static PROJECTS = 0;
+    static ISSUES = 1;
+    static TEAMS = 2;
+    static TASKS = 3;
+    static REVIEWS = 4;
+    static INSIGHTS = 6;
 
     state = {
         userDetails: {
@@ -103,7 +106,7 @@ export default class Dashboard extends Component {
                 id: 6,
                 name: "Insights"
             }
-        ],
+        ]
     };
 
     static defaultProps = {
@@ -132,6 +135,43 @@ export default class Dashboard extends Component {
         this.setState(prev => ({dashBoardSearchKey: value}));
     }
 
+    set currentTab(value) {
+        this.setState({currentTab: value},
+
+            () => {
+                console.log("Changed page");
+            }
+        );
+    }
+
+    componentDidMount() {
+        let paths = this.props.location.location.pathname.split("/");
+
+        console.log(paths);
+
+        switch (paths[2]) {
+            case undefined:
+                break;
+            case "teams":
+                this.currentTab = Dashboard.TEAMS;
+                break;
+            case "projects":
+                this.currentTab = Dashboard.PROJECTS;
+                break;
+
+            case "insights":
+                this.currentTab = Dashboard.INSIGHTS;
+                break;
+            case "issues":
+                this.currentTab = Dashboard.ISSUES;
+                break;
+
+            default:
+                this.currentTab = Dashboard.PROJECTS;
+                break;
+        }
+    }
+
     get userAvatar() {
         return (
             <AccountCircleIcon/>
@@ -142,9 +182,48 @@ export default class Dashboard extends Component {
         return this.state.dashBoardSearchValues[this.state.dashBoardSearchKey].name;
     }
 
+
+    get accessibilityAction() {
+
+
+        let old = <MaterialOptionsMenu
+            id={"accessibility-options"}
+            controller={IconButton}
+            controllerBody={
+                <MaterialIcon
+                    icon={"InvertColors"}
+                />
+            }
+        />;
+
+        return (
+            <MaterialIconButton
+                icon={"InvertColors"}
+                onClick={
+                    e => {
+                        let curr = Settings.theme;
+                        let style = Settings.style;
+
+                        if (curr === "Light") {
+                            Settings.theme = "Dark";
+                        }else Settings.theme ="Light"
+
+                        if (style === "light") {
+                            Settings.style = "dark";
+                        }else Settings.style ="light"
+
+                        console.log(Settings.theme)
+
+                        this.forceUpdate();
+                    }
+                }
+            />
+        );
+    }
+
     get navigation() {
         return (
-            <AppBar className={this.props.classes.clippingDrawerAppBar}>
+            <AppBar position={"static"} className={this.props.classes.clippingDrawerAppBar}>
                 <Toolbar>
                     <MaterialImage
                         src={"/images/logo.png"}
@@ -158,7 +237,8 @@ export default class Dashboard extends Component {
                             fullwidth={"true"}
                             onChange={(e, i) => {
                                 this.setState(prevState => ({currentTab: i}));
-                            }}>
+                            }}
+                        >
                             {
                                 this.state.dashBoardSearchValues.map(({id, name}, i) => (
                                         <StyledTab key={i} label={name}/>
@@ -180,8 +260,8 @@ export default class Dashboard extends Component {
                                 selectionItems={
                                     this.state.dashBoardSearchValues.map(({id, name}, i) => (
                                         {
-                                            key:id,
-                                            value:name
+                                            key: id,
+                                            value: name
                                         }
                                     ))}
                             />
@@ -195,22 +275,27 @@ export default class Dashboard extends Component {
                             </IconButton>
                         </Row>
                     </Paper>
-                    <IconButton color="secondary" aria-label="upload picture" component="span">
-                        <AppsIcon/>
-                    </IconButton>
-                    <IconButton color="secondary" aria-label="upload picture" component="span">
-                        <SettingsIcon/>
-                    </IconButton>
-                    <IconButton color="secondary" aria-label="upload picture" component="span">
-                        <NotificationsIcon/>
-                    </IconButton>
-                    <MaterialBtn
-                        color={"primary"}
-                        variant={"contained"}
-                        startIcon={this.userAvatar}
-                        content={this.toolBarBtnContent}
-                        endIcon={<MoreVertIcon/>}
-                    />
+                    <GridItem xs={12} lg={3}>
+                        <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                            {<AccessibilityControl componentInstance={this}/>}
+                            <MaterialIconButton
+                                icon={"Apps"}
+                            />
+                            <MaterialIconButton
+                                icon={"Settings"}
+                            />
+                            <MaterialIconButton
+                                icon={"Notifications"}
+                            />
+                            <MaterialBtn
+                                color={"primary"}
+                                variant={"contained"}
+                                startIcon={this.userAvatar}
+                                content={this.toolBarBtnContent}
+                                endIcon={<MoreVertIcon/>}
+                            />
+                        </MaterialRow>
+                    </GridItem>
                 </Toolbar>
             </AppBar>
         );
@@ -263,7 +348,7 @@ export default class Dashboard extends Component {
 
 
     get projects() {
-        return <Projects classes={this.props.classes}/>;
+        return <Projects classes={this.props.classes} navigator={this.props.navigator}/>;
     }
 
     /**TODO resolve url to use this currentBody*/
@@ -277,7 +362,7 @@ export default class Dashboard extends Component {
             case 0:
                 return this.projects;
             case 1:
-                return <Issues />;
+                return <Issues/>;
             case  2:
                 return this.teams;
 
@@ -296,13 +381,12 @@ export default class Dashboard extends Component {
 
         return (
             <ThemeProvider theme={dashBoardTheme}>
-                <div ref={this.ref} className={classes.root}>
+                <Row>
                     {this.navigation}
                     <main className={classes.content} style={{background: Settings.colorPrimary}}>
-                        <div className={classes.toolbar}/>
                         {this.currentBody}
                     </main>
-                </div>
+                </Row>
             </ThemeProvider>
 
         );

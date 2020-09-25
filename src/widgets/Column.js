@@ -19,7 +19,6 @@ export default class Column extends Component {
     render() {
         let {direction, reverse = false, justify, alignItems, alignContent, flexGrow,style:{flexGrow:sFlexGrow,...style},...props} = this.props;
 
-        direction = reverse ? "column-reverse" : "column";
 
 
         let view;
@@ -28,9 +27,21 @@ export default class Column extends Component {
             style.flexGrow = flexGrow
         }
 
-        if (justify === undefined && alignItems === undefined && alignContent === undefined) {
-            view = <Grid item style={style} {...props}/>;
-        } else view = <Grid container item direction={"column"} justify={justify} alignContent={alignContent} alignItems={alignItems} style={style} {...props}/>;
+        if(direction !== undefined){
+
+            direction = reverse ? "column-reverse" : "column";
+
+            if (justify === undefined && alignItems === undefined && alignContent === undefined) {
+                view = <Grid item style={style} direction={direction} {...props} />;
+            } else view = <Grid container direction={direction} item justify={justify} alignContent={alignContent} alignItems={alignItems} style={style} {...props}/>;
+
+        }else{
+
+            if (justify === undefined && alignItems === undefined && alignContent === undefined) {
+                view = <Grid item style={style} {...props} />;
+            } else view = <Grid container  item justify={justify} alignContent={alignContent} alignItems={alignItems} style={style} {...props}/>;
+
+        }
 
         return view;
     }

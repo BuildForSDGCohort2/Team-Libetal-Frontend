@@ -5,4 +5,5 @@ export default class Flex {
     static  START = "flex-start";
     static  END = "flex-end";
     static  CENTER = "center";
+    static  STRETCH = "stretch";
 }

@@ -76,7 +76,7 @@ export default class OptionsMenu extends Component {
      * <MenuItem onClick={this.onMenuClose}>Item 2</MenuItem>
      * */
     get menuItems() {
-        return this.props.menuItems.map(({itemId, title, key, id}) => {
+        return this.props.menuItems.map(({itemId, title, key, id},i) => {
 
             let menuItemId;
 
@@ -87,6 +87,7 @@ export default class OptionsMenu extends Component {
 
             return (
                 <MenuItem
+                    id={id}
                     onClick={
                         (e) => {
                             this.props.onMenuItemClick(menuItemId, this, e);

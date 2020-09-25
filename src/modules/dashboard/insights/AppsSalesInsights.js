@@ -7,7 +7,7 @@ import MaterialDivider from "../../../widgets/MaterialDivider";
 import MaterialTextView from "../../../widgets/MaterialTextView";
 import Row from "../../../widgets/Row";
 import Grid from "@material-ui/core/Grid";
-import MaterialSelect from "../../../widgets/MaterialSelect";
+import MaterialSelect from "../../../widgets/input/MaterialSelect";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import Checkbox from "@material-ui/core/Checkbox";
 import TabsLayout from "../../../widgets/TabsLayout";
@@ -17,6 +17,7 @@ import Column from "../../../widgets/Column";
 import Flex from "../../../widgets/Flex";
 import Settings from "../../../utils/Settings";
 import AllAppsSettings from "./context_menues/AllAppsSettings";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
 
 export default class AppsSalesInsights extends React.Component {
 
@@ -64,9 +65,9 @@ export default class AppsSalesInsights extends React.Component {
         },
         appInsightKeys: [
             "Downloads",
-            "Purchases",
-            "Likes",
-            "Ratings"
+            "Purchases"
+            /*     "Likes",
+                 "Ratings"*/
         ],
         projects: [
             {
@@ -139,21 +140,38 @@ export default class AppsSalesInsights extends React.Component {
         }
     ];
 
+    get stepSize() {
+
+        if (this.state.appInsightsOptionsVisibility.Downloads === true && this.state.appInsightsOptionsVisibility.Purchases === true) {
+            return 1000;
+        } else if (this.state.appInsightsOptionsVisibility.Downloads === true && this.state.appInsightsOptionsVisibility.Purchases === false) {
+            return 100;
+        } else if(this.state.appInsightsOptionsVisibility.Purchases){
+            return 1000
+        }else {
+            return 1;
+        }
+    }
+
 
     insights = {
-        yAxisStepSize: 1000,
+        yAxisStepSize: this.stepSize,
         yAxisLabelFormatter(value) {
             let m = "";
 
-            let stepSize = this.insights.yAxisStepSize;
+
+            let stepSize = this.stepSize
 
             if (stepSize === 1000) {
                 m = "k";
             } else if (stepSize === 100) {
-                m = "h";
+                m = "";
+                stepSize = 5
+            }else {
+
             }
 
-            return `${value / this.insights.yAxisStepSize}${m}`;
+            return `${value / stepSize}${m}`;
         },
         xAxisLabelFormatter(value) {
             return `${value.getDate()}/${value.toLocaleString("default", {month: "short"})}`;
@@ -359,12 +377,12 @@ export default class AppsSalesInsights extends React.Component {
         return (
             <>
                 <LineChart
-                    yAxisStepSize={this.insights.yAxisStepSize}
+                    yAxisStepSize={this.stepSize}
                     labels={this.state.appStatsDays.slice(...slice)}
                     showLegends={false}
                     showGridLines={false}
                     showXAxisLabel={false}
-                    xAxisStepSize={31}
+                    xAxisStepSize={1}
                     yAxisLabelFormatter={this.insights.yAxisLabelFormatter.bind(this)}
                     xAxisLabelFormatter={this.insights.xAxisLabelFormatter.bind(this)}
                     tooltipTitleCallBack={this.insights.tooltipTitleCallBack.bind(this)}
@@ -389,6 +407,7 @@ export default class AppsSalesInsights extends React.Component {
                                     data={insight || []}
                                     fillArea={false}
                                     hidden={!this.state.appInsightsOptionsVisibility[insightKey]}
+                                    type={insightKey ==="Downloads" ? "bar":"line"}
                                 />
                             );
                         })
@@ -568,7 +587,7 @@ export default class AppsSalesInsights extends React.Component {
         return (
             <>
                 <MaterialSelect
-                    style={{marginTop:0}}
+                    style={{marginTop: 0}}
                 />
                 {this.insightsMonthSelect}
             </>
@@ -666,7 +685,7 @@ export default class AppsSalesInsights extends React.Component {
 
                     });
                 }}
-                style={{marginTop:0}}
+                style={{marginTop: 0}}
                 selectionItems={this.state.insightYears.map((year, i) => ({
                     key: i,
                     value: year
@@ -690,7 +709,7 @@ export default class AppsSalesInsights extends React.Component {
                         this.updateAppsInsights();
                     });
                 }}
-                style={{marginTop:0}}
+                style={{marginTop: 0}}
                 defaultValue={0}
                 selectionItems={this.insightsMonthSelectItems}/>
         );
@@ -707,7 +726,7 @@ export default class AppsSalesInsights extends React.Component {
                         this.updateAppsInsights();
                     });
                 }}
-                style={{marginTop:0}}
+                style={{marginTop: 0}}
                 defaultValue={AppsSalesInsights.INSIGHTS_DAYS}
                 selectionItems={this.selectionStates}/>
         );
@@ -788,22 +807,25 @@ export default class AppsSalesInsights extends React.Component {
             <>
                 {this.appInsightsTabs}
                 <Paper style={{padding: 4}}>
-                    {this.appInsightsHeader}
-                    <MaterialDivider spacing={2} orientation={"horizontal"}/>
-                    {this.appInsightsBody}
-                    <MaterialDivider spacing={2} orientation={"horizontal"}/>
-                    <MaterialTextView text={"Software Insights"}/>
-                    <Row alignItems={Flex.END}>
-                        <MaterialTextView text={"Total Sales:"} variant={"body2"}/>
-                        <MaterialTextView text={`$${this.grossSales}`} variant={"body2"}/>
-                    </Row>
-                    <Row alignItems={Flex.END}>
-                        <MaterialTextView text={"Downloads Sales:"} variant={"body2"}/>
-                        <MaterialTextView text={`${this.totalDownloads}`}/>
-                        <MaterialIcon icon={"ExpandLess"} color={Settings.colorSuccess}/>
-                        <MaterialTextView text={`${this.downloadsChangePercent}%`}/>
-                    </Row>
+                    <MaterialRow>
+                        {this.appInsightsHeader}
+                        <MaterialDivider spacing={2} orientation={"horizontal"}/>
+                        {this.appInsightsBody}
+                        <MaterialDivider spacing={2} orientation={"horizontal"}/>
+                        <MaterialTextView text={"Software Insights"}/>
+                        <Row alignItems={Flex.END}>
+                            <MaterialTextView text={"Total Sales:"} variant={"body2"}/>
+                            <MaterialTextView text={`$${this.grossSales}`} variant={"body2"}/>
+                        </Row>
+                        <MaterialRow alignItems={Flex.END}>
+                            <MaterialTextView text={"Downloads Sales:"} variant={"body2"}/>
+                            <MaterialTextView text={`${this.totalDownloads}`}/>
+                            <MaterialIcon icon={"ExpandLess"} color={Settings.colorSuccess}/>
+                            <MaterialTextView text={`${this.downloadsChangePercent}%`}/>
+                        </MaterialRow>
+                    </MaterialRow>
                 </Paper>
+
             </>
         );
     }

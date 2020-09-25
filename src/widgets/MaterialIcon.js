@@ -59,7 +59,15 @@ export default class MaterialIcon extends React.Component {
             "MoreHoriz",
             "AccountTree",
             "RssFeed",
-            "Favorite"
+            "Favorite",
+            "Chat",
+            "Accessibility",
+            "InvertColors",
+            "People",
+            "ExitToApp",
+            "BugReport",
+            "Close",
+            "Help",
         ]).isRequired,
         color: PropTypes.string,
         iconSize: PropTypes.number

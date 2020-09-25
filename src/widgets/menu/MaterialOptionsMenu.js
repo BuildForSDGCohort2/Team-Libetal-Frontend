@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 export const MaterialOptionsMenuProps = {
     ...OptionsMenuPropsTypes,
     controller: PropTypes.any,
-    controllerBody:PropTypes.any
+    controllerBody:PropTypes.any,
+    controllerProps:PropTypes.any
 };
 export default class MaterialOptionsMenu extends OptionsMenu {
 

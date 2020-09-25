@@ -99,6 +99,5 @@ export default class MaterialDrawerListItem extends React.Component {
 
     render() {
         return this.item
-
     }
 }

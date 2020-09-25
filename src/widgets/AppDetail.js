@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-undef
 import * as React from "react";
-import Card from "./Card"
+import MaterialCard from "./cards/MaterialCard"
 import logo from "../logo.svg";
 
 class AppDetail extends React.Component {
@@ -10,7 +10,7 @@ class AppDetail extends React.Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <Card/>
+                    <MaterialCard/>
                     <p>
                         Edit <code>src/App.js</code> and save to reload.
                     </p>

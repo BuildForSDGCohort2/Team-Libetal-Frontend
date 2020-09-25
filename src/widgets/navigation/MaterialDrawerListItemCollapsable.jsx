@@ -1,10 +1,8 @@
 import React from "react";
 import MaterialDrawerListItem from "./MaterialDrawerListItem";
-import {Collapse, ListItem, ListItemIcon} from "@material-ui/core";
+import {Collapse, ListItem} from "@material-ui/core";
 import PropTypes from "prop-types";
 import MaterialDrawerList from "./MaterialDrawerList";
-import MaterialIconBtn from "../MaterialIconBtn";
-import ListItemText from "@material-ui/core/ListItemText";
 
 export default class MaterialDrawerListItemCollapsable extends MaterialDrawerListItem {
 
@@ -24,6 +22,31 @@ export default class MaterialDrawerListItemCollapsable extends MaterialDrawerLis
         items: PropTypes.arrayOf(PropTypes.any)
     };
 
+    get collapseController() {
+        let {
+            onItemClick,
+            id,
+            selected
+        } = this.props;
+
+        return (
+            <ListItem
+                button
+                key={id}
+                selected={selected}
+                onClick={
+                    e => {
+                        this.setState(prevState=>({
+                            isCollapsed:!prevState.isCollapsed
+                        }))
+                    }
+                }
+            >
+                {this.itemBody}
+            </ListItem>
+        );
+    }
+
     get item() {
 
         let {
@@ -33,8 +56,8 @@ export default class MaterialDrawerListItemCollapsable extends MaterialDrawerLis
 
         return (
             <>
-                // TODO: this should not have a viable key id as it's just for collapsing
-                {super.item}
+                {/*  // TODO: this should not have a viable key id as it's just for collapsing*/}
+                {this.collapseController}
                 <Collapse in={isCollapsed} timeout={timeout}>
                     <MaterialDrawerList items={this.props.items} onItemClick={this.props.onItemClick}/>
                 </Collapse>

@@ -6,7 +6,6 @@ import AppsIssuesInsights from "./AppsIssuesInsights";
 import Column from "../../../widgets/Column";
 import MaterialTextView from "../../../widgets/MaterialTextView";
 import CommitsInsights from "./CommitsInsights";
-import TransactionsInsights from "./TransactionsInsights";
 import Paper from "@material-ui/core/Paper";
 import Colors from "../../../Colors";
 import Flex from "../../../widgets/Flex";
@@ -14,6 +13,8 @@ import MaterialDivider from "../../../widgets/MaterialDivider";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import Grid from "@material-ui/core/Grid";
 import UserInvestmentInsights from "./UserInvestmentInsights";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
+import GridItem from "../../../widgets/grid/GridItem";
 
 
 export default class AllInsights extends React.Component {
@@ -108,7 +109,7 @@ export default class AllInsights extends React.Component {
     }
 
     get usersEarningsInsights() {
-        return (<UserInvestmentInsights />);
+        return (<UserInvestmentInsights/>);
     }
 
     get issuesInsights() {
@@ -116,23 +117,24 @@ export default class AllInsights extends React.Component {
     }
 
 
-    sampleTrendingFooterTextView(text){
+    sampleTrendingFooterTextView(text) {
         return (
             <MaterialTextView text={text} fontSize={12} textColor={Colors.white}/>
-        )
+        );
     }
-    sampleTrendingItem(name ="Libetal",activeUsers = "10000+",color){
+
+    sampleTrendingItem(name = "Libetal", activeUsers = "10000+", color) {
 
         let textColor = Colors.white;
 
         return (
-            <Column xs={5} lg={3}>
-                <Paper  elevation={6} style={{
+            <div style={{maxWidth: 400, minWidth: 280}}>
+                <Paper elevation={6} style={{
                     flexDirection: "column",
                     display: "flex",
                     flexGrow: 1,
-                    padding:4,
-                    backgroundColor: color,
+                    padding: 4,
+                    backgroundColor: color
                 }}>
                     <Row justify={Flex.CENTER} style={{flexGrow: 2}}>
                         <Grid container direction={"column"} alignItems={Flex.CENTER}>
@@ -192,7 +194,7 @@ export default class AllInsights extends React.Component {
                         </Column>
                     </Row>
                 </Paper>
-            </Column>
+            </div>
         );
     }
 
@@ -226,42 +228,43 @@ export default class AllInsights extends React.Component {
 
         return (
             <>
-                <Row spacing={1}>
-                    {this.sampleTrendingItem("Libetal","800k+",Colors.orange)}
-                    {this.sampleTrendingItem("Dukto","200k+",Colors.red)}
-                    {this.sampleTrendingItem("Luro","12+",Colors.pink)}
-                    {this.sampleTrendingItem("FlexTron","40k+",Colors.blue)}
+                <Row justify={Flex.SPACE_AROUND}>
+                    {this.sampleTrendingItem("Libetal", "800k+", Colors.orange)}
+                    {this.sampleTrendingItem("Dukto", "200k+", Colors.red)}
+                    {this.sampleTrendingItem("Luro", "12+", Colors.pink)}
+                    {this.sampleTrendingItem("FlexTron", "40k+", Colors.blue)}
                 </Row>
+                <MaterialDivider color={Colors.transparent} spacing={12} orientation={MaterialDivider.HORIZONTAL}/>
                 <Row>
                     <MaterialTextView text={"Accounts"} variant={"h5"}/>
                 </Row>
-                <Row justify={Row.JUSTIFY.START} spacing={1} style={{marginBottom: 10}}>
-                    <Column xs={xs} lg={pinState ? 6 : 5}>
+                <MaterialRow justify={Flex.SPACE_EVENLY}>
+                    <GridItem xs={xs} lg={pinState ? 6 : 4}>
                         <AppsSalesInsights apps={this.state.apps}/>
-                    </Column>
-                    <Column xs={xs} lg={pinState ? 6 : 4}>
+                    </GridItem>
+                    <GridItem xs={xs} lg={pinState ? 6 : 4}>
                         <AppsOsDistributionInsights/>
-                    </Column>
-                    <Column lg={pinState ? 6 : 3}>
+                    </GridItem>
+                    <GridItem xs={12} lg={pinState ? 6 : 3}>
                         {this.usersEarningsInsights}
-                    </Column>
-                    <Column xs={12} xm={6} lg={6}>
-                        <Row>
-                            <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
-                        </Row>
+                    </GridItem>
+                    <GridItem xs={12} xm={6} lg={6}>
+                        <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
                         <MaterialTextView text={"Commits"} variant={"h6"}/>
-                        {this.commitsInsights}
-                    </Column>
-                    <Column xs={12} xm={6} lg={6}>
+                        <MaterialRow>
+                            {this.commitsInsights}
+                        </MaterialRow>
+                    </GridItem>
+                    <GridItem xs={12} xm={6} lg={6}>
                         <Row>
                             <MaterialTextView text={"Issues"} variant={"h6"}/>
                         </Row>
-                        <Row>
+                        <MaterialRow>
                             {this.issuesInsights}
-                        </Row>
-                    </Column>
-                </Row>
-
+                        </MaterialRow>
+                    </GridItem>
+                </MaterialRow>
+                <MaterialDivider color={Colors.transparent} spacing={12} orientation={MaterialDivider.HORIZONTAL}/>
             </>
         );
     }

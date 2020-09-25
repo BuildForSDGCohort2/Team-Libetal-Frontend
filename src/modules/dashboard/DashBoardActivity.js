@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Column from "../../widgets/Column";
 import Row from "../../widgets/Row";
 import Flex from "../../widgets/Flex";
-import MaterialSelect from "../../widgets/MaterialSelect";
+import MaterialSelect from "../../widgets/input/MaterialSelect";
 import MaterialDivider from "../../widgets/MaterialDivider";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,10 +22,10 @@ export default class DashBoardActivity extends Component {
         pageItemsCountKeys: [10, 25, 50, 100],
         pageItemsCountIndex: 0,
         visiblePageIndexControls: 5,
-        searchOptions:[
+        searchOptions: [
             {
-                key:0,
-                value:"All"
+                key: 0,
+                value: "All"
             }
         ],
         itemsPerPage: 10,
@@ -36,28 +36,29 @@ export default class DashBoardActivity extends Component {
 
     constructor(props) {
         super(props);
-        this.bindEvents()
+        this.bindEvents();
     }
 
 
-    bindEvents(){
+    bindEvents() {
 
     }
 
-    get createAction(){
+    get createAction() {
         return (
             <MaterialBtn
                 content={"New Action"}
                 color={Colors.green}
                 textColor={Colors.white}
             />
-        )
-    }
-    get secondarySearchPlaceHolder(){
-        return ""
+        );
     }
 
-    onPagerPageUpdate(e,b,c){
+    get secondarySearchPlaceHolder() {
+        return "";
+    }
+
+    onPagerPageUpdate(e, b, c) {
 
     }
 
@@ -100,7 +101,7 @@ export default class DashBoardActivity extends Component {
         );
     }
 
-    get paginationController(){
+    get paginationController() {
         return (
             <PaginationController
                 onUpdate={this.onPagerPageUpdate}
@@ -128,11 +129,6 @@ export default class DashBoardActivity extends Component {
                                     this.setState({currentSelectIndex: b.props.value});
                                 }
                             }
-                            label="Age"
-                            inputProps={{
-                                name: 'age',
-                                id: 'outlined-age-native-simple',
-                            }}
                         />
                         <MaterialDivider height={24} orientation={MaterialDivider.VERTICAL} spacing={6}/>
                         <InputBase
@@ -159,20 +155,24 @@ export default class DashBoardActivity extends Component {
     }
 
     get body() {
+
     }
 
     render() {
         return (
-            <Column xs={12}>
-                <Row>
-                    {this.head}
-                </Row>
-                <Row>
-                    {this.body}
-                </Row>
-                <Footer style={{marginTop:10}}/>
-            </Column>
+            <>
+                <Column xs={12} alignItems={Flex.SPACE_AROUND} style={{paddingLeft: 8, paddingRight: 8}}>
+                    <Row>
+                        {this.head}
+                    </Row>
+                    <Row>
+                        {this.body}
+                    </Row>
 
+                </Column>
+
+                <Footer style={{marginTop: 10}}/>
+            </>
         );
 
     }

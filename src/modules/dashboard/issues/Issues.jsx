@@ -19,7 +19,7 @@ import TabsLayout from "../../../widgets/TabsLayout";
 import MaterialDivider from "../../../widgets/MaterialDivider";
 import MaterialBtn from "../../../widgets/MaterialBtn";
 import Checkbox from "@material-ui/core/Checkbox";
-import MaterialSelect from "../../../widgets/MaterialSelect";
+import MaterialSelect from "../../../widgets/input/MaterialSelect";
 
 export default class Issues extends DashBoardActivity {
 
@@ -54,7 +54,6 @@ export default class Issues extends DashBoardActivity {
 
     }
 
-
     get createAction() {
         return (
             <MaterialBtn
@@ -85,7 +84,7 @@ export default class Issues extends DashBoardActivity {
                 label: "Popular"
             },
             {
-                key: 3,
+                key: 4,
                 label: "Critical"
             }
         ];
@@ -158,7 +157,7 @@ export default class Issues extends DashBoardActivity {
         />;
     }
 
-    get issueTypeBtnStyle(){
+    get issueTypeBtnStyle() {
         return {
             minWidth: 0,
             minHeight: 0,
@@ -166,7 +165,7 @@ export default class Issues extends DashBoardActivity {
             paddingBottom: 2,
             paddingLeft: 8,
             paddingRight: 8
-        }
+        };
     }
 
     get trendingIssues() {
@@ -183,25 +182,25 @@ export default class Issues extends DashBoardActivity {
                 <ListItem key={i++}>
                     <Row>
                         <Column xs={1} alignContent={Flex.SPACE_BETWEEN}>
-                                <MaterialOptionsMenu
-                                    id={`issue-${i}-options-menu`}
-                                    controller={MaterialBtn}
-                                    header={type}
-                                    controllerProps={
-                                        {
-                                            style: this.issueTypeBtnStyle,
-                                            content: type,
-                                            color: color,
-                                            textColor: Colors.white
-                                        }
+                            <MaterialOptionsMenu
+                                id={`issue-${i}-options-menu`}
+                                controller={MaterialBtn}
+                                header={type}
+                                controllerProps={
+                                    {
+                                        style: this.issueTypeBtnStyle,
+                                        content: type,
+                                        color: color,
+                                        textColor: Colors.white
                                     }
-                                    menuItems={[
-                                        {
-                                            key: 0,
-                                            title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
-                                        }
-                                    ]}
-                                />
+                                }
+                                menuItems={[
+                                    {
+                                        key: 0,
+                                        title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
+                                    }
+                                ]}
+                            />
                         </Column>
                         <Column xs={10}>
                             <Row>
@@ -216,9 +215,9 @@ export default class Issues extends DashBoardActivity {
                                         variant={"default"}
                                         content={<MaterialIcon icon={"Favorite"} color={Colors.green} iconSize={18}/>}
                                         style={{
-                                            padding:4,
-                                            minWidth:0,
-                                            minHeight:0
+                                            padding: 4,
+                                            minWidth: 0,
+                                            minHeight: 0
                                         }}
                                         color={Colors.transparent}
                                     />
@@ -226,9 +225,9 @@ export default class Issues extends DashBoardActivity {
                                         variant={"default"}
                                         content={<MaterialIcon icon={"StarBorder"} color={Colors.green} iconSize={18}/>}
                                         style={{
-                                            padding:4,
-                                            minWidth:0,
-                                            minHeight:0
+                                            padding: 4,
+                                            minWidth: 0,
+                                            minHeight: 0
                                         }}
                                         color={Colors.transparent}
                                     />
@@ -263,7 +262,7 @@ export default class Issues extends DashBoardActivity {
         ];
 
         return (
-            <List style={{maxHeight: 600, minHeight: 400,overflowY: "auto"}}>
+            <List style={{maxHeight: 600, minHeight: 400, overflowY: "auto"}}>
                 {listItems}
             </List>
         );
@@ -413,7 +412,7 @@ export default class Issues extends DashBoardActivity {
                 <Chip
                     style={{
                         ...chipStyle,
-                        backgroundColor:Colors.green
+                        backgroundColor: Colors.green
                     }}
                     label={" P: high"} color={"secondary"}
                     onDelete={
@@ -425,7 +424,7 @@ export default class Issues extends DashBoardActivity {
                 <Chip
                     style={{
                         ...chipStyle,
-                        backgroundColor:Colors.purple
+                        backgroundColor: Colors.purple
                     }}
                     label={" S: Chip"}
                     onDelete={
