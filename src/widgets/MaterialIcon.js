@@ -2,7 +2,31 @@ import React from "react";
 import {withProps} from "recompose";
 import * as Icons from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
+import PropTypes from "prop-types";
 
+export const MaterialIconProps = {
+    icon: PropTypes.oneOf([
+        "Settings",
+        "Home",
+        "Notifications",
+        "Apps",
+        "Sort",
+        "Search",
+        "Copyright",
+        "Save",
+        "FilterList",
+        "AttachFile",
+        "StarBorder",
+        "FavoriteBorder",
+        "MoreVert",
+        "ExpandMore",
+        "ExpandLess",
+        "ChevronLeft",
+        "ChevronRight"
+    ]).isRequired,
+    color: PropTypes.string,
+    iconSize: PropTypes.number
+};
 
 export default class MaterialIcon extends React.Component {
 
@@ -12,10 +36,42 @@ export default class MaterialIcon extends React.Component {
         style: {}
     };
 
-    constructor(props) {
-        super(props);
-    }
 
+    static propTypes = {
+        icon: PropTypes.oneOf([
+            "Settings",
+            "Home",
+            "Notifications",
+            "Apps",
+            "Sort",
+            "Search",
+            "Copyright",
+            "Save",
+            "FilterList",
+            "AttachFile",
+            "StarBorder",
+            "FavoriteBorder",
+            "MoreVert",
+            "ExpandMore",
+            "ExpandLess",
+            "ChevronLeft",
+            "ChevronRight",
+            "MoreHoriz",
+            "AccountTree",
+            "RssFeed",
+            "Favorite",
+            "Chat",
+            "Accessibility",
+            "InvertColors",
+            "People",
+            "ExitToApp",
+            "BugReport",
+            "Close",
+            "Help",
+        ]).isRequired,
+        color: PropTypes.string,
+        iconSize: PropTypes.number
+    };
 
     render() {
         let {
@@ -31,6 +87,11 @@ export default class MaterialIcon extends React.Component {
             } = {},
             ...props
         } = this.props;
+
+        if (!(color === "secondary" || color === "primary" || color === "action" || color === "inherit" || color === "disabled")) {
+            style.color = color;
+            color = undefined;
+        }
 
         iconName = iconName || icon;
 

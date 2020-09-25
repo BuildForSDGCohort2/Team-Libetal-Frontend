@@ -1,0 +1,18 @@
+{
+  "response": {
+  },
+  "data": {
+    "dates": [""],
+    "pc": [
+      {
+        "id": 0,
+        "name": "Libetal"
+      }
+    ],
+    "mobile": [
+
+    ],
+    "embedded": [
+    ]
+  }
+}

@@ -16,7 +16,7 @@ import Chip from "@material-ui/core/Chip";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 import MaterialGrid from "../../../widgets/MaterialGrid";
-import MaterialSelect from "../../../widgets/MaterialSelect";
+import MaterialSelect from "../../../widgets/input/MaterialSelect";
 import MaterialTextField from "../../../widgets/MaterialTextField";
 import MaterialInputLayout from "../../../widgets/MaterialInputLayout";
 import Typography from "@material-ui/core/Typography";

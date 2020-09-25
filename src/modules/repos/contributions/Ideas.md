@@ -1,7 +1,0 @@
-- Costing Guidelines
-- Charge by project not by hours
-    - Project estimates
-        - Is the design available
-        - Features
-        - Timelines
-        - Integration

@@ -28,7 +28,11 @@ export const ChartPropTypes = {
     size: PropTypes.number,
     major: PropTypes.object,
     xAxisLabelFormatter: PropTypes.func,
-    yAxisLabelFormatter: PropTypes.func
+    yAxisLabelFormatter: PropTypes.func,
+    yAxisTextColor: PropTypes.string,
+    xAxisTextColor: PropTypes.string,
+    yAxisGridLineColor:PropTypes.string,
+    xAxisGridLineColor:PropTypes.string
 };
 export const ChartProps = {
     datasets: [],
@@ -68,7 +72,9 @@ export default class Chart extends React.Component {
 
     static defaultProps = ChartProps;
 
-    static propTypes = ChartPropTypes;
+    static propTypes = {
+        ...ChartPropTypes
+    };
 
     get element() {
         return this.elementField === undefined ? (this.elementField = React.createRef()) : this.elementField;
@@ -152,7 +158,8 @@ export default class Chart extends React.Component {
             borderColor,
             pointRadius,
             borderWidth,
-            hidden
+            hidden,
+            type = undefined
         } = child.props;
 
         return {
@@ -163,7 +170,8 @@ export default class Chart extends React.Component {
             backgroundColor: backgroundColor,
             borderColor: borderColor,
             borderWidth: borderWidth,
-            hidden: hidden
+            hidden: hidden,
+            type :type
         };
     }
 
@@ -211,7 +219,9 @@ export default class Chart extends React.Component {
             xAxisType,
             sampleSize,
             major = {},
-            distribution
+            distribution,
+            xAxisTextColor,
+            xAxisGridLineColor
         } = this.props;
 
         scaleLabel = {
@@ -227,7 +237,8 @@ export default class Chart extends React.Component {
             xAxes: [
                 {
                     gridLines: {
-                        display: showGridLines
+                        display: showGridLines,
+                        color: xAxisGridLineColor
                     },
                     ticks: {
                         major: major,
@@ -240,7 +251,8 @@ export default class Chart extends React.Component {
                         distribution: distribution,
                         callback: xAxisLabelFormatter,
                         xAxisStepSize: xAxisStepSize,
-                        xAxisSampleSize: xAxisSampleSize
+                        xAxisSampleSize: xAxisSampleSize,
+                        fontColor:xAxisTextColor
                     },
                     scaleLabel: scaleLabel
                 }
@@ -260,13 +272,18 @@ export default class Chart extends React.Component {
             maxRotation,
             minRotation,
             major = {},
-            distribution
+            distribution,
+            yAxisTextColor,
+            yAxisGridLineColor
         } = this.props;
+
+
 
         return {
             yAxes: [{
                 gridLines: {
-                    display: showGridLines
+                    display: showGridLines,
+                    color:yAxisGridLineColor
                 },
                 ticks: {
                     major: major,
@@ -279,7 +296,8 @@ export default class Chart extends React.Component {
                     beginAtZero: true,
                     stepSize: yAxisStepSize,
                     sampleSize: yAxisSampleSize,
-                    callback: yAxisLabelFormatter
+                    callback: yAxisLabelFormatter,
+                    fontColor:yAxisTextColor
                 }
             }]
         };

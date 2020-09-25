@@ -6,7 +6,10 @@ import Theme from "./Theme";
 import HoCs from "./Hocs";
 import Register from "./modules/users/registration/Register";
 import Dashboard from "./modules/dashboard/Dashboard";
-
+import About from "./modules/about/About";
+import CreateRepo from "./modules/repos/CreateRepo";
+import Repo from "./modules/repos/Repo";
+import MaterialTheme from "./widgets/theming/MaterialTheme";
 
 class AppComponent extends Component {
 
@@ -30,6 +33,16 @@ class AppComponent extends Component {
 
                                 return (
                                     <Switch>
+
+                                        <Route
+                                            path={"/(a|A)bout"}
+                                            component={() => {
+                                                return <About
+                                                    navigator={navigateTo}
+                                                    classes={classes}
+                                                />;
+                                            }}
+                                        />
 
                                         <Route exact path="(/|/home)"
                                                component={() => (
@@ -62,12 +75,41 @@ class AppComponent extends Component {
                                                    />
                                                )}
                                         />
+                                        <Route
+                                            path={"/dashboard/projects/new"}
+                                            component={
+                                                location => {
+                                                    return (
+                                                        <CreateRepo
+                                                            theme={MaterialTheme}
+                                                            location={location}
+                                                            classes={classes}
+                                                            navigator={navigateTo}
+                                                        />
+                                                    );
+                                                }
+                                            }
+                                        />
+
+                                        <Route
+                                            path={"/(d|D)ashboard/projects/:projectName"}
+                                            component={
+                                                location => (
+                                                    <Repo
+                                                        location={location}
+                                                    />
+                                                )
+                                            }
+
+                                        />
+
                                         <Route path="/(d|D)ashboard"
                                                component={location => {
                                                    return (
                                                        <Dashboard
                                                            location={location}
                                                            classes={classes}
+                                                           navigator={navigateTo}
                                                        />
                                                    );
                                                }}/>

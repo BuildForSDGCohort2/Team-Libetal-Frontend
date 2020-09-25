@@ -4,7 +4,11 @@ import Colors from "../Colors";
 
 export default class Settings {
 
+    static theme ="Light";
+
     static style = "light";
+
+    static palette = "light"
 
     static white = "#FFFFFF";
 

@@ -38,6 +38,12 @@ export default class MaterialIconBtn extends React.Component {
             ...props
         } = this.props;
 
+        if (!(color === "secondary" || color === "primary" || color === "action" || color === "inherit" || color === "disabled")) {
+            color = undefined;
+            style.color=color
+        }
+
+
         padding = iconPadding || padding || 4;
 
         iconName = iconName || icon;

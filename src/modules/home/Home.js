@@ -5,26 +5,32 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AppsIcon from "@material-ui/icons/Apps";
-import BuildIcon from "@material-ui/icons/Build";
-import PaletteIcon from "@material-ui/icons/Palette";
 // import TimeLineIcon from "@material-ui/icons/TimeLine";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import IconButton from "@material-ui/core/IconButton";
-import BugReportIcon from "@material-ui/icons/BugReport";
 import List from "@material-ui/core/List";
 import Link from "@material-ui/core/Link";
 import Toolbar from "@material-ui/core/Toolbar";
 import ListItem from "@material-ui/core/ListItem";
 import MaterialBtn from "../../widgets/MaterialBtn";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import {createMuiTheme} from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
 import Row from "../../widgets/Row";
+import Column from "../../widgets/Column";
+import MaterialTextView from "../../widgets/MaterialTextView";
+import Flex from "../../widgets/Flex";
+import MaterialIcon from "../../widgets/MaterialIcon";
+import Colors from "../../Colors";
+import Footer from "../Footer";
+import Paper from "@material-ui/core/Paper";
+import MaterialDivider from "../../widgets/MaterialDivider";
+import MaterialCol from "../../widgets/grid/MaterialCol";
+import MaterialRow from "../../widgets/grid/MaterialRow";
+import GridItem from "../../widgets/grid/GridItem";
 
 const theme = createMuiTheme({
     palette: {
@@ -45,6 +51,7 @@ export default class Home extends View {
             console.log(`Requesting for page ${link}`);
         }
     };
+
     state = {
         currentTab: 0,
         currentTabView: (<Typography>Not A Valid Tab</Typography>),
@@ -116,11 +123,298 @@ export default class Home extends View {
     }
 
     componentDidMount() {
-        this.updateTabView(21);
+        this.updateTabView(1);
     }
 
-     getLayout({userDetails, appTheme, classes}) {
 
+    get body() {
+
+        let titleVariant = "h4";
+
+        let textStyle = {
+            textAlign: "center",
+            justify: "center",
+            lineHeight: 1.5,
+            marginTop: 4,
+            fontSize: 18
+        };
+
+        let paperStyle = {
+            padding: 18
+        };
+
+        let textColor = Colors.white;
+        return (
+            <>
+                <Row className={this.props.appTheme.body}>
+                    <MaterialRow marginTop={32} justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.red,
+                                color: textColor
+                            }}>
+                                <MaterialCol>
+                                    <MaterialTextView
+                                        text={"Contributions"}
+                                        variant={titleVariant}
+                                    />
+                                    <MaterialDivider width={"50%"} color={textColor}/>
+
+                                    <MaterialTextView textColor={textColor} textAlign={"center"}>
+                                        Code, Design, Funding.
+                                        All contributions are evaluated and agreed upon the contributor and the project
+                                        creator or manager if any exists, and are later evaluated upon project returns.
+                                    </MaterialTextView>
+                                </MaterialCol>
+                            </Paper>
+
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.red}
+                                textColor={Colors.white}
+                            />
+                        </MaterialCol>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.purple,
+                                color: Colors.white
+                            }}>
+                                <MaterialCol alignItems={Flex.CENTER}>
+                                    <MaterialTextView
+                                        text={"Returns Evaluation"}
+                                        variant={titleVariant}
+                                    />
+                                    <MaterialDivider width={"50%"} color={textColor}/>
+
+                                    <MaterialTextView
+                                        text={"Returns are to be evaluated based on contributors total input on any given product,\n" +
+                                        "be it in terms of code or financial input or design.\n" +
+                                        "All input that was used during the product inception to completion is to be evaluated and quantified."}
+                                        style={textStyle}
+                                    />
+                                </MaterialCol>
+                            </Paper>
+
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.purple}
+                                textColor={Colors.white}
+                            />
+
+                        </MaterialCol>
+                        <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
+
+                            <Paper style={{
+                                ...paperStyle,
+                                backgroundColor: Colors.pink,
+                                color: textColor
+                            }}>
+                                <MaterialCol alignItems={Flex.END}>
+                                    <MaterialTextView textAlign={"right"} variant={titleVariant}>
+                                        <em>Collaboration</em>
+                                    </MaterialTextView>
+                                    <MaterialDivider width={"50%"} color={textColor}/>
+                                    {/*  <MaterialTextView
+                                        text={"Feature pricing and evaluation is done by project contributors, that you hand pick as you see fit depending on your project"}
+                                        style={textStyle}
+                                    />*/}
+                                    <Typography variant={"h6"} style={{textAlign: "center"}}>
+                                        Get to co-create products that will shape your near feature. From production
+                                        tools,
+                                        to home apps that could be the next big thing. By investing your time wisely.
+                                    </Typography>
+                                </MaterialCol>
+                            </Paper>
+
+
+                            <MaterialBtn
+                                content={"Learn More >"}
+                                style={{
+                                    marginTop: 12
+                                }}
+                                color={Colors.pink}
+                                textColor={textColor}
+                            />
+
+                        </MaterialCol>
+                    </MaterialRow>
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={12}/>
+                    <MaterialRow justify={Flex.SPACE_EVENLY}>
+                        <MaterialRow justify={Flex.CENTER}>
+                            <MaterialTextView
+                                text={"Libetal!! Built for Creators"}
+                                variant={"h3"}
+                                textColor={Colors.purple}
+                                textAlign={"center"}
+                                style={{
+                                    textShadow: `2px 2px 30px  ${Colors.purple}`
+                                }}
+                            />
+                        </MaterialRow>
+                        <MaterialRow justify={Flex.CENTER}>
+                            <GridItem xs={12} xsm={8} lg={6}>
+                                <MaterialTextView variant={"h5"} textAlign={"center"}>
+                                    Libetal is more that just commits, it's investment. Investing your time and skill on
+                                    something you believe in.
+                                </MaterialTextView>
+                            </GridItem>
+                        </MaterialRow>
+                    </MaterialRow>
+                    {this.projectEstimationAndEvaluation}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.projectManagement}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.contributeSection}
+                    <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
+                    {this.partnership}
+                </Row>
+                <Footer/>
+            </>
+        );
+    }
+
+    get partnership() {
+        return (
+            <Row style={{marginTop: 16, marginBottom: 16}} justify={Flex.CENTER}>
+                <MaterialTextView
+                    text={"Our Partners"}
+                    variant={"h4"}
+                    textColor={Colors.red}
+                />
+                <Row>
+                    <Column xs={6} lg={2}>
+                        <Paper>
+
+                        </Paper>
+                    </Column>
+                </Row>
+            </Row>
+        );
+    }
+
+    get contributeSection() {
+
+        return (
+            <MaterialRow justify={Flex.CENTER} style={{marginTop: 12}}>
+                <MaterialCol alignItems={Flex.CENTER}>
+                    <MaterialTextView
+                        text={"Contribute To Libetal"}
+                        variant={"h4"}
+                        textColor={Colors.red}
+                    />
+                    <MaterialDivider width={"80%"}/>
+                    <Row justify={Flex.CENTER}>
+                        <Column xs={12} lg={8}>
+                            <Typography align={"center"}>
+                                Contribute to the
+                                <Link href={"/dashboard"} style={{color: Colors.blue}}> @Libetal </Link>
+                                project, there are a few sections that need contribution, Documentation, Design, Code
+                                security and Licencing design and drafting.<br/>
+                                And so much more. Your contributions are considered an investment and evaluated by the
+                                platform as per the project design.<br/>
+                                Financial contributions are also accepted as per the agreement of the project proposal
+                            </Typography>
+                        </Column>
+                    </Row>
+                </MaterialCol>
+            </MaterialRow>
+        );
+    }
+
+    get projectEstimationAndEvaluation() {
+        return (
+            <MaterialRow marginTop={24} justify={Flex.SPACE_EVENLY}>
+                <GridItem xs={12} lg={6}>
+                    <Paper>
+                        <img src={"/images/project_estimation.png"} width={"100%"}/>
+                    </Paper>
+                </GridItem>
+                <GridItem xs={12} lg={4}>
+                    <MaterialCol alignItems={Flex.SPACE_AROUND}>
+                        <Paper style={{paddingLeft: 6, paddingRight: 6, paddingTop: 12, paddingBottom: 12}}>
+                            <Row justify={Flex.CENTER}>
+                                <MaterialTextView
+                                    variant={"h5"}
+                                    textColor={Colors.green}>
+                                    Pricing, Estimation and
+                                    Evaluation.
+                                </MaterialTextView>
+                            </Row>
+                            <Row>
+                                <Column alignItems={Flex.CENTER}>
+                                    <Row justify={Flex.END}>
+                                        <MaterialTextView
+                                            text={"Pricing and evaluations are done by the project creator, and agreed upon by the developer/contributor."}
+                                            fontSize={14}
+                                            style={{
+                                                textAlign: "right"
+                                            }}
+                                        />
+
+                                    </Row>
+                                </Column>
+                            </Row>
+
+                        </Paper>
+                        <MaterialDivider spacing={12} color={Colors.transparent}/>
+                        <GridItem>
+                            <MaterialBtn
+                                content={"Learn More"}
+                                endIcon={<MaterialIcon icon={"ChevronRight"} color={Colors.orange}/>}
+                                color={Colors.green}
+                                textColor={Colors.white}
+                            />
+                        </GridItem>
+                    </MaterialCol>
+                </GridItem>
+
+            </MaterialRow>
+        );
+    }
+
+    get projectManagement() {
+
+        return (
+            <MaterialRow justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                <GridItem xs={12} sm={6} lg={3}>
+                    <MaterialTextView
+                        textAlign={"left"}
+                        text={"Project Management"}
+                        variant={"h4"}
+                    />
+                    <MaterialRow justify={Flex.CENTER}>
+                        <MaterialTextView textAlign={"right"}>
+                            Manage project issues, tasks, contributions with ease
+                            Get direct access to the product users insights.<br/>
+                            Product users can create new issues and even make feature requests for the product.
+                        </MaterialTextView>
+                    </MaterialRow>
+                    <MaterialDivider color={Colors.transparent} spacing={12}/>
+                    <MaterialBtn
+                        variant={"contained"}
+                        content={<MaterialTextView text={"Learn more"} variant={"h5"}/>}
+                        color={Colors.orange}
+                        textColor={Colors.white}
+                    />
+                </GridItem>
+                <GridItem xs={12} lg={7}>
+                    <Paper>
+                        <img src={"/images/project.management.issues.png"} alt={"Project Management"} width={"100%"}/>
+                    </Paper>
+                </GridItem>
+            </MaterialRow>
+        );
+    }
+
+    getLayout({userDetails, appTheme, classes}) {
 
         let flex = {
             display: "flex"
@@ -133,26 +427,28 @@ export default class Home extends View {
         return (
             <Row ref={this.ref}>
                 <CssBaseline/>
-                <AppBar position="static" color="default" elevation={0} className={appTheme.homeAppBar}>
-                    <Grid container className={appTheme.homeHeader}>
-                        <Grid container>
-                            <Grid item xs={3} style={flex}>
-                                <img
-                                    style={marginAuto}
-                                    src={"/images/LogoWhiteSkew.png"}
-                                    width={"inherit"}
-                                    height={"220px"}
-                                />
-                            </Grid>
-                            <Grid item xs={4} style={flex}>
-                                <img
-                                    style={marginAuto}
-                                    src={"/images/BrandingLongBetaWhite.png"}
-                                    width={"80%"}
-                                    height={"220px"}
-                                />
-                            </Grid>
-                            <Grid item xs={5}>
+                <AppBar position="static" elevation={4} className={appTheme.homeAppBar}>
+                    <MaterialRow  className={appTheme.homeHeader}>
+                        <GridItem xs={12} lg={7} >
+                            <MaterialRow alignItems={Flex.CENTER}>
+                                <GridItem xs={12} lg={6}>
+                                    <img
+                                        style={marginAuto}
+                                        src={"/images/LogoWhiteSkew.png"}
+                                        width={"inherit"}
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} lg={6}>
+                                    <img
+                                        style={marginAuto}
+                                        src={"/images/BrandingLongBetaWhite.png"}
+                                        width={"90%"}
+
+                                    />
+                                </GridItem>
+                            </MaterialRow>
+                        </GridItem>
+                            <GridItem item xs={12} lg={5}>
                                 <Grid>
                                     <Toolbar className={appTheme.homeToolbar}>
                                         {
@@ -161,27 +457,12 @@ export default class Home extends View {
                                     </Toolbar>
                                 </Grid>
                                 {this.listItems()}
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                            </GridItem>
+                    </MaterialRow>
                 </AppBar>
                 {/* Hero unit */}
                 <Grid container>
-                    <Grid item xs={7}>
-
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Tabs
-                            theme={theme}
-                            value={this.state.currentTab}
-                            onChange={this.handleChange}
-                        >
-                            <Tab theme={theme} icon={<PaletteIcon/>} label="Features"/>
-                            <Tab theme={theme} icon={<BuildIcon className="iconAccent"/>} label="Issues"/>
-                            <Tab theme={theme} icon={<BugReportIcon className="txtPrimary"/>} label="Bugs"/>
-                        </Tabs>
-                        {this.state.currentTabView}
-                    </Grid>
+                    {this.body}
                 </Grid>
             </Row>
         );
@@ -254,15 +535,24 @@ export default class Home extends View {
                 <div className={classes.grow}/>
                 <nav className={appTheme.alignChildRight}>
                     <MaterialBtn
+                        variant={"default"}
                         onClick={() => this.accessAccount()}
                         startIcon={<AccountCircleIcon/>}
                         content={"Login/Register"}
                     />
-                    <MaterialBtn content={"About Us"}/>
                     <MaterialBtn
+                        variant={"default"}
+                        content={"About Us"}
+                        onClick={() => {
+                            this.props.navigator("about");
+                        }}
+                    />
+                    <MaterialBtn
+                        variant={"default"}
                         onClick={this.openDashboard}
                         content={"Dashboard"}/>
                     <MaterialBtn
+                        variant={"default"}
                         onClick={this.openAppStore}
                         startIcon={<AppsIcon/>}
                         content={"App Store"}
@@ -323,7 +613,8 @@ export default class Home extends View {
                         </IconButton> Skill Investment
                     </ListItem>
                 </List>
-            </Grid>);
+            </Grid>
+        );
     }
 }
 

@@ -29,8 +29,12 @@ body {
   background-image: url("/images/header_banner.png");
 }
 
+.body{
+  background-image: url("/images/home.bg.png");
+}
+
 .homeHeader {
-  background-color: change_color($colorPrimary, $alpha: 0.4);
+  background-color: change_color(#000000, $alpha: 0.4);
   color: $textAccent;
   flex-wrap: wrap;
 }

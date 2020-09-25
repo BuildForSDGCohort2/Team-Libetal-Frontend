@@ -17,6 +17,9 @@ body {
 .homeAppBar {
   background-image: url("/images/header_banner.png"); }
 
+.body {
+  background-image: url("/images/home.bg.png"); }
+
 .homeHeader {
   background-color: rgba(0, 0, 0, 0.4);
   color: #FFFFFF;

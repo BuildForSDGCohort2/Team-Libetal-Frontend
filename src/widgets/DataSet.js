@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default class DataSet extends React.Component {
 
-    props = {
+    prop = {
         label: "DataSetLabel",
         data: [],
         backgroundColor: [],
@@ -10,7 +11,20 @@ export default class DataSet extends React.Component {
         borderWidth: 1,
         fillArea: false,
         pointRadius: 0,
-        hidden: false
+        hidden: false,
+
+    };
+
+    static propTypes = {
+        type: PropTypes.oneOf(["bar","line"]),
+        hidden:PropTypes.bool,
+        fillArea:PropTypes.bool,
+        label:PropTypes.string,
+        pointRadius:PropTypes.number,
+        data:PropTypes.array,
+        backgroundColor:PropTypes.string,
+        borderColor:PropTypes.string,
+        borderWidth:PropTypes.number,
     };
 
     static defaultProps = {
