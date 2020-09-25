@@ -428,24 +428,26 @@ export default class Home extends View {
             <Row ref={this.ref}>
                 <CssBaseline/>
                 <AppBar position="static" elevation={4} className={appTheme.homeAppBar}>
-                    <MaterialRow className={appTheme.homeHeader}>
+                    <MaterialRow  className={appTheme.homeHeader}>
+                        <GridItem xs={12} lg={7} >
+                            <MaterialRow alignItems={Flex.CENTER}>
+                                <GridItem xs={12} lg={6}>
+                                    <img
+                                        style={marginAuto}
+                                        src={"/images/LogoWhiteSkew.png"}
+                                        width={"inherit"}
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} lg={6}>
+                                    <img
+                                        style={marginAuto}
+                                        src={"/images/BrandingLongBetaWhite.png"}
+                                        width={"90%"}
 
-                            <GridItem xs={12} lg={3}>
-                                <img
-                                    style={marginAuto}
-                                    src={"/images/LogoWhiteSkew.png"}
-                                    width={"inherit"}
-
-                                />
-                            </GridItem>
-                            <GridItem xs={12} lg={3}>
-                                <img
-                                    style={marginAuto}
-                                    src={"/images/BrandingLongBetaWhite.png"}
-                                    width={"80%"}
-                                    height={"220px"}
-                                />
-                            </GridItem>
+                                    />
+                                </GridItem>
+                            </MaterialRow>
+                        </GridItem>
                             <GridItem item xs={12} lg={5}>
                                 <Grid>
                                     <Toolbar className={appTheme.homeToolbar}>

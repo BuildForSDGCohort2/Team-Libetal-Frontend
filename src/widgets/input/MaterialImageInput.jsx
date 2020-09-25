@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import MaterialRow from "../grid/MaterialRow";
 import MaterialIconButton from "../button/MaterialIconButton";
 import Colors from "../../Colors";
+import GridItem from "../grid/GridItem";
 
 export default class MaterialImageInput extends Component {
 
@@ -32,7 +33,7 @@ export default class MaterialImageInput extends Component {
     static defaultProps = {
         alt: "Material Image Input",
         defaultSrc: "/images/logo.png",
-        previewWidth: 80,
+        previewWidth: "100%",
         onChange() {
             console.log(`unhandled image input change`);
         }
@@ -81,7 +82,6 @@ export default class MaterialImageInput extends Component {
             flexGrow,
             placeholder,
             multiple,
-            onChange,
             previewHeight,
             previewWidth,
             style = {}
@@ -93,16 +93,27 @@ export default class MaterialImageInput extends Component {
 
         return (
 
-            <Paper>
-                <MaterialCol style={style}
-                             alignItems={Flex.CENTER}
-                             alignContent={Flex.CENTER}
-                             paddingTop={4}
-                             paddingRight={4}
-                             paddingBottom={4}
-                             paddingLeft={4}
+            <Paper style={style}>
+                <MaterialCol
+                    alignItems={Flex.STRETCH}
+                    paddingTop={4}
+                    paddingRight={4}
+                    paddingBottom={4}
+                    paddingLeft={4}
                 >
-                    <img ref={this.img} src={src || defaultSrc} alt={alt} width={previewWidth} height={previewHeight}/>
+
+                   <GridItem xs={12}>
+                       <MaterialCol justify={Flex.CENTER} alignItems={Flex.CENTER}>
+                           <GridItem>
+                               <img ref={this.img} src={src || defaultSrc} alt={alt}
+                                    width={previewWidth}
+                                    style={{
+                                        maxHeight:previewHeight
+                                    }}
+                               />
+                           </GridItem>
+                       </MaterialCol>
+                   </GridItem>
                     <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_EVENLY} paddingLeft={4} paddingRight={4}>
                         <MaterialIconButton
                             icon={"Close"}
