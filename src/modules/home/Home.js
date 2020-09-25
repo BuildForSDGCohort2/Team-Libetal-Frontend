@@ -428,25 +428,25 @@ export default class Home extends View {
             <Row ref={this.ref}>
                 <CssBaseline/>
                 <AppBar position="static" elevation={4} className={appTheme.homeAppBar}>
-                    <Grid container className={appTheme.homeHeader}>
-                        <Grid container>
-                            <Grid item xs={3} style={flex}>
+                    <MaterialRow className={appTheme.homeHeader}>
+
+                            <GridItem xs={12} lg={3}>
                                 <img
                                     style={marginAuto}
                                     src={"/images/LogoWhiteSkew.png"}
                                     width={"inherit"}
-                                    height={"220px"}
+
                                 />
-                            </Grid>
-                            <Grid item xs={4} style={flex}>
+                            </GridItem>
+                            <GridItem xs={12} lg={3}>
                                 <img
                                     style={marginAuto}
                                     src={"/images/BrandingLongBetaWhite.png"}
                                     width={"80%"}
                                     height={"220px"}
                                 />
-                            </Grid>
-                            <Grid item xs={5}>
+                            </GridItem>
+                            <GridItem item xs={12} lg={5}>
                                 <Grid>
                                     <Toolbar className={appTheme.homeToolbar}>
                                         {
@@ -455,9 +455,8 @@ export default class Home extends View {
                                     </Toolbar>
                                 </Grid>
                                 {this.listItems()}
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                            </GridItem>
+                    </MaterialRow>
                 </AppBar>
                 {/* Hero unit */}
                 <Grid container>

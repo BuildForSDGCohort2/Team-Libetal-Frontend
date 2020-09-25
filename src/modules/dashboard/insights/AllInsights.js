@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import UserInvestmentInsights from "./UserInvestmentInsights";
 import MaterialRow from "../../../widgets/grid/MaterialRow";
 import GridItem from "../../../widgets/grid/GridItem";
+import MaterialCol from "../../../widgets/grid/MaterialCol";
 
 
 export default class AllInsights extends React.Component {
@@ -239,21 +240,21 @@ export default class AllInsights extends React.Component {
                     <MaterialTextView text={"Accounts"} variant={"h5"}/>
                 </Row>
                 <MaterialRow justify={Flex.SPACE_EVENLY}>
-                    <GridItem xs={xs} lg={pinState ? 6 : 4}>
+                    <GridItem xs={xs} lg={pinState ? 6 : 5} style={{padding:4}}>
                         <AppsSalesInsights apps={this.state.apps}/>
                     </GridItem>
-                    <GridItem xs={xs} lg={pinState ? 6 : 4}>
+                    <GridItem xs={xs} lg={pinState ? 6 : 4} style={{padding:4}}>
                         <AppsOsDistributionInsights/>
                     </GridItem>
-                    <GridItem xs={12} lg={pinState ? 6 : 3}>
+                    <GridItem xs={12} lg={pinState ? 6 : 3} style={{padding:4}}>
                         {this.usersEarningsInsights}
                     </GridItem>
-                    <GridItem xs={12} xm={6} lg={6}>
-                        <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
-                        <MaterialTextView text={"Commits"} variant={"h6"}/>
-                        <MaterialRow>
-                            {this.commitsInsights}
-                        </MaterialRow>
+                    <GridItem xs={12} xm={6} lg={6} style={{padding:4}}>
+                        <MaterialCol >
+                            <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
+                            <MaterialTextView text={"Commits"} variant={"h6"}/>
+                        </MaterialCol>
+                        <CommitsInsights/>
                     </GridItem>
                     <GridItem xs={12} xm={6} lg={6}>
                         <Row>
