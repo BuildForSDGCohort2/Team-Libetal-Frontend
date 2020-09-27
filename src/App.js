@@ -10,6 +10,9 @@ import About from "./modules/about/About";
 import CreateRepo from "./modules/repos/CreateRepo";
 import Repo from "./modules/repos/Repo";
 import MaterialTheme from "./widgets/theming/MaterialTheme";
+import {ThemeProvider} from "@material-ui/styles";
+import Settings from "./utils/Settings";
+import CreateIssue from "./modules/repos/CreateIssue";
 
 class AppComponent extends Component {
 
@@ -67,12 +70,14 @@ class AppComponent extends Component {
 
                                         <Route path="/register"
                                                component={() => (
-                                                   <Register
-                                                       navigator={navigator}
-                                                       classes={classes}
-                                                       theme={theme}
-                                                       styles={styles}
-                                                   />
+                                                   <ThemeProvider theme={Settings.appTheme}>
+                                                       <Register
+                                                           navigator={navigator}
+                                                           classes={classes}
+                                                           theme={theme}
+                                                           styles={styles}
+                                                       />
+                                                   </ThemeProvider>
                                                )}
                                         />
                                         <Route
@@ -84,6 +89,20 @@ class AppComponent extends Component {
                                                             theme={MaterialTheme}
                                                             location={location}
                                                             classes={classes}
+                                                            navigator={navigateTo}
+                                                        />
+                                                    );
+                                                }
+                                            }
+                                        />
+
+                                        <Route
+                                            path={"/dashboard/issues/new"}
+                                            component={
+                                                location => {
+                                                    return (
+                                                        <CreateIssue
+                                                            location={location}
                                                             navigator={navigateTo}
                                                         />
                                                     );

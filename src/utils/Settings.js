@@ -1,14 +1,15 @@
 import {amber, cyan, green, red} from "@material-ui/core/colors";
 import Colors from "../Colors";
+import {createMuiTheme} from "@material-ui/core/styles";
 
 
 export default class Settings {
 
-    static theme ="Light";
+    static theme = "Light";
 
     static style = "light";
 
-    static palette = "light"
+    static palette = "light";
 
     static white = "#FFFFFF";
 
@@ -17,6 +18,66 @@ export default class Settings {
     static orange = Colors.deep_orange;
 
     static orangeLight = Colors.orange;
+
+
+    static lightTheme = createMuiTheme({
+        palette: {
+            primary: {
+                main: Settings.colorPrimary,
+                dark: Settings.colorPrimaryDark,
+                contrastText: Settings.textPrimary,
+                light: Settings.colorPrimaryLight
+            },
+            secondary: {
+                main: Settings.colorSecondary,
+                dark: Settings.colorSecondaryDark,
+                /**TODO eddit for hover states
+                 light: "#FFFFFF",
+                 dark: "#FFFFFF",*/
+                contrastText: Settings.textSecondary
+            },
+            background: {
+                default: Settings.colorPrimary,
+                paper: Settings.colorPrimary
+            }
+        }
+    });
+
+    static darkTheme = createMuiTheme({
+        palette: {
+            type: "dark",
+            primary: {
+                main: "#202020",
+                dark: "#101010",
+                contrastText: "#FFFFFF",
+                light: Settings.colorPrimaryLight
+            },
+            secondary: {
+                main: Settings.colorSecondary,
+                dark: Settings.colorSecondaryDark,
+                /**TODO eddit for hover states
+                 light: "#FFFFFF",
+                 dark: "#FFFFFF",*/
+                contrastText: Settings.textSecondary
+            },
+            background: {
+                default: "#303030",
+                paper: "#303030"
+            },
+            text: {
+                primary: "#FFFFFF",
+                secondary: "rgba(255,255,255,.8)",
+                disabled: "rgba(255,255,255,.5)"
+            }
+        }
+    });
+
+
+    static get appTheme() {
+        if (this.palette === "light") return this.lightTheme;
+
+        return this.darkTheme;
+    }
 
     static get isLight() {
         return this.style === "light";

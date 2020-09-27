@@ -8,6 +8,7 @@ import MaterialRow from "../grid/MaterialRow";
 import MaterialIconButton from "../button/MaterialIconButton";
 import Colors from "../../Colors";
 import GridItem from "../grid/GridItem";
+import Separator from "../separator";
 
 export default class MaterialImageInput extends Component {
 
@@ -20,11 +21,11 @@ export default class MaterialImageInput extends Component {
         onChange: PropTypes.func,
         flexGrow: PropTypes.number,
         placeholder: PropTypes.string,
-        previewHeight: PropTypes.oneOfType([
+        maxPreviewHeight: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
         ]),
-        previewWidth: PropTypes.oneOfType([
+        maxPreviewWidth: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
         ])
@@ -82,8 +83,8 @@ export default class MaterialImageInput extends Component {
             flexGrow,
             placeholder,
             multiple,
-            previewHeight,
-            previewWidth,
+            maxPreviewHeight,
+            maxPreviewWidth,
             style = {}
         } = this.props;
 
@@ -95,48 +96,46 @@ export default class MaterialImageInput extends Component {
 
             <Paper style={style}>
                 <MaterialCol
-                    alignItems={Flex.STRETCH}
                     paddingTop={4}
                     paddingRight={4}
                     paddingBottom={4}
                     paddingLeft={4}
+                    height={height}
                 >
+                    <Separator/>
+                    <MaterialRow justify={Flex.CENTER}>
+                        <GridItem xs={12} height={maxPreviewHeight}>
+                            <MaterialRow justify={Flex.CENTER} alignItems={Flex.CENTER}>
+                                <img ref={this.img} src={src || defaultSrc} alt={alt}
+                                     style={{
+                                         maxHeight: maxPreviewHeight,
+                                         maxWidth: maxPreviewWidth
+                                         // backgroundColor: Colors.blue
+                                     }}
+                                />
+                            </MaterialRow>
+                        </GridItem>
+                    </MaterialRow>
+                    <Separator/>
+                    <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_EVENLY} paddingLR={4}>
 
-                   <GridItem xs={12}>
-                       <MaterialCol justify={Flex.CENTER} alignItems={Flex.CENTER}>
-                           <GridItem>
-                               <img ref={this.img} src={src || defaultSrc} alt={alt}
-                                    width={previewWidth}
-                                    style={{
-                                        maxHeight:previewHeight
-                                    }}
-                               />
-                           </GridItem>
-                       </MaterialCol>
-                   </GridItem>
-                    <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_EVENLY} paddingLeft={4} paddingRight={4}>
-                        <MaterialIconButton
-                            icon={"Close"}
-                            buttonColor={Colors.orange}
-                            iconColor={Colors.white}
-                            onClick={
-                                e => {
-                                    this.input.reset();
-                                    this.onChange();
+                        <GridItem>
+                            <MaterialFileInputBase
+                                ActionButton={MaterialIconButton}
+                                ActionButtonButtonProps={{
+                                    icon:"ImageSearch"
+                                }}
+                                onMount={
+                                    input => {
+                                        this.input = input;
+                                    }
                                 }
-                            }
-                        />
-                        <MaterialFileInputBase
-                            onMount={
-                                input => {
-                                    this.input = input;
-                                }
-                            }
-                            style={{width: "80%"}}
-                            onChange={this.onChange}
-                            placeholder={placeholder} multiple={multiple}
-                            accept={["png", "jpg"]}
-                        />
+                                style={{width: "80%"}}
+                                onChange={this.onChange}
+                                placeholder={placeholder} multiple={multiple}
+                                accept={["png", "jpg"]}
+                            />
+                        </GridItem>
                     </MaterialRow>
                 </MaterialCol>
             </Paper>

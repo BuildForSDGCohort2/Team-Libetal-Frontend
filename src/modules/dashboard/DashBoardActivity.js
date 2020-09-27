@@ -15,6 +15,7 @@ import MaterialTextView from "../../widgets/MaterialTextView";
 import Settings from "../../utils/Settings";
 import HeaderOption from "./widgets/HeaderOption";
 import Footer from "../Footer";
+import MaterialCol from "../../widgets/grid/MaterialCol";
 
 export default class DashBoardActivity extends Component {
 
@@ -147,7 +148,7 @@ export default class DashBoardActivity extends Component {
                     </Row>
                     <MaterialDivider width={"80%"} orientation={"horizontal"}/>
                 </Column>
-                <Column xs={12} lg={4} justify={Flex.CENTER} alignContent={Flex.END}>
+                <Column xs={12} lg={4} justify={Flex.END} alignContent={Flex.CENTER}>
                     {this.createAction}
                 </Column>
             </>
@@ -161,16 +162,14 @@ export default class DashBoardActivity extends Component {
     render() {
         return (
             <>
-                <Column xs={12} alignItems={Flex.SPACE_AROUND} style={{paddingLeft: 8, paddingRight: 8}}>
+                <MaterialCol alignItems={Flex.SPACE_AROUND} style={{paddingLeft: 8, paddingRight: 8}}>
                     <Row>
                         {this.head}
                     </Row>
                     <Row>
                         {this.body}
                     </Row>
-
-                </Column>
-
+                </MaterialCol>
                 <Footer style={{marginTop: 10}}/>
             </>
         );

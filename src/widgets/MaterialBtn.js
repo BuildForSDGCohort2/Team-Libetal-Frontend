@@ -10,8 +10,8 @@ export default class MaterialBtn extends React.Component {
         variant: "contained",
         color: "secondary",
         textTransform: "capitalize",
-        onClick: ()=>{
-            console.log(`Unhandled button click`)
+        onClick: () => {
+            console.log(`Unhandled button click`);
         }
     };
 
@@ -22,8 +22,9 @@ export default class MaterialBtn extends React.Component {
         textTransform: PropTypes.oneOf(["none", "uppercase", "lowercase", "capitalize"]),
         onClick: PropTypes.func,
         color: PropTypes.string,
-        startIcon:PropTypes.any,
-        endIcon:PropTypes.any
+        startIcon: PropTypes.any,
+        endIcon: PropTypes.any,
+        padding: PropTypes.number,
     };
 
 
@@ -63,7 +64,14 @@ export default class MaterialBtn extends React.Component {
                 ref={this.ref}
                 startIcon={startIcon}
                 endIcon={endIcon}
-                onClick={onClick}
+                onClick={
+                    e => {
+                        let propagate = onClick(e);
+
+                        if (propagate === true || propagate === undefined) e.stopPropagation();
+
+                    }
+                }
                 style={style}
                 color={color}
                 className={className}

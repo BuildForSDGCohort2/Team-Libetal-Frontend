@@ -13,7 +13,8 @@ export default class MaterialImage extends Component {
         alt: PropTypes.string,
         size:PropTypes.number,
         height:PropTypes.number,
-        width:PropTypes.number
+        width:PropTypes.number,
+        onClick:PropTypes.func,
     };
 
     static IMAGE_SMALL = 24;
@@ -29,7 +30,7 @@ export default class MaterialImage extends Component {
 
     render() {
 
-        let {src, alt, size, height, width} = this.props;
+        let {src, alt, size, height, width,onClick} = this.props;
 
         if (width !== undefined && height === undefined) {
             // noinspection JSSuspiciousNameCombination
@@ -49,6 +50,6 @@ export default class MaterialImage extends Component {
         }
 
 
-        return <img ref={this.imgRef} src={src} alt={alt} height={height} width={width}/>;
+        return <img ref={this.imgRef} src={src} alt={alt} height={height} width={width} onClick={onClick}/>;
     }
 }

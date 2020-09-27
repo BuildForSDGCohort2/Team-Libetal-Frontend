@@ -1,6 +1,8 @@
 import React from "react";
-import Row from "../../../widgets/Row";
-import Column from "../../../widgets/Column";
+import Row from "../../../widgets/grid/MaterialRow";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
+import Column from "../../../widgets/grid/MaterialCol";
+import MaterialCol from "../../../widgets/grid/MaterialCol";
 import Colors from "../../../Colors";
 import DashBoardActivity from "../DashBoardActivity";
 import Paper from "@material-ui/core/Paper";
@@ -20,6 +22,8 @@ import MaterialDivider from "../../../widgets/MaterialDivider";
 import MaterialBtn from "../../../widgets/MaterialBtn";
 import Checkbox from "@material-ui/core/Checkbox";
 import MaterialSelect from "../../../widgets/input/MaterialSelect";
+import GridItem from "../../../widgets/grid/GridItem";
+import MaterialIconButton from "../../../widgets/button/MaterialIconButton";
 
 export default class Issues extends DashBoardActivity {
 
@@ -60,6 +64,11 @@ export default class Issues extends DashBoardActivity {
                 content={"New Issue"}
                 color={Colors.green}
                 textColor={Colors.white}
+                onClick={
+                    e => {
+                        this.props.navigator("dashboard/issues/new");
+                    }
+                }
             />
         );
     }
@@ -181,7 +190,7 @@ export default class Issues extends DashBoardActivity {
             items.push(
                 <ListItem key={i++}>
                     <Row>
-                        <Column xs={1} alignContent={Flex.SPACE_BETWEEN}>
+                        <GridItem xs={1}>
                             <MaterialOptionsMenu
                                 id={`issue-${i}-options-menu`}
                                 controller={MaterialBtn}
@@ -201,42 +210,39 @@ export default class Issues extends DashBoardActivity {
                                     }
                                 ]}
                             />
-                        </Column>
-                        <Column xs={10}>
+                        </GridItem>
+                        <GridItem xs={11}>
                             <Row>
-                                <Column xs={10}>
-                                    <MaterialTextView
-                                        text={"This is a sample issue title, but should change depending on issue.title"}
-                                        textColor={color}
-                                    />
-                                </Column>
-                                <Column xs={2} alignItems={Flex.CENTER}>
-                                    <MaterialBtn
-                                        variant={"default"}
-                                        content={<MaterialIcon icon={"Favorite"} color={Colors.green} iconSize={18}/>}
-                                        style={{
-                                            padding: 4,
-                                            minWidth: 0,
-                                            minHeight: 0
-                                        }}
-                                        color={Colors.transparent}
-                                    />
-                                    <MaterialBtn
-                                        variant={"default"}
-                                        content={<MaterialIcon icon={"StarBorder"} color={Colors.green} iconSize={18}/>}
-                                        style={{
-                                            padding: 4,
-                                            minWidth: 0,
-                                            minHeight: 0
-                                        }}
-                                        color={Colors.transparent}
-                                    />
-                                </Column>
+                                <GridItem xs={10}>
+                                    <Column>
+                                        <MaterialTextView
+                                            text={"This is a sample issue title, but should change depending on issue.title"}
+                                            textColor={color}
+                                        />
+                                    </Column>
+                                </GridItem>
+                                <GridItem xs={2}>
+                                    <Column alignItems={Flex.END}>
+                                        <MaterialIconButton
+                                            color={Colors.transparent}
+                                            icon={"Favorite"}
+                                            iconColor={Colors.green}
+                                            iconSize={18}
+                                            buttonColor={Colors.transparent}
+                                        />
+                                        <MaterialIconButton
+                                            icon={"StarBorder"}
+                                            buttonColor={Colors.transparent}
+                                            iconSize={18}
+                                            iconColor={Colors.green}
+                                        />
+                                    </Column>
+                                </GridItem>
                             </Row>
                             <Row>
                                 {this.trendingIssueFooter}
                             </Row>
-                        </Column>
+                        </GridItem>
                     </Row>
                 </ListItem>
             );
@@ -262,7 +268,7 @@ export default class Issues extends DashBoardActivity {
         ];
 
         return (
-            <List style={{maxHeight: 600, minHeight: 400, overflowY: "auto"}}>
+            <List style={{height: 600, maxHeight: 600, minHeight: 400, overflowY: "auto"}}>
                 {listItems}
             </List>
         );
@@ -271,27 +277,33 @@ export default class Issues extends DashBoardActivity {
     get trendingView() {
         return (
             <Paper>
-                <Toolbar style={{backgroundColor: Colors.purple}}>
-                    <MaterialTextView
-                        text={"Trending"}
-                        textColor={Colors.white}
-                        variant={"h6"}
-                    />
-                    <Separator/>
-                    <MaterialOptionsMenu
-                        id={"trending-options"}
-                        controller={IconButton}
-                        controllerBody={
-                            <MaterialIcon
-                                icon={"MoreHoriz"}
-                                color={Colors.white}
-                            />
-                        }
-                        menuItems={this.state.trendingOptions}
-                    />
-                </Toolbar>
-                {this.trendingTabsView}
-                {this.trendingListView}
+                <Column>
+                    <Toolbar style={{backgroundColor: Colors.purple, width: "inherit"}}>
+
+                        <MaterialTextView
+                            text={"Trending"}
+                            textColor={Colors.white}
+                            variant={"h6"}
+                        />
+                        <Separator/>
+                        <MaterialOptionsMenu
+                            id={"trending-options"}
+                            controller={IconButton}
+                            controllerBody={
+                                <MaterialIcon
+                                    icon={"MoreHoriz"}
+                                    color={Colors.white}
+                                />
+                            }
+                            menuItems={this.state.trendingOptions}
+                        />
+
+                    </Toolbar>
+                    {this.trendingTabsView}
+                    <GridItem xs={12}>
+                        {this.trendingListView}
+                    </GridItem>
+                </Column>
             </Paper>
         );
     }
@@ -381,14 +393,14 @@ export default class Issues extends DashBoardActivity {
 
     get paginationControllerView() {
         return (
-            <Row alignItems={Flex.CENTER} justify={Flex.END}>
-                <Column flexGrow={1}>
+            <MaterialRow alignItems={Flex.CENTER} justify={Flex.END}>
+                <GridItem flexGrow={1}>
                     {this.paginationSelect}
-                </Column>
-                <Column flexGrow={3}>
+                </GridItem>
+                <GridItem flexGrow={3}>
                     {this.paginationController}
-                </Column>
-            </Row>
+                </GridItem>
+            </MaterialRow>
         );
     }
 
@@ -441,11 +453,11 @@ export default class Issues extends DashBoardActivity {
         let divider;
 
         if (i < size) divider =
-            <Column><MaterialDivider height={18} orientation={MaterialDivider.VERTICAL}/></Column>;
+            <GridItem><Row><MaterialDivider height={18} orientation={MaterialDivider.VERTICAL}/></Row></GridItem>;
 
         return (
             <Row justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER} spacing={1}>
-                <Column>{text}</Column>
+                <GridItem>{text}</GridItem>
                 {divider}
             </Row>
         );
@@ -488,108 +500,112 @@ export default class Issues extends DashBoardActivity {
 
         return (
             <ListItem key={i} style={{minWidth: "100%"}}>
-                <Column xs={12}>
-                    <Row>
-                        <Column xs={1} alignContent={Flex.SPACE_BETWEEN}>
-                            <Row justify={Flex.CENTER}>
-                                <MaterialOptionsMenu
-                                    id={`issue-${i}-options-menu`}
-                                    controller={MaterialBtn}
-                                    header={type}
-                                    controllerProps={
-                                        {
-                                            style: {
-                                                minWidth: 0,
-                                                minHeight: 0,
-                                                paddingTop: 2,
-                                                paddingBottom: 2,
-                                                paddingLeft: 8,
-                                                paddingRight: 8
-                                            },
-                                            content: type,
-                                            color: color,
-                                            textColor: Colors.white
+                <Column>
+                    <Row alignItems={Flex.STRETCH}>
+                        <GridItem xs={1}>
+                            <Column height={"100%"} justify={Flex.SPACE_BETWEEN}>
+                                <Row>
+                                    <MaterialOptionsMenu
+                                        id={`issue-${i}-options-menu`}
+                                        controller={MaterialBtn}
+                                        header={type}
+                                        controllerProps={
+                                            {
+                                                style: {
+                                                    minWidth: 0,
+                                                    minHeight: 0,
+                                                    paddingTop: 2,
+                                                    paddingBottom: 2,
+                                                    paddingLeft: 8,
+                                                    paddingRight: 8
+                                                },
+                                                content: type,
+                                                color: color,
+                                                textColor: Colors.white
+                                            }
                                         }
-                                    }
-                                    menuItems={[
-                                        {
-                                            key: 0,
-                                            title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
-                                        }
-                                    ]}
-                                />
-                            </Row>
-                            <Row justify={Flex.END} alignItems={Flex.END}>
-                                <Checkbox style={{color: color, padding: 0, margin: 0, marginBottom: 0}}/>
-                            </Row>
-                        </Column>
-                        <Column xs={11}>
-                            <Row>
-                                <Column xs={8}>
-                                    <MaterialTextView
-                                        text={title}
-                                        textColor={Colors.orange}
+                                        menuItems={[
+                                            {
+                                                key: 0,
+                                                title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
+                                            }
+                                        ]}
                                     />
-                                </Column>
-                                <Column xs={4}>
-                                    <MaterialBtn
-                                        variant={"contained"}
-                                        content={"Tackle | Finance"}
-                                        startIcon={
-                                            <MaterialIcon
-                                                icon={"AccountTree"}
-                                                iconSize={18}
-                                                color={Colors.white}
-                                            />
-                                        }
-                                        color={color}
-                                        textColor={Colors.white}
-                                        style={{
-                                            padding: 0,
-                                            paddingLeft: 6,
-                                            paddingRight: 6
-                                        }}
-                                    />
-                                    <MaterialBtn
-                                        variant={"text"}
-                                        content={"100+"}
-                                        startIcon={
-                                            <MaterialIcon
-                                                icon={"AttachFile"}
-                                                iconSize={18}
-                                                color={color}
-                                            />
-                                        }
-                                        style={{
-                                            padding: 0
-                                        }}
-                                    />
+                                </Row>
+                                <Row justify={Flex.END}>
+                                    <Checkbox style={{color: color, padding: 0, margin: 0, marginBottom: 0}}/>
+                                </Row>
+                            </Column>
+                        </GridItem>
+                        <GridItem xs={11}>
+                            <Column>
+                                <Row>
+                                    <GridItem xs={8}>
+                                        <MaterialTextView
+                                            text={title}
+                                            textColor={Colors.orange}
+                                        />
+                                    </GridItem>
+                                    <GridItem xs={4}>
+                                        <MaterialBtn
+                                            variant={"contained"}
+                                            content={"Tackle | Finance"}
+                                            startIcon={
+                                                <MaterialIcon
+                                                    icon={"AccountTree"}
+                                                    iconSize={18}
+                                                    color={Colors.white}
+                                                />
+                                            }
+                                            color={color}
+                                            textColor={Colors.white}
+                                            style={{
+                                                padding: 0,
+                                                paddingLeft: 6,
+                                                paddingRight: 6
+                                            }}
+                                        />
+                                        <MaterialBtn
+                                            variant={"text"}
+                                            content={"100+"}
+                                            startIcon={
+                                                <MaterialIcon
+                                                    icon={"AttachFile"}
+                                                    iconSize={18}
+                                                    color={color}
+                                                />
+                                            }
+                                            style={{
+                                                padding: 0
+                                            }}
+                                        />
 
-                                    <MaterialBtn
-                                        variant={"text"}
-                                        content={"100+"}
-                                        startIcon={
-                                            <MaterialIcon
-                                                icon={"Chat"}
-                                                iconSize={18}
-                                                color={color}
-                                            />
-                                        }
-                                        style={{
-                                            padding: 0
-                                        }}
+                                        <MaterialBtn
+                                            variant={"text"}
+                                            content={"100+"}
+                                            startIcon={
+                                                <MaterialIcon
+                                                    icon={"Chat"}
+                                                    iconSize={18}
+                                                    color={color}
+                                                />
+                                            }
+                                            style={{
+                                                padding: 0
+                                            }}
+                                        />
+                                    </GridItem>
+                                </Row>
+                                <Row alignItems={Flex.END}>
+                                    {this.prepIssueFooter(issue)}
+                                    <Separator/>
+                                    <MaterialTextView
+                                        text={"20/12/2020"}
+                                        fontSize={12}
                                     />
-                                </Column>
-                            </Row>
-                            <Row alignItems={Flex.END}>
-                                {this.prepIssueFooter(issue)}
-                                <Separator/>
-                                <MaterialTextView
-                                    text={"20/12/2020"}
-                                    fontSize={12}
-                                />
-                            </Row>
-                        </Column>
+                                </Row>
+                            </Column>
+                        </GridItem>
                     </Row>
                     <MaterialDivider/>
                 </Column>
@@ -621,7 +637,7 @@ export default class Issues extends DashBoardActivity {
 
     get issuesListView() {
         return (
-            <List style={{minWidth: "100%", minHeight: 100, maxHeight: 600, overflowY: "auto"}}>
+            <List style={{minHeight: 100, maxHeight: 600, overflowY: "auto"}}>
                 {this.issueItems}
             </List>
 
@@ -630,77 +646,80 @@ export default class Issues extends DashBoardActivity {
 
     get body() {
         return (
-            <Row>
-                <Column xs={12} xm={8} lg={8} alignItems={Flex.CENTER}>
-                    <Row>
-                        <Row alignItems={Flex.CENTER}>
-                            {this.issuesFilters}
-                            <Separator/>
-                            {this.issuesCurrentFiltersView}
-                            <Separator/>
-                            <MaterialOptionsMenu
-                                id={"filter-options"}
-                                menuItems={[
+            <MaterialRow>
+                <GridItem xs={12} xm={8} lg={8} paddingLR={6}>
+                    <MaterialCol alignItems={Flex.CENTER}>
+                        <Row>
+                            <Row alignItems={Flex.CENTER}>
+                                {this.issuesFilters}
+                                <Separator/>
+                                {this.issuesCurrentFiltersView}
+                                <Separator/>
+                                <MaterialOptionsMenu
+                                    id={"filter-options"}
+                                    menuItems={[
+                                        {
+                                            key: 0,
+                                            title: "Clear All"
+                                        }
+                                    ]}
+                                    controller={IconButton}
+                                    controllerBody={<MaterialIcon icon={"FilterList"} iconSize={18}/>}
+                                    controllerProps={{style: {padding: 8}}}
+                                    onMenuItemClick={(itemId, menu) => {
+                                        menu.close();
+                                        switch (itemId) {
+                                            case 0:
+                                                this.issuesCurrentFilters = [];
+                                        }
+                                    }}
+                                />
+                                <Separator/>
+                            </Row>
+                        </Row>
+                        <Row style={{marginTop: 8}} justify={Flex.CENTER} alignItems={Flex.CENTER}>
+                            <Checkbox/>
+                            <MaterialSelect
+                                value={0}
+                                color={"secondary"}
+                                style={{marginTop: 0}}
+                                selectionItems={[
                                     {
                                         key: 0,
-                                        title: "Clear All"
+                                        value: "Action"
+                                    },
+                                    {
+                                        key: 1,
+                                        value: "Save"
+                                    },
+                                    {
+                                        key: 2,
+                                        value: "Favorite"
                                     }
                                 ]}
-                                controller={IconButton}
-                                controllerBody={<MaterialIcon icon={"FilterList"} iconSize={18}/>}
-                                controllerProps={{style: {padding: 8}}}
-                                onMenuItemClick={(itemId, menu) => {
-                                    menu.close();
-                                    switch (itemId) {
-                                        case 0:
-                                            this.issuesCurrentFilters = [];
-                                    }
-                                }}
                             />
                             <Separator/>
+                            <MaterialTextView text={`Found 1000`} fontSize={12}/>
+                            <MaterialTextView text={`Showing 100-110`} fontSize={12}/>
+                            <Separator/>
+                            <GridItem xs={12} lg={4}>
+                                {this.paginationControllerView}
+                            </GridItem>
+
                         </Row>
-                    </Row>
-                    <Row style={{marginTop: 8}} justify={Flex.CENTER} alignItems={Flex.CENTER}>
-                        <Checkbox/>
-                        <MaterialSelect
-                            value={0}
-                            color={"secondary"}
-                            style={{marginTop: 0}}
-                            selectionItems={[
-                                {
-                                    key: 0,
-                                    value: "Action"
-                                },
-                                {
-                                    key: 1,
-                                    value: "Save"
-                                },
-                                {
-                                    key: 2,
-                                    value: "Favorite"
-                                }
-                            ]}
-                        />
-                        <Separator/>
-                        <MaterialTextView text={`Found 1000`} fontSize={12}/>
-                        <MaterialTextView text={`Showing 100-110`} fontSize={12}/>
-                        <Separator/>
-                        <Column xs={12} lg={4}>
-                            {this.paginationControllerView}
-                        </Column>
-                    </Row>
-                    {this.issuesListView}
-                    <Row>
-                        <Separator/>
-                        <Column xs={12} lg={4}>
-                            {this.paginationControllerView}
-                        </Column>
-                    </Row>
-                </Column>
-                <Column xs={12} xm={4} lg={4} style={{paddingLeft: 8}}>
+                        {this.issuesListView}
+                        <Row>
+                            <Separator/>
+                            <Column xs={12} lg={4}>
+                                {this.paginationControllerView}
+                            </Column>
+                        </Row>
+                    </MaterialCol>
+                </GridItem>
+                <GridItem xs={12} xm={4} lg={4} paddingLR={6}>
                     {this.trendingView}
-                </Column>
-            </Row>
+                </GridItem>
+            </MaterialRow>
         );
     }
 

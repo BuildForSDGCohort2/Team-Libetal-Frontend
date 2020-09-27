@@ -11,13 +11,6 @@ import MaterialTextView from "../../../widgets/MaterialTextView";
 import Doughnut from "../../../widgets/graphs/Doughnut";
 import BarGraph from "../../../widgets/graphs/Bar";
 import Radar from "../../../widgets/graphs/Radar";
-import ChartJs from "chart.js";
-
-let color = ChartJs.helpers.color;
-
-let randomScalingFactor = function () {
-    return Math.round(Math.random() * 100);
-};
 
 export default class AppsOsDistributionInsights extends React.Component {
 
@@ -262,15 +255,15 @@ export default class AppsOsDistributionInsights extends React.Component {
         let {
             dataset: {
                 keys,
-                values,
-                labels
+                values/*,
+                labels*/
             },
             currentInsightTab
         } = this.state;
 
         let os = keys[currentInsightTab];
 
-        let {downloads, purchases, users} = values[os];
+        let {downloads/*, purchases, users*/} = values[os];
 
 
         let lS = [...Os.TYPES.desktop];
@@ -440,7 +433,7 @@ export default class AppsOsDistributionInsights extends React.Component {
         return (
             <>
                 {this.insightTabs}
-                <Paper style={{padding: 2, backgroundColor: Colors["white"]}}>
+                <Paper style={{padding: 2}}>
                     <Row>
                         {this.insightHeader}
                         {this.insightBody}

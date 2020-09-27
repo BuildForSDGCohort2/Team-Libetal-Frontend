@@ -23,11 +23,15 @@ export default class MaterialTextField extends Component {
         value: PropTypes.any,
         defaultRows: PropTypes.number,
         maxRows: PropTypes.number,
-        helperText: PropTypes.any
+        helperText: PropTypes.any,
+        InputLabelProps:PropTypes.any
     };
 
     static defaultProps = {
-        color: "secondary"
+        color: "secondary",
+        onClick(){
+
+        }
     };
 
     constructor(props) {
@@ -73,7 +77,14 @@ export default class MaterialTextField extends Component {
                     onChange={this.performOnChange}
                     color={color}
                     variant={variant}
-                    onClick={onClick}
+                    onClick={
+                        e=>{
+                            let propagate = onClick(e)
+
+                            if(propagate|| propagate === undefined) e.stopPropagation()
+
+                        }
+                    }
                     helperText={helperText}
                     label={labelText}
                     select
@@ -120,7 +131,14 @@ export default class MaterialTextField extends Component {
             <TextField
                 color={color}
                 variant={variant}
-                onClick={onClick}
+                onClick={
+                    e=>{
+                        let propagate = onClick(e)
+
+                        if(propagate|| propagate === undefined) e.stopPropagation()
+
+                    }
+                }
                 helperText={helperText}
                 label={label}
                 placeholder={placeholder}
@@ -176,7 +194,14 @@ export default class MaterialTextField extends Component {
                 color={color}
                 variant={variant}
                 helperText={helperText}
-                onClick={onClick}
+                onClick={
+                    e=>{
+                        let propagate = onClick(e)
+
+                        if(propagate|| propagate === undefined) e.stopPropagation()
+
+                    }
+                }
                 label={label}
                 placeholder={placeholder}
                 fullWidth={fullWidth}
@@ -223,7 +248,14 @@ export default class MaterialTextField extends Component {
                 onChange={this.performOnChange}
                 color={color}
                 variant={variant}
-                onClick={onClick}
+                onClick={
+                    e=>{
+                        let propagate = onClick(e)
+
+                        if(propagate|| propagate === undefined) e.stopPropagation()
+
+                    }
+                }
                 label={label}
                 helperText={helperText}
                 multiline={multiline}
@@ -268,6 +300,7 @@ export default class MaterialTextField extends Component {
             startIcon,
             children,
             value,
+            InputLabelProps,
             InputProps,
             ...props
         } = this.props;

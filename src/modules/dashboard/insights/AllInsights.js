@@ -129,14 +129,8 @@ export default class AllInsights extends React.Component {
         let textColor = Colors.white;
 
         return (
-            <div style={{maxWidth: 400, minWidth: 280}}>
-                <Paper elevation={6} style={{
-                    flexDirection: "column",
-                    display: "flex",
-                    flexGrow: 1,
-                    padding: 4,
-                    backgroundColor: color
-                }}>
+            <GridItem xs={12} sm={6} lg={3} paddingLR={4}>
+                <Paper elevation={6} style={{backgroundColor: color}}>
                     <Row justify={Flex.CENTER} style={{flexGrow: 2}}>
                         <Grid container direction={"column"} alignItems={Flex.CENTER}>
                             <div style={{display: "flex", flexGrow: 1}}/>
@@ -195,7 +189,7 @@ export default class AllInsights extends React.Component {
                         </Column>
                     </Row>
                 </Paper>
-            </div>
+            </GridItem>
         );
     }
 
@@ -229,34 +223,34 @@ export default class AllInsights extends React.Component {
 
         return (
             <>
-                <Row justify={Flex.SPACE_AROUND}>
+                <MaterialRow justify={Flex.SPACE_AROUND}>
                     {this.sampleTrendingItem("Libetal", "800k+", Colors.orange)}
-                    {this.sampleTrendingItem("Dukto", "200k+", Colors.red)}
+                    {this.sampleTrendingItem("Dukto", "200k+", Colors.green)}
                     {this.sampleTrendingItem("Luro", "12+", Colors.pink)}
                     {this.sampleTrendingItem("FlexTron", "40k+", Colors.blue)}
-                </Row>
+                </MaterialRow>
                 <MaterialDivider color={Colors.transparent} spacing={12} orientation={MaterialDivider.HORIZONTAL}/>
-                <Row>
+                <MaterialRow paddingLeft={8}>
                     <MaterialTextView text={"Accounts"} variant={"h5"}/>
-                </Row>
+                </MaterialRow>
                 <MaterialRow justify={Flex.SPACE_EVENLY}>
-                    <GridItem xs={xs} lg={pinState ? 6 : 5} style={{padding:4}}>
+                    <GridItem xs={xs} lg={pinState ? 6 : 5} paddingLR={2}>
                         <AppsSalesInsights apps={this.state.apps}/>
                     </GridItem>
-                    <GridItem xs={xs} lg={pinState ? 6 : 4} style={{padding:4}}>
+                    <GridItem xs={xs} lg={pinState ? 6 : 4} paddingLR={2}>
                         <AppsOsDistributionInsights/>
                     </GridItem>
-                    <GridItem xs={12} lg={pinState ? 6 : 3} style={{padding:4}}>
+                    <GridItem xs={12} lg={pinState ? 6 : 3} paddingLR={2}>
                         {this.usersEarningsInsights}
                     </GridItem>
-                    <GridItem xs={12} xm={6} lg={6} style={{padding:4}}>
-                        <MaterialCol >
+                    <GridItem xs={12} xm={6} lg={6} paddingLR={2}>
+                        <MaterialCol>
                             <MaterialTextView text={"Projects Insights"} variant={"h5"}/>
                             <MaterialTextView text={"Commits"} variant={"h6"}/>
                         </MaterialCol>
                         <CommitsInsights/>
                     </GridItem>
-                    <GridItem xs={12} xm={6} lg={6}>
+                    <GridItem xs={12} xm={6} lg={6} paddingLR={2}>
                         <Row>
                             <MaterialTextView text={"Issues"} variant={"h6"}/>
                         </Row>
