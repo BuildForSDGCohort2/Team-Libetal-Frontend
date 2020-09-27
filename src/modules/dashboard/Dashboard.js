@@ -3,17 +3,9 @@ import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import {Toolbar} from "@material-ui/core";
 import MaterialImage from "../../widgets/MaterialImage";
-import Separator from "../../widgets/separator";
 import MaterialBtn from "../../widgets/MaterialBtn";
 
-import {
-    AccountCircle as AccountCircleIcon,
-    Apps as AppsIcon,
-    MoreVert as MoreVertIcon,
-    Notifications as NotificationsIcon,
-    Search as SearchIcon,
-    Settings as SettingsIcon
-} from "@material-ui/icons";
+import {AccountCircle as AccountCircleIcon, MoreVert as MoreVertIcon} from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import MaterialTextView from "../../widgets/MaterialTextView";
@@ -33,10 +25,10 @@ import Issues from "./issues/Issues";
 import MaterialOptionsMenu from "../../widgets/menu/MaterialOptionsMenu";
 import MaterialIcon from "../../widgets/MaterialIcon";
 import MaterialIconButton from "../../widgets/button/MaterialIconButton";
-import MaterialCol from "../../widgets/grid/MaterialCol";
 import MaterialRow from "../../widgets/grid/MaterialRow";
 import GridItem from "../../widgets/grid/GridItem";
 import AccessibilityControl from "../../widgets/AccessibilityControl";
+import Teams from "./teams/Teams";
 
 
 const dashBoardTheme = createMuiTheme({
@@ -206,13 +198,13 @@ export default class Dashboard extends Component {
 
                         if (curr === "Light") {
                             Settings.theme = "Dark";
-                        }else Settings.theme ="Light"
+                        } else Settings.theme = "Light";
 
                         if (style === "light") {
                             Settings.style = "dark";
-                        }else Settings.style ="light"
+                        } else Settings.style = "light";
 
-                        console.log(Settings.theme)
+                        console.log(Settings.theme);
 
                         this.forceUpdate();
                     }
@@ -225,77 +217,88 @@ export default class Dashboard extends Component {
         return (
             <AppBar position={"static"} className={this.props.classes.clippingDrawerAppBar}>
                 <Toolbar>
-                    <MaterialImage
-                        src={"/images/logo.png"}
-                        alt={"Logo"}
-                        size={40}
-                    />
-                    <Separator/>
-                    <nav>
-                        <StyledTabs
-                            value={this.state.currentTab}
-                            fullwidth={"true"}
-                            onChange={(e, i) => {
-                                this.setState(prevState => ({currentTab: i}));
-                            }}
-                        >
-                            {
-                                this.state.dashBoardSearchValues.map(({id, name}, i) => (
-                                        <StyledTab key={i} label={name}/>
-                                    )
-                                )
-                            }
-                        </StyledTabs>
-                    </nav>
-                    <Separator/>
-                    <Paper>
-                        <Row alignItems={Flex.CENTER}>
-                            <MaterialSelect
-                                style={{position: "relative", marginTop: 6, marginLeft: 6}}
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={this.state.dashBoardSearchKey}
-                                onChange={this.handleDashboardSearchChange}
-                                renderValue={selected => (this.dashBoardSearchValue)}
-                                selectionItems={
-                                    this.state.dashBoardSearchValues.map(({id, name}, i) => (
-                                        {
-                                            key: id,
-                                            value: name
-                                        }
-                                    ))}
+                    <MaterialRow alignItems={Flex.CENTER} paddingTB={4}>
+                        <GridItem xs={2} sm={2} lg={1}>
+                            <MaterialImage
+                                src={"/images/logo.png"}
+                                alt={"Logo"}
+                                size={40}
+                                onClick={
+                                    e => {
+                                        this.props.navigator("home");
+                                    }
+                                }
                             />
-                            <MaterialDivider orientation={"vertical"} height={24} spacing={4}/>
-                            <InputBase
-                                style={{marginTop: 6}}
-                                placeholder={"Search"}
-                            />
-                            <IconButton type="submit" aria-label="search">
-                                <SearchIcon/>
-                            </IconButton>
-                        </Row>
-                    </Paper>
-                    <GridItem xs={12} lg={3}>
-                        <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
-                            {<AccessibilityControl componentInstance={this}/>}
-                            <MaterialIconButton
-                                icon={"Apps"}
-                            />
-                            <MaterialIconButton
-                                icon={"Settings"}
-                            />
-                            <MaterialIconButton
-                                icon={"Notifications"}
-                            />
-                            <MaterialBtn
-                                color={"primary"}
-                                variant={"contained"}
-                                startIcon={this.userAvatar}
-                                content={this.toolBarBtnContent}
-                                endIcon={<MoreVertIcon/>}
-                            />
-                        </MaterialRow>
-                    </GridItem>
+                        </GridItem>
+                        <GridItem xs={10} sm={12} lg={4}>
+                            <nav>
+                                <StyledTabs
+                                    value={this.state.currentTab}
+                                    fullwidth={"true"}
+                                    onChange={(e, i) => {
+                                        this.setState(prevState => ({currentTab: i}));
+                                    }}
+                                >
+                                    {
+                                        this.state.dashBoardSearchValues.map(({id, name}, i) => (
+                                                <StyledTab key={i} label={name}/>
+                                            )
+                                        )
+                                    }
+                                </StyledTabs>
+                            </nav>
+                        </GridItem>
+                        <GridItem xs={12} sm={12} lg={4}>
+                            <Paper>
+                                <MaterialRow alignItems={Flex.CENTER} marginBottom={4} paddingLR={4} height={42}>
+                                    <MaterialSelect
+                                        style={{position: "relative", marginTop: 0, marginLeft: 6}}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={this.state.dashBoardSearchKey}
+                                        onChange={this.handleDashboardSearchChange}
+                                        renderValue={selected => (this.dashBoardSearchValue)}
+                                        selectionItems={
+                                            this.state.dashBoardSearchValues.map(({id, name}, i) => (
+                                                {
+                                                    key: id,
+                                                    value: name
+                                                }
+                                            ))}
+                                    />
+                                    <MaterialDivider orientation={"vertical"} height={24} spacing={4}/>
+                                    <InputBase
+                                        style={{flexGrow: 1}}
+                                        placeholder={"Search"}
+                                    />
+                                    <MaterialIconButton
+                                        icon={"Search"}
+                                    />
+                                </MaterialRow>
+                            </Paper>
+                        </GridItem>
+                        <GridItem xs={12} sm={12} lg={3}>
+                            <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                                {<AccessibilityControl componentInstance={this}/>}
+                                <MaterialIconButton
+                                    icon={"Apps"}
+                                />
+                                <MaterialIconButton
+                                    icon={"Settings"}
+                                />
+                                <MaterialIconButton
+                                    icon={"Notifications"}
+                                />
+                                <MaterialBtn
+                                    color={"primary"}
+                                    variant={"contained"}
+                                    startIcon={this.userAvatar}
+                                    content={this.toolBarBtnContent}
+                                    endIcon={<MoreVertIcon/>}
+                                />
+                            </MaterialRow>
+                        </GridItem>
+                    </MaterialRow>
                 </Toolbar>
             </AppBar>
         );
@@ -338,18 +341,6 @@ export default class Dashboard extends Component {
 
     }
 
-    get teams() {
-
-    }
-
-    get issues() {
-
-    }
-
-
-    get projects() {
-        return <Projects classes={this.props.classes} navigator={this.props.navigator}/>;
-    }
 
     /**TODO resolve url to use this currentBody*/
     resolveLocation() {
@@ -358,18 +349,21 @@ export default class Dashboard extends Component {
 
     get currentBody() {
 
+        let {
+            navigator
+        } = this.props;
+
         switch (this.state.currentTab) {
             case 0:
-                return this.projects;
+                return <Projects classes={this.props.classes} navigator={navigator}/>;
             case 1:
-                return <Issues/>;
+                return <Issues navigator={navigator}/>;
             case  2:
-                return this.teams;
-
+                return (<Teams navigator={navigator}/>);
             case 6:
-                return <Insights classes={this.props.classes}/>;
+                return <Insights classes={this.props.classes} navigator={navigator}/>;
             default:
-                return this.projects;
+                return <Projects classes={this.props.classes} navigator={navigator}/>;
         }
 
     }
@@ -380,7 +374,7 @@ export default class Dashboard extends Component {
         let {classes} = this.props;
 
         return (
-            <ThemeProvider theme={dashBoardTheme}>
+            <ThemeProvider theme={Settings.appTheme}>
                 <Row>
                     {this.navigation}
                     <main className={classes.content} style={{background: Settings.colorPrimary}}>

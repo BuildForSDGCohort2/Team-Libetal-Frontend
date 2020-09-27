@@ -12,7 +12,7 @@ export default class MaterialIconButton extends Component {
 
 
     static defaultProps = {
-        iconSize:24
+        iconSize: 24
     };
 
     static propTypes = {
@@ -21,7 +21,9 @@ export default class MaterialIconButton extends Component {
         iconSize: Types.number,
         buttonColor: Types.string,
         marginRight: Types.oneOfType([Types.number, Types.string]),
-        onClick:Types.func,
+        onClick: Types.func,
+        padding: Types.number,
+        style: Types.object
     };
 
     render() {
@@ -32,10 +34,17 @@ export default class MaterialIconButton extends Component {
             iconColor,
             buttonColor,
             marginRight,
-            onClick
+            padding,
+            onClick,
+            style
         } = this.props;
 
         this.style.marginRight = marginRight;
+
+        this.style ={
+            ...style,
+            ...this.style
+        }
 
         return (
             <MaterialBtn
@@ -48,6 +57,7 @@ export default class MaterialIconButton extends Component {
                         color={iconColor}
                     />
                 }
+                padding={padding}
                 color={buttonColor}
                 onClick={onClick}
 

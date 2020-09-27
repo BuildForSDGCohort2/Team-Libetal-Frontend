@@ -166,6 +166,21 @@ export default class UserAccountButton extends Component {
                                 </ListItemIcon>
                                 <TextView text={"Issues"}/>
                             </MenuItem>
+
+                            <MenuItem
+                                onClick={
+                                    e => {
+                                        this.props.navigator("dashboard/insights?projects=all");
+                                    }
+                                }
+                            >
+                                <ListItemIcon>
+                                    <MaterialIcon
+                                        icon={"TrendingUp"}
+                                    />
+                                </ListItemIcon>
+                                <TextView text={"Insights"}/>
+                            </MenuItem>
                         </Column>
                         <MaterialDivider height={100} orientation={MaterialDivider.VERTICAL}/>
                         <Column xs={4}>

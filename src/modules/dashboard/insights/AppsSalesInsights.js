@@ -18,6 +18,7 @@ import Flex from "../../../widgets/Flex";
 import Settings from "../../../utils/Settings";
 import AllAppsSettings from "./context_menues/AllAppsSettings";
 import MaterialRow from "../../../widgets/grid/MaterialRow";
+import MaterialCol from "../../../widgets/grid/MaterialCol";
 
 export default class AppsSalesInsights extends React.Component {
 
@@ -146,9 +147,9 @@ export default class AppsSalesInsights extends React.Component {
             return 1000;
         } else if (this.state.appInsightsOptionsVisibility.Downloads === true && this.state.appInsightsOptionsVisibility.Purchases === false) {
             return 100;
-        } else if(this.state.appInsightsOptionsVisibility.Purchases){
-            return 1000
-        }else {
+        } else if (this.state.appInsightsOptionsVisibility.Purchases) {
+            return 1000;
+        } else {
             return 1;
         }
     }
@@ -160,14 +161,14 @@ export default class AppsSalesInsights extends React.Component {
             let m = "";
 
 
-            let stepSize = this.stepSize
+            let stepSize = this.stepSize;
 
             if (stepSize === 1000) {
                 m = "k";
             } else if (stepSize === 100) {
                 m = "";
-                stepSize = 5
-            }else {
+                stepSize = 5;
+            } else {
 
             }
 
@@ -378,7 +379,7 @@ export default class AppsSalesInsights extends React.Component {
             <>
                 <LineChart
                     yAxisStepSize={this.stepSize}
-                    labels={this.state.appStatsDays.slice(...slice)}
+                    labels={this.state.appStatsDays.slice(slice[0], slice[1])}
                     showLegends={false}
                     showGridLines={false}
                     showXAxisLabel={false}
@@ -407,7 +408,7 @@ export default class AppsSalesInsights extends React.Component {
                                     data={insight || []}
                                     fillArea={false}
                                     hidden={!this.state.appInsightsOptionsVisibility[insightKey]}
-                                    type={insightKey ==="Downloads" ? "bar":"line"}
+                                    type={insightKey === "Downloads" ? "bar" : "line"}
                                 />
                             );
                         })
@@ -806,26 +807,27 @@ export default class AppsSalesInsights extends React.Component {
         return (
             <>
                 {this.appInsightsTabs}
-                <Paper style={{padding: 4}}>
-                    <MaterialRow>
-                        {this.appInsightsHeader}
-                        <MaterialDivider spacing={2} orientation={"horizontal"}/>
-                        {this.appInsightsBody}
-                        <MaterialDivider spacing={2} orientation={"horizontal"}/>
-                        <MaterialTextView text={"Software Insights"}/>
-                        <Row alignItems={Flex.END}>
-                            <MaterialTextView text={"Total Sales:"} variant={"body2"}/>
-                            <MaterialTextView text={`$${this.grossSales}`} variant={"body2"}/>
-                        </Row>
-                        <MaterialRow alignItems={Flex.END}>
-                            <MaterialTextView text={"Downloads Sales:"} variant={"body2"}/>
-                            <MaterialTextView text={`${this.totalDownloads}`}/>
-                            <MaterialIcon icon={"ExpandLess"} color={Settings.colorSuccess}/>
-                            <MaterialTextView text={`${this.downloadsChangePercent}%`}/>
+                <MaterialCol paddingLR={4}>
+                    <Paper>
+                        <MaterialRow paddingLR={4}>
+                            {this.appInsightsHeader}
+                            <MaterialDivider spacing={2} orientation={"horizontal"}/>
+                            {this.appInsightsBody}
+                            <MaterialDivider spacing={2} orientation={"horizontal"}/>
+                            <MaterialTextView text={"Software Insights"}/>
+                            <Row alignItems={Flex.END}>
+                                <MaterialTextView text={"Total Sales:"} variant={"body2"}/>
+                                <MaterialTextView text={`$${this.grossSales}`} variant={"body2"}/>
+                            </Row>
+                            <MaterialRow alignItems={Flex.END}>
+                                <MaterialTextView text={"Downloads Sales:"} variant={"body2"}/>
+                                <MaterialTextView text={`${this.totalDownloads}`}/>
+                                <MaterialIcon icon={"ExpandLess"} color={Settings.colorSuccess}/>
+                                <MaterialTextView text={`${this.downloadsChangePercent}%`}/>
+                            </MaterialRow>
                         </MaterialRow>
-                    </MaterialRow>
-                </Paper>
-
+                    </Paper>
+                </MaterialCol>
             </>
         );
     }

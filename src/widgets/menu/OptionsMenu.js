@@ -33,7 +33,22 @@ export default class OptionsMenu extends Component {
         menuItems:[]
     };
 
-    static propTypes = OptionsMenuPropsTypes;
+    static propTypes = {
+        onClick: PropTypes.func,
+        id: PropTypes.string.isRequired,
+        onMenuOpen: PropTypes.func,
+        onMenuClose: PropTypes.func,
+        onMenuItemClick: PropTypes.func,
+        menuItems: PropTypes.arrayOf(
+            PropTypes.shape(
+                {
+                    itemId: PropTypes.number,
+                    title: PropTypes.any
+                }
+            )
+        ).isRequired
+
+    };
 
     constructor(props) {
         super(props);

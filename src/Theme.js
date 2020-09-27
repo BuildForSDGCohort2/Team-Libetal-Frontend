@@ -3,67 +3,8 @@ import {createMuiTheme, makeStyles, ThemeProvider, useTheme} from "@material-ui/
 import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";
 import Settings from "./utils/Settings";
-import {orange} from "@material-ui/core/colors";
-
 
 const drawerWidth = 240;
-let colorPrimary = orange["500"];
-let textPrimary = "#FFFFFF";
-let colorSecondary = "";
-let textSecondary = "";
-
-const lTheme = createMuiTheme({
-    palette: {
-        primary: {
-            main: Settings.colorPrimary,
-            dark: Settings.colorPrimaryDark,
-            contrastText: Settings.textPrimary,
-            light: Settings.colorPrimaryLight
-        },
-        secondary: {
-            main: Settings.colorSecondary,
-            dark: Settings.colorSecondaryDark,
-            /**TODO eddit for hover states
-             light: "#FFFFFF",
-             dark: "#FFFFFF",*/
-            contrastText: Settings.textSecondary
-        },
-        background: {
-            default: Settings.colorPrimary,
-            paper: Settings.colorPrimary
-        }
-    }
-});
-
-const dTheme = createMuiTheme({
-    palette: {
-        type: "dark",
-        primary: {
-            main: "#202020",
-            dark: "#101010",
-            contrastText: "#FFFFFF",
-            light: Settings.colorPrimaryLight
-        },
-        secondary: {
-            main: Settings.colorSecondary,
-            dark: Settings.colorSecondaryDark,
-            /**TODO eddit for hover states
-             light: "#FFFFFF",
-             dark: "#FFFFFF",*/
-            contrastText: Settings.textSecondary
-        },
-        background: {
-            default: "#303030",
-            paper: "#303030"
-        },
-        text: {
-            primary: "#FFFFFF",
-            secondary: "rgba(255,255,255,.8)",
-            disabled: "rgba(255,255,255,.5)"
-        }
-    }
-});
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -208,14 +149,13 @@ export default function Theme({props, children}) {
     const classes = useStyles();
     const theme = useTheme();
 
+
     // THIS SHOULD BE STYLES appStyles
     let styles = Settings.style === "dark" ? darkTheme : lightTheme;
 
-    let t = Settings.palette === "dark" ? dTheme : lTheme;
-
     return (
         <ThemeProvider
-            theme={t}>
+            theme={Settings.appTheme}>
             {children({
                 classes,
                 /**@Depricated*/

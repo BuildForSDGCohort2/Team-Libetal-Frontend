@@ -3,14 +3,13 @@ import Column from "../../widgets/Column";
 import TextView from "../../widgets/MaterialTextView";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import Flex from "../../widgets/Flex";
-import {AppBar, IconButton, InputBase as Input, MenuItem, Paper, Select, Toolbar} from "@material-ui/core";
+import {AppBar, InputBase as Input, MenuItem, Paper, Select, Toolbar} from "@material-ui/core";
 import Colors from "../../Colors";
 import MaterialIconButton from "../../widgets/button/MaterialIconButton";
 import Settings from "../../utils/Settings";
 import MaterialTheme from "../../widgets/theming/MaterialTheme";
 import Footer from "../Footer";
 import Separator from "../../widgets/separator";
-import MaterialOptionsMenu from "../../widgets/menu/MaterialOptionsMenu";
 import MaterialIcon from "../../widgets/MaterialIcon";
 import UserAccountButton from "../users/widgets/UserAccountsButton";
 import MaterialDivider from "../../widgets/MaterialDivider";
@@ -20,6 +19,7 @@ import GridItem from "../../widgets/grid/GridItem";
 import PropTypes from "prop-types";
 import MaterialSelect from "../../widgets/input/MaterialSelect";
 import Col from "../../widgets/grid/MaterialCol";
+import MaterialCol from "../../widgets/grid/MaterialCol";
 import TabsLayout from "../../widgets/TabsLayout";
 import InputBase from "@material-ui/core/InputBase";
 import MaterialImageInput from "../../widgets/input/MaterialImageInput";
@@ -27,6 +27,10 @@ import MaterialTextField from "../../widgets/MaterialTextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import MaterialBtn from "../../widgets/MaterialBtn";
+import AccessibilityControl from "../../widgets/AccessibilityControl";
+import {ThemeProvider} from "@material-ui/styles";
+import MaterialFileInputBase from "../../widgets/input/file/MaterialFileInputBase";
+
 
 export default class CreateRepo extends Component {
 
@@ -43,9 +47,45 @@ export default class CreateRepo extends Component {
                 name: "Team 1"
             }
         ],
+        contributorRating: 0,
+        contributorRatings: [
+
+            {
+                title: "Novice"
+            }
+            , {
+                title: "Intermediate"
+            },
+            {
+                title: "Committed"
+            }
+            ,
+            {
+                title: "Proficient"
+            },
+            {
+                title: "Certified"
+            }
+        ],
         headerSearchSelectionItems: [
             "Projects",
             "Issues"
+        ],
+        currentLicense: 0,
+        licenses: [
+            {
+                name: "Custom Licensing"
+            },
+            {
+                name: "MIT"
+            },
+            {
+                name: "Libetal"
+            },
+            {
+                name: "Apache"
+            }
+
         ],
         currentCategory: 0,
         headerSearchKey: 0,
@@ -54,7 +94,9 @@ export default class CreateRepo extends Component {
             name: undefined,
             // should be user id
             creator: 1,
-            private: false
+            private: false,
+            // either a file or an id
+            license: undefined
         },
         currentPlatform: 0,
         projectsPlatforms: [
@@ -130,44 +172,6 @@ export default class CreateRepo extends Component {
         );
     }
 
-    get accessibilityAction() {
-
-
-        let old = <MaterialOptionsMenu
-            id={"accessibility-options"}
-            controller={IconButton}
-            controllerBody={
-                <MaterialIcon
-                    icon={"InvertColors"}
-                />
-            }
-        />;
-
-        return (
-            <MaterialIconButton
-                icon={"InvertColors"}
-                onClick={
-                    e => {
-                        let curr = Settings.theme;
-                        let style = Settings.style;
-
-                        if (curr === "Light") {
-                            Settings.theme = "Dark";
-                        } else Settings.theme = "Light";
-
-                        if (style === "light") {
-                            Settings.style = "dark";
-                        } else Settings.style = "light";
-
-                        console.log(Settings.theme);
-
-                        this.forceUpdate();
-                    }
-                }
-            />
-        );
-    }
-
     get appBar() {
         return (
             <AppBar position={"relative"} variant={"outlined"}>
@@ -215,7 +219,7 @@ export default class CreateRepo extends Component {
                         <MaterialIconButton
                             icon={"Notifications"}
                         />
-                        {this.accessibilityAction}
+                        {<AccessibilityControl componentInstance={this}/>}
                         {this.accountButton}
                     </Column>
                 </Toolbar>
@@ -301,6 +305,68 @@ export default class CreateRepo extends Component {
         });
     }
 
+    set projectLicense(value) {
+        this.setState(state => {
+
+            state.project.license = value;
+
+            return state;
+
+        });
+    }
+
+    get licensingInput() {
+        return (
+            <MaterialSelect
+                fullWidth
+                labelId={"licensing"}
+                labelText={"Licensing"}
+                startIcon={"Copyright"}
+                value={this.state.currentLicense}
+                selectionHeader={
+                    <Col>
+                        <Row alignItems={Flex.CENTER} paddingLR={4}>
+                            <MaterialFileInputBase
+                                ClearButton={MaterialIconButton}
+                                ClearButtonProps={{
+                                    icon:"Backspace"
+                                }}
+                                ActionButton={MaterialIconButton}
+                                ActionButtonButtonProps={{
+                                    icon:"Attachment"
+                                }}
+                                onChange={
+                                    files => this.projectLicense
+                                }
+                                placeholder={"Add licensing document"}
+                                accept={["docx", "pdf"]}/>
+                        </Row>
+                    </Col>
+                }
+                selectionItems={
+                    this.state.licenses.map(({name: license}, i) => ({
+                        value: license,
+                        key: i
+                    }))
+                }
+                onChange={
+                    /*TODO Callback Function named params referencing to avoid having the first
+                    * sample
+                    * if the name input matches the parent function param name then
+                    * it will be used here
+                    * (input) => this.setState({currentLicense:input.props.value})
+                    * (e,input) => this.setState({currentLicense:input.props.value})
+                    * */
+                    (e, input) => {
+                        if(input !== undefined){
+                            this.setState({currentLicense: input.props.value})
+                        }
+                    }
+                }
+            />
+        );
+    }
+
     get createForm() {
         return (
             <Paper style={{padding: 12}}>
@@ -326,13 +392,15 @@ export default class CreateRepo extends Component {
                 <Row justify={Flex.SPACE_EVENLY}>
                     <GridItem xs={12} sm={5} lg={4}>
                         <MaterialImageInput
-                            previewHeight={180}
+                            height={260}
+                            maxPreviewWidth={"80%"}
+                            maxPreviewHeight={200}
                             onChange={this.onChange}
                             placeholder={"Project Logo"}
                         />
                     </GridItem>
                     <GridItem xs={6}>
-                        <Col spacing={2} justify={Flex.SPACE_EVENLY} alignItems={Flex.STRETCH}>
+                        <Col justify={Flex.SPACE_EVENLY} alignItems={Flex.STRETCH}>
                             <GridItem>
                                 <MaterialTextField
                                     fullWidth
@@ -395,23 +463,6 @@ export default class CreateRepo extends Component {
                             </GridItem>
                             <GridItem>
                                 {this.projectCategorySelect}
-                            </GridItem>
-                            <GridItem>
-                                <Row alignItems={Flex.CENTER}>
-                                    <Checkbox checked={this.state.project.private} onClick={
-                                        e => {
-                                            this.setState(
-                                                state => {
-
-                                                    state.project.private = !state.project.private;
-
-                                                    return state;
-                                                }
-                                            );
-                                        }
-                                    }/>
-                                    <MaterialTextView text={"Make Repo private"} fontSize={12}/>
-                                </Row>
                             </GridItem>
                             <GridItem>
                                 <Row justify={Flex.SPACE_BETWEEN}>
@@ -512,9 +563,62 @@ export default class CreateRepo extends Component {
                                     </GridItem>
                                 </Row>
                             </GridItem>
+                            <MaterialDivider
+                                color={Colors.transparent}
+                                spacing={6}
+                            />
+                            <GridItem>
+                                <MaterialTextView
+                                    text={"Licensing & Contribution"}
+                                    textColor={Colors.blue}
+                                />
+                                {this.licensingInput}
+                                <Row alignItems={Flex.CENTER}>
+                                    <GridItem xs={6} lg={6}>
+                                        <Row alignItems={Flex.CENTER}>
+                                            <Checkbox checked={this.state.project.private} onClick={
+                                                e => {
+                                                    this.setState(
+                                                        state => {
+
+                                                            state.project.private = !state.project.private;
+
+                                                            return state;
+                                                        }
+                                                    );
+                                                }
+                                            }/>
+                                            <MaterialTextView text={"Make Repo private"} fontSize={12}/>
+                                        </Row>
+                                    </GridItem>
+                                    <GridItem xs={6} lg={5}>
+                                        <MaterialSelect
+                                            fullWidth
+                                            labelText={"Contributor Rating"}
+                                            labelId={"contributor-rating"}
+                                            value={this.state.contributorRating}
+                                            selectionItems={
+                                                this.state.contributorRatings.map(({title}, i) => ({
+                                                    key: i,
+                                                    value: title
+                                                }))
+                                            }
+
+                                            onChange={
+                                                (e,input)=>(this.setState({contributorRating:input.props.value}))
+                                            }
+                                        />
+                                    </GridItem>
+                                </Row>
+                                <Row>
+
+                                </Row>
+                            </GridItem>
                         </Col>
                     </GridItem>
+
                 </Row>
+
                 <MaterialDivider spacing={8}/>
                 <Row justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER}>
                     <GridItem>
@@ -554,6 +658,14 @@ export default class CreateRepo extends Component {
         );
     }
 
+    get createHelp() {
+        return (
+            <Row>
+
+            </Row>
+        );
+    }
+
     render() {
         let {
             location
@@ -569,39 +681,28 @@ export default class CreateRepo extends Component {
          * */
 
         return (
-            <React.Fragment>
-                <Column xs={12}>
+            <ThemeProvider theme={Settings.appTheme}>
+                <MaterialCol>
                     {this.appBar}
                     <MaterialDivider spacing={8} color={Colors.transparent}/>
                     <Row justify={Flex.SPACE_EVENLY}>
                         <GridItem xs={12} lg={7}>
                             {this.createForm}
+
                         </GridItem>
                         <GridItem xs={12} lg={4}>
-                            <MaterialTextView
-                                text={"Insights"}
-                                variant={"h4"}
-                            />
-
-
-
-
-
-                            {/**
-                             */}
-
-
+                            {this.createHelp}
                         </GridItem>
                     </Row>
-                </Column>
+                </MaterialCol>
                 <MaterialDivider
-                    spacing={12}
+                    spacing={6}
                     color={Colors.transparent}
-                    width={"80%"}
+                    width={"60%"}
                     orientation={MaterialDivider.HORIZONTAL}
                 />
                 <Footer navigator={this.props.navigator}/>
-            </React.Fragment>
+            </ThemeProvider>
         );
     }
 }
