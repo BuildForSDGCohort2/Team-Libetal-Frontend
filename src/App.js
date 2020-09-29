@@ -115,7 +115,9 @@ class AppComponent extends Component {
                                             component={
                                                 location => (
                                                     <Repo
+                                                        classes={classes}
                                                         location={location}
+                                                        navigator={navigateTo}
                                                     />
                                                 )
                                             }

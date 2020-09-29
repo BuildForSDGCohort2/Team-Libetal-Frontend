@@ -141,9 +141,6 @@ export default class MaterialDrawer extends Component {
         return (
             <Drawer
                 variant={variant}
-                style={{
-                    width: 1000
-                }}
                 //TODO: This has to change to provide for a more Design relative design
                 className={clsx(classes.drawer, {
                     [classes.drawerOpen]: isOpen,

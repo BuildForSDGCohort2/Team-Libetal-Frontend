@@ -25,6 +25,14 @@ export default class UserAccountButton extends Component {
         userDetails: PropTypes.object
     };
 
+    static defaultProps = {
+        userDetails: {
+            name: "Breimer",
+            email: "brymher@gmail.com",
+            img: "/images/logo.png"
+        }
+    };
+
     set anchorEl(value) {
         // avoid unnecessary changes
         this.setState(

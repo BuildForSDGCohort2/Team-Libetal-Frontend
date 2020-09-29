@@ -43,6 +43,8 @@ export default class Settings {
         }
     });
 
+
+
     static darkTheme = createMuiTheme({
         palette: {
             type: "dark",
@@ -77,6 +79,12 @@ export default class Settings {
         if (this.palette === "light") return this.lightTheme;
 
         return this.darkTheme;
+    }
+
+    static get appBackground (){
+        if (this.palette === "light") return Colors.white;
+
+        return "#303030";
     }
 
     static get isLight() {

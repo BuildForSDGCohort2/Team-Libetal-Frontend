@@ -3,6 +3,7 @@ import {withProps} from "recompose";
 import * as Icons from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
 import PropTypes from "prop-types";
+import MaterialIconButton from "./button/MaterialIconButton";
 
 export default class MaterialIcon extends React.Component {
 

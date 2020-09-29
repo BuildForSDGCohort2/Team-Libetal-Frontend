@@ -6,6 +6,8 @@ import GridItem from "../../grid/GridItem";
 import Colors from "../../../Colors";
 import MaterialIconButton from "../../button/MaterialIconButton";
 import MaterialTextField from "../../MaterialTextField";
+import MaterialCol from "../../grid/MaterialCol";
+import {Grid} from "@material-ui/core";
 
 export default class MaterialFileInputBase extends Component {
 
@@ -26,15 +28,26 @@ export default class MaterialFileInputBase extends Component {
             PropTypes.arrayOf(PropTypes.string),
             PropTypes.string
         ]),
+        helperText:PropTypes.string,
         onMount: PropTypes.func,
         onClick: PropTypes.func,
-        flexGrow: PropTypes.number
+        flexGrow: PropTypes.number,
+        actionSize: PropTypes.number,
+        inputSize: PropTypes.number,
+        clearSize: PropTypes.number,
+        inputStyle: PropTypes.object,
+        disabled:PropTypes.bool
 
     };
 
     static defaultProps = {
+        actionSize:1,
+        inputSize:9,
+        clearSize:1,
         style: {},
+        inputStyle:{},
         multiple: false,
+        disabled:false,
         onClick() {
             return true;
         },
@@ -76,11 +89,17 @@ export default class MaterialFileInputBase extends Component {
             onChange,
             multiple,
             accept,
+            actionSize,
+            inputSize,
+            clearSize,
+            inputStyle :{...inputStyle},
             style: {...style},
             onClick,
             ClearButton,
             ClearButtonProps = {},
             ActionButton,
+            disabled,
+            helperText,
             ActionButtonButtonProps = {},
             buttonStyle,
             fullWidth,
@@ -95,59 +114,80 @@ export default class MaterialFileInputBase extends Component {
             };
 
 
-        ClearButton = ClearButton !== undefined ? <ClearButton {...ClearButtonProps} onClick={defaultOnClick}/> :
-            <MaterialIconButton
-                icon={"Close"}
-                buttonColor={Colors.orange}
-                iconColor={Colors.white}
-                onClick={defaultOnClick}
-            />;
+        ClearButton = ClearButton !== undefined ?
+            (
+                <ClearButton {...ClearButtonProps} onClick={defaultOnClick}/>
+            ) :
+            (
+                <MaterialIconButton
+                    icon={"Close"}
+                    buttonColor={Colors.orange}
+                    iconColor={Colors.white}
+                    onClick={defaultOnClick}
+                    disabled={disabled}
+                />
+            );
 
-        ActionButton = ActionButton !== undefined ? <ActionButton
-            onClick={
-                e => {
-                    e.stopPropagation();
-                    this.ref.current.click();
-                }
-            }
-            {...ActionButtonButtonProps}  /> : undefined;
+        ClearButton = (
+             <Grid container xs={clearSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER} style={{overflow:"hidden"}}>
+                 {ClearButton}
+             </Grid>
+        );
+
+        ActionButton = ActionButton !== undefined ? (
+            <Grid container xs={actionSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER} style={{overflow:"hidden"}}>
+                <ActionButton
+                    onClick={
+                        e => {
+                            e.stopPropagation();
+                            this.ref.current.click();
+                        }
+                    }
+                    {...ActionButtonButtonProps}
+                    disabled={disabled}
+                />
+            </Grid>
+        ) : undefined;
+
+
+        inputStyle.overflow="hidden"
 
         return (
-            <MaterialRow justify={Flex.START} alignItems={Flex.CENTER}>
-                <GridItem flexGrow={1}>
+            <MaterialCol>
+                <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.END}>
                     {ActionButton}
-                </GridItem>
-                <GridItem xs={8}>
-                    <MaterialTextField
-                        inputRef={this.ref}
-                        type={"file"}
-                        fullWidth
-                        onChange={
-                            e => {
-                                let files = e.currentTarget.files;
-                                this.setState({files: files}, () => {
-                                    onChange(files, this);
-                                });
-                            }
-                        }
-                        onClick={
-                            e => {
-                                let propagate = onClick(e);
-
-                                if (propagate === true || propagate === undefined) {
-                                    e.stopPropagation();
+                    <Grid xs={inputSize} style={inputStyle}>
+                        <MaterialTextField
+                            inputRef={this.ref}
+                            type={"file"}
+                            fullWidth
+                            onChange={
+                                e => {
+                                    let files = e.currentTarget.files;
+                                    this.setState({files: files}, () => {
+                                        onChange(files, this);
+                                    });
                                 }
                             }
-                        }
-                        multiple={multiple}
-                        style={style}
-                        {...props}
-                    />
-                </GridItem>
-                <GridItem flexGrow={1}>
+                            onClick={
+                                e => {
+                                    let propagate = onClick(e);
+
+                                    if (propagate === true || propagate === undefined) {
+                                        e.stopPropagation();
+                                    }
+                                }
+                            }
+                            multiple={multiple}
+                            style={style}
+                            disabled={disabled}
+                            {...props}
+                        />
+                    </Grid>
                     {ClearButton}
-                </GridItem>
-            </MaterialRow>
+                </MaterialRow>
+                <MaterialRow>{helperText}</MaterialRow>
+            </MaterialCol>
         );
     }
 }

@@ -660,7 +660,6 @@ export default class AppsSalesInsights extends React.Component {
         return this.state.insightYears;
     }
 
-
     set insightYears(years) {
         this.setState({insightYears: years});
     }

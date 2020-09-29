@@ -45,7 +45,7 @@ export default class SimilarIssuesListView extends Component {
         } = this.props;
 
         return (
-            <List style={{height: height, overflowY: "auto", paddingLeft: 4, paddingRight: 4}}>
+            <List style={{height: height, overflowY: "auto", paddingLeft: 4, paddingRight: 4}} >
                 {this.issueItemsViews}
             </List>
         );

@@ -13,17 +13,13 @@ import MaterialDivider from "../../widgets/MaterialDivider";
 import Colors from "../../Colors";
 import Footer from "../Footer";
 import {Toolbar} from "@material-ui/core";
-import Button from "../../widgets/MaterialBtn";
 import IconButton from "../../widgets/button/MaterialIconButton";
-import {AccountCircle as AccountCircleIcon, MoreVert as MoreVertIcon} from "@material-ui/icons";
+import {AccountCircle as AccountCircleIcon} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
 import MaterialCol from "../../widgets/grid/MaterialCol";
-import MaterialRow from "../../widgets/grid/MaterialRow";
-import GridItem from "../../widgets/grid/GridItem";
 import AccessibilityControl from "../../widgets/AccessibilityControl";
-import styled from "@material-ui/core/styles/styled";
-
-
+import UserAccountButton from "../users/widgets/UserAccountsButton";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
 
 
 export default class About extends React.Component {
@@ -131,59 +127,41 @@ export default class About extends React.Component {
         let {blue_lighten_1, orange, orange_lighten_1, blue} = Colors;
 
         return (
-            <>
-                <Drawer
-                    variant={"permanent"}
-
-                    style={MaterialTheme[Settings.theme].Drawer.Permanent}>
+            <ThemeProvider theme={Settings.appTheme}>
+                <Drawer variant={"permanent"} style={{width: drawerWidth}}>
                     <MaterialCol justify={Flex.CENTER} alignContent={Flex.CENTER}
-                            style={{backgroundColor: Colors.orange, width: drawerWidth}}>
+                                 style={{backgroundColor: Colors.orange, width: drawerWidth}}>
                         <img
                             src={"/images/logo.png"} alt={"Libetal"}
                             width={216}/>
                     </MaterialCol>
-                    <MaterialCol >
-                            <TextView
-                                text={"About"}
-                                variant={"h4"}
-                            />
-                            <MaterialDivider width={"80%"}/>
-                            <TextView text={"About Us"}/>
-                            <TextView text={"Our goal"}/>
-                            <TextView text={"Projects & Contribution"} variant={"h6"}/>
-                            <TextView text={"Projects"}/>
-                            <TextView text={"Contributions"}/>
-                            <TextView text={"Financing & Returns"} variant={"h6"}/>
-                            <TextView text={"Financing"}/>
-                            <TextView text={"Returns"}/>
-                            <TextView text={"Terms & Condition"} variant={"h6"}/>
-                            <TextView text={"Licencing"}/>
-                            <TextView text={"Privacy Policy"}/>
-                            <TextView text={"Cookie Policy"}/>
-
+                    <MaterialCol>
+                        <TextView
+                            text={"About"}
+                            variant={"h4"}
+                        />
+                        <MaterialDivider width={"80%"}/>
+                        <TextView text={"About Us"}/>
+                        <TextView text={"Our goal"}/>
+                        <TextView text={"Projects & Contribution"} variant={"h6"}/>
+                        <TextView text={"Projects"}/>
+                        <TextView text={"Contributions"}/>
+                        <TextView text={"Financing & Returns"} variant={"h6"}/>
+                        <TextView text={"Financing"}/>
+                        <TextView text={"Returns"}/>
+                        <TextView text={"Terms & Condition"} variant={"h6"}/>
+                        <TextView text={"Licencing"}/>
+                        <TextView text={"Privacy Policy"}/>
+                        <TextView text={"Cookie Policy"}/>
                     </MaterialCol>
                     <Separator/>
                 </Drawer>
                 <div style={MaterialTheme[Settings.theme].Body.Drawer.Permanent}>
                     <Toolbar>
-                        <Separator/>
-                        <Button
-                            variant={"text"}
-                            content={"Dashboard"}
-                            onClick={
-                                e => {
-                                    navigator("dashboard");
-                                }
-                            }
-                        />
-                        <Button
-                            variant={"text"}
-                            content={"Projects"}
-                            onClick={
-                                e => {
-                                    navigator("dashboard/projects");
-                                }
-                            }
+                        <TextView
+                            text={"About Us"}
+                            variant={"h3"}
+                            textColor={orange}
                         />
                         <Separator/>
                         <Column spacing={1} xs={4}>
@@ -199,23 +177,19 @@ export default class About extends React.Component {
                                     iconColor={Colors.orange}
                                     buttonColor={Colors.white}
                                 />
-                                <Button
-                                    color={"primary"}
-                                    variant={"contained"}
-                                    startIcon={this.userAvatar}
-                                    content={this.toolBarBtnContent}
-                                    endIcon={<MoreVertIcon/>}
+                                <UserAccountButton
+                                    userDetails={{
+                                        name: "Breimer",
+                                        email: "brymher@gmail.com",
+                                        img: "/images/logo.png"
+                                    }}
+                                    navigator={this.props.navigator}
                                 />
                             </Row>
                         </Column>
                     </Toolbar>
                     <Row justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
                         <Column style={{paddingLeft: 12}} xs={12} lg={8}>
-                            <TextView
-                                text={"About"}
-                                variant={"h3"}
-                                textColor={orange}
-                            />
                             <TextView
                                 text={"Our goal"}
                                 variant={"h5"}
@@ -233,6 +207,9 @@ export default class About extends React.Component {
                                 gives you returns to be proud off Invest with your skill, finances or designs. Your
                                 contribution to a project here is not just a commit but an investment no matter how
                                 small it is it's worth something to the overal project.
+
+                                Give developers the ability to create robust but affordable software whilst gaining
+                                returns that can provide and sustain a leaving. <em>Give a hobby value.</em>
                             </Typography>
 
                             <TextView
@@ -262,7 +239,7 @@ export default class About extends React.Component {
                     </Row>
                     <Footer/>
                 </div>
-            </>
+            </ThemeProvider>
         );
     }
 }

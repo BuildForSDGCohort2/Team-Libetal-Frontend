@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 import Flex from "../Flex";
+import {Paper} from "@material-ui/core";
 
 export default class MaterialGridComponent extends Component {
 
@@ -72,6 +73,7 @@ export default class MaterialGridComponent extends Component {
             width = sWidth,
             minHeight = sMinHeight,
             theme,
+            color,
             spacing,
             maxHeight = sMaxHeight,
             maxWidth = sMaxWidth,
@@ -97,6 +99,7 @@ export default class MaterialGridComponent extends Component {
         return (
             <Grid
                 container
+                color={"secondary"}
                 justify={justify}
                 spacing={spacing}
                 alignContent={alignContent}

@@ -28,6 +28,7 @@ import TabsLayout from "../../widgets/TabsLayout";
 import Paper from "@material-ui/core/Paper";
 import MaterialOptionsMenu from "../../widgets/menu/MaterialOptionsMenu";
 import MaterialMenuItem from "../../widgets/menu/MaterialMenuItem";
+import MaterialCol from "../../widgets/grid/MaterialCol";
 
 
 const btnSuccess = createMuiTheme({
@@ -371,7 +372,7 @@ export default class Projects extends Component {
 
         while (i < count) {
             projectsItems.push(
-                <Column xs={12} lg={12} justify={Flex.CENTER} style={{marginBottom: 4, marginTop: 6}}>
+                <MaterialCol justify={Flex.CENTER} style={{marginBottom: 4, marginTop: 4}}>
                     <Row>
                         <Column xs={1} lg={1}>
                             <MaterialImage
@@ -388,6 +389,9 @@ export default class Projects extends Component {
                                     <MaterialTextView
                                         text={"This is a sample project description and is required soon to have more than this text here "}
                                         textColor={Colors.blue}
+                                        onClick={
+                                            e => this.props.navigator(`dashboard/projects/libetal`)
+                                        }
                                     />
                                 </Column>
                                 <MaterialIcon icon={"AttachFile"} iconSize={18}/>
@@ -425,7 +429,7 @@ export default class Projects extends Component {
                     {this.projectTechnologies()}
                     {this.projectFooter()}
                     <MaterialDivider width={"95%"}/>
-                </Column>
+                </MaterialCol>
             );
 
             i++;
@@ -442,7 +446,7 @@ export default class Projects extends Component {
                     this.projectsListItems.map(
                         view => {
                             return (
-                                <ListItem children={view}/>
+                                <ListItem children={view} component={"div"}/>
                             );
                         })
                 }
@@ -671,71 +675,73 @@ export default class Projects extends Component {
         } = this.props;
 
         return (
-            <Row className={classes.root}>
-                <Column xs={12}>
-                    <Row>
-                        <Grid container item xs={12} xm={8} lg={8} justify={Flex.CENTER}>
-                            <Row justify={Flex.CENTER} alignItems={Flex.CENTER} style={{paddingTop: 32}}>
-                                <MaterialSelect
-                                    style={{position: "relative", marginTop: 0, marginLeft: 6}}
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={this.state.searchSelect[this.state.currentSelectIndex].value}
-                                    renderValue={() => this.state.searchSelect[this.state.currentSelectIndex].value}
-                                    selectionItems={this.state.searchSelect}
-                                    onChange={
-                                        (e, b, c) => {
-                                            this.setState({currentSelectIndex: b.props.value});
-                                        }
-                                    }
-                                />
-                                <MaterialDivider height={24} orientation={MaterialDivider.VERTICAL} spacing={6}/>
-                                <InputBase
-                                    placeholder={"Search in{All:ProjectName}"}
-                                    style={{flexGrow: .8}}
-                                />
-                                <IconButton>
-                                    <MaterialIcon icon={"Search"}/>
-                                </IconButton>
-                                <Chip label={"by: @Chris"} color={"secondary"}/>
-                                <Chip label={"by: @Chris"} onDelete={() => {
-                                }}/>
-                                <IconButton style={{padding: 6, margin: 2}}>
-                                    <MaterialIcon icon={"Save"}/>
-                                </IconButton>
-                            </Row>
-                            <MaterialDivider width={"80%"} orientation={"horizontal"}/>
-                        </Grid>
-                        <Grid container item xs={12} xm={4} lg={4} justify={Flex.END} alignContent={Flex.CENTER}>
-                            <ThemeProvider
-                                theme={btnSuccess}
-                                children={
-                                    <MaterialBtn
-                                        variant={"contained"}
-                                        content={"CREATE PROJECT"}
-                                        onClick={
-                                            e => {
-                                                this.props.navigator("dashboard/projects/new")
+            <Paper className={classes.root} style={{borderRadius:0}}>
+                <Row>
+                    <Column xs={12}>
+                        <Row>
+                            <Grid container item xs={12} xm={8} lg={8} justify={Flex.CENTER}>
+                                <Row justify={Flex.CENTER} alignItems={Flex.CENTER} style={{paddingTop: 32}}>
+                                    <MaterialSelect
+                                        style={{position: "relative", marginTop: 0, marginLeft: 6}}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={this.state.searchSelect[this.state.currentSelectIndex].value}
+                                        renderValue={() => this.state.searchSelect[this.state.currentSelectIndex].value}
+                                        selectionItems={this.state.searchSelect}
+                                        onChange={
+                                            (e, b, c) => {
+                                                this.setState({currentSelectIndex: b.props.value});
                                             }
                                         }
                                     />
-                                }
-                            />
-                        </Grid>
-                    </Row>
-                </Column>
-                <Column xs={12}>
-                    <Row justify={Flex.SPACE_AROUND}>
-                        <Column xs={12} xm={7} lg={8}>
-                            {this.projectsView}
-                        </Column>
-                        <Column xs={12} xm={4} lg={4} style={{paddingLeft: 12}}>
-                            {this.trendingView}
-                        </Column>
-                    </Row>
-                    <Footer/>
-                </Column>
-            </Row>
+                                    <MaterialDivider height={24} orientation={MaterialDivider.VERTICAL} spacing={6}/>
+                                    <InputBase
+                                        placeholder={"Search in{All:ProjectName}"}
+                                        style={{flexGrow: .8}}
+                                    />
+                                    <IconButton>
+                                        <MaterialIcon icon={"Search"}/>
+                                    </IconButton>
+                                    <Chip label={"by: @Chris"} color={"secondary"}/>
+                                    <Chip label={"by: @Chris"} onDelete={() => {
+                                    }}/>
+                                    <IconButton style={{padding: 6, margin: 2}}>
+                                        <MaterialIcon icon={"Save"}/>
+                                    </IconButton>
+                                </Row>
+                                <MaterialDivider width={"80%"} orientation={"horizontal"}/>
+                            </Grid>
+                            <Grid container item xs={12} xm={4} lg={4} justify={Flex.END} alignContent={Flex.CENTER}>
+                                <ThemeProvider
+                                    theme={btnSuccess}
+                                    children={
+                                        <MaterialBtn
+                                            variant={"contained"}
+                                            content={"CREATE PROJECT"}
+                                            onClick={
+                                                e => {
+                                                    this.props.navigator("dashboard/projects/new")
+                                                }
+                                            }
+                                        />
+                                    }
+                                />
+                            </Grid>
+                        </Row>
+                    </Column>
+                    <Column xs={12}>
+                        <Row justify={Flex.SPACE_AROUND}>
+                            <Column xs={12} xm={7} lg={8}>
+                                {this.projectsView}
+                            </Column>
+                            <Column xs={12} xm={4} lg={4} style={{paddingLeft: 12}}>
+                                {this.trendingView}
+                            </Column>
+                        </Row>
+                        <Footer/>
+                    </Column>
+                </Row>
+            </Paper>
         );
     }
 }

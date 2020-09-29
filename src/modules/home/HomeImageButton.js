@@ -16,6 +16,8 @@ export default class HomeImageButton extends Component {
                         this.props.navigator("home");
                     }
                 }
+                height={80}
+                width={80}
                 src={"/images/logo.png"}
             />
         );

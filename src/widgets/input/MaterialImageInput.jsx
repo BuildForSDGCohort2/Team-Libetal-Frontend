@@ -130,7 +130,6 @@ export default class MaterialImageInput extends Component {
                                         this.input = input;
                                     }
                                 }
-                                style={{width: "80%"}}
                                 onChange={this.onChange}
                                 placeholder={placeholder} multiple={multiple}
                                 accept={["png", "jpg"]}

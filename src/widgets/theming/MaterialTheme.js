@@ -260,8 +260,7 @@ export default class MaterialTheme {
             },
             Drawer: {
                 Permanent: {
-                    marginLeft: 280,
-                    backgroundColor: MaterialTheme.Palette.Light.backgroundColorPrimary
+                    marginLeft: 280
                 },
                 AppBar: {
                     Fixed: {}

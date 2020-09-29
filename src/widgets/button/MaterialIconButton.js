@@ -4,6 +4,7 @@ import MaterialIcon from "../MaterialIcon";
 import Types from "prop-types";
 import MaterialTheme from "../theming/MaterialTheme";
 import Settings from "../../utils/Settings";
+import PropTypes from "prop-types";
 
 export default class MaterialIconButton extends Component {
 
@@ -16,14 +17,49 @@ export default class MaterialIconButton extends Component {
     };
 
     static propTypes = {
-        icon: Types.string,
+        icon: PropTypes.oneOf([
+            "Settings",
+            "Home",
+            "Notifications",
+            "Apps",
+            "Sort",
+            "Search",
+            "Copyright",
+            "Save",
+            "FilterList",
+            "AttachFile",
+            "StarBorder",
+            "FavoriteBorder",
+            "MoreVert",
+            "ExpandMore",
+            "ExpandLess",
+            "ChevronLeft",
+            "ChevronRight",
+            "MoreHoriz",
+            "AccountTree",
+            "RssFeed",
+            "Favorite",
+            "Chat",
+            "Accessibility",
+            "InvertColors",
+            "People",
+            "ExitToApp",
+            "BugReport",
+            "Close",
+            "Help",
+            "TrendingUp",
+            "TrendingDown",
+            "Done",
+            "ArrowDropDown",
+        ]).isRequired,
         iconColor: Types.string,
         iconSize: Types.number,
         buttonColor: Types.string,
         marginRight: Types.oneOfType([Types.number, Types.string]),
         onClick: Types.func,
         padding: Types.number,
-        style: Types.object
+        style: Types.object,
+        disabled: Types.bool,
     };
 
     render() {
@@ -36,6 +72,7 @@ export default class MaterialIconButton extends Component {
             marginRight,
             padding,
             onClick,
+            disabled,
             style
         } = this.props;
 
@@ -57,10 +94,10 @@ export default class MaterialIconButton extends Component {
                         color={iconColor}
                     />
                 }
+                disabled={disabled}
                 padding={padding}
                 color={buttonColor}
                 onClick={onClick}
-
             />
         );
     }

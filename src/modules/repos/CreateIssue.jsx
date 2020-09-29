@@ -16,7 +16,6 @@ import Flex from "../../widgets/Flex";
 import GridItem from "../../widgets/grid/GridItem";
 import InputBase from "@material-ui/core/InputBase";
 import Paper from "@material-ui/core/Paper";
-import SimilarIssuesListView from "../dashboard/issues/SimilarIssuesListView";
 import HomeImageButton from "../home/HomeImageButton";
 import MaterialTextView from "../../widgets/MaterialTextView";
 import Separator from "../../widgets/separator";
@@ -24,13 +23,15 @@ import CreateIssuesHelpSideBar from "./CreateIssuesHelpSideBar";
 import Footer from "../Footer";
 import ProjectSelectDropdown from "./widgets/ProjectSelectDropdown";
 import IssueTypeSelect from "./widgets/IssueTypeSelect";
-import MaterialFileInput from "../../widgets/MaterialFileInput";
 import MaterialFileInputBase from "../../widgets/input/file/MaterialFileInputBase";
+import UserAccountButton from "../users/widgets/UserAccountsButton";
+import AccessibilityControl from "../../widgets/AccessibilityControl";
 
 export default class CreateIssue extends Component {
 
 
     state = {
+        formReady:false,
         issue: {
             project: {
                 id: 0,
@@ -38,6 +39,12 @@ export default class CreateIssue extends Component {
             },
             assignee: undefined
         },
+        ndaSelectionKey: 0,
+        ndaLicences: [
+            {
+                title: "Custom"
+            }
+        ],
         projectKey: 0,
         currentIssueTitle: "Custom",
         customIssue: {
@@ -97,67 +104,68 @@ export default class CreateIssue extends Component {
     };
 
 
-    random(max) {
-        return Math.floor(Math.random() * max);
+    constructor(props) {
+        super(props);
+        this.fetchLNdaLicenses();
     }
 
-    randomFromArray(array) {
-        return array[this.random(array.length)];
+    fetchLNdaLicenses() {
+        this.performNdaLicensesFetch()
+            .then(
+                licenses => {
+                    this.setState(state => {
+                        if (Array.isArray(licenses)) state.ndaLicences.push(...licenses);
+
+                        return state;
+                    });
+                }
+            ).catch(e => console.log(e.message));
     }
 
-    get similarIssues() {
-        let issues = [];
-        let i = 0;
+    async performNdaLicensesFetch() {
+        return new Promise(resolve => {
 
+            setTimeout(
+                e => {
+                    resolve(
+                        [
+                            {
+                                title: "MIT"
+                            },
+                            {
+                                title: "Libetal"
+                            }
+                        ]);
+                }, 2000);
 
-        let titles = ["This is a sample issue title, Should be long to demonstrate the worst case scenario of the project", "Short sample title"];
-        let assignees = ["issue.assignee", "Breimer"];
-        let projects = ["@Libetal", "issue.project"];
-        let types = ["issue.type", "Bug", "Feature", "Problem"];
-        let states = ["issue.state", "open", "closed", "submitted", "discussion", "duplicate"];
-        let priorities = ["issue.priority", "critical", "normal", "high", "stable"];
-        let creators = ["issue.by", "@Breimer", "@Emily", "@Rael"];
-
-        while (i < 20) {
-
-            issues.push({
-                id: i,
-                title: this.randomFromArray(titles),
-                assignee: {
-                    id: this.randomFromArray([2, 3, 4, 4, 5, 6]),
-                    name: this.randomFromArray(assignees),
-                    img: "/images/logo.png"
-                },
-                project: {
-                    name: this.randomFromArray(projects)
-                },
-                type: this.randomFromArray(types),
-                priority: this.randomFromArray(priorities),
-                state: this.randomFromArray(states),
-                by: {
-                    id: this.randomFromArray([2, 3, 4, 4, 5, 6]),
-                    name: this.randomFromArray(creators),
-                    img: "/images/logo.png"
-                },
-                cost: {
-                    estimation: 1000
-                },
-                date: "20/12/2020"
-            });
-
-            i++;
-        }
-
-        return issues;
+        });
     }
 
     get appBar() {
         return (
             <AppBar position={"static"}>
                 <Toolbar>
-                    <Row>
-                        <HomeImageButton navigator={this.props.navigator}/>
-                    </Row>
+                    <HomeImageButton navigator={this.props.navigator}/>
+                    <Separator/>
+                    <GridItem xs={12} lg={3}>
+                        <Row justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER}>
+                            <MaterialIconButton
+                                icon={"Apps"}
+                            />
+                            <MaterialIconButton
+                                icon={"Notifications"}
+                            />
+                            <AccessibilityControl componentInstance={this}/>
+                            <UserAccountButton
+                                userDetails={{
+                                    name: "Breimer",
+                                    email: "brymher@gmail.com",
+                                    img: "/images/logo.png"
+                                }}
+                                navigator={this.props.navigator}
+                            />
+                        </Row>
+                    </GridItem>
                 </Toolbar>
             </AppBar>
         );
@@ -228,7 +236,7 @@ export default class CreateIssue extends Component {
                         iconColor={white}
                     />
                 </Toolbar>
-                <SimilarIssuesListView issues={this.similarIssues} height={400}/>
+
             </Paper>
         );
     }
@@ -269,6 +277,90 @@ export default class CreateIssue extends Component {
         );
     }
 
+    get ndaView() {
+
+
+        return (
+            <Row alignItems={Flex.END} justify={Flex.SPACE_BETWEEN}>
+                <GridItem xs={3}>
+                    <MaterialTextView
+                        text={"Licensing"}
+                        textColor={Colors.orange}
+                        variant={"body2"}
+                    />
+                    <MaterialSelect
+                        fullWidth
+                        value={this.state.ndaSelectionKey}
+                        selectionItems={
+                            this.state.ndaLicences.map(
+                                ({title: value}, key) => ({
+                                    value,
+                                    key
+                                })
+                            )
+                        }
+
+                        onChange={
+                            (a, input) => {
+                                this.setState({ndaSelectionKey: input.props.value});
+                            }
+                        }
+                    />
+                </GridItem>
+                <GridItem xs={8}>
+                    <MaterialFileInputBase
+                        disabled={this.state.ndaSelectionKey !== 0}
+                        actionSize={3}
+                        inputSize={8}
+                        clearSize={1}
+                        ActionButton={MaterialBtn}
+                        ActionButtonButtonProps={
+                            {
+                                content: "File",
+                                style: {
+                                    marginBottom: 2,
+                                    marginLeft: 0
+                                }
+                            }
+                        }
+                    />
+                </GridItem>
+            </Row>
+        );
+    }
+
+    uploadIssue() {
+
+    }
+
+    get uploadButton() {
+
+        let {
+            formReady
+        } = this.state;
+
+        let {
+            white,
+            grey,
+            green,
+            grey_lighten_3
+        } = Colors;
+
+        return (
+            <MaterialBtn
+                disabled={!formReady}
+                content={"Create"}
+                color={formReady ? green: grey_lighten_3}
+                textColor={formReady ? white : grey}
+                onClick={
+                    e => {
+                        this.uploadIssue();
+                    }
+                }
+            />
+        );
+    }
+
     render() {
 
 
@@ -286,155 +378,163 @@ export default class CreateIssue extends Component {
         ;
         return (
             <ThemeProvider theme={Settings.appTheme}>
-                {this.appBar}
-                <MaterialDivider
-                    orientation={MaterialDivider.HORIZONTAL}
-                    color={transparent}
-                    spacing={6}
-                />
-                <Col paddingLR={12}>
-                    <MaterialDivider spacing={8} color={transparent}/>
-                    <Row paddingLR={8} alignContent={Flex.CENTER} justify={Flex.SPACE_AROUND}>
-                        <GridItem xs={12} sm={10} lg={6}>
-                            <Paper>
-                                <Row justify={Flex.CENTER} paddingTB={10}>
-                                    <GridItem xs={12} sm={10}>
-                                        <Col>
-                                            <MaterialTextView
-                                                variant={"h4"}
-                                                textColor={purple}
-                                                text={"Create New <#Issue>"}
-                                            />
-                                            <MaterialTextView
-                                                text={"Title"}
-                                                // variant=b1
-                                                variant={"body1"}
-                                                textColor={orange}
-                                            />
-                                            <MaterialTextField
-                                                fullWidth
-                                                placeholder={"e.g: User Login And Registration Integration"}
-
-                                            />
-                                            <MaterialTextView
-                                                text={"Description"}
-                                                // variant=b1
-                                                variant={"body1"}
-                                                textColor={orange}
-                                            />
-                                            <MaterialTextField
-                                                multiline
-                                                fullWidth
-                                                maxRows={4}
-                                                defaultRows={4}
-                                                placeholder={"e.g: Integrate user login with current running design"}
-
-                                            />
-                                            <Row>
-                                                <MaterialFileInputBase
-                                                    ActionButton={MaterialBtn}
-                                                    ActionButtonButtonProps={{
-                                                        content:"Attachments"
-                                                    }}
+                <Paper elevation={0} style={{borderRadius: 0}}>
+                    {this.appBar}
+                    <Col paddingLR={12}>
+                        <MaterialDivider spacing={5} color={transparent}/>
+                        <Row paddingLR={8} alignContent={Flex.CENTER} justify={Flex.SPACE_AROUND}>
+                            <GridItem xs={12} sm={10} lg={6}>
+                                <Paper elevation={8}>
+                                    <Row justify={Flex.CENTER} paddingTB={10}>
+                                        <GridItem xs={12} sm={10}>
+                                            <Col>
+                                                <Row>
+                                                    <MaterialTextView
+                                                        variant={"h4"}
+                                                        textColor={purple}
+                                                        text={"Create New <#Issue>"}
+                                                    />
+                                                    <Separator/>
+                                                    {this.uploadButton}
+                                                </Row>
+                                                <MaterialDivider spacing={6} color={transparent}/>
+                                                <MaterialTextView
+                                                    text={"Title *"}
+                                                    // variant=b1
+                                                    variant={"body1"}
+                                                    textColor={orange}
                                                 />
-                                            </Row>
-                                            <MaterialDivider spacing={4} color={Colors.transparent}/>
+                                                <MaterialTextField
+                                                    fullWidth
+                                                    placeholder={"e.g: User Login And Registration Integration"}
 
-                                            <Row justify={Flex.SPACE_EVENLY}>
-                                                <GridItem xs={12} sm={5}>
-                                                    {this.projectSelect}
+                                                />
+                                                <MaterialDivider spacing={4} color={transparent}/>
+                                                <MaterialTextView
+                                                    text={"Description"}
+                                                    variant={"body1"}
+                                                    textColor={orange}
+                                                />
+                                                <MaterialTextField
+                                                    multiline
+                                                    fullWidth
+                                                    maxRows={3}
+                                                    defaultRows={3}
+                                                    placeholder={"e.g: Integrate user login with current running design"}
 
-                                                    <MaterialDivider spacing={4} color={Colors.transparent}/>
-                                                    {this.assigneesSelectView}
-                                                </GridItem>
-                                                <GridItem xs={12} sm={6}>
-                                                    <IssueTypeSelect
-                                                        onChange={
-                                                            issue => {
-                                                                this.setState({currentIssueTitle: issue.title});
+                                                />
+                                                <MaterialDivider
+                                                    color={transparent}
+                                                    spacing={4}
+                                                />
+                                                <Row justify={Flex.SPACE_BETWEEN} alignItems={Flex.END}>
+                                                    <GridItem xs={7}>
+                                                        <MaterialFileInputBase
+                                                            inputSize={7}
+                                                            actionSize={4}
+                                                            clearSize={1}
+                                                            helperText={
+                                                                <MaterialTextView fontSize={10}>
+                                                                    Images, Documentation, Video.
+                                                                </MaterialTextView>
                                                             }
-                                                        }
-                                                    />
-                                                    <MaterialDivider spacing={4} color={transparent}/>
-                                                    <MaterialTextField
-                                                        label={"Type Title"}
-                                                        fullWidth
-                                                        onChange={
-                                                            (e) => {
-                                                                this.setState(state => {
-                                                                    state.customIssue.title = e.currentTarget.value;
-                                                                    return state;
-                                                                });
-                                                            }
-                                                        }
-                                                        InputLabelProps={{
-                                                            shrink: true
-                                                        }}
-                                                        placeholder={"e.g: Performance"}
-                                                        onClick={e => e.stopPropagation()}
-                                                        disabled={currentIssueTitle.toLowerCase() !== "custom"}
-                                                    />
-                                                    <MaterialDivider spacing={4} color={transparent}/>
-                                                    <MaterialTextField
-                                                        fullWidth
-                                                        multiline
-                                                        maxRows={2}
-                                                        defaultRows={2}
-                                                        onChange={
-                                                            (e, input) => {
-                                                                this.setState(state => {
-                                                                    state.customIssue.description = input.props.value;
-                                                                    return state;
-                                                                });
-                                                            }
-                                                        }
-                                                        InputLabelProps={{
-                                                            shrink: true
-                                                        }}
-                                                        placeholder={"Type description"}
-                                                        disabled={currentIssueTitle.toLowerCase() !== "custom"}
-                                                    />
+                                                            ActionButton={MaterialBtn}
+                                                            ActionButtonButtonProps={{
+                                                                content: "Attachments",
+                                                                style: {
+                                                                    marginBottom: 4
+                                                                }
+                                                            }}
+                                                        />
+                                                    </GridItem>
+                                                    <GridItem xs={4} paddingBottom={14}>
+                                                        {this.assigneesSelectView}
+                                                    </GridItem>
+                                                </Row>
+                                                <MaterialDivider spacing={6} color={Colors.transparent}/>
+                                                <Row justify={Flex.SPACE_EVENLY}>
+                                                    <GridItem xs={12} sm={5}>
+                                                        {this.projectSelect}
+                                                    </GridItem>
 
-                                                    <Row justify={Flex.SPACE_BETWEEN} paddingTB={8}>
-                                                        <MaterialBtn
-                                                            content={"Cache"}
-                                                            onClick={
-                                                                e => this.submit()
+                                                    <GridItem xs={12} sm={6}>
+                                                        <IssueTypeSelect
+                                                            onChange={
+                                                                issue => {
+                                                                    this.setState({currentIssueTitle: issue.title});
+                                                                }
                                                             }
                                                         />
-
-                                                        <MaterialBtn
-                                                            content={"Create"}
-                                                            onClick={
-                                                                e => this.submit()
+                                                        <MaterialDivider spacing={4} color={transparent}/>
+                                                        <MaterialTextField
+                                                            label={"Type Title"}
+                                                            fullWidth
+                                                            onChange={
+                                                                (e) => {
+                                                                    this.setState(state => {
+                                                                        state.customIssue.title = e.currentTarget.value;
+                                                                        return state;
+                                                                    });
+                                                                }
                                                             }
-                                                            color={green}
-                                                            textColor={white}
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            placeholder={"e.g: Performance"}
+                                                            onClick={e => e.stopPropagation()}
+                                                            disabled={currentIssueTitle.toLowerCase() !== "custom"}
                                                         />
-                                                    </Row>
-                                                </GridItem>
-                                            </Row>
-
-                                        </Col>
-                                    </GridItem>
-                                </Row>
-                            </Paper>
-                            <MaterialDivider spacing={4} color={Colors.transparent}/>
-                            <Row>
-                                {this.similarIssuesView}
-                            </Row>
-                        </GridItem>
-                        <GridItem xs={12} sm={8} lg={5}>
-                            <CreateIssuesHelpSideBar navigator={this.props.navigator}/>
-                        </GridItem>
-                    </Row>
-                    <MaterialDivider spacing={6} color={Colors.transparent}/>
-                </Col>
-                <MaterialDivider
-                    spacing={8}
-                    color={transparent}
-                />
-                <Footer navigator={this.props.navigator}/>
+                                                        <MaterialDivider spacing={4} color={transparent}/>
+                                                        <MaterialTextField
+                                                            fullWidth
+                                                            multiline
+                                                            maxRows={2}
+                                                            defaultRows={2}
+                                                            onChange={
+                                                                (e, input) => {
+                                                                    this.setState(state => {
+                                                                        state.customIssue.description = input.props.value;
+                                                                        return state;
+                                                                    });
+                                                                }
+                                                            }
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            label={"Type Description"}
+                                                            placeholder={"e.g Load time is low"}
+                                                            disabled={currentIssueTitle.toLowerCase() !== "custom"}
+                                                        />
+                                                    </GridItem>
+                                                </Row>
+                                                {this.ndaView}
+                                                <Row justify={Flex.SPACE_BETWEEN} paddingTB={8}>
+                                                    <MaterialBtn
+                                                        content={"Cache"}
+                                                        onClick={
+                                                            e => this.submit()
+                                                        }
+                                                    />
+                                                    {this.uploadButton}
+                                                </Row>
+                                            </Col>
+                                        </GridItem>
+                                    </Row>
+                                </Paper>
+                                {/*<MaterialDivider spacing={4} color={Colors.transparent}/>*/}
+                            </GridItem>
+                            <GridItem xs={12} sm={8} lg={5} paddingLeft={8}>
+                                <CreateIssuesHelpSideBar navigator={this.props.navigator}/>
+                            </GridItem>
+                        </Row>
+                        <MaterialDivider spacing={6} color={Colors.transparent}/>
+                    </Col>
+                    <MaterialDivider
+                        spacing={8}
+                        color={transparent}
+                    />
+                    <Footer navigator={this.props.navigator}/>
+                </Paper>
             </ThemeProvider>
         );
     }

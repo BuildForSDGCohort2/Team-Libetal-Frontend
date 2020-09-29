@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen
         }),
         overflowX: "hidden",
-        width: theme.spacing(7),
+        width: theme.spacing(6),
         [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(7)
+            width: theme.spacing(6)
         }
     },
 
