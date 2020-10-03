@@ -1,0 +1,40 @@
+body {
+  background-color: #FFFFFF; }
+
+.appBar {
+  background-color: #FFFFFF !important; }
+
+.homeToolbar {
+  background-color: transparent;
+  color: #f8bd54; }
+  .homeToolbar nav button {
+    color: #FFFFFF; }
+
+.horizontalList {
+  display: flex;
+  flex-direction: row; }
+
+.homeAppBar {
+  background-image: url("/images/header_banner.png"); }
+
+.body {
+  background-image: url("/images/home.bg.png"); }
+
+.homeHeader {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #FFFFFF;
+  flex-wrap: wrap; }
+
+.btn {
+  background-color: #FFFFFF; }
+
+.alignChildLeft > * {
+  float: left; }
+
+.alignChildRight > * {
+  float: right; }
+
+.navRight > * {
+  float: right; }
+
+/*# sourceMappingURL=Theme.module.css.map */

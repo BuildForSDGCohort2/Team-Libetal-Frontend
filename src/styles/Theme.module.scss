@@ -1,0 +1,63 @@
+$borderRadius: 4px;
+
+body {
+  background-color: $colorPrimary;
+}
+
+.appBar {
+  background-color: $colorPrimary !important;
+}
+
+.homeToolbar {
+  background-color: transparent;
+  color: $colorAccent;
+
+  nav {
+    button {
+      color: $textAccent;
+    }
+  }
+}
+
+
+.horizontalList {
+  display: flex;
+  flex-direction: row;
+}
+
+.homeAppBar {
+  background-image: url("/images/header_banner.png");
+}
+
+.body{
+  background-image: url("/images/home.bg.png");
+}
+
+.homeHeader {
+  background-color: change_color(#000000, $alpha: 0.4);
+  color: $textAccent;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background-color: $colorPrimary;
+}
+
+$alignments: ("Left":"left", "Right":"right");
+
+@each $name, $value in $alignments {
+  .alignChild#{$name} {
+
+
+    > * {
+      float: #{$value};
+    }
+  }
+}
+
+.navRight {
+
+  > * {
+    float: right;
+  }
+}

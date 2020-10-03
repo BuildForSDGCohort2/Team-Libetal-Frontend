@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIA,gBAAiB;EACf,MAAM,EAAE,IAAI",
+"sources": ["RepoNav.module.scss"],
+"names": [],
+"file": "RepoNav.module.css"
+}

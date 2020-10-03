@@ -1,0 +1,61 @@
+/*
+Error: Undefined variable: "$colorPrimary".
+        on line 4 of Theme.module.scss
+
+1: $borderRadius: 4px;
+2: 
+3: body {
+4:   background-color: $colorPrimary;
+5: }
+6: 
+7: .appBar {
+8:   background-color: $colorPrimary !important;
+9: }
+
+Backtrace:
+Theme.module.scss:4
+/usr/lib/ruby/vendor_ruby/scss/script/tree/variable.rb:49:in `_perform'
+/usr/lib/ruby/vendor_ruby/scss/script/tree/node.rb:50:in `perform'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:398:in `visit_prop'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `block in visit'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:135:in `with_frame'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:440:in `block (2 levels) in visit_rule'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:440:in `map'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:440:in `block in visit_rule'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:179:in `with_environment'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:438:in `visit_rule'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `block in visit'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:135:in `with_frame'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `map'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:167:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:179:in `with_environment'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:166:in `visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `block in visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:186:in `visit_root'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:157:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:10:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/root_node.rb:36:in `css_tree'
+/usr/lib/ruby/vendor_ruby/scss/tree/root_node.rb:29:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/engine.rb:389:in `_render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/engine.rb:307:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/exec/sass_scss.rb:383:in `run'
+/usr/lib/ruby/vendor_ruby/scss/exec/sass_scss.rb:63:in `process_result'
+/usr/lib/ruby/vendor_ruby/scss/exec/base.rb:50:in `parse'
+/usr/lib/ruby/vendor_ruby/scss/exec/base.rb:18:in `parse!'
+/usr/bin/scss:8:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$colorPrimary\".\A         on line 4 of Theme.module.scss\A \A 1: $borderRadius: 4px;\A 2: \A 3: body {\A 4:   background-color: $colorPrimary;\A 5: }\A 6: \A 7: .appBar {\A 8:   background-color: $colorPrimary !important;\A 9: }"; }

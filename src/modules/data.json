@@ -1,0 +1,29 @@
+{
+  "accounts": {
+  },
+  "repos": [
+    {
+      "name": "libetal",
+      "branches": [
+        {
+          "name": "master",
+          "commits": [
+            {
+              "by": "breimer",
+              "issue": ""
+            }
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "id": "bcg12b",
+          "type": "migration",
+          "status": "open"
+        }
+      ],
+      "bug": [
+      ]
+    }
+  ]
+}

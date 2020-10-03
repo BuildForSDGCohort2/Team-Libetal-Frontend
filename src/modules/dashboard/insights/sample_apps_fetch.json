@@ -1,0 +1,40 @@
+{
+  "data": {
+    "type": {
+      "name": "app",
+      "items": [
+        {
+          "id": 0,
+          "name": "Libetal",
+          "platform": {
+            "id": 0,
+            "name": "web"
+          },
+          "downloads": [
+            {
+              "date": "25th",
+              "value": 100
+            }
+          ],
+          "purchases": [
+            {
+              "date": "25th",
+              "value": 90
+            }
+          ],
+          "likes": [
+            {
+              "date": "25th",
+              "value": 10
+            }
+          ],
+          "contributions": [
+            {
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+

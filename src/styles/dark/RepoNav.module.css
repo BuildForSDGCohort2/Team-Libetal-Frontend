@@ -1,0 +1,44 @@
+/*
+Error: File to import not found or unreadable: src/scss/RepoNav.module.
+        on line 1 of RepoNav.module.scss
+
+1: @import "src/scss/RepoNav.module";
+
+Backtrace:
+RepoNav.module.scss:1
+/usr/lib/ruby/vendor_ruby/scss/tree/import_node.rb:67:in `rescue in import'
+/usr/lib/ruby/vendor_ruby/scss/tree/import_node.rb:44:in `import'
+/usr/lib/ruby/vendor_ruby/scss/tree/import_node.rb:28:in `imported_file'
+/usr/lib/ruby/vendor_ruby/scss/tree/import_node.rb:37:in `css_import?'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:310:in `visit_import'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `block in visit'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `block in with_base'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:135:in `with_frame'
+/usr/lib/ruby/vendor_ruby/scss/stack.rb:79:in `with_base'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:158:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `map'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:52:in `visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:167:in `block in visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:179:in `with_environment'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:166:in `visit_children'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `block in visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:186:in `visit_root'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/base.rb:36:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:157:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/visitors/perform.rb:10:in `visit'
+/usr/lib/ruby/vendor_ruby/scss/tree/root_node.rb:36:in `css_tree'
+/usr/lib/ruby/vendor_ruby/scss/tree/root_node.rb:29:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/engine.rb:389:in `_render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/engine.rb:307:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/scss/exec/sass_scss.rb:383:in `run'
+/usr/lib/ruby/vendor_ruby/scss/exec/sass_scss.rb:63:in `process_result'
+/usr/lib/ruby/vendor_ruby/scss/exec/base.rb:50:in `parse'
+/usr/lib/ruby/vendor_ruby/scss/exec/base.rb:18:in `parse!'
+/usr/bin/scss:8:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: src/styles/RepoNav.module.\A         on line 1 of RepoNavDark.module.scss\A \A 1: @import \"src/styles/RepoNav.module\";"; }
