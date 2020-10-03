@@ -18,6 +18,7 @@ import MaterialOptionsMenu from "../../widgets/menu/MaterialOptionsMenu";
 import Card from "@material-ui/core/Card";
 import MaterialDivider from "../../widgets/MaterialDivider";
 import MaterialBtn from "../../widgets/MaterialBtn";
+import GitTreeListView from "./GitTreeListView";
 
 /**TODO
  * Should display information about commits done
@@ -55,7 +56,7 @@ export default class RepoCommits extends Component {
     }
 
     initDisplayContent() {
-        this.fetchCommits();
+        this.fetchGitTree();
     }
 
     fetchGitTree() {
@@ -71,7 +72,7 @@ export default class RepoCommits extends Component {
 
     onCommitsLoad({response: {code: responseCode}, data, itemsCount} = {response: {}}) {
         if (responseCode === 200) {
-            this.setState({commits: data});
+            this.setState({tree: data});
         } else {
             console.log(`Unhandled response error`);
         }
@@ -288,7 +289,7 @@ export default class RepoCommits extends Component {
     get view() {
         if (this.state.mode === RepoCommits.GRAPHS) return this.graphs;
 
-        return <CommitsListView commits={this.state.commits} navigator={this.props.navigator}/>;
+        return <GitTreeListView branches={this.state.tree} navigator={this.props.navigator}/>;
     }
 
     toThousandsString(value) {
@@ -354,8 +355,33 @@ export default class RepoCommits extends Component {
             <MaterialRow alignItems={Flex.CENTER} justify={Flex.CENTER} marginBottom={10}>
                 <GridItem xs={12} sm={3} lg={3} padding={8}>
                     <Card style={{backgroundColor: purple, color: white}}>
-                        <MaterialRow justify={Flex.CENTER}>
+                        <MaterialRow justify={Flex.CENTER} paddingTop={8}>
                             My Total Commit Costs
+                            <MaterialRow marginTB={6} justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                                <GridItem>
+                                    <MaterialTextView
+                                        text={`Total`}
+                                    />
+                                    <MaterialTextView
+                                        text={`Merged`}
+                                    />
+                                    <MaterialTextView
+                                        text={`Unused`}
+                                    />
+                                </GridItem>
+                                <MaterialDivider color={white} orientation={MaterialDivider.VERTICAL}/>
+                                <GridItem>
+                                    <MaterialTextView
+                                        text={totalCommits}
+                                    />
+                                    <MaterialTextView
+                                        text={mergedCommits}
+                                    />
+                                    <MaterialTextView
+                                        text={totalMergeCommitsDifference}
+                                    />
+                                </GridItem>
+                            </MaterialRow>
                         </MaterialRow>
                     </Card>
                 </GridItem>

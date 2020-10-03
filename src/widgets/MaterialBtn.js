@@ -80,7 +80,7 @@ export default class MaterialBtn extends React.Component {
             margin,
             marginLR = margin,
             marginTB = margin,
-            marginRight = marginLR || sMarginLeft,
+            marginRight = marginLR || sMarginRight,
             marginLeft = marginLR || sMarginLeft,
             marginTop = marginTB || sMarginTop,
             marginBottom = marginTB || sMarginBottom,

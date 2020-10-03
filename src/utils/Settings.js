@@ -9,7 +9,7 @@ export default class Settings {
 
     static style = "light";
 
-    static palette = "light";
+    static palette = "dark";
 
     static white = "#FFFFFF";
 

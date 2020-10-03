@@ -62,11 +62,14 @@ export default class TabsLayout extends Component {
         tabBottomPadding: PropTypes.number,
         minTabHeight: PropTypes.number,
         minTabWidth: PropTypes.number,
+        tabMarginBottom: PropTypes.number,
+        tabLeftPadding: PropTypes.number,
+        tabRightPadding: PropTypes.number,
         value: PropTypes.number,
         variant: PropTypes.oneOf(["standard", "scrollable", "fullWidth"]),
         showIndicator: PropTypes.bool,
         onItemClick: PropTypes.func,
-        onChange:PropTypes.func
+        onChange: PropTypes.func
     };
 
     static defaultProps = {
@@ -87,6 +90,7 @@ export default class TabsLayout extends Component {
         minTabWidth: 32,
         tabTopPadding: 2,
         tabBottomPadding: 2,
+        tabMarginBottom: 1,
         showIndicator: true,
         onItemClick: e => {
 
@@ -101,9 +105,11 @@ export default class TabsLayout extends Component {
             tabs: propTabs,
             tabStyle,
             minTabWidth,
-
+            tabMarginBottom,
             minTabHeight,
             tabTopPadding,
+            tabLeftPadding,
+            tabRightPadding,
             tabBottomPadding
         } = this.props;
 
@@ -115,7 +121,10 @@ export default class TabsLayout extends Component {
             minWidth: minTabWidth,
             minHeight: minTabHeight,
             paddingBottom: tabTopPadding,
-            paddingTop: tabBottomPadding
+            paddingTop: tabBottomPadding,
+            paddingLeft: tabLeftPadding,
+            paddingRight: tabRightPadding,
+            marginBottom: tabMarginBottom
         };
 
 

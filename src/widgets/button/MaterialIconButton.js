@@ -92,17 +92,20 @@ export default class MaterialIconButton extends Component {
             ...this.style
         };
 
+
+        if (typeof icon === "string") {
+            icon = <MaterialIcon
+                icon={icon}
+                iconSize={iconSize}
+                color={iconColor}
+            />;
+        }
+
         return (
             <MaterialBtn
                 variant={variant}
                 style={this.style}
-                content={
-                    <MaterialIcon
-                        icon={icon}
-                        iconSize={iconSize}
-                        color={iconColor}
-                    />
-                }
+                content={icon}
                 disabled={disabled}
                 padding={padding}
                 color={buttonColor}
