@@ -21,7 +21,7 @@ export default class PullRequestsListView extends Component {
             props: {
                 style: {
                     height: sHeight,
-                    width: sWidth = "80%",
+                    width: sWidth,
                     ...style
                 } = {},
                 height = sHeight,

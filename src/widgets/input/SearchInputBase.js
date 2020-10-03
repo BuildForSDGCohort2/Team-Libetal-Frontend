@@ -5,6 +5,7 @@ import InputBase from "@material-ui/core/InputBase";
 import MaterialIcon from "../MaterialIcon";
 import PropTypes from "prop-types";
 import MaterialDivider from "../MaterialDivider";
+import MaterialIconButton from "../button/MaterialIconButton";
 
 export default class SearchInputBase extends Component {
 
@@ -14,6 +15,7 @@ export default class SearchInputBase extends Component {
         textColor: PropTypes.string,
         iconColor: PropTypes.string,
         onChange: PropTypes.func,
+        inputFlexGrow: PropTypes.number,
         showDivider: PropTypes.bool
     };
 
@@ -27,15 +29,15 @@ export default class SearchInputBase extends Component {
                 onChange,
                 showDivider,
                 textColor,
-                iconColor,
+                inputFlexGrow,
+                iconColor
             }
 
         } = this;
 
 
-
         if (typeof icon === "string") {
-            icon = <MaterialIcon icon={icon} color={iconColor}/>;
+            icon = <MaterialIconButton icon={icon} color={iconColor}/>;
         }
 
         return (
@@ -44,7 +46,8 @@ export default class SearchInputBase extends Component {
                     placeholder={placeholder}
                     onChange={onChange}
                     style={{
-                        color:textColor
+                        color: textColor,
+                        flexGrow: inputFlexGrow
                     }}
                 />
                 {showDivider ?

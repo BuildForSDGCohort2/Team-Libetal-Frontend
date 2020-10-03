@@ -1,16 +1,9 @@
 import React from "react";
-import OptionsMenu, {OptionsMenuPropsTypes} from "./OptionsMenu";
+import OptionsMenu from "./OptionsMenu";
 import PropTypes from "prop-types";
 
 
-export const MaterialOptionsMenuProps = {
-    ...OptionsMenuPropsTypes,
-    controller: PropTypes.any,
-    controllerBody:PropTypes.any,
-    controllerProps:PropTypes.any
-};
 export default class MaterialOptionsMenu extends OptionsMenu {
-
 
 
     static defaultProps = {
@@ -18,7 +11,12 @@ export default class MaterialOptionsMenu extends OptionsMenu {
         ...OptionsMenu.defaultProps
     };
 
-    static propTypes = MaterialOptionsMenuProps;
+    static propTypes = {
+        ...OptionsMenu.propTypes,
+        controller: PropTypes.any,
+        controllerBody: PropTypes.any,
+        controllerProps: PropTypes.any
+    };
 
 
     get controller() {

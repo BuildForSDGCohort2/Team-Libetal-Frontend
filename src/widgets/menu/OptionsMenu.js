@@ -3,22 +3,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 
-export const OptionsMenuPropsTypes = {
-    onClick: PropTypes.func,
-    id: PropTypes.string.isRequired,
-    onMenuOpen: PropTypes.func,
-    onMenuClose: PropTypes.func,
-    onMenuItemClick: PropTypes.func,
-    menuItems: PropTypes.arrayOf(
-        PropTypes.shape(
-            {
-                itemId: PropTypes.number,
-                title: PropTypes.any
-            }
-        )
-    ).isRequired
 
-};
 export default class OptionsMenu extends Component {
 
 
@@ -37,6 +22,7 @@ export default class OptionsMenu extends Component {
         onClick: PropTypes.func,
         id: PropTypes.string.isRequired,
         onMenuOpen: PropTypes.func,
+        optionsHeader: PropTypes.any,
         onMenuClose: PropTypes.func,
         onMenuItemClick: PropTypes.func,
         menuItems: PropTypes.arrayOf(
@@ -47,7 +33,6 @@ export default class OptionsMenu extends Component {
                 }
             )
         ).isRequired
-
     };
 
     constructor(props) {

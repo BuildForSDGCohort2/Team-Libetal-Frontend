@@ -18,6 +18,8 @@ import Row from "../../widgets/Row";
 import Settings from "../../utils/Settings";
 import PaginationController from "../../widgets/PaginationController";
 import PullRequestsListView from "./PullRequestsListView";
+import Paper from "@material-ui/core/Paper";
+import Separator from "../../widgets/separator";
 
 
 /**
@@ -133,43 +135,57 @@ export default class RepoPullRequests extends Component {
     render() {
 
         return (
-            <MaterialCol minHeight={600}>
-                <MaterialCol marginBottom={8} alignItems={Flex.CENTER}>
-                    <GridItem xs={12} sm={7} lg={10}>
+            <MaterialCol minHeight={600} marginTB={12} alignItems={Flex.CENTER}>
+                <GridItem xs={12} sm={7} lg={11}>
+                    <Paper>
                         <MaterialRow justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER}>
-                            <GridItem xs={6}>
-                                <SearchInputBase placeholder={"Search: {in:pull request}"}/>
+                            <GridItem xs={12} sm={6} paddingLeft={8}>
+                                <SearchInputBase placeholder={"Search: {in:pull request}"} inputFlexGrow={1}/>
                             </GridItem>
-                            <MaterialDivider orientation={MaterialDivider.VERTICAL} spacing={4} height={18} />
-                            <GridItem xs={5}>
-                                <Chip
-                                    ref={this.chipRef}
-                                    label={"Saved"}
-                                    size={"small"}
-                                    onDelete={
-                                        (e, b) => {
-                                            console.log(`Remove chips by index`);
-                                        }
+                            <MaterialDivider orientation={MaterialDivider.VERTICAL} spacing={4} height={18}/>
+                            <Separator/>
+                            <Chip
+                                ref={this.chipRef}
+                                label={"Saved"}
+                                size={"small"}
+                                onDelete={
+                                    (e, b) => {
+                                        console.log(`Remove chips by index`);
                                     }
-                                />
-                                <Chip
+                                }
+                            />
+                            <Chip
 
-                                    ref={this.chipRef}
-                                    label={"Saved"}
-                                    size={"small"}
-                                    onDelete={
-                                        (e, b) => {
-                                            console.log(`Remove chips by index`);
-                                        }
+                                ref={this.chipRef}
+                                label={"Saved"}
+                                size={"small"}
+                                onDelete={
+                                    (e, b) => {
+                                        console.log(`Remove chips by index`);
                                     }
-                                />
-                                <MaterialIconButton
-                                    icon={"Save"}
-                                    marginLR={4}
-                                    iconSize={18}
-                                />
+                                }
+                            />
 
-                            </GridItem>
+                            <MaterialOptionsMenu
+                                controller={MaterialIconButton}
+                                controllerProps={{
+                                    icon: "SaveOutlined",
+                                    marginLR: 6,
+                                    iconSize: 18
+                                }}
+                                id={"save-options-menu"}
+                                menuItems={[
+                                    {
+                                        itemId: 1,
+                                        title: "Clear All"
+                                    },
+                                    {
+                                        itemId: 1,
+                                        title: "Delete All"
+                                    }
+                                ]}
+                            />
+
                         </MaterialRow>
                         <MaterialDivider spacing={4} width={"100%"}/>
                         <MaterialRow justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER}>
@@ -192,13 +208,16 @@ export default class RepoPullRequests extends Component {
                                             }
                                             controllerProps={{
                                                 variant: "text",
-                                                content: <MaterialRow alignItems={Flex.CENTER}>
-                                                    Tested
-                                                    <MaterialIcon icon={"ExpandMore"}/>
-                                                </MaterialRow>,
+                                                textTransform: "lowercase",
+                                                content: "Tested",
+                                                paddingTB: 1,
+                                                paddingLR: 6,
                                                 style: {
-                                                    padding: 2
-                                                }
+                                                    fontSize: 12,
+                                                    minHeight: 0,
+                                                    minWidth: 0
+                                                },
+                                                endIcon: <MaterialIcon icon={"ExpandMore"}/>
 
                                             }}
                                             menuItems={["First"].map((value, i) => ({
@@ -213,13 +232,15 @@ export default class RepoPullRequests extends Component {
                                             controller={MaterialBtn}
                                             controllerProps={{
                                                 variant: "text",
-                                                content: <MaterialRow alignItems={Flex.CENTER}>
-                                                    Cost
-                                                    <MaterialIcon icon={"ExpandMore"}/>
-                                                </MaterialRow>,
+                                                content: "Cost",
+                                                paddingTB: 1,
+                                                paddingLR: 6,
                                                 style: {
-                                                    padding: 2
-                                                }
+                                                    fontSize: 12,
+                                                    minHeight: 0,
+                                                    minWidth: 0
+                                                },
+                                                endIcon: <MaterialIcon icon={"ExpandMore"}/>
 
                                             }}
                                             menuItems={["High-Low", "Low-High", "Agreed", "Disputed"].map((value, i) => ({
@@ -234,14 +255,16 @@ export default class RepoPullRequests extends Component {
                                             controller={MaterialBtn}
                                             controllerProps={{
                                                 variant: "text",
-                                                content: <MaterialRow alignItems={Flex.CENTER}>
-                                                    Request State
-                                                    <MaterialIcon icon={"ExpandMore"}/>
-                                                </MaterialRow>,
+                                                content: "Request State",
+                                                textTransform: "lowercase",
+                                                paddingTB: 1,
+                                                paddingLR: 6,
                                                 style: {
-                                                    padding: 2
-                                                }
-
+                                                    fontSize: 12,
+                                                    minHeight: 0,
+                                                    minWidth: 0
+                                                },
+                                                endIcon: <MaterialIcon icon={"ExpandMore"}/>
                                             }}
                                             menuItems={["Merged", "Pending", "Discussion", "Disputed"].map((value, i) => ({
                                                 itemId: i,
@@ -273,7 +296,22 @@ export default class RepoPullRequests extends Component {
                                         }
                                     }
                                 />
-                                <MaterialIconButton icon={"FilterList"} marginLR={4} iconSize={18}/>
+
+                                <MaterialOptionsMenu
+                                    id={"filter-list-options-menu"}
+                                    controller={MaterialIconButton}
+                                    controllerProps={{
+                                        icon: "FilterList",
+                                        marginLR: 8,
+                                        iconSize: 18
+                                    }}
+                                    menuItems={[
+                                        {
+                                            itemId: 1,
+                                            title: "Clear All"
+                                        }
+                                    ]}
+                                />
                             </GridItem>
 
                         </MaterialRow>
@@ -282,9 +320,11 @@ export default class RepoPullRequests extends Component {
                                 {this.paginationControllerView}
                             </GridItem>
                         </MaterialRow>
-                    </GridItem>
-                    <PullRequestsListView requests={this.state.pullRequests} height={500}/>
-                </MaterialCol>
+                        <MaterialCol alignItems={Flex.CENTER} paddingLR={8} marginTop={8}>
+                            <PullRequestsListView requests={this.state.pullRequests} height={500}/>
+                        </MaterialCol>
+                    </Paper>
+                </GridItem>
             </MaterialCol>
         );
     }
