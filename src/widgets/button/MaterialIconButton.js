@@ -2,9 +2,9 @@ import React, {Component} from "react";
 import MaterialBtn from "../MaterialBtn";
 import MaterialIcon from "../MaterialIcon";
 import Types from "prop-types";
+import PropTypes from "prop-types";
 import MaterialTheme from "../theming/MaterialTheme";
 import Settings from "../../utils/Settings";
-import PropTypes from "prop-types";
 
 export default class MaterialIconButton extends Component {
 
@@ -13,7 +13,8 @@ export default class MaterialIconButton extends Component {
 
 
     static defaultProps = {
-        iconSize: 24
+        iconSize: 24,
+        variant: "text"
     };
 
     static propTypes = {
@@ -27,6 +28,7 @@ export default class MaterialIconButton extends Component {
             "Copyright",
             "Save",
             "FilterList",
+            "List",
             "AttachFile",
             "StarBorder",
             "FavoriteBorder",
@@ -50,16 +52,18 @@ export default class MaterialIconButton extends Component {
             "TrendingUp",
             "TrendingDown",
             "Done",
-            "ArrowDropDown",
+            "ArrowDropDown"
         ]).isRequired,
         iconColor: Types.string,
         iconSize: Types.number,
         buttonColor: Types.string,
+        variant: Types.string,
         marginRight: Types.oneOfType([Types.number, Types.string]),
         onClick: Types.func,
         padding: Types.number,
         style: Types.object,
         disabled: Types.bool,
+        marginLR: Types.number
     };
 
     render() {
@@ -69,23 +73,28 @@ export default class MaterialIconButton extends Component {
             iconSize,
             iconColor,
             buttonColor,
-            marginRight,
+            marginLR,
+            marginRight = marginLR,
+            marginLeft = marginLR,
             padding,
             onClick,
             disabled,
+            variant,
             style
         } = this.props;
 
         this.style.marginRight = marginRight;
+        this.style.marginLeft = marginLeft;
+        this.style.padding = padding;
 
-        this.style ={
+        this.style = {
             ...style,
             ...this.style
-        }
+        };
 
         return (
             <MaterialBtn
-                variant={"text"}
+                variant={variant}
                 style={this.style}
                 content={
                     <MaterialIcon
@@ -98,6 +107,7 @@ export default class MaterialIconButton extends Component {
                 padding={padding}
                 color={buttonColor}
                 onClick={onClick}
+
             />
         );
     }

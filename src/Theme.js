@@ -1,5 +1,5 @@
 import React from "react";
-import {createMuiTheme, makeStyles, ThemeProvider, useTheme} from "@material-ui/core/styles";
+import {makeStyles, ThemeProvider, useTheme} from "@material-ui/core/styles";
 import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";
 import Settings from "./utils/Settings";

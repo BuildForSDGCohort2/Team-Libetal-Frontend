@@ -28,7 +28,6 @@ export default class MaterialOptionsMenu extends OptionsMenu {
             controllerProps: {onClick, ...controllerProps}
         } = this.props;
 
-
         return (
             <Controller onClick={this.open} children={controllerBody} {...controllerProps}/>
         );

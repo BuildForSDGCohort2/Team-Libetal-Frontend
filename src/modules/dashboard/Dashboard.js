@@ -371,7 +371,6 @@ export default class Dashboard extends Component {
                     {this.navigation}
                     <Paper className={classes.content} style={{borderRadius: 0}} elevation={0}
 
-
                            children={
                                <main style={{background: Settings.colorPrimary}}>
                                    {this.currentBody}

@@ -19,8 +19,8 @@ export default class ListItemDiv extends Component {
         return (
             <ListItem
                 component={"div"}
-                {...props}
                 alignItems={alignItems}
+                {...props}
             />
         );
     }

@@ -30,7 +30,7 @@ export default class OptionsMenu extends Component {
         onMenuItemClick(itemId, e) {
             console.log(`Unhandled menu item click ${itemId}`);
         },
-        menuItems:[]
+        menuItems: []
     };
 
     static propTypes = {
@@ -91,7 +91,7 @@ export default class OptionsMenu extends Component {
      * <MenuItem onClick={this.onMenuClose}>Item 2</MenuItem>
      * */
     get menuItems() {
-        return this.props.menuItems.map(({itemId, title, key, id},i) => {
+        let items = this.props.menuItems.map(({itemId, title, key, id}, i) => {
 
             let menuItemId;
 
@@ -113,6 +113,15 @@ export default class OptionsMenu extends Component {
                 />
             );
         });
+
+        let {
+            optionsHeader
+        } = this.props;
+        if (optionsHeader !== undefined) {
+            return [optionsHeader, ...items];
+        }
+
+        return items;
     }
 
     render() {

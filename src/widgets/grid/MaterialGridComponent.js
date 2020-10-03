@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 import Flex from "../Flex";
-import {Paper} from "@material-ui/core";
 
 export default class MaterialGridComponent extends Component {
 
@@ -27,6 +26,9 @@ export default class MaterialGridComponent extends Component {
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        overflow: PropTypes.string,
+        overflowX: PropTypes.string,
+        overflowY: PropTypes.string
     };
 
     render() {
@@ -53,6 +55,9 @@ export default class MaterialGridComponent extends Component {
                 marginBottom: sMarginBottom = sMargin,
                 marginTop: sMarginTop = sMargin,
                 minHeight: sMinHeight,
+                overflow: sOverflow,
+                overflowX: sOverflowX,
+                overflowY: sOverflowY,
                 ...style
             } = {},
             padding = sPadding,
@@ -78,6 +83,9 @@ export default class MaterialGridComponent extends Component {
             maxHeight = sMaxHeight,
             maxWidth = sMaxWidth,
             backgroundColor = sBackgroundColor,
+            overflow = sOverflow,
+            overflowX = sOverflowX,
+            overflowY = sOverflowY,
             ...props
         } = this.props;
 
@@ -94,6 +102,10 @@ export default class MaterialGridComponent extends Component {
         style.width = width;
         style.maxHeight = maxHeight;
         style.maxWidth = maxWidth;
+        style.overflow = overflow;
+        style.overflowX = overflowX;
+        style.overflowY = overflowY;
+
         style.backgroundColor = backgroundColor;
 
         return (

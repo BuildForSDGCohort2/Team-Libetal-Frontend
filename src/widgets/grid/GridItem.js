@@ -10,26 +10,49 @@ export default class GridItem extends Component {
         paddingLeft: PropTypes.number,
         paddingTop: PropTypes.number,
         paddingBottom: PropTypes.number,
+        marginLeft: PropTypes.number,
         marginRight: PropTypes.number,
+        marginTop: PropTypes.number,
+        marginBottom: PropTypes.number,
         paddingLR: PropTypes.number,
         paddingTB: PropTypes.number,
         flexGrow: PropTypes.number,
-        backgroundColor:PropTypes.string,
+        height: PropTypes.number,
+        width: PropTypes.number,
+        backgroundColor: PropTypes.string,
+        overflowY: PropTypes.string
     };
 
     render() {
         let {
-            padding,
-            backgroundColor,
-            marginRight,
+            style: {
+                padding: sPadding,
+                margin: sMargin,
+                marginLeft: sMarginLeft,
+                marginRight: sMarginRight,
+                marginTop: sMarginTop,
+                marginBottom: sMarginBottom,
+                ...style
+            } = {},
+            padding = sPadding,
             paddingLR = padding,
             paddingTB = padding,
             paddingTop = paddingTB,
             paddingBottom = paddingTB,
             paddingLeft = paddingLR,
             paddingRight = paddingLR,
+            margin = sMargin,
+            marginLR = margin,
+            marginTB = margin,
+            marginLeft = marginLR || sMarginLeft,
+            marginRight = marginLR || sMarginRight,
+            marginTop = marginTB || sMarginTop,
+            marginBottom = marginTB || sMarginBottom,
+            height,
+            overflowY,
+            backgroundColor,
             flexGrow,
-            style: {...style} = {},
+
             ...props
         } = this.props;
 
@@ -38,7 +61,12 @@ export default class GridItem extends Component {
         style.paddingTop = paddingTop;
         style.paddingBottom = paddingBottom;
         style.marginRight = marginRight;
+        style.marginLeft = marginLeft;
+        style.marginTop = marginTop;
+        style.marginBottom = marginBottom;
         style.backgroundColor = backgroundColor;
+        style.height = height;
+        style.overflowY = overflowY;
 
 
         style.flexGrow = flexGrow || style.flexGrow;
@@ -46,7 +74,8 @@ export default class GridItem extends Component {
             <Grid
                 style={style}
                 item
-                {...props}/>
+                {...props}
+            />
         );
     }
 }

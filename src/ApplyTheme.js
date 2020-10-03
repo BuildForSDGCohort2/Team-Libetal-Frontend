@@ -1,4 +1,4 @@
-import {ThemeProvider, useTheme} from "@material-ui/core/styles";
+import {ThemeProvider} from "@material-ui/core/styles";
 import Settings from "./utils/Settings";
 import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";

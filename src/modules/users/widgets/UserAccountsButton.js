@@ -12,6 +12,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import MaterialDivider from "../../../widgets/MaterialDivider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Libetal from "../../../widgets/icons/Libetal";
+import Colors from "../../../Colors";
+import ListItemDiv from "../../repos/ListItemDiv";
 
 export default class UserAccountButton extends Component {
 
@@ -29,7 +32,7 @@ export default class UserAccountButton extends Component {
         userDetails: {
             name: "Breimer",
             email: "brymher@gmail.com",
-            img: "/images/logo.png"
+            img: undefined
         }
     };
 
@@ -200,10 +203,19 @@ export default class UserAccountButton extends Component {
                             />
                             <MenuItem>
                                 <ListItemIcon>
-                                    <Avatar
-                                        src={this.props.userDetails.img}
-                                        style={{width: 24, height: 24}}
-                                    />
+                                    {
+                                        this.props.userDetails.img === undefined ?
+                                            (
+                                                <Libetal height={24 } width={24} iColor={Colors.red}
+                                                         bColor={Colors.white}
+                                                         lColor={Colors.blue}/>)
+                                            : (
+                                                <Avatar
+                                                    src={this.props.userDetails.img}
+                                                    style={{width: 24, height: 24}}
+                                                />
+                                            )
+                                    }
                                 </ListItemIcon>
                                 <TextView
                                     text={"Profile"}

@@ -1,6 +1,5 @@
 import * as React from "react";
 import Typography from "@material-ui/core/Typography";
-import RepoNavigation from "./RepoNavigation";
 import RepoAppBar from "./RepoAppBar";
 import RepoDrawer from "./RepoDrawer";
 import View from "./View";

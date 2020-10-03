@@ -31,7 +31,7 @@ export default class AllInsights extends React.Component {
         // platform -> Apps they have worked on
         // most popular platforms
         // most popular apps
-        // most popular stack
+        // most `popular stack
         // most popular Frameworks/SDK
         // most active os
         return new Promise(resolve => {

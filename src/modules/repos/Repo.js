@@ -1,22 +1,25 @@
 import React, {Component} from "react";
-import Row from "../../widgets/Row";
 import PropTypes from "prop-types";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import Settings from "../../utils/Settings";
-import Drawer from "@material-ui/core/Drawer";
 import MaterialRow from "../../widgets/grid/MaterialRow";
-import MDrawer from "../../widgets/MDrawer";
 import RepoDrawer from "./widgets/RepoDrawer";
-import Toolbar from "@material-ui/core/Toolbar";
 import UserAccountButton from "../users/widgets/UserAccountsButton";
 import Separator from "../../widgets/separator";
-import Colors from "../../Colors";
-import GridItem from "../../widgets/grid/GridItem";
-import AppBar from "@material-ui/core/AppBar";
-import MaterialCol from "../../widgets/grid/MaterialCol";
 import MaterialTextView from "../../widgets/MaterialTextView";
-import MaterialDivider from "../../widgets/MaterialDivider";
 import Flex from "../../widgets/Flex";
+import AccessibilityControl from "../../widgets/AccessibilityControl";
+import GridItem from "../../widgets/grid/GridItem";
+import Paper from "@material-ui/core/Paper";
+import Footer from "../Footer";
+import RepoDashboard from "./RepoDashboard";
+import RepoCommits from "./RepoCommits";
+import RepoInsights from "./RepoInsights";
+import RepoIssues from "./RepoIssues";
+import RepoPullRequests from "./RepoPullRequests";
+import RepoTasks from "./RepoTasks";
+import RepoFiles from "./RepoFiles";
+import RepoAbout from "./RepoAbout";
 
 export default class Repo extends Component {
 
@@ -24,8 +27,20 @@ export default class Repo extends Component {
     state = {
         drawerIsOpen: true,
         userDetails: {},
-        isAdmin: false
+        isAdmin: false,
+        currentPage: Repo.ABOUT,
+        project: {}
+
     };
+
+    static DASHBOARD = 1;
+    static INSIGHTS = 2;
+    static ISSUES = 3;
+    static TASKS = 4;
+    static PULL_REQUESTS = 5;
+    static COMMITS = 6;
+    static FILES = 7;
+    static ABOUT = 8;
 
     static propTypes = {
         navigator: PropTypes.func
@@ -35,20 +50,42 @@ export default class Repo extends Component {
         super(props);
 
         this.initDisplayContent();
+
     }
 
     initDisplayContent() {
         this.checkIsAdmin();
-        this.loadProject(this.onProjectLoad);
+        this.loadProject(this.onProjectLoad.bind(this));
+    }
+
+    getFromLocation(index) {
+        if (this.pathsField === undefined) {
+            let {
+                pathname
+            } = this.props.location.location;
+            this.pathsField = pathname.trim("/").split("/");
+        }
+
+        return this.pathsField[index];
     }
 
     loadProject(callBack) {
-
+        new Promise(
+            resolve => {
+                resolve(this.getFromLocation(3));
+            }
+        ).then(
+            projectName => callBack({
+                name: projectName,
+                documentation: `${projectName}.md`
+            })
+        ).catch(
+            e => console.log(e.message)
+        );
     }
 
     onProjectLoad(project) {
-        let {name} = project;
-
+        this.setState({project});
     }
 
     checkIsAdmin() {
@@ -65,16 +102,88 @@ export default class Repo extends Component {
 
     }
 
+    get currentPage() {
+
+        switch (this.state.currentPage) {
+            case Repo.COMMITS:
+                return <RepoCommits navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.DASHBOARD:
+                return <RepoDashboard component={this} project={this.state.project}/>;
+            case Repo.INSIGHTS:
+                return <RepoInsights navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.ISSUES:
+                return <RepoIssues navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.PULL_REQUESTS:
+                return <RepoPullRequests navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.TASKS:
+                return <RepoTasks navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.FILES:
+                return <RepoFiles navigator={this.props.navigator} project={this.state.project}/>;
+            case Repo.ABOUT:
+                return <RepoAbout navigator={this.props.navigator} project={this.state.project}/>;
+            default:
+                return <RepoAbout navigator={this.props.navigator} project={this.state.project}/>;
+        }
+    }
+
+    set currentPage(value) {
+        console.log(value);
+        if (typeof value === "string") {
+            switch (value.toLowerCase()) {
+                case "issues":
+                    value = Repo.ISSUES;
+                    break;
+                case "about":
+                    value = Repo.ABOUT;
+                    break;
+                case "insights":
+                    value = Repo.INSIGHTS;
+                    break;
+                case "commits":
+                    value = Repo.COMMITS;
+                    break;
+                case "dashboard":
+                    value = Repo.DASHBOARD;
+                    break;
+                case "files":
+                    value = Repo.FILES;
+                    break;
+                case "pull_requests":
+                    value = Repo.PULL_REQUESTS;
+                    break;
+                default:
+                    let parsed = parseInt(value);
+                    value = parsed > 0 && parsed <= 8 ? parsed : Repo.ABOUT;
+                    break;
+            }
+        }
+
+        this.setState({currentPage: value}, () => this.forceUpdate());
+    }
+
+    get projectName() {
+        let {name = "Project Name Loading..."} = this.state.project;
+        name = name[0].toUpperCase() + name.slice(1, name.length);
+        return name;
+    }
+
+    componentDidMount() {
+        this.currentPage = this.getFromLocation(4);
+    }
+
     render() {
 
         let {
             state: {
-                drawerIsOpen
+                drawerIsOpen,
+                currentPage
             },
             props: {
-                classes
+                classes,
+                navigator
             }
         } = this;
+
 
         return (
             <ThemeProvider theme={Settings.appTheme}>
@@ -84,50 +193,27 @@ export default class Repo extends Component {
                         onChange={
                             isOpen => this.setState({drawerIsOpen: isOpen})
                         }
+                        onItemClick={
+                            itemId => this.setState({currentPage: itemId || currentPage})
+                        }
                     />
-                    <MaterialCol paddingLeft={drawerIsOpen ? 240 : 58} alignItems={Flex.CENTER}>
-                        <MaterialRow paddingTop={8} paddingLR={8} marginBottom={6}>
+                    <Paper style={{paddingLeft: drawerIsOpen ? 240 : 48, borderRadius: 0}} elevation={0}>
+                        <MaterialRow paddingTop={8} paddingLR={8} alignItems={Flex.CENTER}>
                             <MaterialTextView
-                                text={"Project Name"}
+                                text={this.projectName}
                                 variant={"h5"}
                             />
                             <Separator/>
-                            <UserAccountButton navigator={this.props.navigator}/>
-                            <MaterialRow justify={Flex.CENTER} alignItems={Flex.CENTER}>
-                                Documentation
-                                <MaterialDivider orientation={MaterialDivider.VERTICAL} spacing={8} height={24}/>
-                                Security
-                                <MaterialDivider orientation={MaterialDivider.VERTICAL} spacing={8} height={24}/>
-                                Licensing
-                                <MaterialDivider orientation={MaterialDivider.VERTICAL} spacing={8} height={24}/>
-                            </MaterialRow>
+                            <GridItem xs={12} lg={3}>
+                                <MaterialRow justify={Flex.SPACE_AROUND} alignItems={Flex.CENTER}>
+                                    <AccessibilityControl componentInstance={this}/>
+                                    <UserAccountButton navigator={navigator}/>
+                                </MaterialRow>
+                            </GridItem>
                         </MaterialRow>
-                        <MaterialDivider
-                            width={"80%"}
-                        />
-
-                        This view should depict total project description
-                        from issues relating to the project.
-                        total invested time and cost(used to evaluate wasted time)
-                        total merged time and cost
-                        tasks relating to the project
-                            - open tasks
-                            - closed tasks
-                            - in progress tasks
-                        issues
-                            - posted
-                            - in discussion issue
-                            - etc about the issue
-                        Branching details are to be visible here
-                        Insights about the project
-                            - sales made
-                            - project estimates and returns
-                        Project admin is to use this view to control the whole project also
-                        thus need to be able to see issues and assign them
-                        create new issues relating to the project form here also,
-                        delete issues depending of abc
-
-                    </MaterialCol>
+                        {this.currentPage}
+                        <Footer navigator={this.props.navigator}/>
+                    </Paper>
                 </>
             </ThemeProvider>
         );

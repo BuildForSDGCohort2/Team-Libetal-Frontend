@@ -14,7 +14,6 @@ import InputBase from "@material-ui/core/InputBase";
 import MaterialIconButton from "../../widgets/button/MaterialIconButton";
 import Collapse from "@material-ui/core/Collapse";
 import MaterialCol from "../../widgets/grid/MaterialCol";
-import SimilarIssuesListView from "../dashboard/issues/SimilarIssuesListView";
 
 export default class CreateRepoHelp extends Component {
 

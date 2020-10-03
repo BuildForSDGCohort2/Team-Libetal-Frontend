@@ -1,7 +1,6 @@
 import React from "react";
 import OptionsMenu, {OptionsMenuPropsTypes} from "../../../widgets/menu/OptionsMenu";
 import MaterialBtn from "../../../widgets/MaterialBtn";
-import Colors from "../../../Colors";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import PropTypes from "prop-types";
 

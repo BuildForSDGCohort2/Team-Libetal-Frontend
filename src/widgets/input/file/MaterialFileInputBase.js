@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import MaterialRow from "../../grid/MaterialRow";
 import Flex from "../../Flex";
-import GridItem from "../../grid/GridItem";
 import Colors from "../../../Colors";
 import MaterialIconButton from "../../button/MaterialIconButton";
 import MaterialTextField from "../../MaterialTextField";

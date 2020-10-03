@@ -389,6 +389,9 @@ export default class Projects extends Component {
                                     <MaterialTextView
                                         text={"This is a sample project description and is required soon to have more than this text here "}
                                         textColor={Colors.blue}
+                                        style={{
+                                            cursor: "pointer"
+                                        }}
                                         onClick={
                                             e => this.props.navigator(`dashboard/projects/libetal`)
                                         }
@@ -462,13 +465,13 @@ export default class Projects extends Component {
 
         let projects = [
             {
-                id:1,
+                id: 1,
                 name: "Libetal",
                 description: "A product to help one invest their time to something that, might have proper future returns"
 
             },
             {
-                id:2,
+                id: 2,
                 name: "Luro",
                 description: "This is a short generic project description, meant to present full text view size and overflow response."
             }
@@ -477,7 +480,7 @@ export default class Projects extends Component {
         while (i < 10) {
             projects.push(
                 {
-                    id:i,
+                    id: i,
                     name: `Project ${i++}`,
                     description: "This is a short generic project description, meant to present full text view size and overflow response."
                 }
@@ -569,14 +572,14 @@ export default class Projects extends Component {
             <List
                 children={
                     this.trendingProjects.map(
-                        (project,i) => (
+                        (project, i) => (
                             <ListItem key={project.id}>
                                 {this.prepProjectListItem(project)}
                             </ListItem>
                         )
                     )
                 }
-                style={{minWidth:"100%",maxHeight: 600, overflowY: "auto"}}
+                style={{minWidth: "100%", maxHeight: 600, overflowY: "auto"}}
             />
         );
     }
@@ -675,7 +678,7 @@ export default class Projects extends Component {
         } = this.props;
 
         return (
-            <Paper className={classes.root} style={{borderRadius:0}}>
+            <Paper className={classes.root} style={{borderRadius: 0}}>
                 <Row>
                     <Column xs={12}>
                         <Row>
@@ -720,7 +723,7 @@ export default class Projects extends Component {
                                             content={"CREATE PROJECT"}
                                             onClick={
                                                 e => {
-                                                    this.props.navigator("dashboard/projects/new")
+                                                    this.props.navigator("dashboard/projects/new");
                                                 }
                                             }
                                         />

@@ -2,7 +2,7 @@ import React from "react";
 import {IconButton} from "@material-ui/core";
 import {withProps} from "recompose";
 import * as Icons from "@material-ui/icons";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 export default class MaterialIconBtn extends React.Component {
 

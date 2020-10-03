@@ -1,0 +1,37 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": {
+    "name": "master",
+    "commits": [
+      {
+        "message": "Added User Interaction modules",
+        "author": {
+          "name": "Brymher",
+          "email": "brymher@gmail.com"
+        },
+        "date": "2020-08-24T11:17:24Z",
+        "url": "",
+        "issue": {
+          "id": 1,
+          "title": "Integrate logging system",
+          "cost": {
+            "value": 1000,
+            "currency": {
+              "name": "K.Shilling",
+              "sign": "Ksh"
+            }
+          }
+        },
+        "branches": [
+          {
+            "name": "ui"
+          }
+        ]
+      }
+    ]
+  },
+  "itemsCount": 1000
+}

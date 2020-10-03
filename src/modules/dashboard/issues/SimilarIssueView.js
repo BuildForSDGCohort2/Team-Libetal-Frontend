@@ -12,13 +12,11 @@ import MaterialMenuItem from "../../../widgets/menu/MaterialMenuItem";
 import MaterialTextView from "../../../widgets/MaterialTextView";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import MaterialDivider from "../../../widgets/MaterialDivider";
-import MaterialCol from "../../../widgets/grid/MaterialCol";
 import CharButton from "./CharButton";
 
 export default class SimilarIssueView extends Component {
 
     static propTypes = TrendingIssueView.propTypes;
-
 
     render() {
         let {

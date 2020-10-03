@@ -6,7 +6,6 @@ import Flex from "../Flex";
 import Paper from "@material-ui/core/Paper";
 import MaterialRow from "../grid/MaterialRow";
 import MaterialIconButton from "../button/MaterialIconButton";
-import Colors from "../../Colors";
 import GridItem from "../grid/GridItem";
 import Separator from "../separator";
 

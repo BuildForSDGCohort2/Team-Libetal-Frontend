@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import Flex from "./Flex";
-import Drawer from "@material-ui/core/Drawer";
 import Colors from "../Colors";
 import Paper from "@material-ui/core/Paper";
 

@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 export default class RepoListItemIcon extends Component {
 
     static propTypes = {
-        icon: PropTypes.string
+        icon: PropTypes.string,
+        color: PropTypes.string,
+        marginRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        marginLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
 
     render() {
@@ -14,7 +17,9 @@ export default class RepoListItemIcon extends Component {
             props: {
                 icon,
                 marginRight = 8,
-                marginLeft = 0
+                marginLeft = 0,
+                color,
+                ...props
             }
         } = this;
         return (
@@ -23,6 +28,8 @@ export default class RepoListItemIcon extends Component {
                 style={{
                     marginRight
                 }}
+                color={color}
+                {...props}
             />
         );
     }

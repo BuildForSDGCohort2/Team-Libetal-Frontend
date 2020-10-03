@@ -1,24 +1,19 @@
 import React, {Component} from "react";
 import Drawer from "@material-ui/core/Drawer";
-import MaterialDrawer from "../../../widgets/navigation/MaterialDrawer";
 import clsx from "clsx";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronRightIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import MaterialIcon from "../../../widgets/MaterialIcon";
 import ListItemDiv from "../ListItemDiv";
 import Radio from "@material-ui/core/Radio";
-import MaterialCol from "../../../widgets/grid/MaterialCol";
-import GridItem from "../../../widgets/grid/GridItem";
 import Chip from "@material-ui/core/Chip";
 import RepoListItemIcon from "./RepoListItemIcon";
 import MaterialImage from "../../../widgets/MaterialImage";
 import Separator from "../../../widgets/separator";
 import Colors from "../../../Colors";
+import MaterialIcon from "../../../widgets/MaterialIcon";
+import Repo from "../Repo";
+import Libetal from "../../../widgets/icons/Libetal";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
 
 export default class RepoDrawer extends Component {
 
@@ -31,6 +26,9 @@ export default class RepoDrawer extends Component {
     static defaultProps = {
         onChange(isOpen) {
             console.log(`Unhandled drawer change isOpen=${isOpen}`);
+        },
+        onItemClick(itemId) {
+            console.log(`Unhandled item click ${itemId}`);
         }
     };
 
@@ -67,7 +65,8 @@ export default class RepoDrawer extends Component {
         let {
             props: {
                 classes,
-                onChange
+                onChange,
+                onItemClick
             },
             state: {
                 isPinned
@@ -80,7 +79,9 @@ export default class RepoDrawer extends Component {
             green,
             white,
             red,
-            purple
+            purple,
+            indigo,
+            blue
         } = Colors;
 
         let chipS = {
@@ -110,9 +111,9 @@ export default class RepoDrawer extends Component {
                 }
             >
                 <List disablePadding>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.DASHBOARD)}>
                         {/*TODO should be the app logo*/}
-                        <MaterialImage src={"/images/logo.png"} height={52} width={52}/>
+                        <Libetal height={32} width={32} iColor={Colors.red} bColor={Colors.white} lColor={Colors.blue}/>
                         <Separator/>
                         <Radio
                             checked={isPinned}
@@ -124,9 +125,19 @@ export default class RepoDrawer extends Component {
                             }
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.ABOUT)}>
                         <RepoListItemIcon
-                            icon={"AccountTree"}
+                            color={blue}
+                            icon={"InfoOutlined"}
+                        />
+                        <ListItemText
+                            primary={"About"}
+                        />
+                    </ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.FILES)}>
+                        <RepoListItemIcon
+                            icon={"AccountTreeOutlined"}
+                            color={indigo}
                         />
                         <ListItemText
                             primary={"Files"}
@@ -142,7 +153,8 @@ export default class RepoDrawer extends Component {
                             }}
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.ISSUES)}>
+                        <RepoListItemIcon icon={"ReportOutlined"} color={orange}/>
                         <ListItemText
                             primary={"Issues"}
                         />
@@ -168,7 +180,7 @@ export default class RepoDrawer extends Component {
                             }}
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.TASKS)}>
                         <RepoListItemIcon
                             icon={"Accessibility"}
                         />
@@ -198,21 +210,36 @@ export default class RepoDrawer extends Component {
                             }}
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.PULL_REQUESTS)}>
+                        <RepoListItemIcon icon={"Publish"} color={Colors.green}/>
                         <ListItemText
                             primary={"Pull request"}
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.COMMITS)}>
+                        <RepoListItemIcon icon={"AssignmentReturnedOutlined"}/>
                         <ListItemText
                             primary={"Commits"}
                         />
                     </ListItemDiv>
-                    <ListItemDiv>
+                    <ListItemDiv button onClick={e => onItemClick(Repo.INSIGHTS)}>
                         {/*THis should update the toolbar. This is to mean the toolbar is not static and changes with time*/}
                         {/*Should display progress insights. Commits, users, */}
+                        <RepoListItemIcon icon={"TrendingUp"}/>
                         <ListItemText
                             primary={"Insights"}
+                        />
+                    </ListItemDiv>
+                    <Separator/>
+                </List>
+                <Separator/>
+                <List>
+                    <ListItemDiv button>
+                        <RepoListItemIcon
+                            icon={"Settings"}
+                        />
+                        <ListItemText
+                            primary={"Settings"}
                         />
                     </ListItemDiv>
                 </List>

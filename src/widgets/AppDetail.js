@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-undef
 import * as React from "react";
-import MaterialCard from "./cards/MaterialCard"
+import MaterialCard from "./cards/MaterialCard";
 import logo from "../logo.svg";
 
 class AppDetail extends React.Component {
