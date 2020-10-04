@@ -70,14 +70,13 @@ class AppComponent extends Component {
 
                                         <Route path="/register"
                                                component={() => (
-                                                   <ThemeProvider theme={Settings.appTheme}>
-                                                       <Register
-                                                           navigator={navigator}
-                                                           classes={classes}
-                                                           theme={theme}
-                                                           styles={styles}
-                                                       />
-                                                   </ThemeProvider>
+                                                   <Register
+                                                       navigator={navigateTo}
+                                                       classes={classes}
+                                                       theme={theme}
+                                                       styles={styles}
+
+                                                   />
                                                )}
                                         />
                                         <Route

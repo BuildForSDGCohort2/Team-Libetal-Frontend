@@ -56,20 +56,19 @@ export default class GridItem extends Component {
             ...props
         } = this.props;
 
-        style.paddingRight = paddingRight;
-        style.paddingLeft = paddingLeft;
-        style.paddingTop = paddingTop;
-        style.paddingBottom = paddingBottom;
-        style.marginRight = marginRight;
-        style.marginLeft = marginLeft;
-        style.marginTop = marginTop;
-        style.marginBottom = marginBottom;
-        style.backgroundColor = backgroundColor;
-        style.height = height;
-        style.overflowY = overflowY;
+        if (paddingRight !== undefined) style.paddingRight = paddingRight;
+        if (paddingLeft !== undefined) style.paddingLeft = paddingLeft;
+        if (paddingTop !== undefined) style.paddingTop = paddingTop;
+        if (paddingBottom !== undefined) style.paddingBottom = paddingBottom;
+        if (marginRight !== undefined) style.marginRight = marginRight;
+        if (marginLeft !== undefined) style.marginLeft = marginLeft;
+        if (marginTop !== undefined) style.marginTop = marginTop;
+        if (marginBottom !== undefined) style.marginBottom = marginBottom;
+        if (backgroundColor !== undefined) style.backgroundColor = backgroundColor;
+        if (height !== undefined) style.height = height;
+        if (overflowY !== undefined) style.overflowY = overflowY;
+        if (flexGrow !== undefined) style.flexGrow = flexGrow || style.flexGrow;
 
-
-        style.flexGrow = flexGrow || style.flexGrow;
         return (
             <Grid
                 style={style}

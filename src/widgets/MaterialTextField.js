@@ -24,12 +24,12 @@ export default class MaterialTextField extends Component {
         defaultRows: PropTypes.number,
         maxRows: PropTypes.number,
         helperText: PropTypes.any,
-        InputLabelProps:PropTypes.any
+        InputLabelProps: PropTypes.any
     };
 
     static defaultProps = {
         color: "secondary",
-        onClick(){
+        onClick() {
 
         }
     };
@@ -78,10 +78,10 @@ export default class MaterialTextField extends Component {
                     color={color}
                     variant={variant}
                     onClick={
-                        e=>{
-                            let propagate = onClick(e)
+                        e => {
+                            let propagate = onClick(e);
 
-                            if(propagate|| propagate === undefined) e.stopPropagation()
+                            if (propagate || propagate === undefined) e.stopPropagation();
 
                         }
                     }
@@ -132,10 +132,10 @@ export default class MaterialTextField extends Component {
                 color={color}
                 variant={variant}
                 onClick={
-                    e=>{
-                        let propagate = onClick(e)
+                    e => {
+                        let propagate = onClick(e);
 
-                        if(propagate|| propagate === undefined) e.stopPropagation()
+                        if (propagate || propagate === undefined) e.stopPropagation();
 
                     }
                 }
@@ -195,10 +195,10 @@ export default class MaterialTextField extends Component {
                 variant={variant}
                 helperText={helperText}
                 onClick={
-                    e=>{
-                        let propagate = onClick(e)
+                    e => {
+                        let propagate = onClick(e);
 
-                        if(propagate|| propagate === undefined) e.stopPropagation()
+                        if (propagate || propagate === undefined) e.stopPropagation();
 
                     }
                 }
@@ -249,10 +249,10 @@ export default class MaterialTextField extends Component {
                 color={color}
                 variant={variant}
                 onClick={
-                    e=>{
-                        let propagate = onClick(e)
+                    e => {
+                        let propagate = onClick(e);
 
-                        if(propagate|| propagate === undefined) e.stopPropagation()
+                        if (propagate || propagate === undefined) e.stopPropagation();
 
                     }
                 }

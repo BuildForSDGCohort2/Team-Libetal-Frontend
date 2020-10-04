@@ -146,7 +146,7 @@ export default class Home extends View {
         let textColor = Colors.white;
         return (
             <>
-                <Row className={this.props.appTheme.body}>
+                <MaterialRow className={this.props.appTheme.body}>
                     <MaterialRow marginTop={32} justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
                         <MaterialCol xs={12} sm={5} lg={3} alignItems={Flex.CENTER}>
                             <Paper style={{
@@ -275,7 +275,7 @@ export default class Home extends View {
                     {this.contributeSection}
                     <MaterialDivider width={"100%"} color={Colors.transparent} spacing={16}/>
                     {this.partnership}
-                </Row>
+                </MaterialRow>
                 <Footer/>
             </>
         );
@@ -428,8 +428,8 @@ export default class Home extends View {
             <Row ref={this.ref}>
                 <CssBaseline/>
                 <AppBar position="static" elevation={4} className={appTheme.homeAppBar}>
-                    <MaterialRow  className={appTheme.homeHeader}>
-                        <GridItem xs={12} lg={7} >
+                    <MaterialRow className={appTheme.homeHeader}>
+                        <GridItem xs={12} lg={7}>
                             <MaterialRow alignItems={Flex.CENTER}>
                                 <GridItem xs={12} lg={6}>
                                     <img
@@ -448,16 +448,16 @@ export default class Home extends View {
                                 </GridItem>
                             </MaterialRow>
                         </GridItem>
-                            <GridItem item xs={12} lg={5}>
-                                <Grid>
-                                    <Toolbar className={appTheme.homeToolbar}>
-                                        {
-                                            userDetails === null ? this.getLoginView(appTheme, classes) : this.accountAppBar(appTheme)
-                                        }
-                                    </Toolbar>
-                                </Grid>
-                                {this.listItems()}
+                        <GridItem item xs={12} lg={5}>
+                            <GridItem>
+                                <Toolbar className={appTheme.homeToolbar}>
+                                    {
+                                        userDetails === null ? this.getLoginView(appTheme, classes) : this.accountAppBar(appTheme)
+                                    }
+                                </Toolbar>
                             </GridItem>
+                            {this.listItems()}
+                        </GridItem>
                     </MaterialRow>
                 </AppBar>
                 {/* Hero unit */}
@@ -555,7 +555,7 @@ export default class Home extends View {
                         variant={"default"}
                         onClick={this.openAppStore}
                         startIcon={<AppsIcon/>}
-                        content={"App Store"}
+                        content={"Store"}
                     />
                 </nav>
             </>

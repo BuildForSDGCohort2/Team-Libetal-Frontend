@@ -97,14 +97,14 @@ export default class MaterialGridComponent extends Component {
         style.marginRight = marginRight;
         style.marginTop = marginTop;
         style.marginBottom = marginBottom;
-        style.height = height;
-        style.minHeight = minHeight;
-        style.width = width;
-        style.maxHeight = maxHeight;
-        style.maxWidth = maxWidth;
-        style.overflow = overflow;
-        style.overflowX = overflowX;
-        style.overflowY = overflowY;
+        if (height !== undefined) style.height = height;
+        if (width !== undefined) style.width = width;
+        if (maxHeight !== undefined) style.maxHeight = maxHeight;
+        if (maxWidth !== undefined) style.maxWidth = maxWidth;
+        if (minHeight !== undefined) style.minHeight = minHeight;
+        if (overflow !== undefined) style.overflow = overflow;
+        if (overflowX !== undefined) style.overflowX = overflowX;
+        if (overflowY !== undefined) style.overflowY = overflowY;
 
         style.backgroundColor = backgroundColor;
 

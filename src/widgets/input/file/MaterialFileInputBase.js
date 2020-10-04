@@ -7,6 +7,7 @@ import MaterialIconButton from "../../button/MaterialIconButton";
 import MaterialTextField from "../../MaterialTextField";
 import MaterialCol from "../../grid/MaterialCol";
 import {Grid} from "@material-ui/core";
+import GridItem from "../../grid/GridItem";
 
 export default class MaterialFileInputBase extends Component {
 
@@ -27,7 +28,7 @@ export default class MaterialFileInputBase extends Component {
             PropTypes.arrayOf(PropTypes.string),
             PropTypes.string
         ]),
-        helperText:PropTypes.string,
+        helperText: PropTypes.string,
         onMount: PropTypes.func,
         onClick: PropTypes.func,
         flexGrow: PropTypes.number,
@@ -35,18 +36,18 @@ export default class MaterialFileInputBase extends Component {
         inputSize: PropTypes.number,
         clearSize: PropTypes.number,
         inputStyle: PropTypes.object,
-        disabled:PropTypes.bool
+        disabled: PropTypes.bool
 
     };
 
     static defaultProps = {
-        actionSize:1,
-        inputSize:9,
-        clearSize:1,
+        actionSize: 1,
+        inputSize: 9,
+        clearSize: 1,
         style: {},
-        inputStyle:{},
+        inputStyle: {},
         multiple: false,
-        disabled:false,
+        disabled: false,
         onClick() {
             return true;
         },
@@ -91,7 +92,7 @@ export default class MaterialFileInputBase extends Component {
             actionSize,
             inputSize,
             clearSize,
-            inputStyle :{...inputStyle},
+            inputStyle: {...inputStyle},
             style: {...style},
             onClick,
             ClearButton,
@@ -128,13 +129,15 @@ export default class MaterialFileInputBase extends Component {
             );
 
         ClearButton = (
-             <Grid container xs={clearSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER} style={{overflow:"hidden"}}>
-                 {ClearButton}
-             </Grid>
+            <Grid container xs={clearSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER}
+                  style={{overflow: "hidden"}}>
+                {ClearButton}
+            </Grid>
         );
 
         ActionButton = ActionButton !== undefined ? (
-            <Grid container xs={actionSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER} style={{overflow:"hidden"}}>
+            <Grid container xs={actionSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER}
+                  style={{overflow: "hidden"}}>
                 <ActionButton
                     onClick={
                         e => {
@@ -149,13 +152,13 @@ export default class MaterialFileInputBase extends Component {
         ) : undefined;
 
 
-        inputStyle.overflow="hidden"
+        inputStyle.overflow = "hidden";
 
         return (
             <MaterialCol>
                 <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.END}>
                     {ActionButton}
-                    <Grid xs={inputSize} style={inputStyle}>
+                    <GridItem xs={inputSize} style={inputStyle}>
                         <MaterialTextField
                             inputRef={this.ref}
                             type={"file"}
@@ -177,12 +180,13 @@ export default class MaterialFileInputBase extends Component {
                                     }
                                 }
                             }
+
                             multiple={multiple}
                             style={style}
                             disabled={disabled}
                             {...props}
                         />
-                    </Grid>
+                    </GridItem>
                     {ClearButton}
                 </MaterialRow>
                 <MaterialRow>{helperText}</MaterialRow>

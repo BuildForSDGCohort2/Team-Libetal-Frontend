@@ -25,6 +25,12 @@ export default class MaterialBtn extends React.Component {
         startIcon: PropTypes.any,
         endIcon: PropTypes.any,
         padding: PropTypes.number,
+        paddingTB: PropTypes.number,
+        paddingLR: PropTypes.number,
+        paddingLeft: PropTypes.number,
+        paddingRight: PropTypes.number,
+        paddingTop: PropTypes.number,
+        paddingBottom: PropTypes.number,
         margin: PropTypes.number,
         marginLR: PropTypes.number,
         marginRight: PropTypes.number,
@@ -32,6 +38,7 @@ export default class MaterialBtn extends React.Component {
         marginTB: PropTypes.number,
         marginTop: PropTypes.number,
         marginBottom: PropTypes.number,
+        maxWidth: PropTypes.number,
         fontSize: PropTypes.oneOf([PropTypes.string, PropTypes.number])
     };
 
@@ -51,6 +58,7 @@ export default class MaterialBtn extends React.Component {
             startIcon,
             endIcon,
             style: {
+                maxWidth: sMaxWidth,
                 fontSize: sFontSize,
                 margin: sMargin,
                 marginRight: sMarginRight = sMargin,
@@ -65,6 +73,7 @@ export default class MaterialBtn extends React.Component {
                 textTransform: styleTextTransform,
                 ...style
             },
+            maxWidth = sMaxWidth,
             textTransform = styleTextTransform,
             padding,
             paddingTB = padding,
@@ -104,6 +113,7 @@ export default class MaterialBtn extends React.Component {
         style.paddingTop = paddingTop;
         style.paddingBottom = paddingBottom;
         style.fontSize = fontSize;
+        style.maxWidth = maxWidth;
 
         return (
             <Button

@@ -12,6 +12,7 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import MaterialBtn from "../../../widgets/MaterialBtn";
 import {ThemeProvider} from "@material-ui/styles";
 import Register from "./Register";
+import MaterialIcon from "../../../widgets/MaterialIcon";
 
 
 export default class RegisterDrawer extends Component {
@@ -48,7 +49,7 @@ export default class RegisterDrawer extends Component {
         this.props.toggleDrawer();
         if (this.props.open) {
             this.props.switchForm(form);
-            this.props.toggleDrawer()
+            this.props.toggleDrawer();
         }
     }
 
@@ -79,8 +80,14 @@ export default class RegisterDrawer extends Component {
                             onClick={() => this.onDrawerItemClick(Register.PROFILE_FORM)}
                             primary={"Profile"}/>
                     </ListItem>
-
-                    <ListItem
+                    <ListItem onClick={toggleDrawer} button key={"primary"}>
+                        <ListItemIcon><InboxIcon/></ListItemIcon>
+                        <ListItemText
+                            onClick={() => this.onDrawerItemClick(Register.QUALIFICATIONS_FORM)}
+                            secondary={"Qualifications/Payments"}
+                            primary={"Other information"}/>
+                    </ListItem>
+                   {/* <ListItem
                         onClick={toggleDrawer}
                         button
                         key={"payment"}>
@@ -88,7 +95,7 @@ export default class RegisterDrawer extends Component {
                         <ListItemText
                             onClick={() => this.onDrawerItemClick(Register.ACCOUNTS_FORM)}
                             primary={"Payments"}/>
-                    </ListItem>
+                    </ListItem>*/}
 
                 </List>
                 <Divider/>
@@ -97,7 +104,7 @@ export default class RegisterDrawer extends Component {
                         onClick={toggleDrawer}
                         button
                         key={"accessibility"}>
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
+                        <ListItemIcon><MaterialIcon icon={"AccessibilityOutlined"}/></ListItemIcon>
                         <ListItemText
                             onClick={() => this.onDrawerItemClick(Register.ACCESSIBILITY_FORM)}
                             primary={"Accessibility"}/>

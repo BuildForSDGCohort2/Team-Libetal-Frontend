@@ -31,6 +31,17 @@ import RegisterDrawer from "./RegisterDrawer";
 import Avatar from "@material-ui/core/Avatar";
 import MaterialFileInput from "../../../widgets/MaterialFileInput";
 import GitHubIcon from "@material-ui/icons/GitHub";
+import Paper from "@material-ui/core/Paper";
+import Footer from "../../Footer";
+import Settings from "../../../utils/Settings";
+import GridItem from "../../../widgets/grid/GridItem";
+import MaterialCol from "../../../widgets/grid/MaterialCol";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
+import Flex from "../../../widgets/Flex";
+import MaterialTextView from "../../../widgets/MaterialTextView";
+import MaterialImageInput from "../../../widgets/input/MaterialImageInput";
+import MaterialDivider from "../../../widgets/MaterialDivider";
+import Colors from "../../../Colors";
 
 
 const success = createMuiTheme({
@@ -79,6 +90,7 @@ export default class Register extends Component {
     static PROFILE_FORM = 0;
     static ACCOUNTS_FORM = 1;
     static ACCESSIBILITY_FORM = 2;
+    static QUALIFICATIONS_FORM = 3;
 
     state = {
         drawerOpen: false,
@@ -275,7 +287,7 @@ export default class Register extends Component {
         let lastNameLabel = "Last Name";
 
         return (
-            <Grid container xs={12} xm={12} lg={12}>
+            <MaterialCol>
                 <Typography>Name</Typography>
                 <MaterialGrid lg={12}>
                     <MaterialTextField
@@ -286,30 +298,35 @@ export default class Register extends Component {
                         helperText={"Your displayed app name"}
                     />
                 </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
-                    <MaterialTextField
-                        label={firstNameLabel}
-                        placeholder={firstNameLabel}/>
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
-                    <MaterialTextField
-                        label={lastNameLabel}
-                        placeholder={lastNameLabel}/>
-                </MaterialGrid>
-            </Grid>
+                <MaterialRow justify={Flex.SPACE_BETWEEN}>
+                    <GridItem xs={12} sm={5}>
+                        <MaterialTextField
+                            fullWidth
+                            label={firstNameLabel}
+                            placeholder={firstNameLabel}/>
+                    </GridItem>
+                    <GridItem xs={12} sm={5}>
+                        <MaterialTextField
+                            fullWidth
+                            label={lastNameLabel}
+                            placeholder={lastNameLabel}/>
+                    </GridItem>
+                </MaterialRow>
+            </MaterialCol>
         );
     }
 
     get phoneInputs() {
         return (
-            <MaterialGrid container xs={12} xm={12} lg={12} style={{marginTop: 8}}>
-                <MaterialGrid container xm={12} lg={12} xs={12}>
+            <MaterialRow marginTop={8} justify={Flex.SPACE_BETWEEN}>
+                <MaterialRow>
                     <Typography fullWidth>Contact</Typography>
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
+                </MaterialRow>
+                <GridItem xs={12} sm={5}>
                     <MaterialTextField
                         validate type={"email"}
                         label={"email"}
+                        fullWidth
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -318,10 +335,11 @@ export default class Register extends Component {
                             )
                         }}
                     />
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
+                </GridItem>
+                <GridItem xs={12} sm={5}>
                     <MaterialTextField
                         type={"phone"}
+                        fullWidth
                         label={"phone"}
                         InputProps={{
                             startAdornment: (
@@ -330,56 +348,63 @@ export default class Register extends Component {
                                 </InputAdornment>
                             )
                         }}/>
-                </MaterialGrid>
-            </MaterialGrid>
+                </GridItem>
+            </MaterialRow>
         );
     }
 
 
     get addressInputs() {
         return (
-            <MaterialGrid container xs={12} xm={12} lg={12} style={{marginTop: 8}}>
-                <MaterialGrid xm={12} lg={12} xs={12}>
-                    <Typography fullWidth>Address</Typography>
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
+            <MaterialRow marginTop={8} justify={Flex.SPACE_BETWEEN}>
+                <MaterialRow>
+                    <MaterialTextView
+                        text={"Address"}
+                    />
+                </MaterialRow>
+                <GridItem xs={12} sm={5}>
                     <MaterialTextField
                         type={"text"}
                         label={"Country"}
                         startIcon={<PublicIcon/>}
+                        fullWidth
                     />
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
-                    <MaterialTextField type={"text"} label={"City"}/>
-                </MaterialGrid>
-            </MaterialGrid>
+                </GridItem>
+                <GridItem xs={12} sm={5}>
+                    <MaterialTextField
+                        type={"text"}
+                        label={"City"}
+                        fullWidth
+                    />
+                </GridItem>
+            </MaterialRow>
         );
     }
 
     get passwordInputs() {
         return (
-            <MaterialGrid container xs={12} xm={12} lg={12} style={{marginTop: 8}}>
-                <MaterialGrid xm={12} lg={12} xs={12}>
+            <MaterialRow marginTop={8} justify={Flex.SPACE_BETWEEN}>
+                <MaterialRow>
                     <Typography fullWidth>Security</Typography>
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
+                </MaterialRow>
+                <GridItem xs={12} sm={5} lg={5}>
                     <MaterialTextField
                         item
-                        flexGrow={1}
+                        fullWidth
                         required
                         type={"password"}
                         label={"Password"}
                         startIcon={<LockIcon/>}/>
-                </MaterialGrid>
-                <MaterialGrid flexGrow={1}>
+                </GridItem>
+                <GridItem xs={12} sm={5} lg={5}>
                     <MaterialTextField
                         item
-                        flexGrow={1}
+                        fullWidth
                         required type={"password"}
                         label={"Password Again"}
                         startIcon={<LockIcon/>}/>
-                </MaterialGrid>
-            </MaterialGrid>
+                </GridItem>
+            </MaterialRow>
         );
     }
 
@@ -399,32 +424,31 @@ export default class Register extends Component {
         };
 
         return (
-            <MaterialInputLayout>
-                <MaterialSelect
-                    labelText={"Skills"}
-                    menuTitleText={"Skills"}
-                    color={"secondary"}
-                    labelId="label-skills"
-                    id="skills-select"
-                    multiple fullWidth
-                    value={this.state.selectedSkills}
-                    onChange={this.onSkillChange}
-                    input={<Input id="skills-select-input"/>}
-                    renderValue={(selected) => {
-                        return (
-                            <div className={classes.chips}>
-                                {selected.map(id => (
-                                    <Chip color="primary" key={id}
-                                          label={this.getSkill(id).name}
-                                          className={classes.chip}/>
-                                ))}
-                            </div>
-                        );
-                    }}
-                    MenuProps={MenuProps}>
-                    {this.skillsLayout}
-                </MaterialSelect>
-            </MaterialInputLayout>
+            <MaterialSelect
+                labelText={"Skills"}
+                menuTitleText={"Skills"}
+                color={"secondary"}
+                labelId="label-skills"
+                id="skills-select"
+                multiple
+                fullWidth
+                value={this.state.selectedSkills}
+                onChange={this.onSkillChange}
+                input={<Input id="skills-select-input"/>}
+                renderValue={(selected) => {
+                    return (
+                        <div className={classes.chips}>
+                            {selected.map(id => (
+                                <Chip color="primary" key={id}
+                                      label={this.getSkill(id).name}
+                                      className={classes.chip}/>
+                            ))}
+                        </div>
+                    );
+                }}
+                MenuProps={MenuProps}>
+                {this.skillsLayout}
+            </MaterialSelect>
         );
     }
 
@@ -452,6 +476,52 @@ export default class Register extends Component {
         );
     }
 
+    get qualificationsForm() {
+
+        return (
+            <MaterialCol minHeight={400} alignItems={Flex.CENTER}>
+                <GridItem xs={8} sm={8}>
+                    <Paper style={{padding:8}}>
+                        <Typography>Qualifications</Typography>
+                        <GridItem xs={12} sm={5}>
+                            {this.skillsInput}
+                        </GridItem>
+                        <GridItem>
+                            {this.aboutUserInput}
+                        </GridItem>
+                        <GridItem marginTB={4}>
+                            <MaterialFileInput
+                                fullWidth
+                                labelText={"CV / Portfolio"}/>
+                        </GridItem>
+                        <GridItem marginTB={4}>
+                            <MaterialFileInput
+                                fullWidth
+                                labelText={"Certification"}/>
+                        </GridItem>
+
+                       <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_BETWEEN} marginTB={10}>
+                           <GridItem>
+                               <MaterialTextField
+                                   label={"GitHub Profile name"}
+                                   startIcon={<GitHubIcon/>}
+                               />
+                           </GridItem>
+                           <GridItem>
+                               <MaterialBtn
+                                   color={"primary"}
+                                   variant={"contained"}
+                                   content={"Help"}
+                                   startIcon={<ContactSupportIcon/>}/>
+                           </GridItem>
+                       </MaterialRow>
+                    </Paper>
+
+                </GridItem>
+            </MaterialCol>
+        );
+    }
+
     getMain() {
         let {classes} = this.props;
 
@@ -459,11 +529,11 @@ export default class Register extends Component {
 
 
         switch (this.state.currentForm) {
-            case Register.ACCOUNTS_FORM:
-                view = <Typography>Accounts</Typography>;
-                break;
             case Register.ACCESSIBILITY_FORM:
                 view = <Typography>Accounts</Typography>;
+                break;
+            case Register.QUALIFICATIONS_FORM:
+                view = this.qualificationsForm;
                 break;
             default:
                 view = this.getProfileRegistrationForm();
@@ -472,6 +542,7 @@ export default class Register extends Component {
         return (
             <main className={classes.content}>
                 {view}
+                <MaterialDivider spacing={10} color={Colors.transparent} />
             </main>
         );
     }
@@ -481,43 +552,29 @@ export default class Register extends Component {
         let {classes} = this.props;
 
         return (
-            <form className={classes.root}>
-                <Grid container justify={"space-around"}>
-                    <Grid container item xs={5} lg={5}>
+            <MaterialRow justify={Flex.CENTER} alignContent={Flex.CENTER}>
+                <MaterialRow sm={12} lg={2} alignItems={Flex.CENTER} justify={Flex.CENTER}>
+                    <MaterialImageInput
+                        paddingLR={1}
+                        paddingTB={4}
+                        width={200}
+                        inputSize={8}
+                        clearSize={2}
+                        actionSize={2}
+                        maxPreviewHeight={160}
+                        maxPreviewWidth={"80%"}
+                    />
+                </MaterialRow>
+                <GridItem xs={8} lg={5}>
+                    <Paper style={{padding:6}}>
                         {this.nameInputs}
                         {this.passwordInputs}
                         {this.phoneInputs}
                         {this.addressInputs}
                         {this.submitBtn}
-                    </Grid>
-                    <Grid container alignItems={"flex-start"} xs={4} lg={4}>
-                        <Grid item lg={12}>
-                            <Typography>Qualifications</Typography>
-                            {this.skillsInput}
-                        </Grid>
-                        <Grid item lg={12}>
-                            {this.aboutUserInput}
-                        </Grid>
-                        <Grid item lg={12}>
-                            <MaterialFileInput labelText={"CV / Portfolio"}/>
-                            <MaterialFileInput labelText={"Certification"}/>
-                        </Grid>
-                        <Grid item lg={8}>
-                            <MaterialTextField
-                                label={"GitHub Profile name"}
-                                startIcon={<GitHubIcon/>}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <MaterialBtn
-                                color={"primary"}
-                                variant={"contained"}
-                                content={"Help"}
-                                startIcon={<ContactSupportIcon/>}/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </form>
+                    </Paper>
+                </GridItem>
+            </MaterialRow>
         );
     }
 
@@ -535,13 +592,10 @@ export default class Register extends Component {
             <MaterialTextField
                 label={"About You"}
                 fullWidth
-                lg={12}
                 multiline
-                rows={3}
-                rowsMax={4}
-                flexGrow={1}
+                rows={5}
+                rowsMax={5}
                 placeholder={"Tell us about yourself."}
-                style={{height: 40}}
             />
         );
     }
@@ -574,56 +628,31 @@ export default class Register extends Component {
 
         return (
             <div className={classes.root} style={{flexDirection: "column"}}>
-                <RegisterAppBar
-                    color={"secondary"}
-                    styles={styles}
-                    open={this.state.drawerOpen}
-                    classes={classes}
-                    handleOpen={this.toggleDrawer}
-                />
+                <ThemeProvider theme={Settings.appTheme}>
+                    <RegisterAppBar
+                        color={"secondary"}
+                        styles={styles}
+                        open={this.state.drawerOpen}
+                        classes={classes}
+                        handleOpen={this.toggleDrawer}
+                        navigator={this.props.navigator}
+                        registrationInstance={this}
+                    />
 
-                <RegisterDrawer
-                    success={success}
-                    registerUser={this.registerUser}
-                    classes={this.classes}
-                    theme={theme}
-                    appTheme={styles}
-                    open={this.state.drawerOpen}
-                    switchForm={this.switchForm}
-                    toggleDrawer={this.toggleDrawer}/>
-
-                <Grid
-                    container
-                    direction="row"
-                    justify={"space-around"}>
-                    <Grid container
-                          item
-                          lg={2}
-                          justify={"center"}
-                          alignItems={"center"}
-                          direction="row">
-                        <Avatar src={"images/branding.png"} style={{height: 100, width: 100}}/>
-                    </Grid>
-                    <Grid
-                        container
-                        item
-                        lg={8}
-                        justify={"flex-start"}
-                        direction="column">
-                        <Grid item
-                              container
-                              justify={"flex-end"}
-                              direction="row"
-                              style={{paddingRight: 40}}>
-                            <MaterialBtn
-                                content={"FAQ"}/>
-                            <MaterialBtn
-                                content={"About US"}/>
-                        </Grid>
-                    </Grid>
-
-                </Grid>
-                {this.getMain()}
+                    <RegisterDrawer
+                        success={success}
+                        registerUser={this.registerUser}
+                        classes={this.classes}
+                        theme={theme}
+                        appTheme={styles}
+                        open={this.state.drawerOpen}
+                        switchForm={this.switchForm}
+                        toggleDrawer={this.toggleDrawer}/>
+                    <Paper style={{borderRadius: 0}} elevation={0}>
+                        {this.getMain()}
+                    </Paper>
+                    <Footer/>
+                </ThemeProvider>
             </div>
         );
     }

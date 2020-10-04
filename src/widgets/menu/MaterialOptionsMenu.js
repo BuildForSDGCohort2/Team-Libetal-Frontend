@@ -13,7 +13,7 @@ export default class MaterialOptionsMenu extends OptionsMenu {
 
     static propTypes = {
         ...OptionsMenu.propTypes,
-        controller: PropTypes.any,
+        controller: PropTypes.any.isRequired,
         controllerBody: PropTypes.any,
         controllerProps: PropTypes.any
     };

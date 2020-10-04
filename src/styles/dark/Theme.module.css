@@ -18,7 +18,10 @@ body {
   background-image: url("/images/header_banner.png"); }
 
 .body {
-  background-image: url("/images/home.bg.png"); }
+  background-image: url("/images/ic_bg.png");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-position-y: 80px; }
 
 .homeHeader {
   background-color: rgba(0, 0, 0, 0.4);

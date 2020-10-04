@@ -17,8 +17,11 @@ export default class MaterialImageInput extends Component {
         defaultSrc: PropTypes.string,
         height: PropTypes.number,
         width: PropTypes.number,
+        paddingLR: PropTypes.number,
+        paddingTB: PropTypes.number,
         onChange: PropTypes.func,
         flexGrow: PropTypes.number,
+        padding: PropTypes.number,
         placeholder: PropTypes.string,
         maxPreviewHeight: PropTypes.oneOfType([
             PropTypes.number,
@@ -27,7 +30,10 @@ export default class MaterialImageInput extends Component {
         maxPreviewWidth: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string
-        ])
+        ]),
+        inputSize: PropTypes.number,
+        actionSize: PropTypes.number,
+        clearSize: PropTypes.number
     };
 
     static defaultProps = {
@@ -84,6 +90,12 @@ export default class MaterialImageInput extends Component {
             multiple,
             maxPreviewHeight,
             maxPreviewWidth,
+            inputSize,
+            actionSize,
+            clearSize,
+            padding = 4,
+            paddingLR = padding,
+            paddingTB = padding,
             style = {}
         } = this.props;
 
@@ -95,10 +107,8 @@ export default class MaterialImageInput extends Component {
 
             <Paper style={style}>
                 <MaterialCol
-                    paddingTop={4}
-                    paddingRight={4}
-                    paddingBottom={4}
-                    paddingLeft={4}
+                    paddingLR={paddingLR}
+                    paddingTB={paddingTB}
                     height={height}
                 >
                     <Separator/>
@@ -122,13 +132,16 @@ export default class MaterialImageInput extends Component {
                             <MaterialFileInputBase
                                 ActionButton={MaterialIconButton}
                                 ActionButtonButtonProps={{
-                                    icon:"ImageSearch"
+                                    icon: "ImageSearch"
                                 }}
                                 onMount={
                                     input => {
                                         this.input = input;
                                     }
                                 }
+                                inputSize={inputSize}
+                                actionSize={actionSize}
+                                clearSize={clearSize}
                                 onChange={this.onChange}
                                 placeholder={placeholder} multiple={multiple}
                                 accept={["png", "jpg"]}

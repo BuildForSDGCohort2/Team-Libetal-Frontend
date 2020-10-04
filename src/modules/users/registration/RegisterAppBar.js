@@ -16,6 +16,15 @@ import View from "../../repos/contributions/View";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Settings from "../../../utils/Settings";
+import UserAccountButton from "../widgets/UserAccountsButton";
+import AccessibilityControl from "../../../widgets/AccessibilityControl";
+import GridItem from "../../../widgets/grid/GridItem";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
+import Flex from "../../../widgets/Flex";
+import Libetal from "../../../widgets/icons/Libetal";
+import Separator from "../../../widgets/separator";
+import MaterialOptionsMenu from "../../../widgets/menu/MaterialOptionsMenu";
+import LanguagesAccessibilityControl from "../../../widgets/accessibility/LanguagesAccessibilityControl";
 
 export default class RegisterAppBar extends View {
 
@@ -25,56 +34,52 @@ export default class RegisterAppBar extends View {
             <AppBar
                 position="static"
                 className={clsx(classes.appBar, {})}>
-                <Toolbar style={{display: "flex", flexDirection: "row !important", alignItems: "right"}}>
-                    <IconButton
-                        style={{
-                            color: Settings.textPrimary
-                        }}
-                        aria-label="open drawer"
-                        onClick={handleOpen}
-                        edge="start">
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h2">
-                        Libetal
-                    </Typography>
-                    <div className={classes.grow}/>
-                    <nav>
+                <Toolbar>
+                    <MaterialRow>
+                        <IconButton
+                            style={{
+                                color: Settings.textPrimary
+                            }}
+                            aria-label="open drawer"
+                            onClick={handleOpen}
+                            edge="start">
+                            <MenuIcon/>
+                        </IconButton>
                         <MaterialBtn
-                            style={{marginRight: 10}}
-                            startIcon={
-                                <Grid container>
-                                    <AccountTreeIcon/>
-                                </Grid>
-                            }
-                            content={"Repositories"}/>
+                            paddinTop={0}
+                            paddinBottom={0}
+                            paddingLR={16}
+                            startIcon={<Libetal height={32} width={32}/>}
+                            variant={"text"}
+                            fontSize={20}
+                            textTransform={"none"}
+                            content={"Libetal"}
+                        />
+                        <Separator/>
+                        <GridItem xs={12} sm={5}>
+                            <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_BETWEEN}>
+                                <MaterialBtn
+                                    variant={"text"}
+                                    style={{marginRight: 10}}
+                                    startIcon={<AppsIcon/>}
+                                    content={"Store"}/>
 
-                        <MaterialBtn
-                            style={{marginRight: 10}}
-                            startIcon={
-                                <Grid container>
-                                    <AppsIcon/>
-                                </Grid>
-                            }
-                            content={"Store"}/>
+                                <MaterialBtn
+                                    variant={"text"}
+                                    content={"FAQ"}
+                                />
 
-                        <MaterialBtn
-                            style={{marginRight: 10}}
-                            endIcon={
-                                <Grid container>
-                                    <LanguageIcon/>
-                                    <InvertColorsIcon/>
-                                </Grid>
-                            }
-                            content={"Accessibility"}/>
+                                <MaterialBtn
+                                    variant={"text"}
+                                    content={"About US"}
+                                />
 
-                        <Button
-                            variant={"contained"}
-                            startIcon={<AccountCircleIcon/>}
-                            endIcon={<ExpandMoreIcon/>}>
-                            Login
-                        </Button>
-                    </nav>
+                                <LanguagesAccessibilityControl componentInstance={this.props.registrationInstance}/>
+                                <AccessibilityControl componentInstance={this.props.registrationInstance}/>
+                                <UserAccountButton navigator={this.props.navigator}/>
+                            </MaterialRow>
+                        </GridItem>
+                    </MaterialRow>
                 </Toolbar>
             </AppBar>
         );
