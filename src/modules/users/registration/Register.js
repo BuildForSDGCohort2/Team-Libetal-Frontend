@@ -42,6 +42,8 @@ import MaterialTextView from "../../../widgets/MaterialTextView";
 import MaterialImageInput from "../../../widgets/input/MaterialImageInput";
 import MaterialDivider from "../../../widgets/MaterialDivider";
 import Colors from "../../../Colors";
+import Checkbox from "@material-ui/core/Checkbox";
+import MaterialIconButton from "../../../widgets/button/MaterialIconButton";
 
 
 const success = createMuiTheme({
@@ -99,9 +101,11 @@ export default class Register extends Component {
         selectedSkills: [],
         selectedSkillsIds: [],
         userDetails: {
-            profileName: "",
-            firstName: "",
-            lastName: "",
+            username: "",
+            f_name: "",
+            l_name: "",
+            password: "",
+            passwordAgain: "",
             phone: 0,
             email: ""
         },
@@ -283,6 +287,7 @@ export default class Register extends Component {
     }
 
     get nameInputs() {
+        let profileNameLabel = "Profile Name";
         let firstNameLabel = "First Name";
         let lastNameLabel = "Last Name";
 
@@ -291,8 +296,8 @@ export default class Register extends Component {
                 <Typography>Name</Typography>
                 <MaterialGrid lg={12}>
                     <MaterialTextField
-                        label={firstNameLabel}
-                        value={this.state.userDetails.profileName}
+                        label={profileNameLabel}
+                        value={this.state.userDetails.username}
                         onChange={this.onProfileTextChange}
                         startIcon={<AccountCircleIcon/>}
                         helperText={"Your displayed app name"}
@@ -301,6 +306,7 @@ export default class Register extends Component {
                 <MaterialRow justify={Flex.SPACE_BETWEEN}>
                     <GridItem xs={12} sm={5}>
                         <MaterialTextField
+                            value={this.state.userDetails.f_name}
                             fullWidth
                             label={firstNameLabel}
                             placeholder={firstNameLabel}/>
@@ -308,6 +314,7 @@ export default class Register extends Component {
                     <GridItem xs={12} sm={5}>
                         <MaterialTextField
                             fullWidth
+                            value={this.state.userDetails.l_name}
                             label={lastNameLabel}
                             placeholder={lastNameLabel}/>
                     </GridItem>
@@ -455,8 +462,7 @@ export default class Register extends Component {
     get submitBtn() {
         let marginTop = 12;
         return (
-            <Grid container direction={"row"} justify={"flex-end"} item lg={12}
-                  style={{marginTop}}>
+            <>
                 <ThemeProvider theme={cancel}>
                     <MaterialBtn
                         color={"primary"}
@@ -472,53 +478,73 @@ export default class Register extends Component {
                         variant={"contained"}
                         content={"Register"}/>
                 </ThemeProvider>
-            </Grid>
+            </>
+        );
+    }
+
+    get paymentsForm() {
+
+
+        return (
+            <GridItem xs={8} sm={6} lg={4}>
+                <Paper>
+                    Payment
+                </Paper>
+            </GridItem>
+        );
+    }
+
+    get qualificationsFormAndPayments() {
+
+        return (
+            <MaterialCol minHeight={400} alignItems={Flex.CENTER}>
+                {this.qualificationsForm}
+                {this.paymentsForm}
+            </MaterialCol>
         );
     }
 
     get qualificationsForm() {
 
         return (
-            <MaterialCol minHeight={400} alignItems={Flex.CENTER}>
-                <GridItem xs={8} sm={8}>
-                    <Paper style={{padding:8}}>
-                        <Typography>Qualifications</Typography>
-                        <GridItem xs={12} sm={5}>
-                            {this.skillsInput}
+            <GridItem xs={8} sm={6} lg={7}>
+                <Paper style={{padding: 8}}>
+                    <Typography>Qualifications</Typography>
+                    <GridItem xs={12} sm={5}>
+                        {this.skillsInput}
+                    </GridItem>
+                    <GridItem>
+                        {this.aboutUserInput}
+                    </GridItem>
+                    <GridItem marginTB={4}>
+                        <MaterialFileInput
+                            fullWidth
+                            labelText={"CV / Portfolio"}/>
+                    </GridItem>
+                    <GridItem marginTB={4}>
+                        <MaterialFileInput
+                            fullWidth
+                            labelText={"Certification"}/>
+                    </GridItem>
+
+                    <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_BETWEEN} marginTB={10}>
+                        <GridItem>
+                            <MaterialTextField
+                                label={"GitHub Profile name"}
+                                startIcon={<GitHubIcon/>}
+                            />
                         </GridItem>
                         <GridItem>
-                            {this.aboutUserInput}
+                            <MaterialBtn
+                                color={"primary"}
+                                variant={"contained"}
+                                content={"Help"}
+                                startIcon={<ContactSupportIcon/>}/>
                         </GridItem>
-                        <GridItem marginTB={4}>
-                            <MaterialFileInput
-                                fullWidth
-                                labelText={"CV / Portfolio"}/>
-                        </GridItem>
-                        <GridItem marginTB={4}>
-                            <MaterialFileInput
-                                fullWidth
-                                labelText={"Certification"}/>
-                        </GridItem>
+                    </MaterialRow>
+                </Paper>
 
-                       <MaterialRow alignItems={Flex.CENTER} justify={Flex.SPACE_BETWEEN} marginTB={10}>
-                           <GridItem>
-                               <MaterialTextField
-                                   label={"GitHub Profile name"}
-                                   startIcon={<GitHubIcon/>}
-                               />
-                           </GridItem>
-                           <GridItem>
-                               <MaterialBtn
-                                   color={"primary"}
-                                   variant={"contained"}
-                                   content={"Help"}
-                                   startIcon={<ContactSupportIcon/>}/>
-                           </GridItem>
-                       </MaterialRow>
-                    </Paper>
-
-                </GridItem>
-            </MaterialCol>
+            </GridItem>
         );
     }
 
@@ -527,13 +553,12 @@ export default class Register extends Component {
 
         let view;
 
-
         switch (this.state.currentForm) {
             case Register.ACCESSIBILITY_FORM:
                 view = <Typography>Accounts</Typography>;
                 break;
             case Register.QUALIFICATIONS_FORM:
-                view = this.qualificationsForm;
+                view = this.qualificationsFormAndPayments;
                 break;
             default:
                 view = this.getProfileRegistrationForm();
@@ -542,7 +567,7 @@ export default class Register extends Component {
         return (
             <main className={classes.content}>
                 {view}
-                <MaterialDivider spacing={10} color={Colors.transparent} />
+                <MaterialDivider spacing={10} color={Colors.transparent}/>
             </main>
         );
     }
@@ -566,12 +591,36 @@ export default class Register extends Component {
                     />
                 </MaterialRow>
                 <GridItem xs={8} lg={5}>
-                    <Paper style={{padding:6}}>
+                    <Paper style={{padding: 6}}>
                         {this.nameInputs}
                         {this.passwordInputs}
                         {this.phoneInputs}
                         {this.addressInputs}
-                        {this.submitBtn}
+                        <MaterialRow alignItems={Flex.CENTER} marginTop={4}>
+                            <MaterialRow xs={12} sm={6} alignItems={Flex.CENTER}>
+                                <Checkbox
+                                    onChange={
+                                        (e, newValue) => this.setState(
+                                            state => {
+
+
+                                                return state;
+                                            }
+                                        )
+                                    }
+                                />
+                                <MaterialBtn
+                                    textTransform={"none"}
+                                    variant={"text"}
+                                    padding={0}
+                                    content={"Accept Terms & Conditions"}
+                                />
+                                <MaterialIconButton icon={"Help"}/>
+                            </MaterialRow>
+                            <MaterialRow xs={12} sm={6} alignItems={Flex.CENTER} justify={Flex.SPACE_EVENLY}>
+                                {this.submitBtn}
+                            </MaterialRow>
+                        </MaterialRow>
                     </Paper>
                 </GridItem>
             </MaterialRow>
@@ -615,7 +664,7 @@ export default class Register extends Component {
         this.setState(prevState => {
             let userDetails = prevState.userDetails;
 
-            userDetails.profileName = value;
+            userDetails.username = value;
 
             return userDetails;
         });

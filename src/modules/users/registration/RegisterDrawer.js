@@ -96,7 +96,6 @@ export default class RegisterDrawer extends Component {
                             onClick={() => this.onDrawerItemClick(Register.ACCOUNTS_FORM)}
                             primary={"Payments"}/>
                     </ListItem>*/}
-
                 </List>
                 <Divider/>
                 <List>
