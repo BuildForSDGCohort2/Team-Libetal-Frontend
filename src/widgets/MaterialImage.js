@@ -5,7 +5,8 @@ export default class MaterialImage extends Component {
 
     static defaultProps = {
         alt: "MaterialImage",
-        size: undefined
+        // this is to fix image issues for registration page
+        size: ""
     };
 
     static propTypes = {

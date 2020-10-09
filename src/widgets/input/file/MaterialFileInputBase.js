@@ -36,7 +36,9 @@ export default class MaterialFileInputBase extends Component {
         inputSize: PropTypes.number,
         clearSize: PropTypes.number,
         inputStyle: PropTypes.object,
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
+        rowJustify: PropTypes.string,
+        actionRowFlexJustify: PropTypes.string
 
     };
 
@@ -90,6 +92,8 @@ export default class MaterialFileInputBase extends Component {
             multiple,
             accept,
             actionSize,
+            rowJustify = Flex.SPACE_EVENLY,
+            actionRowFlexJustify = Flex.CENTER,
             inputSize,
             clearSize,
             inputStyle: {...inputStyle},
@@ -129,26 +133,28 @@ export default class MaterialFileInputBase extends Component {
             );
 
         ClearButton = (
-            <Grid container xs={clearSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER}
-                  style={{overflow: "hidden"}}>
+            <MaterialRow xs={clearSize} justify={Flex.START} alignItems={Flex.CENTER}
+                         style={{overflow: "hidden"}}>
                 {ClearButton}
-            </Grid>
+            </MaterialRow>
         );
 
         ActionButton = ActionButton !== undefined ? (
-            <Grid container xs={actionSize} direction={"row"} justify={Flex.CENTER} alignItems={Flex.CENTER}
-                  style={{overflow: "hidden"}}>
-                <ActionButton
-                    onClick={
-                        e => {
-                            e.stopPropagation();
-                            this.ref.current.click();
+            <MaterialRow xs={actionSize} justify={actionRowFlexJustify} alignItems={Flex.CENTER}
+                         style={{overflow: "hidden"}}>
+                <GridItem>
+                    <ActionButton
+                        onClick={
+                            e => {
+                                e.stopPropagation();
+                                this.ref.current.click();
+                            }
                         }
-                    }
-                    {...ActionButtonButtonProps}
-                    disabled={disabled}
-                />
-            </Grid>
+                        {...ActionButtonButtonProps}
+                        disabled={disabled}
+                    />
+                </GridItem>
+            </MaterialRow>
         ) : undefined;
 
 
@@ -156,8 +162,9 @@ export default class MaterialFileInputBase extends Component {
 
         return (
             <MaterialCol>
-                <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.END}>
+                <MaterialRow justify={rowJustify} alignItems={Flex.END}>
                     {ActionButton}
+                    {/*TODO this should be in a grid item so as to show distinction between action and input */}
                     <GridItem xs={inputSize} style={inputStyle}>
                         <MaterialTextField
                             inputRef={this.ref}

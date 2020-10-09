@@ -19,6 +19,7 @@ export default class MaterialSelect extends Component {
         style: {},
         selectionItems: [],
         selectionHeader: undefined,
+        maxRows: undefined,
         selectionFooter: undefined,
         value: "",
         onChange(item) {
@@ -91,17 +92,12 @@ export default class MaterialSelect extends Component {
         }
 
         return (
-            <Select style={style} {...props}>
+            <Select style={style}  {...props} >
                 {selectionHeader}
                 {this.selectionItems}
                 {selectionFooter}
             </Select>
         );
-    }
-
-
-    get input() {
-        return this.props.labelId === undefined ? this.basicInput : this.withLabel;
     }
 
     get withLabel() {
@@ -140,6 +136,11 @@ export default class MaterialSelect extends Component {
                 </Select>
             </>
         );
+    }
+
+
+    get input() {
+        return this.props.labelId === undefined ? this.basicInput : this.withLabel;
     }
 
 

@@ -54,6 +54,11 @@ export default class RegisterAppBar extends View {
                             fontSize={20}
                             textTransform={"none"}
                             content={"Libetal"}
+                            onClick={
+                                e => {
+                                    this.props.navigator("home");
+                                }
+                            }
                         />
                         <Separator/>
                         <GridItem xs={12} sm={5}>
@@ -72,6 +77,11 @@ export default class RegisterAppBar extends View {
                                 <MaterialBtn
                                     variant={"text"}
                                     content={"About US"}
+                                    onClick={
+                                        e => {
+                                            this.props.navigator("about");
+                                        }
+                                    }
                                 />
 
                                 <LanguagesAccessibilityControl componentInstance={this.props.registrationInstance}/>

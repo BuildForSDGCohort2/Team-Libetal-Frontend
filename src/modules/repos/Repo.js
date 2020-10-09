@@ -196,6 +196,7 @@ export default class Repo extends Component {
                         onItemClick={
                             itemId => this.setState({currentPage: itemId || currentPage})
                         }
+                        navigator={this.props.navigator}
                     />
                     <Paper style={{paddingLeft: drawerIsOpen ? 240 : 48, borderRadius: 0}} elevation={0}>
                         <MaterialRow paddingTop={8} paddingLR={8} alignItems={Flex.CENTER}>
@@ -212,7 +213,7 @@ export default class Repo extends Component {
                             </GridItem>
                         </MaterialRow>
                         {this.currentPage}
-                        <Footer navigator={this.props.navigator}/>
+                        <Footer navigator={navigator}/>
                     </Paper>
                 </>
             </ThemeProvider>

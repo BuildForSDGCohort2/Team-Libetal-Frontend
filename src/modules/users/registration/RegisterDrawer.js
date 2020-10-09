@@ -74,20 +74,20 @@ export default class RegisterDrawer extends Component {
                 <Grid style={{height: 80}}/>
                 <Divider/>
                 <List>
-                    <ListItem onClick={toggleDrawer} button key={"primary"}>
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
+                    <ListItem onClick={toggleDrawer} button key={"profile"}>
+                        <ListItemIcon><MaterialIcon icon={"PersonAdd"}/></ListItemIcon>
                         <ListItemText
                             onClick={() => this.onDrawerItemClick(Register.PROFILE_FORM)}
                             primary={"Profile"}/>
                     </ListItem>
-                    <ListItem onClick={toggleDrawer} button key={"primary"}>
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
+                    <ListItem onClick={toggleDrawer} button key={"accounts_skill"}>
+                        <ListItemIcon><MaterialIcon icon={"AccountBalanceWallet"}/></ListItemIcon>
                         <ListItemText
                             onClick={() => this.onDrawerItemClick(Register.QUALIFICATIONS_FORM)}
                             secondary={"Qualifications/Payments"}
                             primary={"Other information"}/>
                     </ListItem>
-                   {/* <ListItem
+                    {/* <ListItem
                         onClick={toggleDrawer}
                         button
                         key={"payment"}>

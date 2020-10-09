@@ -24,7 +24,9 @@ export default class MaterialTextField extends Component {
         defaultRows: PropTypes.number,
         maxRows: PropTypes.number,
         helperText: PropTypes.any,
-        InputLabelProps: PropTypes.any
+        InputLabelProps: PropTypes.any,
+        type: PropTypes.oneOf(["number", "email", "password"]),
+        inputRef: PropTypes.any
     };
 
     static defaultProps = {
@@ -51,7 +53,9 @@ export default class MaterialTextField extends Component {
         let {
             labelText,
             labelId,
+            type,
             color,
+            inputRef,
             variant,
             onClick,
             InputProps,
@@ -74,6 +78,7 @@ export default class MaterialTextField extends Component {
             <>
                 {/* <InputLabel shrink id={labelId}>{labelText}</InputLabel>*/}
                 <TextField
+                    inputRef={inputRef}
                     onChange={this.performOnChange}
                     color={color}
                     variant={variant}
@@ -85,6 +90,7 @@ export default class MaterialTextField extends Component {
 
                         }
                     }
+                    type={type}
                     helperText={helperText}
                     label={labelText}
                     select
@@ -109,6 +115,8 @@ export default class MaterialTextField extends Component {
             labelText,
             labelId,
             color,
+            type,
+            inputRef,
             helperText,
             variant,
             onClick,
@@ -129,6 +137,7 @@ export default class MaterialTextField extends Component {
 
         return (
             <TextField
+                inputRef={inputRef}
                 color={color}
                 variant={variant}
                 onClick={
@@ -144,6 +153,7 @@ export default class MaterialTextField extends Component {
                 placeholder={placeholder}
                 fullWidth={fullWidth}
                 style={style}
+                type={type}
                 multiline={multiline}
                 rows={defaultRows}
                 rowsMax={maxRows}
@@ -166,6 +176,7 @@ export default class MaterialTextField extends Component {
             labelText,
             labelId,
             color,
+            inputRef,
             variant,
             onClick,
             multiline,
@@ -173,6 +184,7 @@ export default class MaterialTextField extends Component {
             maxRows,
             helperText,
             label,
+            type,
             placeholder,
             fullWidth,
             style = {},
@@ -187,6 +199,7 @@ export default class MaterialTextField extends Component {
 
         return (
             <TextField
+                inputRef={inputRef}
                 rows={defaultRows}
                 rowsMax={maxRows}
                 ref={this.ref}
@@ -203,6 +216,7 @@ export default class MaterialTextField extends Component {
                     }
                 }
                 label={label}
+                type={type}
                 placeholder={placeholder}
                 fullWidth={fullWidth}
                 style={style}
@@ -227,12 +241,14 @@ export default class MaterialTextField extends Component {
             labelId,
             color,
             variant,
+            inputRef,
             helperText,
             onClick,
             label,
             placeholder,
             multiline,
             defaultRows,
+            type,
             maxRows,
             fullWidth,
             style = {},
@@ -245,6 +261,7 @@ export default class MaterialTextField extends Component {
 
         return (
             <TextField
+                inputRef={inputRef}
                 onChange={this.performOnChange}
                 color={color}
                 variant={variant}
@@ -257,6 +274,7 @@ export default class MaterialTextField extends Component {
                     }
                 }
                 label={label}
+                type={type}
                 helperText={helperText}
                 multiline={multiline}
                 rows={defaultRows}
@@ -287,6 +305,8 @@ export default class MaterialTextField extends Component {
             labelId,
             color,
             variant,
+            type,
+            inputRef,
             onClick,
             label,
             placeholder,

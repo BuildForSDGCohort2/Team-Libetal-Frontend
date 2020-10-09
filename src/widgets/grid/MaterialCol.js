@@ -6,7 +6,9 @@ export default class MaterialCol extends MaterialGridComponent {
 
     direction = "column";
 
-    static propTypes = MaterialGridComponent.propTypes;
+    static propTypes = {
+        ...MaterialGridComponent.propTypes
+    };
 
     static defaultProps = {
         alignItems: Flex.START,

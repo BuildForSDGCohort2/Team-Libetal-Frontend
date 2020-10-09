@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import MaterialOptionsMenu from "../menu/MaterialOptionsMenu";
 import MaterialRow from "../grid/MaterialRow";
 import MaterialIconButton from "../button/MaterialIconButton";
+import PropTypes from "prop-types";
 
 export default class LanguagesAccessibilityControl extends Component {
 
@@ -10,6 +11,10 @@ export default class LanguagesAccessibilityControl extends Component {
         languages: []
     };
 
+
+    static propTypes = {
+        componentInstance: PropTypes.any
+    };
 
     initLanguages() {
         this.fetchLanguages();
@@ -21,7 +26,7 @@ export default class LanguagesAccessibilityControl extends Component {
             .then(response => this.onReceivedLanguages(response));
     }
 
-    onReceivedLanguages({response,data} = {}) {
+    onReceivedLanguages({response, data} = {}) {
         if (response.code === 200) {
             this.setState({languages: data});
         }

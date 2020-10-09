@@ -21,12 +21,13 @@ const MTab = withStyles((theme) => ({
     root: {
         textTransform: "none",
         padding: 2,
-        margin: 4,
+        // margin: 4,
         minWidth: 0
     },
     wrapper: {
         fontWeight: "normal",
-        letterSpacing: 0.5
+        letterSpacing: 0.5,
+        textAlign: "center"
     }
 }))((
     props

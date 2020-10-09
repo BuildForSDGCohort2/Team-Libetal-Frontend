@@ -112,8 +112,18 @@ export default class RepoDrawer extends Component {
             >
                 <List disablePadding>
                     <ListItemDiv button onClick={e => onItemClick(Repo.DASHBOARD)}>
-                        {/*TODO should be the app logo*/}
-                        <Libetal height={32} width={32} iColor={Colors.red} bColor={Colors.white} lColor={Colors.blue}/>
+                        <Libetal
+                            height={32}
+                            width={32}
+                            iColor={Colors.red}
+                            bColor={Colors.white}
+                            lColor={Colors.blue}
+                            onClick={
+                                e => {
+                                    this.props.navigator("home");
+                                }
+                            }
+                        />
                         <Separator/>
                         <Radio
                             checked={isPinned}

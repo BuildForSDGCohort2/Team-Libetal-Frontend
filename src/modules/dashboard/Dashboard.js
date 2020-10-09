@@ -15,7 +15,7 @@ import Insights from "./insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
 import PropTypes from "prop-types";
-import Projects from "./Projects";
+import Projects from "./projects/Projects";
 import InputBase from "@material-ui/core/InputBase";
 import Row from "../../widgets/Row";
 import Flex from "../../widgets/Flex";
@@ -29,6 +29,7 @@ import AccessibilityControl from "../../widgets/AccessibilityControl";
 import Teams from "./teams/Teams";
 import HomeImageButton from "../home/HomeImageButton";
 import UserAccountButton from "../users/widgets/UserAccountsButton";
+import LanguagesAccessibilityControl from "../../widgets/accessibility/LanguagesAccessibilityControl";
 
 
 const dashBoardTheme = createMuiTheme({
@@ -270,6 +271,7 @@ export default class Dashboard extends Component {
                         </GridItem>
                         <GridItem xs={12} sm={12} lg={3}>
                             <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                                <LanguagesAccessibilityControl componentInstance={this}/>
                                 {<AccessibilityControl componentInstance={this}/>}
                                 <MaterialIconButton
                                     icon={"Apps"}

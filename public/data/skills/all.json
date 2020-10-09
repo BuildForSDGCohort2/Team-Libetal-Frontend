@@ -19,6 +19,18 @@
     {
       "id": 4,
       "name": "Html"
+    },
+    {
+      "id": 4,
+      "name": "CSS3"
+    },
+    {
+      "id": 5,
+      "name": "React"
+    },
+    {
+      "id": 6,
+      "name": "NodeJs"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": {
+    "dates": [
+      "12th",
+      "13th",
+      "14th",
+      "15th",
+      "16th",
+      "17h",
+      "18th"
+    ],
+    "values": [
+      8,
+      5,
+      3,
+      4,
+      2,
+      1,
+      7
+    ]
+  }
+}

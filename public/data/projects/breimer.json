@@ -1,0 +1,1214 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": [
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    },
+    {
+      "name": "Libetal",
+      "description": "This is a simple project description used to describe view size change, Long Variant",
+      "created": "20 Jan 2020",
+      "activeUsers": 100,
+      "logo": "/images/logo.png",
+      "by": [
+        {
+          "name": "Brymher"
+        },
+        {
+          "name": "Rose"
+        },
+        {
+          "name": "Yvonne"
+        }
+      ],
+      "version": "1.0.1",
+      "teams": [
+        {
+          "id": 2,
+          "name": "team.name"
+        }
+      ],
+      "teamsCount": 2,
+      "category": {
+        "id": 1,
+        "name": "Productivity"
+      },
+      "technologies": {
+        "frameworks": [
+          {
+            "name": "React"
+          },
+          {
+            "name": "NodeJs"
+          }
+        ]
+      },
+      "commitsCount": 20,
+      "commits": [],
+      "issues": [],
+      "issuesCount": 100,
+      "tasks": [],
+      "tasksCount": 10,
+      "bugs": [],
+      "bugsCount": 10,
+      "rating": 3.5,
+      "favorites": 1001,
+      "attachments": [],
+      "attachmentsCount": 2,
+      "topContributors": [
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        },
+        {
+          "image": "/images/header_banner.png"
+        }
+      ],
+      "contributorsCount": 1000
+    }
+  ]
+}

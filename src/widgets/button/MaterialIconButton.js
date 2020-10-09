@@ -39,6 +39,7 @@ export default class MaterialIconButton extends Component {
             "ChevronRight",
             "MoreHoriz",
             "AccountTree",
+            "Language",
             "RssFeed",
             "Favorite",
             "Chat",

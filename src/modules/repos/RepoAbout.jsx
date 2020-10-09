@@ -38,11 +38,12 @@ export default class RepoAbout extends Component {
     }
 
     set documentation(location) {
+        location = location || "";
         if (this.state.documentationLocation !== location) {
             this.setState(
                 {documentationLocation: location},
                 () => {
-                    fetch(`/assets/sample.docs/${location}`)
+                    fetch(`/assets/sample.docs/${location.toLowerCase()}`)
                         .then(response => response.clone().text())
                         .then(
                             mdDocumentation => {

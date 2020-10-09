@@ -24,6 +24,7 @@ export default class MaterialBtn extends React.Component {
         color: PropTypes.string,
         startIcon: PropTypes.any,
         endIcon: PropTypes.any,
+        disabled: PropTypes.bool,
         padding: PropTypes.number,
         paddingTB: PropTypes.number,
         paddingLR: PropTypes.number,
@@ -87,6 +88,7 @@ export default class MaterialBtn extends React.Component {
             color,
             children,
             margin,
+            disabled,
             marginLR = margin,
             marginTB = margin,
             marginRight = marginLR || sMarginRight,
@@ -118,6 +120,7 @@ export default class MaterialBtn extends React.Component {
         return (
             <Button
                 ref={this.ref}
+                disabled={disabled}
                 startIcon={startIcon}
                 endIcon={endIcon}
                 onClick={

@@ -7,19 +7,11 @@ import Colors from "../../Colors";
 export default class HomeImageButton extends Component {
 
     static propTypes = {
-        navigator: PropTypes.func
+        navigator: PropTypes.func.isRequired
     };
 
     render() {
 
-        let old = (
-            <MaterialImage
-
-                height={80}
-                width={80}
-                src={"/images/logo.png"}
-            />
-        );
         return (
             <Libetal
                 height={32}

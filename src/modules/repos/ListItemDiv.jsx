@@ -6,18 +6,22 @@ export default class ListItemDiv extends Component {
 
     static propTypes = {
         component: PropTypes.any,
-        alignItems: PropTypes.oneOf(["center", "flex-start"])
+        alignItems: PropTypes.oneOf(["center", "flex-start"]),
+        disableGutters: PropTypes.bool,
+        button: PropTypes.bool,
     };
 
     render() {
         let {
             alignItems,
             component,
+            disableGutters,
             ...props
         } = this.props;
 
         return (
             <ListItem
+                disableGutters={disableGutters}
                 component={"div"}
                 alignItems={alignItems}
                 {...props}

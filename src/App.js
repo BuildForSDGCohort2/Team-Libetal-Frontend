@@ -13,6 +13,7 @@ import MaterialTheme from "./widgets/theming/MaterialTheme";
 import {ThemeProvider} from "@material-ui/styles";
 import Settings from "./utils/Settings";
 import CreateIssue from "./modules/repos/CreateIssue";
+import Profile from "./modules/users/profile/Profile";
 
 class AppComponent extends Component {
 
@@ -65,6 +66,25 @@ class AppComponent extends Component {
                                                        theme={theme}
                                                        appTheme={appTheme}
                                                    />
+                                               )}
+                                        />
+
+                                        <Route
+                                            path={"/users/:username"}
+                                            component={
+                                                location => (
+                                                    <Profile
+                                                        navigator={navigateTo}
+                                                        location={location}
+                                                    />
+                                                )
+                                            }
+                                        />
+                                        <Route path="/users"
+                                               component={() => (
+                                                   <>
+                                                       Users
+                                                   </>
                                                )}
                                         />
 

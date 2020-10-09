@@ -6,6 +6,7 @@ import MaterialIcon from "../MaterialIcon";
 import PropTypes from "prop-types";
 import MaterialDivider from "../MaterialDivider";
 import MaterialIconButton from "../button/MaterialIconButton";
+import GridItem from "../grid/GridItem";
 
 export default class SearchInputBase extends Component {
 
@@ -16,6 +17,7 @@ export default class SearchInputBase extends Component {
         iconColor: PropTypes.string,
         onChange: PropTypes.func,
         inputFlexGrow: PropTypes.number,
+        inputStyle: PropTypes.any,
         showDivider: PropTypes.bool
     };
 
@@ -27,6 +29,7 @@ export default class SearchInputBase extends Component {
                 icon = "Search",
                 paddingLR,
                 onChange,
+                inputStyle,
                 showDivider,
                 textColor,
                 inputFlexGrow,
@@ -47,8 +50,14 @@ export default class SearchInputBase extends Component {
                     onChange={onChange}
                     style={{
                         color: textColor,
-                        flexGrow: inputFlexGrow
+                        flexGrow: inputFlexGrow,
+                        ...inputStyle
                     }}
+                    onClick={
+                        e => {
+                            e.stopPropagation();
+                        }
+                    }
                 />
                 {showDivider ?
                     <MaterialDivider spacing={2} height={24} orientation={MaterialDivider.VERTICAL}/> : undefined}

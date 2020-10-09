@@ -25,7 +25,8 @@ export default class UserAccountButton extends Component {
 
 
     static propTypes = {
-        userDetails: PropTypes.object
+        userDetails: PropTypes.object,
+        navigator: PropTypes.func
     };
 
     static defaultProps = {
@@ -92,6 +93,9 @@ export default class UserAccountButton extends Component {
 
     render() {
 
+        const {
+            navigator
+        } = this.props;
         let {
             anchorEl
         } = this.state;
@@ -104,8 +108,8 @@ export default class UserAccountButton extends Component {
                     style={{
                         paddingLeft: 4,
                         paddingRight: 4,
-                        paddingTop: 4,
-                        paddingBottom: 4
+                        paddingTop: 2,
+                        paddingBottom: 2
                     }}
                     onClick={
                         e => {
@@ -201,12 +205,18 @@ export default class UserAccountButton extends Component {
                             <MaterialDivider
                                 width={"50%"}
                             />
-                            <MenuItem>
+                            <MenuItem
+                                onClick={
+                                    e => {
+                                        navigator("users/breimer");
+                                    }
+                                }
+                            >
                                 <ListItemIcon>
                                     {
                                         this.props.userDetails.img === undefined ?
                                             (
-                                                <Libetal height={24 } width={24} iColor={Colors.red}
+                                                <Libetal height={24} width={24} iColor={Colors.red}
                                                          bColor={Colors.white}
                                                          lColor={Colors.blue}/>)
                                             : (

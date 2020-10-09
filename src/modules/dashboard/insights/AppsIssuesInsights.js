@@ -597,8 +597,8 @@ export default class AppsIssuesInsights extends React.Component {
             <LineChart
                 showLegends={false}
                 showXAxisLabel={false}
-                tooltipLabelCallBack={this.toolTipsLabelCallback}
                 yAxisStepSize={100}
+                tooltipLabelCallBack={this.toolTipsLabelCallback}
                 tooltipTitleCallBack={this.toolTipsTitleCallback}
                 xAxisLabelFormatter={(date) => {
                     return `${date.getDate()}/${date.getMonth()}`;

@@ -11,6 +11,7 @@ export default class GridItem extends Component {
         paddingTop: PropTypes.number,
         paddingBottom: PropTypes.number,
         marginLeft: PropTypes.number,
+        marginLR: PropTypes.number,
         marginRight: PropTypes.number,
         marginTop: PropTypes.number,
         marginBottom: PropTypes.number,
@@ -19,6 +20,7 @@ export default class GridItem extends Component {
         flexGrow: PropTypes.number,
         height: PropTypes.number,
         width: PropTypes.number,
+        minHeight: PropTypes.number,
         backgroundColor: PropTypes.string,
         overflowY: PropTypes.string
     };
@@ -26,6 +28,7 @@ export default class GridItem extends Component {
     render() {
         let {
             style: {
+                minHeight: sMinHeight,
                 padding: sPadding,
                 margin: sMargin,
                 marginLeft: sMarginLeft,
@@ -49,14 +52,15 @@ export default class GridItem extends Component {
             marginTop = marginTB || sMarginTop,
             marginBottom = marginTB || sMarginBottom,
             height,
+            minHeight = sMinHeight,
             overflowY,
             backgroundColor,
             flexGrow,
-
             ...props
         } = this.props;
 
         if (paddingRight !== undefined) style.paddingRight = paddingRight;
+        if (minHeight !== undefined) style.minHeight = minHeight;
         if (paddingLeft !== undefined) style.paddingLeft = paddingLeft;
         if (paddingTop !== undefined) style.paddingTop = paddingTop;
         if (paddingBottom !== undefined) style.paddingBottom = paddingBottom;
