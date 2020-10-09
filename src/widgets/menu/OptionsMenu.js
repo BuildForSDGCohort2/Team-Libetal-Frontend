@@ -3,22 +3,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 
-export const OptionsMenuPropsTypes = {
-    onClick: PropTypes.func,
-    id: PropTypes.string.isRequired,
-    onMenuOpen: PropTypes.func,
-    onMenuClose: PropTypes.func,
-    onMenuItemClick: PropTypes.func,
-    menuItems: PropTypes.arrayOf(
-        PropTypes.shape(
-            {
-                itemId: PropTypes.number,
-                title: PropTypes.any
-            }
-        )
-    ).isRequired
 
-};
 export default class OptionsMenu extends Component {
 
 
@@ -30,13 +15,14 @@ export default class OptionsMenu extends Component {
         onMenuItemClick(itemId, e) {
             console.log(`Unhandled menu item click ${itemId}`);
         },
-        menuItems:[]
+        menuItems: []
     };
 
     static propTypes = {
         onClick: PropTypes.func,
         id: PropTypes.string.isRequired,
         onMenuOpen: PropTypes.func,
+        optionsHeader: PropTypes.any,
         onMenuClose: PropTypes.func,
         onMenuItemClick: PropTypes.func,
         menuItems: PropTypes.arrayOf(
@@ -47,7 +33,6 @@ export default class OptionsMenu extends Component {
                 }
             )
         ).isRequired
-
     };
 
     constructor(props) {
@@ -91,7 +76,7 @@ export default class OptionsMenu extends Component {
      * <MenuItem onClick={this.onMenuClose}>Item 2</MenuItem>
      * */
     get menuItems() {
-        return this.props.menuItems.map(({itemId, title, key, id},i) => {
+        let items = this.props.menuItems.map(({itemId, title, key, id}, i) => {
 
             let menuItemId;
 
@@ -113,6 +98,15 @@ export default class OptionsMenu extends Component {
                 />
             );
         });
+
+        let {
+            optionsHeader
+        } = this.props;
+        if (optionsHeader !== undefined) {
+            return [optionsHeader, ...items];
+        }
+
+        return items;
     }
 
     render() {

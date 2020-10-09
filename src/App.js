@@ -13,6 +13,7 @@ import MaterialTheme from "./widgets/theming/MaterialTheme";
 import {ThemeProvider} from "@material-ui/styles";
 import Settings from "./utils/Settings";
 import CreateIssue from "./modules/repos/CreateIssue";
+import Profile from "./modules/users/profile/Profile";
 
 class AppComponent extends Component {
 
@@ -68,16 +69,34 @@ class AppComponent extends Component {
                                                )}
                                         />
 
+                                        <Route
+                                            path={"/users/:username"}
+                                            component={
+                                                location => (
+                                                    <Profile
+                                                        navigator={navigateTo}
+                                                        location={location}
+                                                    />
+                                                )
+                                            }
+                                        />
+                                        <Route path="/users"
+                                               component={() => (
+                                                   <>
+                                                       Users
+                                                   </>
+                                               )}
+                                        />
+
                                         <Route path="/register"
                                                component={() => (
-                                                   <ThemeProvider theme={Settings.appTheme}>
-                                                       <Register
-                                                           navigator={navigator}
-                                                           classes={classes}
-                                                           theme={theme}
-                                                           styles={styles}
-                                                       />
-                                                   </ThemeProvider>
+                                                   <Register
+                                                       navigator={navigateTo}
+                                                       classes={classes}
+                                                       theme={theme}
+                                                       styles={styles}
+
+                                                   />
                                                )}
                                         />
                                         <Route
@@ -115,7 +134,9 @@ class AppComponent extends Component {
                                             component={
                                                 location => (
                                                     <Repo
+                                                        classes={classes}
                                                         location={location}
+                                                        navigator={navigateTo}
                                                     />
                                                 )
                                             }

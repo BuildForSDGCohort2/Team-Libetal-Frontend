@@ -5,13 +5,15 @@ import Column from "../widgets/Column";
 import MaterialTextView from "../widgets/MaterialTextView";
 import Flex from "../widgets/Flex";
 import MaterialIcon from "../widgets/MaterialIcon";
+import MaterialRow from "../widgets/grid/MaterialRow";
+import GridItem from "../widgets/grid/GridItem";
+import MaterialDivider from "../widgets/MaterialDivider";
 
 
 export default class Footer extends Component {
 
 
     render() {
-
 
         let textColor = Colors.white;
 
@@ -20,7 +22,12 @@ export default class Footer extends Component {
         return (
             <>
                 <div style={{flexGrow: 1, display: "flex"}}/>
-                <Row style={{backgroundColor: Colors.black, ...this.props.style, paddingTop: 16, paddingRight: 16,marginLeft:0}}>
+                <MaterialRow justify={Flex.CENTER} style={{
+                    backgroundColor: Colors.black, ...this.props.style,
+                    paddingTop: 16,
+                    paddingRight: 16,
+                    marginLeft: 0
+                }}>
                     <Column xs={6} lg={4}>
                         <Row justify={Flex.CENTER}>
                             <MaterialTextView text={"App Store"} textColor={textColor} variant={"h5"}/>
@@ -42,7 +49,15 @@ export default class Footer extends Component {
                             </Column>
                         </Row>
                     </Column>
-                    <Column xs={6} lg={4}></Column>
+                    <MaterialRow xs={6} lg={4} justify={Flex.CENTER}>
+                        <MaterialTextView
+                            textColor={Colors.white}
+                            textAlign={"center"}>
+                            Libetal helps developers and creators alike,
+                            to invest their time wisely on products that could bring more
+                            than change to society but so much more.
+                        </MaterialTextView>
+                    </MaterialRow>
                     <Column xs={6} lg={4} alignItems={Flex.END}>
                         <Row justify={Flex.CENTER}>
                             <MaterialTextView text={"About"} textColor={textColor} variant={"h5"}/>
@@ -67,27 +82,28 @@ export default class Footer extends Component {
                             </Column>
                         </Row>
                     </Column>
-                    <Column xs={12} style={{padding:8}}>
-                        <Row spacing={2} justify={Flex.CENTER}>
-                           <Column>
-                               <MaterialTextView text={"cookie policy"} textColor={textColor}/>
-                           </Column>
-                           <Column>
-                               <MaterialTextView text={"privacy policy"} textColor={textColor}/>
-                           </Column>
-                           <Column>
-                               <MaterialTextView text={"terms & condition"} textColor={textColor}/>
-                           </Column>
-                           <Column>
-                               <Row spacing={1}>
-                                   <MaterialTextView text={"Copyright "} textColor={textColor}/>
-                                   <MaterialIcon icon={"Copyright"}/>
-                                   <MaterialTextView text={" 2020"} textColor={textColor}/>
-                               </Row>
-                           </Column>
-                        </Row>
-                    </Column>
-                </Row>
+                    <MaterialDivider width={"60%"}/>
+                    <GridItem xs={12} padding={8}>
+                        <MaterialRow spacing={2} justify={Flex.CENTER} alignItems={Flex.CENTER}>
+                            <Column>
+                                <MaterialTextView text={"cookie policy"} textColor={textColor}/>
+                            </Column>
+                            <Column>
+                                <MaterialTextView text={"privacy policy"} textColor={textColor}/>
+                            </Column>
+                            <Column>
+                                <MaterialTextView text={"terms & condition"} textColor={textColor}/>
+                            </Column>
+                            <Column>
+                                <MaterialRow spacing={1}>
+                                    <MaterialTextView text={"Copyright "} textColor={textColor}/>
+                                    <MaterialIcon icon={"Copyright"}/>
+                                    <MaterialTextView text={" 2020"} textColor={textColor}/>
+                                </MaterialRow>
+                            </Column>
+                        </MaterialRow>
+                    </GridItem>
+                </MaterialRow>
             </>
         );
     }

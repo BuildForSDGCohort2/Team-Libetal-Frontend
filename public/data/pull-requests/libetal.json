@@ -1,0 +1,457 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": [
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": true,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request. This is a long one to demo a long marge type for the view",
+      "description": "Sample issue description. Reflating to the project. This is also a long description for the view. Should help discern how large or smaller the view should be dependent on this section.",
+      "timeTaken": "3h",
+      "merged": false,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": true,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": false,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": false,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": true,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": false,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "task": {
+        "title": "Issue Title",
+        "estimatedTime": "2h",
+        "cost": {
+          "value": 1000,
+          "currency": {
+            "name": "Dollar",
+            "sign": "$"
+          }
+        },
+        "assignee": {
+          "name": "PropTypes.string"
+        },
+        "by": {
+          "name": "PropTypes.string"
+        },
+        "project": {
+          "id": "PropTypes.number",
+          "name": "PropTypes.string"
+        },
+        "priority": "PropTypes.string",
+        "state": {
+          "id": "PropTypes.number",
+          "title": "PropTypes.string",
+          "description": "PropTypes.string"
+        },
+        "type": {
+          "id": 0,
+          "title": "Bug",
+          "description": "Output or UI is not working as expected"
+        },
+        "date": "PropTypes.string",
+        "attachments": [
+          ""
+        ],
+        "milestones": [
+          ""
+        ],
+        "tags": [
+          ""
+        ]
+      },
+      "title": "This is a sample title for a pull request",
+      "description": "Sample issue description. Reflating to the project",
+      "timeTaken": "3h",
+      "merged": true,
+      "cost": {
+        "value": 1050,
+        "currency": {
+          "name": "Dollar",
+          "sign": "$"
+        }
+      }
+    }
+  ],
+  "itemsCount": 100
+}

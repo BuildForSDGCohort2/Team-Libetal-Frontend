@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Radio from "@material-ui/core/Radio";
 import MaterialDrawer from "../../../widgets/navigation/MaterialDrawer";
 import Colors from "../../../Colors";
-import Divider from "@material-ui/core/Divider";
 import MaterialDrawerListItem from "../../../widgets/navigation/MaterialDrawerListItem";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

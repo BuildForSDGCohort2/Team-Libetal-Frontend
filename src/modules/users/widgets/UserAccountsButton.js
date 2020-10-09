@@ -12,6 +12,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import MaterialDivider from "../../../widgets/MaterialDivider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Libetal from "../../../widgets/icons/Libetal";
+import Colors from "../../../Colors";
+import ListItemDiv from "../../repos/ListItemDiv";
 
 export default class UserAccountButton extends Component {
 
@@ -22,7 +25,16 @@ export default class UserAccountButton extends Component {
 
 
     static propTypes = {
-        userDetails: PropTypes.object
+        userDetails: PropTypes.object,
+        navigator: PropTypes.func
+    };
+
+    static defaultProps = {
+        userDetails: {
+            name: "Breimer",
+            email: "brymher@gmail.com",
+            img: undefined
+        }
     };
 
     set anchorEl(value) {
@@ -81,6 +93,9 @@ export default class UserAccountButton extends Component {
 
     render() {
 
+        const {
+            navigator
+        } = this.props;
         let {
             anchorEl
         } = this.state;
@@ -93,8 +108,8 @@ export default class UserAccountButton extends Component {
                     style={{
                         paddingLeft: 4,
                         paddingRight: 4,
-                        paddingTop: 4,
-                        paddingBottom: 4
+                        paddingTop: 2,
+                        paddingBottom: 2
                     }}
                     onClick={
                         e => {
@@ -190,12 +205,27 @@ export default class UserAccountButton extends Component {
                             <MaterialDivider
                                 width={"50%"}
                             />
-                            <MenuItem>
+                            <MenuItem
+                                onClick={
+                                    e => {
+                                        navigator("users/breimer");
+                                    }
+                                }
+                            >
                                 <ListItemIcon>
-                                    <Avatar
-                                        src={this.props.userDetails.img}
-                                        style={{width: 24, height: 24}}
-                                    />
+                                    {
+                                        this.props.userDetails.img === undefined ?
+                                            (
+                                                <Libetal height={24} width={24} iColor={Colors.red}
+                                                         bColor={Colors.white}
+                                                         lColor={Colors.blue}/>)
+                                            : (
+                                                <Avatar
+                                                    src={this.props.userDetails.img}
+                                                    style={{width: 24, height: 24}}
+                                                />
+                                            )
+                                    }
                                 </ListItemIcon>
                                 <TextView
                                     text={"Profile"}

@@ -9,7 +9,7 @@ export default class MaterialBtn extends React.Component {
         content: "MaterialButton",
         variant: "contained",
         color: "secondary",
-        textTransform: "capitalize",
+        textTransform: "uppercase",
         onClick: () => {
             console.log(`Unhandled button click`);
         }
@@ -24,7 +24,23 @@ export default class MaterialBtn extends React.Component {
         color: PropTypes.string,
         startIcon: PropTypes.any,
         endIcon: PropTypes.any,
+        disabled: PropTypes.bool,
         padding: PropTypes.number,
+        paddingTB: PropTypes.number,
+        paddingLR: PropTypes.number,
+        paddingLeft: PropTypes.number,
+        paddingRight: PropTypes.number,
+        paddingTop: PropTypes.number,
+        paddingBottom: PropTypes.number,
+        margin: PropTypes.number,
+        marginLR: PropTypes.number,
+        marginRight: PropTypes.number,
+        marginLeft: PropTypes.number,
+        marginTB: PropTypes.number,
+        marginTop: PropTypes.number,
+        marginBottom: PropTypes.number,
+        maxWidth: PropTypes.number,
+        fontSize: PropTypes.oneOf([PropTypes.string, PropTypes.number])
     };
 
 
@@ -37,16 +53,48 @@ export default class MaterialBtn extends React.Component {
 
         let {
             textColor,
-            textTransform,
             onClick,
             className,
             content,
             startIcon,
             endIcon,
-            style: {textTransform: styleTextTransform, ...style},
+            style: {
+                maxWidth: sMaxWidth,
+                fontSize: sFontSize,
+                margin: sMargin,
+                marginRight: sMarginRight = sMargin,
+                marginLeft: sMarginLeft = sMargin,
+                marginTop: sMarginTop = sMargin,
+                marginBottom: sMarginBottom = sMargin,
+                padding: sPadding,
+                paddingLeft: sPaddingLeft = sPadding,
+                paddingRight: sPaddingRight = sPadding,
+                paddingTop: sPaddingTop = sPadding,
+                paddingBottom: sPaddingBottom = sPadding,
+                textTransform: styleTextTransform,
+                ...style
+            },
+            maxWidth = sMaxWidth,
+            textTransform = styleTextTransform,
+            padding,
+            paddingTB = padding,
+            paddingLR = padding,
+            paddingLeft = paddingLR || sPaddingLeft,
+            paddingRight = paddingLR || sPaddingRight,
+            paddingTop = paddingTB || sPaddingTop,
+            paddingBottom = paddingTB || sPaddingBottom,
+            fontSize = sFontSize,
             variant,
             color,
             children,
+            margin,
+            disabled,
+            marginLR = margin,
+            marginTB = margin,
+            marginRight = marginLR || sMarginRight,
+            marginLeft = marginLR || sMarginLeft,
+            marginTop = marginTB || sMarginTop,
+            marginBottom = marginTB || sMarginBottom,
             ...props
         } = this.props;
 
@@ -58,10 +106,21 @@ export default class MaterialBtn extends React.Component {
         }
 
         style.color = textColor;
+        style.marginRight = marginRight;
+        style.marginLeft = marginLeft;
+        style.marginTop = marginTop;
+        style.marginBottom = marginBottom;
+        style.paddingLeft = paddingLeft;
+        style.paddingRight = paddingRight;
+        style.paddingTop = paddingTop;
+        style.paddingBottom = paddingBottom;
+        style.fontSize = fontSize;
+        style.maxWidth = maxWidth;
 
         return (
             <Button
                 ref={this.ref}
+                disabled={disabled}
                 startIcon={startIcon}
                 endIcon={endIcon}
                 onClick={

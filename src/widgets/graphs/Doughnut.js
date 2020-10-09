@@ -1,22 +1,20 @@
 import React from "react";
-import Chart, {ChartProps, ChartPropTypes} from "./Chart";
+import Chart from "./Chart";
 import PropTypes from "prop-types";
-
-const DoughnutPropTypes = {
-    ...ChartProps,
-};
 
 
 export default class Doughnut extends Chart {
 
     kind = "doughnut";
 
-    static propTypes ={
-        ...ChartPropTypes,
-        labelCallback: PropTypes.func,
-    }
+    static propTypes = {
+        ...Chart.propTypes,
+        labelCallback: PropTypes.func
+    };
 
-    static defaultProps = DoughnutPropTypes;
+    static defaultProps = {
+        ...Chart.defaultProps
+    };
 
     get scales() {
         return {};
@@ -30,7 +28,8 @@ export default class Doughnut extends Chart {
 
         let callbacks = {};
 
-        if (tooltipLabelCallBack !== undefined) callbacks.label = tooltipLabelCallBack;
+        // does not play well with others
+        // if (tooltipLabelCallBack !== undefined) callbacks.label = tooltipLabelCallBack;
 
         if (tooltipTitleCallBack !== undefined) callbacks.title = tooltipTitleCallBack;
 

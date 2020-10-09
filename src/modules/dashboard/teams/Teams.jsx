@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import Settings from "../../../utils/Settings";
 import PropTypes from "prop-types";
+import MaterialTextView from "../../../widgets/MaterialTextView";
+import MaterialRow from "../../../widgets/grid/MaterialRow";
+import Paper from "@material-ui/core/Paper";
+import Footer from "../../Footer";
 
 export default class Teams extends Component {
 
@@ -12,13 +14,18 @@ export default class Teams extends Component {
 
     render() {
         return (
-            <ThemeProvider theme={Settings.appTheme}>
-                Contains actions involving new issue discussion,
-                Discussions affecting the product,
-                And insights depending on team
-                team productivity, team projects
-                team issues and features.
-            </ThemeProvider>
+            <Paper style={{borderRadius:0}}>
+                <MaterialRow>
+                    <MaterialTextView>
+                        Contains actions involving new issue discussion,
+                        Discussions affecting the product,
+                        And insights depending on team
+                        team productivity, team projects
+                        team issues and features.
+                    </MaterialTextView>
+                </MaterialRow>
+                <Footer/>
+            </Paper>
         );
     }
 }

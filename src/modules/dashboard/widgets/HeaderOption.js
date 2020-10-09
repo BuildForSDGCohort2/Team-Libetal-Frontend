@@ -1,15 +1,15 @@
 import React from "react";
-import OptionsMenu, {OptionsMenuPropsTypes} from "../../../widgets/menu/OptionsMenu";
+import OptionsMenu from "../../../widgets/menu/OptionsMenu";
 import MaterialBtn from "../../../widgets/MaterialBtn";
-import Colors from "../../../Colors";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import PropTypes from "prop-types";
+
 
 export default class HeaderOption extends OptionsMenu {
 
 
     static propTypes = {
-        ...OptionsMenuPropsTypes,
+        ...OptionsMenu.propTypes,
         title: PropTypes.any,
         textColor:PropTypes.string,
         btnColor:PropTypes.string

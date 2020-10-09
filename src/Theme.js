@@ -1,5 +1,5 @@
 import React from "react";
-import {createMuiTheme, makeStyles, ThemeProvider, useTheme} from "@material-ui/core/styles";
+import {makeStyles, ThemeProvider, useTheme} from "@material-ui/core/styles";
 import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";
 import Settings from "./utils/Settings";
@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen
         }),
         overflowX: "hidden",
-        width: theme.spacing(7),
+        width: theme.spacing(6),
         [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(7)
+            width: theme.spacing(6)
         }
     },
 

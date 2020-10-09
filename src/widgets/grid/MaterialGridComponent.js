@@ -21,11 +21,21 @@ export default class MaterialGridComponent extends Component {
         marginRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        marginTB: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         paddingLR: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         paddingTB: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        overflow: PropTypes.string,
+        overflowX: PropTypes.string,
+        overflowY: PropTypes.string,
+        xs: PropTypes.number,
+        xm: PropTypes.number,
+        xl: PropTypes.number,
+        sm: PropTypes.number,
+        lg: PropTypes.number
     };
 
     render() {
@@ -36,6 +46,7 @@ export default class MaterialGridComponent extends Component {
             alignContent,
             direction,
             style: {
+                background: sBackground,
                 backgroundColor: sBackgroundColor,
                 maxHeight: sMaxHeight,
                 maxWidth: sMaxWidth,
@@ -52,6 +63,10 @@ export default class MaterialGridComponent extends Component {
                 marginBottom: sMarginBottom = sMargin,
                 marginTop: sMarginTop = sMargin,
                 minHeight: sMinHeight,
+                minWidth: sMinWidth,
+                overflow: sOverflow,
+                overflowX: sOverflowX,
+                overflowY: sOverflowY,
                 ...style
             } = {},
             padding = sPadding,
@@ -71,14 +86,26 @@ export default class MaterialGridComponent extends Component {
             height = sHeight,
             width = sWidth,
             minHeight = sMinHeight,
+            minWidth = sMinWidth,
             theme,
+            color,
+            sm,
+            lg,
+            xs,
+            xm = sm,
+            xl = lg,
             spacing,
             maxHeight = sMaxHeight,
             maxWidth = sMaxWidth,
+            backgroundImage,
             backgroundColor = sBackgroundColor,
+            overflow = sOverflow,
+            overflowX = sOverflowX,
+            overflowY = sOverflowY,
             ...props
         } = this.props;
 
+        if (backgroundImage !== undefined) style.backgroundImage = `url(${backgroundImage})`;
         style.paddingLeft = paddingLeft;
         style.paddingRight = paddingRight;
         style.paddingTop = paddingTop;
@@ -87,22 +114,31 @@ export default class MaterialGridComponent extends Component {
         style.marginRight = marginRight;
         style.marginTop = marginTop;
         style.marginBottom = marginBottom;
-        style.height = height;
-        style.minHeight = minHeight;
-        style.width = width;
-        style.maxHeight = maxHeight;
-        style.maxWidth = maxWidth;
+        if (height !== undefined) style.height = height;
+        if (width !== undefined) style.width = width;
+        if (maxHeight !== undefined) style.maxHeight = maxHeight;
+        if (maxWidth !== undefined) style.maxWidth = maxWidth;
+        if (minWidth !== undefined) style.minWidth = minWidth;
+        if (minHeight !== undefined) style.minHeight = minHeight;
+        if (overflow !== undefined) style.overflow = overflow;
+        if (overflowX !== undefined) style.overflowX = overflowX;
+        if (overflowY !== undefined) style.overflowY = overflowY;
+
         style.backgroundColor = backgroundColor;
 
         return (
             <Grid
                 container
-                justify={justify}
+                style={style}
                 spacing={spacing}
-                alignContent={alignContent}
+                justify={justify}
+                color={"secondary"}
                 alignItems={alignItems}
                 direction={this.direction}
-                style={style}
+                alignContent={alignContent}
+                xs={xs}
+                sm={xm}
+                lg={xl}
                 {...props}
             />
         );

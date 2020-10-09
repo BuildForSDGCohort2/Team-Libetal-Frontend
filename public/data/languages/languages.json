@@ -1,0 +1,16 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": [
+    {
+      "name": "English",
+      "short": "en"
+    },
+    {
+      "name": "Swahili",
+      "short": "swa"
+    }
+  ]
+}

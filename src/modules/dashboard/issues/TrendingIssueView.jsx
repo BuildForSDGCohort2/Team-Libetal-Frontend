@@ -12,7 +12,6 @@ import MaterialMenuItem from "../../../widgets/menu/MaterialMenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import MaterialTextView from "../../../widgets/MaterialTextView";
 import MaterialIcon from "../../../widgets/MaterialIcon";
-import Separator from "../../../widgets/separator";
 import MaterialDivider from "../../../widgets/MaterialDivider";
 import TabsLayout from "../../../widgets/TabsLayout";
 
@@ -102,8 +101,6 @@ export default class TrendingIssueView extends Component {
 
         let t = type[0].toUpperCase();
         let color;
-
-
 
         switch (t) {
             case "B":

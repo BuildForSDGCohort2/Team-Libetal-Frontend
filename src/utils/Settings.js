@@ -9,7 +9,7 @@ export default class Settings {
 
     static style = "light";
 
-    static palette = "light";
+    static palette = "dark";
 
     static white = "#FFFFFF";
 
@@ -42,6 +42,8 @@ export default class Settings {
             }
         }
     });
+
+
 
     static darkTheme = createMuiTheme({
         palette: {
@@ -77,6 +79,12 @@ export default class Settings {
         if (this.palette === "light") return this.lightTheme;
 
         return this.darkTheme;
+    }
+
+    static get appBackground (){
+        if (this.palette === "light") return Colors.white;
+
+        return "#303030";
     }
 
     static get isLight() {

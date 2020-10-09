@@ -4,6 +4,7 @@ import Settings from "../utils/Settings";
 import Tabs from "@material-ui/core/Tabs";
 import MaterialTab from "./MaterialTab";
 import PropTypes from "prop-types";
+import Colors from "../Colors";
 
 
 const component = (
@@ -11,7 +12,10 @@ const component = (
 );
 const HiddenIndicator = withStyles({
     indicator: {
-        display: "none"
+        display: "none",
+        "& > *": {
+            display: "none"
+        }
     }
 })(component);
 
@@ -58,20 +62,30 @@ export default class TabsLayout extends Component {
         ]).isRequired,
         defaultTabIndex: PropTypes.number,
         orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+        minTabHeight: PropTypes.number,
+        width: PropTypes.number,
+        minTabWidth: PropTypes.number,
+        tabMarginLeft: PropTypes.number,
+        tabMarginRight: PropTypes.number,
+        tabMarginTop: PropTypes.number,
+        tabMarginBottom: PropTypes.number,
+        tabTBPadding: PropTypes.number,
+        tabLRPadding: PropTypes.number,
+        tabLeftPadding: PropTypes.number,
+        tabRightPadding: PropTypes.number,
         tabTopPadding: PropTypes.number,
         tabBottomPadding: PropTypes.number,
-        minTabHeight: PropTypes.number,
-        minTabWidth: PropTypes.number,
         value: PropTypes.number,
         variant: PropTypes.oneOf(["standard", "scrollable", "fullWidth"]),
         showIndicator: PropTypes.bool,
         onItemClick: PropTypes.func,
-        onChange:PropTypes.func
+        onChange: PropTypes.func
     };
 
     static defaultProps = {
         tabStyle: {},
         value: 0,
+        // ON CHANGE IS WORKING WRONG
         onChange(e, newTab) {
             console.log(`Unhandled tab change newTab=${newTab}`);
         },
@@ -83,10 +97,8 @@ export default class TabsLayout extends Component {
         ],
         defaultTabIndex: 0,
         orientation: "horizontal",
-        minTabHeight: 32,
-        minTabWidth: 32,
-        tabTopPadding: 2,
-        tabBottomPadding: 2,
+        minTabHeight: 20,
+        minTabWidth: 20,
         showIndicator: true,
         onItemClick: e => {
 
@@ -101,10 +113,24 @@ export default class TabsLayout extends Component {
             tabs: propTabs,
             tabStyle,
             minTabWidth,
-
             minTabHeight,
-            tabTopPadding,
-            tabBottomPadding
+            tabLRMargin,
+            tabTBMargin,
+            tabLeftMargin = tabLRMargin,
+            tabRightMargin = tabLRMargin,
+            tabTopMargin = tabTBMargin,
+            tabBottomMargin = tabTBMargin,
+            tabMarginLeft = tabLeftMargin,
+            tabMarginRight = tabRightMargin,
+            tabMarginTop = tabTopMargin,
+            tabMarginBottom = tabBottomMargin,
+            tabTBPadding,
+            tabLRPadding,
+            tabLeftPadding = tabLRPadding,
+            tabRightPadding = tabLRPadding,
+            tabBottomPadding = tabTBPadding,
+            tabTopPadding = tabTBPadding
+
         } = this.props;
 
         tabStyle = tabStyle === undefined ? TabsLayout.defaultTabStyle : tabStyle;
@@ -114,45 +140,48 @@ export default class TabsLayout extends Component {
             display: "flex",
             minWidth: minTabWidth,
             minHeight: minTabHeight,
-            paddingBottom: tabTopPadding,
-            paddingTop: tabBottomPadding
+            paddingLeft: tabLeftPadding,
+            paddingRight: tabRightPadding,
+            paddingTop: tabTopPadding,
+            paddingBottom: tabBottomPadding,
+            marginLeft: tabMarginLeft,
+            marginRight: tabMarginRight,
+            marginTop: tabMarginTop,
+            marginBottom: tabMarginBottom
         };
 
 
         let tabs = [];
 
-        switch (typeof tabs) {
-            case "object":
-                tabs = propTabs.map((tab, i) => {
-                    let key = i;
-                    let label;
+        if (typeof tabs === "object") {
+            tabs = propTabs.map((tab, i) => {
+                let key = i;
+                let label;
 
-                    switch (typeof tab) {
-                        case "string":
+                switch (typeof tab) {
+                    case "string":
+                        key = i;
+                        label = tab;
+                        break;
+                    case "object":
+                        // Unify syntax design if you find rem to implement in Unify lang gitHub
+                        // {key,label} = tab
+                        if (tab.label === undefined) {
                             key = i;
                             label = tab;
-                            break;
-                        case "object":
-                            // Unify syntax design if you find rem to implement in Unify lang gitHub
-                            // {key,label} = tab
-                            if (tab.label === undefined) {
-                                key = i;
-                                label = tab;
-                            } else {
-                                key = tab.key;
-                                label = tab.label;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                        } else {
+                            key = tab.key;
+                            label = tab.label;
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
-                    return this.getTab(key, label, tabStyle);
-                });
-                break;
-            default:
-                tabs = tabs.map((label, i) => this.getTab(i, label, tabStyle));
-
+                return this.getTab(key, label, tabStyle);
+            });
+        } else {
+            tabs = tabs.map((label, i) => this.getTab(i, label, tabStyle));
         }
 
         return tabs;
@@ -182,23 +211,46 @@ export default class TabsLayout extends Component {
 
         let {
             tabs,
-            tabStyle,
+            tabStyle: {...tabStyle} = {},
             defaultTabIndex,
             minTabWidth,
-            tabTopPadding,
-            tabBottomPadding,
             orientation,
             onChange,
             minTabHeight,
             classes,
             value,
+            tabLRMargin,
+            tabTBMargin,
+            tabLeftMargin = tabLRMargin,
+            tabRightMargin = tabLRMargin,
+            tabTopMargin = tabTBMargin,
+            tabBottomMargin = tabTBMargin,
+            tabTBPadding,
+            tabLRPadding,
+            tabLeftPadding = tabLRPadding,
+            tabRightPadding = tabLRPadding,
+            tabBottomPadding = tabTBPadding,
+            tabTopPadding = tabTBPadding,
             onTabChangeRequest,
             onTabChangeRejected,
             showIndicator,
+            style = {},
+            width,
             onItemClick,
             ...props
         } = this.props;
 
+
+        tabStyle.paddingLeft = tabLeftPadding;
+        tabStyle.paddingRight = tabRightPadding;
+        tabStyle.paddingTop = tabTopPadding;
+        tabStyle.paddingBottom = tabBottomPadding;
+
+        tabStyle.marginLeft = tabLeftMargin;
+        tabStyle.marginRight = tabRightMargin;
+        tabStyle.marginTop = tabTopMargin;
+        tabStyle.marginBottom = tabBottomMargin;
+        tabStyle.minHeight = minTabHeight;
 
         let tabChange = (e, tabId) => {
             if (onTabChangeRequest(tabId)) {
@@ -207,29 +259,27 @@ export default class TabsLayout extends Component {
             } else onTabChangeRejected(tabId);
         };
 
+        let Component = showIndicator ? Layout : HiddenIndicator;
+
+        let componentStyle = {
+            ...style,
+            minHeight: minTabHeight,
+            padding: 0,
+            paddingTop: 0,
+            width: width
+        };
 
         if (showIndicator === false) {
-            return (
-                <HiddenIndicator
-                    value={this.currentTab}
-                    orientation={orientation}
-                    indicatorColor={"secondary"}
-                    onChange={tabChange}
-                    {...props}
-                    style={{minHeight: minTabHeight}}
-                >
-                    {this.tabs}
-                </HiddenIndicator>
-            );
+            componentStyle = {...componentStyle, paddingBottom: 0};
         }
 
         return (
-            <Layout
+            <Component
                 value={this.currentTab}
                 orientation={orientation}
                 indicatorColor={"secondary"}
                 onChange={tabChange}
-                style={{minHeight: minTabHeight}}
+                style={componentStyle}
                 children={this.tabs}
                 {...props}
             />

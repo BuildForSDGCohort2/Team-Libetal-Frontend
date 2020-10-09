@@ -15,144 +15,85 @@ import MaterialTextView from "../../../widgets/MaterialTextView";
 import MaterialIcon from "../../../widgets/MaterialIcon";
 import Separator from "../../../widgets/separator";
 import MaterialDivider from "../../../widgets/MaterialDivider";
+import TabsLayout from "../../../widgets/TabsLayout";
+import IssueListItemView from "./IssueListItemView";
 
 export default class IssuesListView extends Component {
 
 
     static propTypes = {
-        issues: PropTypes.arrayOf(PropTypes.shape({
-            title: PropTypes.string,
+        issues: PropTypes.shape({
             id: PropTypes.number,
+            title: PropTypes.string,
+            cost: PropTypes.shape({
+                estimated: PropTypes.shape({
+                    value: PropTypes.number,
+                    sign: PropTypes.string
+                })
+            }),
+            assignee: PropTypes.shape({
+                name: PropTypes.string
+            }),
+            by: PropTypes.shape({
+                name: PropTypes.string
+            }),
+            project: PropTypes.shape({
+                id: PropTypes.number,
+                name: PropTypes.string
+            }),
+            priority: PropTypes.string,
+            state: PropTypes.shape({
+                id: PropTypes.number,
+                title: PropTypes.string,
+                description: PropTypes.string
+            }),
+            type: PropTypes.shape({
+                id: PropTypes.number,
+                title: PropTypes.string,
+                descriptions: PropTypes.string
+            }),
+            date: PropTypes.string,
             attachments: PropTypes.arrayOf(PropTypes.string),
-            milestones: PropTypes.arrayOf(PropTypes.string)
-        }))
+            milestones: PropTypes.arrayOf(PropTypes.string),
+            tags: PropTypes.arrayOf(PropTypes.string)
+        }),
+        minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        overflowY: PropTypes.string
     };
 
-
-    prepIssueListItem(i, issue) {
-        let {id: issueId, title} = issue;
-
-        let [type, color] = this.issueTypeDemo;
-
-        return (
-            <ListItem key={i} style={{minWidth: "100%"}}>
-                <Column>
-                    <Row alignItems={Flex.STRETCH}>
-                        <GridItem xs={1}>
-                            <Column height={"100%"} justify={Flex.SPACE_BETWEEN}>
-                                <Row>
-                                    <MaterialOptionsMenu
-                                        id={`issue-${i}-options-menu`}
-                                        controller={MaterialBtn}
-                                        header={type}
-                                        controllerProps={
-                                            {
-                                                style: {
-                                                    minWidth: 0,
-                                                    minHeight: 0,
-                                                    paddingTop: 2,
-                                                    paddingBottom: 2,
-                                                    paddingLeft: 8,
-                                                    paddingRight: 8
-                                                },
-                                                content: type,
-                                                color: color,
-                                                textColor: Colors.white
-                                            }
-                                        }
-                                        menuItems={[
-                                            {
-                                                key: 0,
-                                                title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
-                                            }
-                                        ]}
-                                    />
-                                </Row>
-                                <Row justify={Flex.END}>
-                                    <Checkbox style={{color: color, padding: 0, margin: 0, marginBottom: 0}}/>
-                                </Row>
-                            </Column>
-                        </GridItem>
-                        <GridItem xs={11}>
-                            <Column>
-                                <Row>
-                                    <GridItem xs={8}>
-                                        <MaterialTextView
-                                            text={title}
-                                            textColor={Colors.orange}
-                                        />
-                                    </GridItem>
-                                    <GridItem xs={4}>
-                                        <MaterialBtn
-                                            variant={"contained"}
-                                            content={"Tackle | Finance"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"AccountTree"}
-                                                    iconSize={18}
-                                                    color={Colors.white}
-                                                />
-                                            }
-                                            color={color}
-                                            textColor={Colors.white}
-                                            style={{
-                                                padding: 0,
-                                                paddingLeft: 6,
-                                                paddingRight: 6
-                                            }}
-                                        />
-                                        <MaterialBtn
-                                            variant={"text"}
-                                            content={"100+"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"AttachFile"}
-                                                    iconSize={18}
-                                                    color={color}
-                                                />
-                                            }
-                                            style={{
-                                                padding: 0
-                                            }}
-                                        />
-
-                                        <MaterialBtn
-                                            variant={"text"}
-                                            content={"100+"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"Chat"}
-                                                    iconSize={18}
-                                                    color={color}
-                                                />
-                                            }
-                                            style={{
-                                                padding: 0
-                                            }}
-                                        />
-                                    </GridItem>
-                                </Row>
-                                <Row alignItems={Flex.END}>
-                                    {this.prepIssueFooter(issue)}
-                                    <Separator/>
-                                    <MaterialTextView
-                                        text={"20/12/2020"}
-                                        fontSize={12}
-                                    />
-                                </Row>
-                            </Column>
-                        </GridItem>
-                    </Row>
-                    <MaterialDivider/>
-                </Column>
-            </ListItem>
-        );
-    }
+    static defaultProps = {
+        style: {}
+    };
 
     render() {
-        return (
-            <List>
+        let {
+            props: {
+                style: {
+                    minHeight: sMinHeight,
+                    minWidth: sMinWidth,
+                    ...style
+                },
+                minHeight = sMinHeight,
+                minWidth = sMinWidth,
+                maxHeight,
+                overflowY = "scroll",
+                height
+            }
+        } = this;
 
+
+        style.minHeight = minHeight;
+        style.minWidth = minWidth;
+        style.maxHeight = maxHeight;
+        style.height = height;
+        style.overflowY = overflowY;
+
+        return (
+            <List style={style}>
+                {this.props.issues.map(IssueListItemView.mapCreate)}
             </List>
         );
     }

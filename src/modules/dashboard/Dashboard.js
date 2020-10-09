@@ -2,10 +2,8 @@ import React, {Component} from "react";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import {Toolbar} from "@material-ui/core";
-import MaterialImage from "../../widgets/MaterialImage";
-import MaterialBtn from "../../widgets/MaterialBtn";
 
-import {AccountCircle as AccountCircleIcon, MoreVert as MoreVertIcon} from "@material-ui/icons";
+import {AccountCircle as AccountCircleIcon} from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import MaterialTextView from "../../widgets/MaterialTextView";
@@ -17,7 +15,7 @@ import Insights from "./insights/Insights";
 import StyledTabs from "../../widgets/StyledTabs";
 import StyledTab from "../../widgets/StyledTab";
 import PropTypes from "prop-types";
-import Projects from "./Projects";
+import Projects from "./projects/Projects";
 import InputBase from "@material-ui/core/InputBase";
 import Row from "../../widgets/Row";
 import Flex from "../../widgets/Flex";
@@ -29,6 +27,9 @@ import MaterialRow from "../../widgets/grid/MaterialRow";
 import GridItem from "../../widgets/grid/GridItem";
 import AccessibilityControl from "../../widgets/AccessibilityControl";
 import Teams from "./teams/Teams";
+import HomeImageButton from "../home/HomeImageButton";
+import UserAccountButton from "../users/widgets/UserAccountsButton";
+import LanguagesAccessibilityControl from "../../widgets/accessibility/LanguagesAccessibilityControl";
 
 
 const dashBoardTheme = createMuiTheme({
@@ -219,16 +220,7 @@ export default class Dashboard extends Component {
                 <Toolbar>
                     <MaterialRow alignItems={Flex.CENTER} paddingTB={4}>
                         <GridItem xs={2} sm={2} lg={1}>
-                            <MaterialImage
-                                src={"/images/logo.png"}
-                                alt={"Logo"}
-                                size={40}
-                                onClick={
-                                    e => {
-                                        this.props.navigator("home");
-                                    }
-                                }
-                            />
+                            <HomeImageButton navigator={this.props.navigator}/>
                         </GridItem>
                         <GridItem xs={10} sm={12} lg={4}>
                             <nav>
@@ -279,6 +271,7 @@ export default class Dashboard extends Component {
                         </GridItem>
                         <GridItem xs={12} sm={12} lg={3}>
                             <MaterialRow justify={Flex.SPACE_EVENLY} alignItems={Flex.CENTER}>
+                                <LanguagesAccessibilityControl componentInstance={this}/>
                                 {<AccessibilityControl componentInstance={this}/>}
                                 <MaterialIconButton
                                     icon={"Apps"}
@@ -289,12 +282,13 @@ export default class Dashboard extends Component {
                                 <MaterialIconButton
                                     icon={"Notifications"}
                                 />
-                                <MaterialBtn
-                                    color={"primary"}
-                                    variant={"contained"}
-                                    startIcon={this.userAvatar}
-                                    content={this.toolBarBtnContent}
-                                    endIcon={<MoreVertIcon/>}
+                                <UserAccountButton
+                                    userDetails={{
+                                        name: "Breimer",
+                                        email: "brymher@gmail.com",
+                                        img: "/images/logo.png"
+                                    }}
+                                    navigator={this.props.navigator}
                                 />
                             </MaterialRow>
                         </GridItem>
@@ -377,9 +371,14 @@ export default class Dashboard extends Component {
             <ThemeProvider theme={Settings.appTheme}>
                 <Row>
                     {this.navigation}
-                    <main className={classes.content} style={{background: Settings.colorPrimary}}>
-                        {this.currentBody}
-                    </main>
+                    <Paper className={classes.content} style={{borderRadius: 0}} elevation={0}
+
+                           children={
+                               <main style={{background: Settings.colorPrimary}}>
+                                   {this.currentBody}
+                               </main>
+                           }
+                    />
                 </Row>
             </ThemeProvider>
 

@@ -24,6 +24,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import MaterialSelect from "../../../widgets/input/MaterialSelect";
 import GridItem from "../../../widgets/grid/GridItem";
 import MaterialIconButton from "../../../widgets/button/MaterialIconButton";
+import IssuesListView from "./IssuesListView";
+import PropTypes from "prop-types";
 
 export default class Issues extends DashBoardActivity {
 
@@ -56,6 +58,80 @@ export default class Issues extends DashBoardActivity {
 
         ];
 
+        this.initDisplayContent();
+
+    }
+
+    random(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    getRandom(array) {
+        return array[this.random(array.length)];
+    }
+
+    initDisplayContent() {
+        new Promise(
+            resolve => {
+                let issues = [];
+
+                let i = 0;
+                let titles = [`This is a sample issue title to be used as a place holder for issue `, "This is another sample title used for projects"];
+                let projects = [`Luro`, `Libetal`];
+                let types = [`But`, `Feature`, `Repeated`, `Documentation`];
+                let dates = [`11/12/2019`, `20/12/2017`, `18/12/2016`, `10/1/2019`];
+                let costs = [10000, 2000, 50, 300];
+                let signs = [`ksh`, `$`, `UGH`];
+
+                while (i < 10) {
+                    issues.push(
+                        {
+                            id: i,
+                            title: this.getRandom(titles),
+                            cost: {
+                                estimated: {
+                                    value: this.getRandom(costs),
+                                    sign: this.getRandom(signs)
+                                }/*,
+                                used :{
+
+                                }*/
+                            },
+                            assignee: {},
+                            by: {
+                                name: `Breimer`
+                            },
+                            project: {
+                                id: 1,
+                                name: projects[this.random(projects.length)]
+                            },
+                            priority: `High`,
+                            state: {
+                                id: 1,
+                                title: `reported`,
+                                description: `Issue has just been reported an nothing has been discussed in relation to it`
+                            },
+                            type: {
+                                id: 1,
+                                title: types[this.random(types.length)],
+                                descriptions: PropTypes.string
+                            },
+                            date: dates[this.random(dates.length)],
+                            attachments: ["one", "two", "three"],
+                            milestones: ["one", "two", "three"],
+                            tags: ["one", "two", "three"]
+
+                        }
+                    );
+                    i++;
+                }
+
+                resolve(issues);
+            }
+        )
+            .then(
+                issues => this.setState({issues})
+            );
     }
 
     get createAction() {
@@ -463,171 +539,21 @@ export default class Issues extends DashBoardActivity {
         );
     }
 
-    prepIssueFooter(issue) {
-        let tabsStrings = [
-            // do not show price if it's flagged as private
-            `E.C: ksh.1000`,
-            `issue.by`,
-            `@Libetal`,
-            // if issues is unassigned claim | unassigned | to @Steve
-            `issue.assignment`,
-            `issue.type`,
-            `issue.priority`,
-            `issue.state`
-        ];
 
-        return <TabsLayout
-            variant={TabsLayout.VARIANT.SCROLLABLE}
-            showIndicator={false}
-            orientation={"horizontal"}
-            tabStyle={{margin: 0, paddingLeft: 4}}
-            tabs={
-                tabsStrings.map(
-                    (string, i) => ({
-                        key: i,
-                        label: this.tabItem(string, i, tabsStrings.length - 1)
-                    })
-                )}
-        />;
-    }
-
-    prepIssueListItem(i, issue) {
-        let {id: issueId, title} = issue;
-
-        let [type, color] = this.issueTypeDemo;
-
-        // let testStyle = {minHeight: 80, background: Colors.black};
-
-        return (
-            <ListItem key={i} style={{minWidth: "100%"}}>
-                <Column>
-                    <Row alignItems={Flex.STRETCH}>
-                        <GridItem xs={1}>
-                            <Column height={"100%"} justify={Flex.SPACE_BETWEEN}>
-                                <Row>
-                                    <MaterialOptionsMenu
-                                        id={`issue-${i}-options-menu`}
-                                        controller={MaterialBtn}
-                                        header={type}
-                                        controllerProps={
-                                            {
-                                                style: {
-                                                    minWidth: 0,
-                                                    minHeight: 0,
-                                                    paddingTop: 2,
-                                                    paddingBottom: 2,
-                                                    paddingLeft: 8,
-                                                    paddingRight: 8
-                                                },
-                                                content: type,
-                                                color: color,
-                                                textColor: Colors.white
-                                            }
-                                        }
-                                        menuItems={[
-                                            {
-                                                key: 0,
-                                                title: <MaterialMenuItem title={`Option`} titleFontSize={12}/>
-                                            }
-                                        ]}
-                                    />
-                                </Row>
-                                <Row justify={Flex.END}>
-                                    <Checkbox style={{color: color, padding: 0, margin: 0, marginBottom: 0}}/>
-                                </Row>
-                            </Column>
-                        </GridItem>
-                        <GridItem xs={11}>
-                            <Column>
-                                <Row>
-                                    <GridItem xs={8}>
-                                        <MaterialTextView
-                                            text={title}
-                                            textColor={Colors.orange}
-                                        />
-                                    </GridItem>
-                                    <GridItem xs={4}>
-                                        <MaterialBtn
-                                            variant={"contained"}
-                                            content={"Tackle | Finance"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"AccountTree"}
-                                                    iconSize={18}
-                                                    color={Colors.white}
-                                                />
-                                            }
-                                            color={color}
-                                            textColor={Colors.white}
-                                            style={{
-                                                padding: 0,
-                                                paddingLeft: 6,
-                                                paddingRight: 6
-                                            }}
-                                        />
-                                        <MaterialBtn
-                                            variant={"text"}
-                                            content={"100+"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"AttachFile"}
-                                                    iconSize={18}
-                                                    color={color}
-                                                />
-                                            }
-                                            style={{
-                                                padding: 0
-                                            }}
-                                        />
-
-                                        <MaterialBtn
-                                            variant={"text"}
-                                            content={"100+"}
-                                            startIcon={
-                                                <MaterialIcon
-                                                    icon={"Chat"}
-                                                    iconSize={18}
-                                                    color={color}
-                                                />
-                                            }
-                                            style={{
-                                                padding: 0
-                                            }}
-                                        />
-                                    </GridItem>
-                                </Row>
-                                <Row alignItems={Flex.END}>
-                                    {this.prepIssueFooter(issue)}
-                                    <Separator/>
-                                    <MaterialTextView
-                                        text={"20/12/2020"}
-                                        fontSize={12}
-                                    />
-                                </Row>
-                            </Column>
-                        </GridItem>
-                    </Row>
-                    <MaterialDivider/>
-                </Column>
-            </ListItem>
-        );
-    }
-
-    get issueItems() {
-
+    get issues() {
         let issues = [];
 
         let i = 1;
 
         while (i < 20) {
             issues.push(
-                this.prepIssueListItem(
-                    i,
-                    {
-                        id: `bxCvd${i}`,
-                        title: `This is a sample issue title for issue ${i}`
-                    }
-                )
+                {
+                    title: "This is a sample issue title to be used",
+                    id: 1,
+                    attachments: ["One", "two", "three"],
+                    milestones: ["Java", "Android", "Etc"],
+                    tags: ["Java", "Android", "Etc"]
+                }
             );
             i++;
         }
@@ -637,10 +563,7 @@ export default class Issues extends DashBoardActivity {
 
     get issuesListView() {
         return (
-            <List style={{minHeight: 100, maxHeight: 600, overflowY: "auto"}}>
-                {this.issueItems}
-            </List>
-
+            <IssuesListView issues={this.state.issues} height={500} />
         );
     }
 
@@ -697,6 +620,11 @@ export default class Issues extends DashBoardActivity {
                                         value: "Favorite"
                                     }
                                 ]}
+                            />
+                            <MaterialBtn
+                                variant={"text"}
+                                content={"EXECUTE"}
+                                textColor={Colors.green}
                             />
                             <Separator/>
                             <MaterialTextView text={`Found 1000`} fontSize={12}/>

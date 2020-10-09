@@ -7,6 +7,7 @@ import ProjectsInsights from "./ProjectsInsights";
 import Row from "../../../widgets/Row";
 import ProductivityInsights from "./ProductivityInsights";
 import Footer from "../../Footer";
+import Settings from "../../../utils/Settings";
 
 
 /**Todo
@@ -88,7 +89,7 @@ export default class Insights extends React.Component {
                 }} onItemClick={this.onMenuItemClick} classes={classes}/>}
                 <Row
                     style={{
-                        paddingRight: 0,
+                        backgroundColor:Settings.appBackground,
                         paddingLeft: pinState ? 242 : 58
                     }}
                     children={this.currentTab}

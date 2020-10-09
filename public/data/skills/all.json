@@ -1,0 +1,36 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": [
+    {
+      "id": 1,
+      "name": "Developer"
+    },
+    {
+      "id": 2,
+      "name": "Android"
+    },
+    {
+      "id": 3,
+      "name": "Kotlin"
+    },
+    {
+      "id": 4,
+      "name": "Html"
+    },
+    {
+      "id": 4,
+      "name": "CSS3"
+    },
+    {
+      "id": 5,
+      "name": "React"
+    },
+    {
+      "id": 6,
+      "name": "NodeJs"
+    }
+  ]
+}

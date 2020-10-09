@@ -1,4 +1,4 @@
-import {ThemeProvider, useTheme} from "@material-ui/core/styles";
+import {ThemeProvider} from "@material-ui/core/styles";
 import Settings from "./utils/Settings";
 import darkTheme from "./styles/dark/Theme.module.css";
 import lightTheme from "./styles/light/Theme.module.css";
@@ -12,7 +12,7 @@ export default function ApplyTheme({initTheme, children, useStyles}) {
     let styles = Settings.style === "dark" ? darkTheme : lightTheme;
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}  >
             {children({
                 classes,
                 /**@Depricated*/

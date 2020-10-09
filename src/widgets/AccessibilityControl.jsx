@@ -31,6 +31,8 @@ export default class AccessibilityControl extends Component {
 
                         componentInstance.forceUpdate();
 
+                        console.log(`Updated theme to ${Settings.palette}`);
+
                         return true;
                     }
                 }

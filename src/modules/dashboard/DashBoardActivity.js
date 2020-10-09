@@ -16,6 +16,7 @@ import Settings from "../../utils/Settings";
 import HeaderOption from "./widgets/HeaderOption";
 import Footer from "../Footer";
 import MaterialCol from "../../widgets/grid/MaterialCol";
+import Paper from "@material-ui/core/Paper";
 
 export default class DashBoardActivity extends Component {
 
@@ -161,7 +162,7 @@ export default class DashBoardActivity extends Component {
 
     render() {
         return (
-            <>
+            <Paper style={{borderRadius:0}}>
                 <MaterialCol alignItems={Flex.SPACE_AROUND} style={{paddingLeft: 8, paddingRight: 8}}>
                     <Row>
                         {this.head}
@@ -171,7 +172,7 @@ export default class DashBoardActivity extends Component {
                     </Row>
                 </MaterialCol>
                 <Footer style={{marginTop: 10}}/>
-            </>
+            </Paper>
         );
 
     }

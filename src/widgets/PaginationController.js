@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {IconButton} from "@material-ui/core";
 import PropTypes from "prop-types";
 import MaterialIcon from "./MaterialIcon";
 import Row from "./Row";

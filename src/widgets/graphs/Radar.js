@@ -1,5 +1,4 @@
 import React from "react";
-import Chart from "./Chart";
 import Colors from "../../Colors";
 import Doughnut from "./Doughnut";
 

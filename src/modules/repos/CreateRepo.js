@@ -30,6 +30,7 @@ import MaterialBtn from "../../widgets/MaterialBtn";
 import AccessibilityControl from "../../widgets/AccessibilityControl";
 import {ThemeProvider} from "@material-ui/styles";
 import MaterialFileInputBase from "../../widgets/input/file/MaterialFileInputBase";
+import CreateRepoHelp from "./CreateRepoHelp";
 
 
 export default class CreateRepo extends Component {
@@ -178,12 +179,22 @@ export default class CreateRepo extends Component {
                 <Toolbar>
                     <MaterialIconButton
                         icon={"Home"}
+                        onClick={
+                            e => {
+                                this.props.navigator("home");
+                            }
+                        }
                     />
                     <TextView
                         text={"Libetal"}
                         variant={"h6"}
                         textColor={Colors.orange}
-
+                        onClick={
+                            e => {
+                                this.props.navigator("home");
+                            }
+                        }
+                        style={{marginLeft: 8}}
                     />
                     <Separator/>
                     <Paper style={MaterialTheme.AppBar.Search.FullWidth}>
@@ -329,11 +340,11 @@ export default class CreateRepo extends Component {
                             <MaterialFileInputBase
                                 ClearButton={MaterialIconButton}
                                 ClearButtonProps={{
-                                    icon:"Backspace"
+                                    icon: "Backspace"
                                 }}
                                 ActionButton={MaterialIconButton}
                                 ActionButtonButtonProps={{
-                                    icon:"Attachment"
+                                    icon: "Attachment"
                                 }}
                                 onChange={
                                     files => this.projectLicense
@@ -358,8 +369,8 @@ export default class CreateRepo extends Component {
                     * (e,input) => this.setState({currentLicense:input.props.value})
                     * */
                     (e, input) => {
-                        if(input !== undefined){
-                            this.setState({currentLicense: input.props.value})
+                        if (input !== undefined) {
+                            this.setState({currentLicense: input.props.value});
                         }
                     }
                 }
@@ -369,7 +380,7 @@ export default class CreateRepo extends Component {
 
     get createForm() {
         return (
-            <Paper style={{padding: 12}}>
+            <Paper style={{padding: 12}} elevation={4}>
                 <Row>
                     <GridItem xs={12} sm={6}>
                         <Col>
@@ -390,56 +401,80 @@ export default class CreateRepo extends Component {
                     </GridItem>
                 </Row>
                 <Row justify={Flex.SPACE_EVENLY}>
-                    <GridItem xs={12} sm={5} lg={4}>
-                        <MaterialImageInput
-                            height={260}
-                            maxPreviewWidth={"80%"}
-                            maxPreviewHeight={200}
-                            onChange={this.onChange}
-                            placeholder={"Project Logo"}
+                    <GridItem xs={12} sm={5} lg={6}>
+                        <Row justify={Flex.CENTER}>
+                            <GridItem xs={12} sm={9}>
+                                <MaterialImageInput
+                                    height={260}
+                                    maxPreviewWidth={"80%"}
+                                    maxPreviewHeight={200}
+                                    onChange={this.onChange}
+                                    placeholder={"Project Logo"}
+                                />
+                            </GridItem>
+                        </Row>
+                        <MaterialDivider
+                            spacing={6}
+                            color={Colors.transparent}
                         />
+                        <MaterialCol>
+
+                            <MaterialTextView
+                                text={"Project Name"}
+                                textColor={Colors.orange}
+                            />
+                            <MaterialTextField
+                                fullWidth
+                                placeholder={"e.g: Trulo"}
+                                helperText={
+                                    <MaterialRow alignItems={Flex.CENTER}
+                                                 justify={Flex.SPACE_BETWEEN}>
+                                        <MaterialTextView
+                                            text={"Short name relating to the product 10-50 characters"}
+                                            fontSize={10}
+                                        />
+                                        <MaterialIcon icon={"Help"} iconSize={12}/>
+                                    </MaterialRow>
+                                }
+                                startIcon={<MaterialIcon icon={"AccountTree"}/>}
+                            />
+
+                            <MaterialDivider
+                                spacing={4}
+                                color={Colors.transparent}
+                            />
+                            <MaterialTextField
+                                fullWidth
+                                multiline
+                                maxRows={4}
+                                defaultRows={4}
+                                placeholder={
+                                    `e.g: Using git project manager to track contributions then evaluate the cost of contribution. Which can later be used to provide returns based on input per person.`
+                                }
+                                label={"Project Description"}
+                                helperText={
+                                    <MaterialRow alignItems={Flex.CENTER}
+                                                 justify={Flex.SPACE_BETWEEN}>
+                                        <MaterialTextView
+                                            text={"Describe your project. Simple and precise. 100-150 Words"}
+                                            fontSize={10}
+                                        />
+                                        <MaterialIcon icon={"Help"} iconSize={12}/>
+                                    </MaterialRow>
+                                }
+                                InputLabelProps={{
+                                    shrink: true
+                                }}
+                            />
+                        </MaterialCol>
                     </GridItem>
-                    <GridItem xs={6}>
+                    <GridItem xs={5}>
                         <Col justify={Flex.SPACE_EVENLY} alignItems={Flex.STRETCH}>
                             <GridItem>
-                                <MaterialTextField
-                                    fullWidth
-                                    placeholder={"Project Name"}
-                                    helperText={
-                                        <MaterialRow alignItems={Flex.CENTER}
-                                                     justify={Flex.SPACE_BETWEEN}>
-                                            <MaterialTextView
-                                                text={"Short name relating to the product 10-50 characters"}
-                                                fontSize={10}
-                                            />
-                                            <MaterialIcon icon={"Help"} iconSize={12}/>
-                                        </MaterialRow>
-                                    }
-                                    startIcon={<MaterialIcon icon={"AccountTree"}/>}
+                                <MaterialDivider
+                                    spacing={4}
+                                    color={Colors.transparent}
                                 />
-                            </GridItem>
-                            <GridItem>
-                                <MaterialTextField
-                                    fullWidth
-                                    multiline
-                                    maxRows={4}
-                                    defaultRows={2}
-                                    placeholder={"Project description"}
-                                    label={"Project Description"}
-                                    helperText={
-                                        <MaterialRow alignItems={Flex.CENTER}
-                                                     justify={Flex.SPACE_BETWEEN}>
-                                            <MaterialTextView
-                                                text={"Describe your project. Simple and precise. 100-150 Words"}
-                                                fontSize={10}
-                                            />
-                                            <MaterialIcon icon={"Help"} iconSize={12}/>
-                                        </MaterialRow>
-                                    }
-                                />
-
-                            </GridItem>
-                            <GridItem>
                                 <MaterialSelect
                                     fullWidth
                                     value={this.state.selectedTeam}
@@ -462,119 +497,133 @@ export default class CreateRepo extends Component {
                                 />
                             </GridItem>
                             <GridItem>
+                                <MaterialDivider
+                                    spacing={4}
+                                    color={Colors.transparent}
+                                />
                                 {this.projectCategorySelect}
                             </GridItem>
                             <GridItem>
+                                <MaterialDivider
+                                    spacing={4}
+                                    color={Colors.transparent}
+                                />
+                                <Row>
+                                    <MaterialSelect
+                                        fullWidth
+                                        labelId={"project-languages"}
+                                        labelText={"Languages"}
+                                        selectionHeader={
+                                            <Col paddingLeft={4} paddingRight={4}>
+                                                <TabsLayout
+                                                    orientation={TabsLayout.ORIENTATION.HORIZONTAL}
+                                                    variant={TabsLayout.VARIANT.SCROLLABLE}
+                                                    tabs={
+                                                        ["All", "Front End", "Backend"].map(
+                                                            (stack, i) => ({
+                                                                key: i,
+                                                                label: stack
+                                                            })
+                                                        )
+                                                    }
+                                                />
+                                                <InputBase
+                                                    onClick={
+                                                        e => {
+                                                            e.stopPropagation();
+                                                        }
+                                                    }
+                                                    placeholder={"Search"}
+                                                    startAdornment={
+                                                        <InputAdornment position="start"
+                                                                        style={{cursor: MaterialTheme.Style.Cursor.Pointer}}>
+                                                            <MaterialIcon icon={"Search"}/>
+                                                        </InputAdornment>
+                                                    }
+                                                />
+                                            </Col>
+                                        }
+
+                                        selectionItems={
+                                            ["Python", "Kotlin", "Java", "Php", "Rubi"].map(
+                                                (lang, i) => ({
+                                                    key: i,
+                                                    value: lang
+                                                })
+                                            )
+                                        }
+                                    />
+                                </Row>
+                                <MaterialDivider
+                                    spacing={4}
+                                    color={Colors.transparent}
+                                />
                                 <Row justify={Flex.SPACE_BETWEEN}>
-                                    <GridItem xs={12} sm={6} lg={5}>
-                                        <MaterialSelect
-                                            fullWidth
-                                            labelId={"project-languages"}
-                                            labelText={"Languages"}
-                                            selectionHeader={
-                                                <Col paddingLeft={4} paddingRight={4}>
-                                                    <TabsLayout
-                                                        orientation={TabsLayout.ORIENTATION.HORIZONTAL}
-                                                        variant={TabsLayout.VARIANT.SCROLLABLE}
-                                                        tabs={
-                                                            ["All", "Front End", "Backend"].map(
-                                                                (stack, i) => ({
-                                                                    key: i,
-                                                                    label: stack
-                                                                })
-                                                            )
+                                    <MaterialSelect
+                                        value={[]}
+                                        fullWidth
+                                        labelId={"project-technologies"}
+                                        labelText={"Technologies"}
+                                        selectionHeader={
+                                            <Col paddingLeft={4} paddingRight={4}>
+                                                <TabsLayout
+                                                    orientation={TabsLayout.ORIENTATION.HORIZONTAL}
+                                                    variant={TabsLayout.VARIANT.SCROLLABLE}
+                                                    tabs={
+                                                        ["Frameworks", "Libraries", "API"].map(
+                                                            (stack, i) => ({
+                                                                key: i,
+                                                                label: stack
+                                                            })
+                                                        )
+                                                    }
+                                                />
+                                                <InputBase
+                                                    onClick={
+                                                        e => {
+                                                            e.stopPropagation();
                                                         }
-                                                    />
-                                                    <InputBase
-                                                        onClick={
-                                                            e => {
-                                                                e.stopPropagation();
-                                                            }
-                                                        }
-                                                        placeholder={"Search"}
-                                                        startAdornment={
-                                                            <InputAdornment position="start"
-                                                                            style={{cursor: MaterialTheme.Style.Cursor.Pointer}}>
-                                                                <MaterialIcon icon={"Search"}/>
-                                                            </InputAdornment>
-                                                        }
-                                                    />
-                                                </Col>
-                                            }
+                                                    }
+                                                    placeholder={"Search: Tech"}
+                                                    startAdornment={
+                                                        <InputAdornment position="start"
+                                                                        style={{cursor: MaterialTheme.Style.Cursor.Pointer}}>
+                                                            <MaterialIcon icon={"Search"}/>
+                                                        </InputAdornment>
+                                                    }
+                                                />
+                                            </Col>
+                                        }
 
-                                            selectionItems={
-                                                ["Python", "Kotlin", "Java", "Php", "Rubi"].map(
-                                                    (lang, i) => ({
-                                                        key: i,
-                                                        value: lang
-                                                    })
-                                                )
-                                            }
-                                        />
-                                    </GridItem>
-                                    <GridItem xs={12} sm={6} lg={5}>
-                                        <MaterialSelect
-                                            value={[]}
-                                            fullWidth
-                                            labelId={"project-technologies"}
-                                            labelText={"Technologies"}
-                                            selectionHeader={
-                                                <Col paddingLeft={4} paddingRight={4}>
-                                                    <TabsLayout
-                                                        orientation={TabsLayout.ORIENTATION.HORIZONTAL}
-                                                        variant={TabsLayout.VARIANT.SCROLLABLE}
-                                                        tabs={
-                                                            ["Frameworks", "Libraries", "API"].map(
-                                                                (stack, i) => ({
-                                                                    key: i,
-                                                                    label: stack
-                                                                })
-                                                            )
-                                                        }
-                                                    />
-                                                    <InputBase
-                                                        onClick={
-                                                            e => {
-                                                                e.stopPropagation();
-                                                            }
-                                                        }
-                                                        placeholder={"Search: Tech"}
-                                                        startAdornment={
-                                                            <InputAdornment position="start"
-                                                                            style={{cursor: MaterialTheme.Style.Cursor.Pointer}}>
-                                                                <MaterialIcon icon={"Search"}/>
-                                                            </InputAdornment>
-                                                        }
-                                                    />
-                                                </Col>
-                                            }
+                                        selectionItems={
+                                            ["React", "NodeJs", "Angular"].map(
+                                                (tech, i) => ({
+                                                    key: i,
+                                                    value: tech
+                                                })
+                                            )
+                                        }
 
-                                            selectionItems={
-                                                ["React", "NodeJs", "Angular"].map(
-                                                    (tech, i) => ({
-                                                        key: i,
-                                                        value: tech
-                                                    })
-                                                )
-                                            }
-
-                                            multiple={true}
-                                        />
-                                    </GridItem>
+                                        multiple={true}
+                                    />
                                 </Row>
                             </GridItem>
                             <MaterialDivider
                                 color={Colors.transparent}
                                 spacing={6}
                             />
+                            <MaterialTextView
+                                text={"Licensing & Contribution"}
+                                textColor={Colors.blue}
+                            />
+                            {this.licensingInput}
                             <GridItem>
-                                <MaterialTextView
-                                    text={"Licensing & Contribution"}
-                                    textColor={Colors.blue}
+                                <MaterialDivider
+                                    spacing={6}
+                                    color={Colors.transparent}
                                 />
-                                {this.licensingInput}
                                 <Row alignItems={Flex.CENTER}>
-                                    <GridItem xs={6} lg={6}>
+                                    <GridItem xs={6} lg={5}>
                                         <Row alignItems={Flex.CENTER}>
                                             <Checkbox checked={this.state.project.private} onClick={
                                                 e => {
@@ -588,10 +637,10 @@ export default class CreateRepo extends Component {
                                                     );
                                                 }
                                             }/>
-                                            <MaterialTextView text={"Make Repo private"} fontSize={12}/>
+                                            <MaterialTextView text={"private"} fontSize={12}/>
                                         </Row>
                                     </GridItem>
-                                    <GridItem xs={6} lg={5}>
+                                    <GridItem xs={6} lg={6}>
                                         <MaterialSelect
                                             fullWidth
                                             labelText={"Contributor Rating"}
@@ -605,21 +654,40 @@ export default class CreateRepo extends Component {
                                             }
 
                                             onChange={
-                                                (e,input)=>(this.setState({contributorRating:input.props.value}))
+                                                (e, input) => (this.setState({contributorRating: input.props.value}))
                                             }
                                         />
                                     </GridItem>
                                 </Row>
-                                <Row>
+                                <MaterialDivider
+                                    spacing={30}
+                                    color={Colors.transparent}
+                                />
+                                <Row justify={Flex.SPACE_AROUND}>
+                                    <GridItem>
+                                        <MaterialBtn
+                                            fullWidth
+                                            content={"Create & Add Issues"}
+                                            color={Colors.orange}
+                                            textColor={Colors.white}
+                                        />
+                                    </GridItem>
+                                    <GridItem>
+                                        <MaterialBtn
+                                            fullWidth
+                                            content={"Create"}
+                                            color={Colors.green}
+                                            textColor={Colors.white}
+                                        />
+                                    </GridItem>
+
 
                                 </Row>
                             </GridItem>
                         </Col>
                     </GridItem>
-
                 </Row>
-
-                <MaterialDivider spacing={8}/>
+                <MaterialDivider spacing={4}/>
                 <Row justify={Flex.SPACE_BETWEEN} alignItems={Flex.CENTER}>
                     <GridItem>
                         <Row alignItems={Flex.CENTER}>
@@ -633,23 +701,7 @@ export default class CreateRepo extends Component {
                     </GridItem>
                     <GridItem xs={8} lg={4}>
                         <Row justify={Flex.SPACE_BETWEEN}>
-                            <GridItem>
-                                <MaterialBtn
-                                    fullWidth
-                                    content={"Create"}
-                                    color={Colors.green}
-                                    textColor={Colors.white}
-                                />
-                            </GridItem>
 
-                            <GridItem>
-                                <MaterialBtn
-                                    fullWidth
-                                    content={"Create & Add Issues"}
-                                    color={Colors.orange}
-                                    textColor={Colors.white}
-                                />
-                            </GridItem>
 
                         </Row>
                     </GridItem>
@@ -682,26 +734,27 @@ export default class CreateRepo extends Component {
 
         return (
             <ThemeProvider theme={Settings.appTheme}>
-                <MaterialCol>
-                    {this.appBar}
-                    <MaterialDivider spacing={8} color={Colors.transparent}/>
-                    <Row justify={Flex.SPACE_EVENLY}>
-                        <GridItem xs={12} lg={7}>
-                            {this.createForm}
-
-                        </GridItem>
-                        <GridItem xs={12} lg={4}>
-                            {this.createHelp}
-                        </GridItem>
-                    </Row>
-                </MaterialCol>
-                <MaterialDivider
-                    spacing={6}
-                    color={Colors.transparent}
-                    width={"60%"}
-                    orientation={MaterialDivider.HORIZONTAL}
-                />
-                <Footer navigator={this.props.navigator}/>
+                <Paper elevation={0}>
+                    <MaterialCol color={"primary"}>
+                        {this.appBar}
+                       <MaterialDivider spacing={6} color={Colors.transparent}/>
+                        <Row justify={Flex.SPACE_EVENLY}>
+                            <GridItem xs={12} lg={7}>
+                                {this.createForm}
+                            </GridItem>
+                            <GridItem xs={12} lg={4}>
+                                <CreateRepoHelp navigator={this.props.navigator}/>
+                            </GridItem>
+                        </Row>
+                    </MaterialCol>
+                    <MaterialDivider
+                        spacing={6}
+                        color={Colors.transparent}
+                        width={"60%"}
+                        orientation={MaterialDivider.HORIZONTAL}
+                    />
+                    <Footer navigator={this.props.navigator}/>
+                </Paper>
             </ThemeProvider>
         );
     }

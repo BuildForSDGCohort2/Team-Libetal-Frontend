@@ -3,77 +3,88 @@ import ChartJs from "chart.js";
 import DataSet from "../DataSet";
 import PropTypes from "prop-types";
 
-
-export const ChartPropTypes = {
-    datasets: PropTypes.array,
-    labels: PropTypes.array,
-    yAxisStepSize: PropTypes.number,
-    showLegends: PropTypes.bool,
-    showXAxisGrid: PropTypes.bool,
-    showyAxisGrid: PropTypes.bool,
-    xAxisSampleSize: PropTypes.number,
-    xAxisStepSize: PropTypes.number,
-    xAxisLabel: PropTypes.string,
-    showXAxisLabel: PropTypes.bool,
-    yAxisSampleSize: PropTypes.number,
-    tooltipTitleCallBack: PropTypes.func,
-    tooltipLabelCallBack: PropTypes.func,
-    tooltips: PropTypes.object,
-    source: PropTypes.object,
-    autoSkip: PropTypes.bool,
-    autoSkipPadding: PropTypes.object,
-    maxRotation: PropTypes.number,
-    minRotation: PropTypes.number,
-    responsive: PropTypes.bool,
-    size: PropTypes.number,
-    major: PropTypes.object,
-    xAxisLabelFormatter: PropTypes.func,
-    yAxisLabelFormatter: PropTypes.func,
-    yAxisTextColor: PropTypes.string,
-    xAxisTextColor: PropTypes.string,
-    yAxisGridLineColor:PropTypes.string,
-    xAxisGridLineColor:PropTypes.string
-};
-export const ChartProps = {
-    datasets: [],
-    labels: [],
-    yAxisStepSize: 1,
-    showLegends: true,
-    showXAxisGrid: false,
-    showyAxisGrid: false,
-    xAxisSampleSize: 0,
-    xAxisStepSize: 1,
-    xAxisLabel: "Text",
-    showXAxisLabel: true,
-    yAxisSampleSize: 0,
-    tooltipTitleCallBack: undefined,
-    tooltipLabelCallBack: undefined,
-    tooltips: {
-        callbacks: {}
-    },
-    source: undefined,
-    autoSkip: false,
-    autoSkipPadding: undefined,
-    maxRotation: 90,
-    minRotation: 0,
-    responsive: true,
-    size: 100,
-    major: {
-        // enabled: true,
-        // fontStyle: "bold"
-    },
-    xAxisLabelFormatter: d => d,
-    yAxisLabelFormatter: d => d
-};
-
 export default class Chart extends React.Component {
 
     kind = "line";
 
-    static defaultProps = ChartProps;
+    static defaultProps = {
+        datasets: [],
+        labels: [],
+        yAxisStepSize: 0,
+        showLegends: true,
+        showGridLines: true,
+        showXAxisGrid: false,
+        showYAxisGrid: false,
+        xAxisSampleSize: 0,
+        xAxisStepSize: 1,
+        xAxisLabel: "xLabel xAxisLabel",
+        showLabels: true,
+        tooltipTitleCallBack(toolTips, data) {
+            try {
+                if (Array.isArray(toolTips)) {
+                    return toolTips.map(t => data.datasets[t.datasetIndex].label);
+                } else return data.datasets[toolTips.datasetIndex].label;
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        onDidMount(chart) {
+
+        },
+        tooltipLabelCallBack(toolTip) {
+            return toolTip.xLabel;
+        },
+        tooltips: {
+            callbacks: {}
+        },
+        source: undefined,
+        autoSkip: false,
+        autoSkipPadding: undefined,
+        maxRotation: 90,
+        minRotation: 0,
+        responsive: true,
+        size: 100,
+        major: {
+            // enabled: true,
+            // fontStyle: "bold"
+        },
+        xAxisLabelFormatter: d => d,
+        yAxisLabelFormatter: d => d
+    };
 
     static propTypes = {
-        ...ChartPropTypes
+        datasets: PropTypes.array,
+        labels: PropTypes.array,
+        yAxisStepSize: PropTypes.number,
+        showLegends: PropTypes.bool,
+        showXAxisGrid: PropTypes.bool,
+        showYAxisGrid: PropTypes.bool,
+        showGridLines: PropTypes.bool,
+        xAxisSampleSize: PropTypes.number,
+        xAxisStepSize: PropTypes.number,
+        xAxisLabel: PropTypes.string,
+        showXAxisLabel: PropTypes.bool,
+        showLabels: PropTypes.bool,
+        showYAxisLabel: PropTypes.bool,
+        yAxisSampleSize: PropTypes.number,
+        tooltipTitleCallBack: PropTypes.func,
+        tooltipLabelCallBack: PropTypes.func,
+        tooltips: PropTypes.object,
+        source: PropTypes.object,
+        autoSkip: PropTypes.bool,
+        autoSkipPadding: PropTypes.object,
+        maxRotation: PropTypes.number,
+        minRotation: PropTypes.number,
+        responsive: PropTypes.bool,
+        size: PropTypes.number,
+        major: PropTypes.object,
+        onDidMount: PropTypes.func,
+        xAxisLabelFormatter: PropTypes.func,
+        yAxisLabelFormatter: PropTypes.func,
+        yAxisTextColor: PropTypes.string,
+        xAxisTextColor: PropTypes.string,
+        yAxisGridLineColor: PropTypes.string,
+        xAxisGridLineColor: PropTypes.string
     };
 
     get element() {
@@ -83,23 +94,6 @@ export default class Chart extends React.Component {
     // Element might be affected on DidMount!!
     get ctx() {
         return this.element.current.getContext("2d");
-    }
-
-    get chartDescription() {
-        let {kind, datasets, labels, options} = this.props;
-
-        return {
-            type: kind,
-            data: {
-                labels: labels,
-                datasets: datasets
-            },
-            options
-        };
-    }
-
-    set chartDescription(value) {
-        this.chartDescriptionFiled = value;
     }
 
     constructor(props) {
@@ -171,7 +165,7 @@ export default class Chart extends React.Component {
             borderColor: borderColor,
             borderWidth: borderWidth,
             hidden: hidden,
-            type :type
+            type: type
         };
     }
 
@@ -207,9 +201,11 @@ export default class Chart extends React.Component {
             xAxisSampleSize,
             xAxisLabelFormatter,
             xAxisLabel,
-            showXAxisLabel = true,
-            showGridLines = true,
-            scaleLabel,
+            showLabels,
+            showXAxisLabel = showLabels,
+            showGridLines,
+            showXAxisGrid = showGridLines,
+            scaleLabel: {...scaleLabel} = {},
             source,
             autoSkip,
             autoSkipPadding,
@@ -224,10 +220,6 @@ export default class Chart extends React.Component {
             xAxisGridLineColor
         } = this.props;
 
-        scaleLabel = {
-            ...scaleLabel
-        };
-
         if (xAxisLabel !== undefined) {
             scaleLabel.labelString = xAxisLabel;
             scaleLabel.display = showXAxisLabel;
@@ -237,7 +229,7 @@ export default class Chart extends React.Component {
             xAxes: [
                 {
                     gridLines: {
-                        display: showGridLines,
+                        display: showXAxisGrid,
                         color: xAxisGridLineColor
                     },
                     ticks: {
@@ -252,7 +244,7 @@ export default class Chart extends React.Component {
                         callback: xAxisLabelFormatter,
                         xAxisStepSize: xAxisStepSize,
                         xAxisSampleSize: xAxisSampleSize,
-                        fontColor:xAxisTextColor
+                        fontColor: xAxisTextColor
                     },
                     scaleLabel: scaleLabel
                 }
@@ -263,27 +255,35 @@ export default class Chart extends React.Component {
     get yAxis() {
         let {
             yAxisStepSize,
-            yAxisSampleSize = 1,
+            yAxisSampleSize,
             yAxisLabelFormatter,
-            showGridLines = true,
+            showGridLines,
+            showYAxisGrid = showGridLines,
             source,
             autoSkip,
+            yAxisScaleLabel: {...yAxisScaleLabel} = {},
             autoSkipPadding,
             maxRotation,
             minRotation,
+            yAxisLabel,
+            showLabels,
+            showYAxisLabel = showLabels,
             major = {},
             distribution,
             yAxisTextColor,
             yAxisGridLineColor
         } = this.props;
 
-
+        if (yAxisLabel !== undefined) {
+            yAxisScaleLabel.labelString = yAxisLabel;
+            yAxisScaleLabel.display = showYAxisLabel;
+        }
 
         return {
             yAxes: [{
                 gridLines: {
-                    display: showGridLines,
-                    color:yAxisGridLineColor
+                    display: showYAxisGrid,
+                    color: yAxisGridLineColor
                 },
                 ticks: {
                     major: major,
@@ -297,20 +297,18 @@ export default class Chart extends React.Component {
                     stepSize: yAxisStepSize,
                     sampleSize: yAxisSampleSize,
                     callback: yAxisLabelFormatter,
-                    fontColor:yAxisTextColor
-                }
+                    fontColor: yAxisTextColor
+                },
+                scaleLabel: yAxisScaleLabel
             }]
         };
     }
 
     get scales() {
-
-        if (this.scalesField === undefined) this.scalesField = {
+        return {
             ...this.yAxis,
             ...this.xAxis
         };
-
-        return this.scalesField;
     }
 
     get options() {
@@ -367,15 +365,32 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        this.newChart = this.chart;
+        this.chart = this.chart;
+        let {onDidMount} = this.props;
+
+
+        if (typeof onDidMount === "function") {
+            onDidMount(this.chart);
+        }
     }
+
 
     get usingChildren() {
         return this.props.datasets.length === 0;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.chart.data.labels = this.props.labels;
+        let {
+            props: {
+                yAxisStepSize,
+                labels
+            },
+            options
+        } = this;
+
+        this.chart.data.labels = labels;
+
+        this.chart.options = options;
 
         this.chart.data.datasets = this.datasets;
         // this.myChart.data.datasets[0].data = this.props.dataset
@@ -383,20 +398,13 @@ export default class Chart extends React.Component {
     }
 
     componentWillUnmount() {
-        this.chartDescription = undefined;
-        this.myChart = undefined;
-    }
-
-    /**setup responsive properties*/
-    setUpResponsiveness() {
-
+        this.chart = undefined;
     }
 
     render() {
-        let {height, style = {}, ...props} = this.props;
+        let {height, style = {}} = this.props;
 
         let {height: cHeight, ...cStyle} = style;
-
 
         style = {
             ...cStyle,

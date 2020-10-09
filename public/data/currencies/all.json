@@ -1,0 +1,28 @@
+{
+  "response": {
+    "code": 200,
+    "message": "success"
+  },
+  "data": [
+    {
+      "name": "K.Shilling",
+      "sign": "Ksh"
+    },
+    {
+      "name": "Dollar",
+      "sign": "$"
+    },
+    {
+      "name": "UG.Shilling",
+      "sign": "UGX"
+    },
+    {
+      "name": "TZ.Shilling",
+      "sign": "TZS"
+    },
+    {
+      "name": "Ethiopian birr",
+      "sign": "Br"
+    }
+  ]
+}
